@@ -1,0 +1,1 @@
+CREATE DATABASE "Baseball" ENCODING 'UTF-8';

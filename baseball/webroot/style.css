@@ -1,0 +1,213 @@
+@charset "utf-8";
+/* CSS Document */
+
+body {
+	margin: 20px;
+	padding: 0px;
+	background: #ffffff;
+	
+	font-family: "georgia";
+	color: #885411;
+}
+
+#container {
+	width: 100%;
+	min-width: 600px;
+	max-width: 1280px;
+	max-height: 747px;
+	margin: 0px auto;
+	padding: 5px 0px;
+	
+	background: url(images/background.jpg) repeat-y top center;
+}
+
+#index #container {
+	background: url(images/index.jpg) no-repeat center center;
+}
+
+#index #container a {
+	width: 100%;
+	height: 737px;
+	display: block;
+}
+
+#header, #navigation, #content {
+	display: block;
+	margin: 0 5px;
+}
+
+#header, #navigation {
+	margin-bottom: 5px;
+}
+
+#container, #header, #navigation, #content, #content #description, 
+#content #right, #content-right #main, #footer {
+	border-radius: 8px;
+	-moz-border-radius: 8px;
+}
+
+#logo {
+	position: absolute;
+	top: 25px;
+	right: 35px;
+	z-index: 0;
+}
+
+#index #logo {
+	top: 500px;
+	right: 35px;
+}
+
+#logo a {
+	display: block;
+	background: url(images/logo.png) no-repeat;
+	width: 400px;
+	height: 150px;
+}
+
+#header {
+	background: url(images/header.jpg) no-repeat;
+	height: 140px;
+}
+
+#navigation {
+	background: url(images/navigation.png);
+	height: 34px;
+	text-align: center;
+	position: relative;
+	z-index: 1;
+}
+
+#navigation ul {
+	margin: 0px;
+	padding: 0px;
+}
+
+#navigation li {
+	display: inline-block;
+	margin: 7px 10px;
+	padding: 0px;
+}
+
+#navigation li a {
+	display: block;
+	height: 20px;
+	margin: 0px;
+	padding: 0px;
+}
+
+#navigation li a.consult {
+	background: url(images/navigation/consult.png) top left no-repeat;
+	width: 101px;
+}
+
+#navigation li a.insert {
+	background: url(images/navigation/insert.png) top left no-repeat;
+	width: 93px;
+}
+
+#navigation li a.delete {
+	background: url(images/navigation/delete.png) top left no-repeat;
+	width: 92px;
+}
+
+#navigation li a.update {
+	background: url(images/navigation/update.png) top left no-repeat;
+	width: 111px;
+}
+
+#navigation li a.consult:hover, #navigation li a.insert:hover, 
+#navigation li a.delete:hover, #navigation li a.update:hover {
+	background-position: right;
+}
+
+#content {
+	background: url(images/content.png) no-repeat;
+	height: 530px;
+}
+
+#content > div {
+	height: 460px;
+	height: 100%;
+	display: inline;
+}
+
+#home #content {
+	background: none;
+}
+
+#home #content * {
+	display: none;
+}
+
+#content-left {
+	width: 30%;
+	float: left;
+}
+
+#content-right {
+	width: 70%;
+	float: right;
+}
+
+#content-left > div {
+	display: block;
+	margin: 10px;
+}
+
+#content-left #title {
+	height: 26px;
+	margin: 10px auto;
+}
+
+#consult #content-left #title {
+	background: url(images/titles/consult.png) top left no-repeat;
+	width: 131px;
+}
+
+#insert #content-left #title {
+	background: url(images/titles/insert.png) top left no-repeat;
+	width: 121px;
+}
+
+#delete #content-left #title {
+	background: url(images/titles/delete.png) top left no-repeat;
+	width: 119px;
+}
+
+#update #content-left #title {
+	background: url(images/titles/update.png) top left no-repeat;
+	width: 148px;
+}
+
+#about #content-left #title {
+	background: url(images/titles/about.png) top left no-repeat;
+	width: 111px;
+}
+
+#content-left #description {
+	background-color: #ffffff;
+	height: 474px;
+}
+
+#content-right #main {
+	background-color: #ffffff;
+	height: 490px;
+	margin: 10px;
+	padding: 10px;
+	overflow-y: auto;
+}
+
+#content-right #main p {
+	margin: 0px;
+}
+
+#footer {
+	display: block;
+	padding: 0px;
+	text-align: center;
+}
+
+.hidden {
+	display: none;
+}

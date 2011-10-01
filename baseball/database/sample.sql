@@ -1,4 +1,4 @@
-INSERT INTO "Jugador" ("nombre", "equipo", "número")
+INSERT INTO "Jugador" ("nombre", "número", "equipo")
 SELECT "Datos"."nombre", "Datos"."número", "Equipo"."id"
 FROM
         "Equipo",
@@ -9,4 +9,4 @@ FROM
                 ('Ricardo Monascal'     ,  12, 'Leones del Caracas'              ),
                 ('Miguel Ambrosio'      ,  45, 'Navegantes del Magallanes'       )
         ) as "Datos" ("nombre", "número", "nombre del equipo")
-WHERE "Datos"."nombre del equipo" = "Equipo"."id"
+WHERE "Datos"."nombre del equipo" = "Equipo"."nombre"

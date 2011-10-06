@@ -1,3 +1,4 @@
+<?php include "config.php"; ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
         <head>
@@ -32,15 +33,13 @@
                                         </div>
                                         <div id="content-right">
                                                 <div id="main">
-                                                        <p>Equipos:</p>
+                                                        <p>Jugadores:</p>
 <?php
-$dbconn = pg_connect("host=localhost dbname=Baseball user=Baseball password=klasd864") or die('Could not connect: ' . pg_last_error());
-
-$query = 'SELECT "Equipo"."nombre" AS a, "Equipo"."año de fundación" AS b, "Equipo"."ciudad" AS c, "Equipo"."estado" AS d, "Estadio"."nombre" FROM "Equipo", "Estadio" WHERE "Equipo"."estadio principal" = "Estadio"."id"';
+$query = 'SELECT "Jugador"."nombre" AS a, "Jugador"."número" AS b, "Equipo"."nombre" AS c FROM "Jugador", "Equipo" WHERE "Jugador"."equipo" = "Equipo"."id"';
 $result = pg_query($query) or die('Query failed: ' . pg_last_error());
 
 echo "<table border=\"1\">\n";
-echo "<tr><th>Nombre</th><th>Año de fundación</th><th>Ciudad</th><th>Estado</th><th>Estadio</th></tr>\n";
+echo "<tr><th>Jugador</th><th>Número</th><th>Equipo</th></tr>\n";
 while ($row = pg_fetch_row($result, null, PGSQL_ASSOC)) {
         echo "<tr>\n";
         foreach ($row as $col_value) {

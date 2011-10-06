@@ -2,12 +2,12 @@
         $dbconn = pg_connect("host=localhost dbname=Baseball user=Baseball password=klasd864") or die('Could not connect: ' . pg_last_error());
 
         if ($_POST != null) {
-                $nombre = trim($_POST['nombre']);
+                $nombre = pg_escape_string(trim($_POST['nombre']));
                 $numero = trim($_POST['numero']);
-                $equipo = trim($_POST['equipo']);
+                $equipo = pg_escape_string(trim($_POST['equipo']));
 
-                $query = 'INSERT INTO "Jugador" ("nombre", "número", "equipo") SELECT $1, $2, "Equipo"."id" FROM "Equipo" WHERE "Equipo"."nombre" = $3';
-                $result = pg_query_params($query, $nombre, $numero, $equipo) or die('Query 1 failed: ' . pg_last_error() . "\n$query\n$nombre\n$numero\n$equipo\n");
+                $query = "INSERT INTO \"Jugador\" (\"nombre\", \"número\", \"equipo\") SELECT '{$nombre}', '{$numero}', \"Equipo\".\"id\" FROM \"Equipo\" WHERE \"Equipo\".\"nombre\" = '{$equipo}'";
+                $result = pg_query($query) or die('Query 1 failed: ' . pg_last_error() . "\n$query\n$nombre\n$numero\n$equipo\n");
         }
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">

@@ -33,26 +33,26 @@
                                         <div id="content-right">
                                                 <div id="main">
                                                         <p>Equipos:</p>
-                                                        <?php
-                                                                $dbconn = pg_connect("host=localhost dbname=Baseball user=Baseball password=klasd864") or die('Could not connect: ' . pg_last_error());
+<?php
+$dbconn = pg_connect("host=localhost dbname=Baseball user=Baseball password=klasd864") or die('Could not connect: ' . pg_last_error());
 
-                                                                $query = 'SELECT "Equipo"."nombre" AS a, "Equipo"."año de fundación" AS b, "Equipo"."ciudad" AS c, "Equipo"."estado" AS d, "Estadio"."nombre" FROM "Equipo", "Estadio" WHERE "Equipo"."estadio principal" = "Estadio"."id"';
-                                                                $result = pg_query($query) or die('Query failed: ' . pg_last_error());
+$query = 'SELECT "Equipo"."nombre" AS a, "Equipo"."año de fundación" AS b, "Equipo"."ciudad" AS c, "Equipo"."estado" AS d, "Estadio"."nombre" FROM "Equipo", "Estadio" WHERE "Equipo"."estadio principal" = "Estadio"."id"';
+$result = pg_query($query) or die('Query failed: ' . pg_last_error());
 
-                                                                echo "<table border=\"1\">\n";
-                                                                echo "<tr><th>Nombre</th><th>Año de fundación</th><th>Ciudad</th><th>Estado</th><th>Estadio</th></tr>\n";
-                                                                while ($row = pg_fetch_row($result, null, PGSQL_ASSOC)) {
-                                                                        echo "<tr>\n";
-                                                                        foreach ($row as $col_value) {
-                                                                                echo "<td>$col_value</td>\n";
-                                                                        }
-                                                                        echo "</tr>\n";
-                                                                }
-                                                                echo "</table>\n";
+echo "<table border=\"1\">\n";
+echo "<tr><th>Nombre</th><th>Año de fundación</th><th>Ciudad</th><th>Estado</th><th>Estadio</th></tr>\n";
+while ($row = pg_fetch_row($result, null, PGSQL_ASSOC)) {
+        echo "<tr>\n";
+        foreach ($row as $col_value) {
+                echo "<td>$col_value</td>\n";
+        }
+        echo "</tr>\n";
+}
+echo "</table>\n";
 
-                                                                pg_free_result($result);
-                                                                pg_close($dbconn);
-                                                        ?>
+pg_free_result($result);
+pg_close($dbconn);
+?>
                                                 </div>
                                         </div>
                                 </div>

@@ -33,26 +33,26 @@
                                 </div>
                                 <div id="right">
                                         <p>Jugadores:</p>
-                                        <?php
-                                                $dbconn = pg_connect("host=localhost dbname=Baseball user=Baseball password=klasd864") or die('Could not connect: ' . pg_last_error());
+<?php
+$dbconn = pg_connect("host=localhost dbname=Baseball user=Baseball password=klasd864") or die('Could not connect: ' . pg_last_error());
 
-                                                #$query = 'SELECT * FROM "Jugador", "Equipo" WHERE "Jugador"."equipo" = "Equipo"."id"';
-                                                $query = 'SELECT "Jugador"."nombre" AS a, "Jugador"."número" AS b, "Equipo"."nombre" AS c FROM "Jugador", "Equipo" WHERE "Jugador"."equipo" = "Equipo"."id"';
-                                                $result = pg_query($query) or die('Query failed: ' . pg_last_error());
+#$query = 'SELECT * FROM "Jugador", "Equipo" WHERE "Jugador"."equipo" = "Equipo"."id"';
+$query = 'SELECT "Jugador"."nombre" AS a, "Jugador"."número" AS b, "Equipo"."nombre" AS c FROM "Jugador", "Equipo" WHERE "Jugador"."equipo" = "Equipo"."id"';
+$result = pg_query($query) or die('Query failed: ' . pg_last_error());
 
-                                                echo "<table>\n";
-                                                while ($row = pg_fetch_row($result, null, PGSQL_ASSOC)) {
-                                                        echo "<tr>\n";
-                                                        foreach ($row as $col_value) {
-                                                                echo "<td>$col_value</td>\n";
-                                                        }
-                                                        echo "</tr>\n";
-                                                }
-                                                echo "</table>\n";
+echo "<table>\n";
+while ($row = pg_fetch_row($result, null, PGSQL_ASSOC)) {
+        echo "<tr>\n";
+        foreach ($row as $col_value) {
+                echo "<td>$col_value</td>\n";
+        }
+        echo "</tr>\n";
+}
+echo "</table>\n";
 
-                                                pg_free_result($result);
-                                                pg_close($dbconn);
-                                        ?>
+pg_free_result($result);
+pg_close($dbconn);
+?>
 
                                 </div>
                         </div>

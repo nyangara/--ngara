@@ -56,49 +56,37 @@
                                                                 <form action="insertarequipo.php" method="POST" id="insertar_equipo">
                                                                         <table border="0" style="text-align:left;" cellpadding="5px;" >
                                                                                 <tr>
-                                                                                        <td>
-                                                                                                Nombre:
-                                                                                        </td>
+                                                                                        <td>Nombre:</td>
                                                                                         <td>
                                                                                                 <input type="text" size="40" name="nombre" id="nombre">
                                                                                         </td>
                                                                                 </tr>
                                                                                 <tr>
-                                                                                        <td>
-                                                                                                Cantidad de jugadores:
-                                                                                        </td>
+                                                                                        <td>Cantidad de jugadores:</td>
                                                                                         <td>
                                                                                                 <input type="text" size="40" name="cantidad" id="cantidad">
                                                                                         </td>
                                                                                 </tr>
                                                                                 <tr>
-                                                                                        <td>
-                                                                                                Nombre del manager:
-                                                                                        </td>
+                                                                                        <td>Nombre del manager:</td>
                                                                                         <td>
                                                                                                 <input type="text" size="40" name="manager" id="manager">
                                                                                         </td>
                                                                                 </tr>
                                                                                 <tr>
-                                                                                        <td>
-                                                                                                Fecha de fundación:
-                                                                                        </td>
+                                                                                        <td>Fecha de fundación:</td>
                                                                                         <td>
                                                                                                 <input type="text" size="40" name="ffundacion" id="ffundacion">
                                                                                         </td>
                                                                                 </tr>
                                                                                 <tr>
-                                                                                        <td>
-                                                                                                Ciudad:
-                                                                                        </td>
+                                                                                        <td>Ciudad:</td>
                                                                                         <td>
                                                                                                 <input type="text" size="40" name="ciudad" id="ciudad">
                                                                                         </td>
                                                                                 </tr>
                                                                                 <tr>
-                                                                                        <td>
-                                                                                                Estadio:
-                                                                                        </td>
+                                                                                        <td>Estadio:</td>
                                                                                         <td>
                                                                                                 <input type="text" size="40" name="estadio" id="estadio">
                                                                                         </td>
@@ -108,8 +96,6 @@
                                                                                                 <input type="submit" value="CREAR" style="font-weight:bold; width:100px; height:30px; color:white; background-color:#885411;">
                                                                                         </td>
                                                                                 </tr>
-
-
                                                                         </table>
                                                                 </form>
                                                         </center>

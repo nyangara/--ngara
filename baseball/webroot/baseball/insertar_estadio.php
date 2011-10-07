@@ -56,60 +56,34 @@
                                                                 <form action="consultaIES.php" method="POST" id="insertar_estadio">
                                                                         <table border="0" style="text-align:left;" cellpadding="5px;" >
                                                                                 <tr>
-                                                                                        <td>
-                                                                                                Nombre:
-                                                                                        </td>
-                                                                                        <td>
-                                                                                                <input type="text" size="50" name="nombre" id="nombre">
-                                                                                        </td>
+                                                                                        <td>Nombre:</td>
+                                                                                        <td><input type="text" name="nombre" id="nombre"/></td>
                                                                                 </tr>
                                                                                 <tr>
-                                                                                        <td>
-                                                                                                Capacidad:
-                                                                                        </td>
-                                                                                        <td>
-                                                                                                <input type="text" size="40" name="capacidad" id="capacidad">
-                                                                                        </td>
+                                                                                        <td>Capacidad:</td>
+                                                                                        <td><input type="text" name="capacidad" id="capacidad"/></td>
                                                                                 </tr>
                                                                                 <tr>
-                                                                                        <td>
-                                                                                                Ciudad:
-                                                                                        </td>
-                                                                                        <td>
-                                                                                                <input type="text" size="40" name="ciudad" id="ciudad">
-                                                                                        </td>
+                                                                                        <td>Ciudad:</td>
+                                                                                        <td><input type="text" name="ciudad" id="ciudad"/></td>
                                                                                 </tr>
                                                                                 <tr>
-                                                                                        <td>
-                                                                                                Estado:
-                                                                                        </td>
-                                                                                        <td>
-                                                                                                <input type="text" size="40" name="estado" id="estado">
-                                                                                        </td>
+                                                                                        <td>Estado:</td>
+                                                                                        <td><input type="text" name="estado" id="estado"/></td>
                                                                                 </tr>
                                                                                 <tr>
-                                                                                        <td>
-                                                                                                Fundación:
-                                                                                        </td>
-                                                                                        <td>
-                                                                                                <input type="text" size="30" name="fundacion" id="fundacion">
-                                                                                        </td>
+                                                                                        <td>Fundación:</td>
+                                                                                        <td><input type="text" name="fundacion" id="fundacion"/></td>
                                                                                 </tr>
                                                                                 <tr>
-                                                                                        <td>
-                                                                                                Tipo de terreno:
-                                                                                        </td>
-                                                                                        <td>
-                                                                                                <input type="text" size="30" name="terreno" id="terreno">
-                                                                                        </td>
+                                                                                        <td>Tipo de terreno:</td>
+                                                                                        <td><input type="text" name="terreno" id="terreno"/></td>
                                                                                 </tr>
                                                                                 <tr>
-                                                                                        <td COLSPAN="2" style="text-align:center;">
-                                                                                                <input type="submit" value="CREAR" style="font-weight:bold; width:100px; height:30px; color:white; background-color:#885411;">
+                                                                                        <td colspan="2" style="text-align:center;">
+                                                                                                <input type="submit" value="CREAR" style="font-weight:bold; width:100px; height:30px; color:white; background-color:#885411;"/>
                                                                                         </td>
                                                                                 </tr>
-
-
                                                                         </table>
                                                                 </form>
                                                         </center>

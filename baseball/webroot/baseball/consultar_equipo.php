@@ -1,4 +1,7 @@
-﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<?php
+include "config.php";
+?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
         <head>
                 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -27,62 +30,42 @@
                                                 <div id="title">
                                                         <h2 class="hidden">Indice</h2>
                                                 </div>
-                                                <center>
-                                                        <div id="description" >
-
-                                                                <div class="menu_elem">
-                                                                        <a href="consultar_equipo.php" class="link_hide">Por Equipo</a>
-                                                                </div>
-
-                                                                <div class="menu_elem">
-                                                                        <a href="consultar_juego.php" class="link_hide">Por Juego</a>
-                                                                </div>
-
-                                                                <div class="menu_elem">
-                                                                        <a href="consultar_estadio.php" class="link_hide">Por Estadio</a>
-                                                                </div>
-                                                        </div>
-                                                </center>
+                                                <div id="description">
+                                                </div>
                                         </div>
                                         <div id="content-right">
                                                 <div id="main">
+                                                        <p>Equipos:</p>
+<?php
+$query = 'SELECT "Equipo"."nombre" AS a, "Equipo"."año de fundación" AS b, "Equipo"."ciudad" AS c, "Equipo"."estado" AS d, "Estadio"."nombre" AS e FROM "Equipo", "Estadio" WHERE "Equipo"."estadio principal" = "Estadio"."id"';
+$result = pg_query($dbconn, $query) or die('Query failed: ' . pg_last_error());
+echo "<table border=\"1\">\n";
+echo "<tr>";
+echo "<th>Nombre</th>";
+echo "<th>Año de fundación</th>";
+echo "<th>Ciudad</th>";
+echo "<th>Estado</th>";
+echo "<th>Estadio principal</th>";
+echo "</tr>\n";
+while ($row = pg_fetch_row($result, null, PGSQL_ASSOC)) {
+        echo "<tr>\n";
+        foreach ($row as $col_value) {
+                echo "<td>$col_value</td>\n";
+        }
+        echo "</tr>\n";
+}
+echo "</table>\n";
 
-
-                                                        <form action="consultarequipo.php" method="POST" id="consultar_equipo">
-                                                                <table border="0" style="text-align:left;" cellpadding="5px;" >
-
-                                                                                <tr>
-                                                                                        <td>
-                                                                                        Equipo:
-                                                                                        <select name="equipo" id="equipo">
-                                                                                                <option >Navegantes del Magallanes</option>
-                                                                                                <option >Leones del Caracas</option>
-                                                                                                <option >Tigres de Aragua</option>
-                                                                                        </select>
-                                                                                </td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                                <tr>
-                                                                                        <td>
-                                                                                                <input type="radio" name="buscar" value="informacion"> Información general del equipo<br>
-                                                                                                <input type="radio" name="buscar" value="juegos"> Próximos Juegos<br>
-                                                                                                <input type="radio" name="buscar" value="jugadores"> Jugadores del equipo<br>
-                                                                                        </td>
-                                                                                </tr>
-                                                                                <tr>
-                                                                                        <td COLSPAN="2" style="text-align:center;">
-                                                                                                <input type="submit" value="BUSCAR" style="font-weight:bold; width:100px; height:30px; color:white; background-color:#885411;">
-                                                                                        </td>
-                                                                                </tr>
-                                                                        </table>
-                                                                </form>
-                                                        </div>
+pg_free_result($result);
+pg_close($dbconn);
+?>
                                                 </div>
                                         </div>
                                 </div>
-                                <div id="footer">
-                                        <p>Un producto de Ñángara, Inc. <img src="images/vendor.png" alt="Una pieza del teclado de un computador, con el simbolo de ñangara." /></p>
-                                </div>
                         </div>
-                </body>
-        </html>
+                        <div id="footer">
+                                <p>Un producto de Ñángara, Inc. <img src="images/vendor.png" alt="Una pieza del teclado de un computador, con el simbolo de ñangara." /></p>
+                        </div>
+                </div>
+        </body>
+</html>

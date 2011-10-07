@@ -1,13 +1,22 @@
-INSERT INTO "Estadio" ("nombre", "ciudad", "estado", "capacidad") VALUES
-        ('Alfonso "Chico" Carrasquel'   , 'Puerto La Cruz'      , 'Anzoátegui'          , 18000),
-        ('Enzo Hernández'               , 'El Tigre'            , 'Anzoátegui'          ,  5762),
-        ('Antonio Herrera Gutiérrez'    , 'Barquisimeto'        , 'Lara'                , 20450),
-        ('José Pérez Colmenares'        , 'Maracay'             , 'Aragua'              , 15000),
-        ('José Bernardo Pérez'          , 'Valencia'            , 'Carabobo'            , 15000),
-        ('Luis Aparicio'                , 'Maracaibo'           , 'Zulia'               , 23000),
-        ('Nueva Esparta'                , 'Porlamar'            , 'Nueva Esparta'       , 16000),
-        ('Universitario'                , 'Caracas'             , 'Distrito Capital'    , 20763),
-        ('La Ceiba'                     , 'Ciudad Guayana'      , 'Bolívar'             , 30000);
+INSERT INTO "Tipo de terreno" ("nombre") VALUES ('tierra'), ('grama'), ('grama artificial');
+
+INSERT INTO "Estadio" ("nombre", "ciudad", "estado", "capacidad", "tipo de terreno", "año de fundación")
+SELECT "Datos"."nombre", "Datos"."ciudad", "Datos"."estado", "Datos"."capacidad", "Tipo de terreno"."id", "Datos"."año de fundación"
+FROM
+        "Tipo de terreno",
+        (
+                VALUES
+                        ('Alfonso "Chico" Carrasquel'   , 'Puerto La Cruz'      , 'Anzoátegui'          , 18000,        'grama',        1234),
+                        ('Enzo Hernández'               , 'El Tigre'            , 'Anzoátegui'          ,  5762,        'grama',        1234),
+                        ('Antonio Herrera Gutiérrez'    , 'Barquisimeto'        , 'Lara'                , 20450,        'grama',        1234),
+                        ('José Pérez Colmenares'        , 'Maracay'             , 'Aragua'              , 15000,        'grama',        1234),
+                        ('José Bernardo Pérez'          , 'Valencia'            , 'Carabobo'            , 15000,        'grama',        1234),
+                        ('Luis Aparicio'                , 'Maracaibo'           , 'Zulia'               , 23000,        'grama',        1234),
+                        ('Nueva Esparta'                , 'Porlamar'            , 'Nueva Esparta'       , 16000,        'grama',        1234),
+                        ('Universitario'                , 'Caracas'             , 'Distrito Capital'    , 20763,        'grama',        1234),
+                        ('La Ceiba'                     , 'Ciudad Guayana'      , 'Bolívar'             , 30000,        'grama',        1234)
+        ) as "Datos" ("nombre", "ciudad", "estado", "capacidad", "tipo de terreno", "año de fundación")
+WHERE "Datos"."tipo de terreno" = "Tipo de terreno"."nombre";
 
 INSERT INTO "Equipo" ("nombre", "año de fundación", "ciudad", "estado", "estadio principal")
 SELECT "Datos"."nombre", "Datos"."año de fundación", "Datos"."ciudad", "Datos"."estado", "Estadio"."id"

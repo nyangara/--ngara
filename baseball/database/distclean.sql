@@ -1,0 +1,2 @@
+DROP DATABASE IF EXISTS "Baseball";
+DROP ROLE     IF EXISTS "Baseball";

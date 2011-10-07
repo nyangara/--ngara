@@ -7,9 +7,9 @@
         </head>
 
         <body>
-		<?
-		include 'config.php';
-		?>
+                <?
+                include 'config.php';
+                ?>
                 <div id="delete">
                         <div id="logo">
                                 <h1><a href="inicio.html"><span class="hidden">Triple Play</span></a></h1>
@@ -31,45 +31,45 @@
                                                         <h2 class="hidden">Indice</h2>
                                                 </div>
                                                 <div id="description">
-												<center>
-													<div class="menu_elem">
-													<a href="eliminar_jugador.php" class="link_hide">Eliminar Jugador</a>
-													</div>
-													
-													<div class="menu_elem">
-													<a href="eliminar_estadio.php" class="link_hide">Eliminar Estadio</a>
-													</div>
-													
-													<div class="menu_elem">
-													<a href="eliminar_equipo.php" class="link_hide">Eliminar Equipo</a>
-													</div>
-												
-													<div class="menu_elem">
-													<a href="eliminar_juego.php" class="link_hide">Eliminar Juego</a>
-													</div>
-												</center>
+                                                        <center>
+                                                                <div class="menu_elem">
+                                                                        <a href="eliminar_jugador.php" class="link_hide">Eliminar Jugador</a>
+                                                                </div>
+
+                                                                <div class="menu_elem">
+                                                                        <a href="eliminar_estadio.php" class="link_hide">Eliminar Estadio</a>
+                                                                </div>
+
+                                                                <div class="menu_elem">
+                                                                        <a href="eliminar_equipo.php" class="link_hide">Eliminar Equipo</a>
+                                                                </div>
+
+                                                                <div class="menu_elem">
+                                                                        <a href="eliminar_juego.php" class="link_hide">Eliminar Juego</a>
+                                                                </div>
+                                                        </center>
                                                 </div>
                                         </div>
                                         <div id="content-right">
                                                 <div id="main">
-												<center>
-													<h3 style="color:#885411;">Eliminar Jugador</h3><br>
-                                                   <table style="width:80%; margin:0px;text-align:left;"; cellpadding="2px;">
-														<tr style="color:black;"><td>Nombre</td><td>Apellido</td><td>Número</td><td>Posición</td><td>Equipo</td></tr>
+                                                        <center>
+                                                                <h3 style="color:#885411;">Eliminar Jugador</h3><br>
+                                                                <table style="width:80%; margin:0px;text-align:left;"; cellpadding="2px;">
+                                                                        <tr style="color:black;"><td>Nombre</td><td>Apellido</td><td>Número</td><td>Posición</td><td>Equipo</td></tr>
 
-														<?
-														$consulta=$baseball->prepare("SELECT * FROM jugador ");
-														$consulta->execute();	
-														$jugador = $consulta->fetchAll();
+                                                                        <?
+                                                                        $consulta=$baseball->prepare("SELECT * FROM jugador ");
+                                                                        $consulta->execute();
+                                                                        $jugador = $consulta->fetchAll();
 
-														foreach ($jugador as $jug)
-															{		
-																echo '<tr><td>'.$jug['Nombre'].'</td><td>'.$jug['Apellido'].'</td><td>'.$jug['Nro_uniforme'].'</td><td>'.$jug['Posicion'].'</td><td>'.$jug['nombre_equipo'].'</td><td><a href="eliminarjugador.php?id='.$jug['id'].'">Eliminar</a></td></tr>'; 
-															}
-														?>
+                                                                        foreach ($jugador as $jug)
+                                                                        {
+                                                                        echo '<tr><td>'.$jug['Nombre'].'</td><td>'.$jug['Apellido'].'</td><td>'.$jug['Nro_uniforme'].'</td><td>'.$jug['Posicion'].'</td><td>'.$jug['nombre_equipo'].'</td><td><a href="eliminarjugador.php?id='.$jug['id'].'">Eliminar</a></td></tr>';
+                                                                        }
+                                                                        ?>
 
-													</table>
-												</center>													
+                                                                </table>
+                                                        </center>
                                                 </div>
                                         </div>
                                 </div>

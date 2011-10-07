@@ -1,16 +1,14 @@
 <?php
+include "config.php";
 
-	error_reporting( E_ALL );
-		include "config.php";
+$Nombre = pg_escape_string (trim($_POST['nombre']));
+$Cantidad = trim($_POST['cantidad']);
+$Manager = pg_escape_string(trim($_POST['manager']));
+$Ffundacion = trim($_POST['ffundacion']);
+$ciudad = pg_escape_string(trim($_POST['ciudad']));
+$estadio = trim($_POST['estadio']);
 
-	$Nombre = pg_escape_string (trim($_POST['nombre']));
-	$Cantidad = trim($_POST['cantidad']);
-	$Manager = pg_escape_string(trim($_POST['manager']));
-	$Ffundacion = trim($_POST['ffundacion']);
-	$ciudad = pg_escape_string(trim($_POST['ciudad']));
-	$estadio = trim($_POST['estadio']);
-
-        $query = "INSERT INTO \"jugador\" (\"Nombre_jugador\",\"Apellido_jugador\",\"Nro_jugador\",\"Tipo_jugador\",\"Posición_jugador\",\"Fecha_nacimiento\",\"lugar_nacimiento\",\"peso\" ,\"altura\",\"equipo_id\") SELECT '{$Nombre}', '{$Apellido}','{$Numero}','{$Tipo}','{$Posicion}','{$Fecha}','{$Lugar}','{$Peso}','{$Altura}', \"Equipo\".\"id\" FROM \"Equipo\" WHERE \"Equipo\".\"nombre\" = '{$Equipo}'";
+$query = "INSERT INTO \"jugador\" (\"Nombre_jugador\",\"Apellido_jugador\",\"Nro_jugador\",\"Tipo_jugador\",\"Posición_jugador\",\"Fecha_nacimiento\",\"lugar_nacimiento\",\"peso\" ,\"altura\",\"equipo_id\") SELECT '{$Nombre}', '{$Apellido}','{$Numero}','{$Tipo}','{$Posicion}','{$Fecha}','{$Lugar}','{$Peso}','{$Altura}', \"Equipo\".\"id\" FROM \"Equipo\" WHERE \"Equipo\".\"nombre\" = '{$Equipo}'";
 
 INSERT INTO "Equipo" ("nombre", "año de fundación", "ciudad", "estado", "estadio principal")
 SELECT "Datos"."nombre", "Datos"."año de fundación", "Datos"."ciudad", "Datos"."estado", "Estadio"."id"
@@ -29,9 +27,7 @@ FROM
         ) as "Datos" ("nombre", "año de fundación", "ciudad", "estado", "nombre del estadio principal")
 WHERE "Datos"."nombre del estadio principal" = "Estadio"."nombre";
 
-	
+$result = pg_query($dbconn, $query);
 
-	$result = pg_query($dbconn, $query);
- 
-	header( 'Location: insertar.html');
+header( 'Location: insertar.html');
 ?>

@@ -1,7 +1,10 @@
-all: create schema load perm
+all: create password schema load perm
 
 create:
 	psql -f create.sql
+
+password:
+	psql -f password.sql
 
 schema:
 	psql -f schema.sql "Baseball"

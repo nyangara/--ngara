@@ -27,64 +27,62 @@
                                                 <div id="title">
                                                         <h2 class="hidden">Indice</h2>
                                                 </div>
-                                                                                                <center>
-                                                <div id="description" >
+                                                <center>
+                                                        <div id="description" >
 
-                                                                                                        <div class="menu_elem">
-                                                                                                        <a href="consultar_equipo.php" class="link_hide">Por Equipo</a>
-                                                                                                        </div>
+                                                                <div class="menu_elem">
+                                                                        <a href="consultar_equipo.php" class="link_hide">Por Equipo</a>
+                                                                </div>
 
-                                                                                                        <div class="menu_elem">
-                                                                                                        <a href="consultar_juego.php" class="link_hide">Por Juego</a>
-                                                                                                        </div>
+                                                                <div class="menu_elem">
+                                                                        <a href="consultar_juego.php" class="link_hide">Por Juego</a>
+                                                                </div>
 
-                                                                                                        <div class="menu_elem">
-                                                                                                        <a href="consultar_estadio.php" class="link_hide">Por Estadio</a>
-                                                                                                        </div>
-                                                </div>
-                                                                                                </center>
+                                                                <div class="menu_elem">
+                                                                        <a href="consultar_estadio.php" class="link_hide">Por Estadio</a>
+                                                                </div>
+                                                        </div>
+                                                </center>
                                         </div>
                                         <div id="content-right">
                                                 <div id="main">
 
 
-                                                                                                                        <form action="consultarequipo.php" method="POST" id="consultar_equipo">
-                                                                                                                                <table border="0" style="text-align:left;" cellpadding="5px;" >
+                                                        <form action="consultarequipo.php" method="POST" id="consultar_equipo">
+                                                                <table border="0" style="text-align:left;" cellpadding="5px;" >
 
-                                                                                                                                        <tr>
-                                                                                                                                                <td>
-                                                                                                                                                        Equipo:
-                                                                                                                                                                <select name="equipo" id="equipo">
-                                                                                                                                                                <option >Navegantes del Magallanes</option>
-                                                                                                                                                                <option >Leones del Caracas</option>
-                                                                                                                                                                <option >Tigres de Aragua</option>
-                                                                                                                                                        </select>
-                                                                                                                                                </td>        
-                                                                                                                                        </tr>
-                                                                                                                                        <tr>
-                                                                                                                                        <tr>
-                                                                                                                                                <td>
-                                                                                                                                                        <input type="radio" name="buscar" value="informacion"> Información general del equipo<br>
-                                                                                                                                                        <input type="radio" name="buscar" value="juegos"> Próximos Juegos<br>
-                                                                                                                                                        <input type="radio" name="buscar" value="jugadores"> Jugadores del equipo<br>
-                                                                                                                                                </td>
-                                                                                                                                        </tr>
-                                                                                                                                        <tr>
-                                                                                                                                                <td COLSPAN="2" style="text-align:center;">
-                                                                                                                                                        <input type="submit" value="BUSCAR" style="font-weight:bold; width:100px; height:30px; color:white; background-color:#885411;">
-                                                                                                                                                </td>        
-                                                                                                                                        </tr>
-
-
-                                                                                                                                </table>
-                                                                                                                        </form>                                                                                                                                                                                                                                                                                                                                                                                                                        
-                                                                            </div>
+                                                                                <tr>
+                                                                                        <td>
+                                                                                        Equipo:
+                                                                                        <select name="equipo" id="equipo">
+                                                                                                <option >Navegantes del Magallanes</option>
+                                                                                                <option >Leones del Caracas</option>
+                                                                                                <option >Tigres de Aragua</option>
+                                                                                        </select>
+                                                                                </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                                <tr>
+                                                                                        <td>
+                                                                                                <input type="radio" name="buscar" value="informacion"> Información general del equipo<br>
+                                                                                                <input type="radio" name="buscar" value="juegos"> Próximos Juegos<br>
+                                                                                                <input type="radio" name="buscar" value="jugadores"> Jugadores del equipo<br>
+                                                                                        </td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                        <td COLSPAN="2" style="text-align:center;">
+                                                                                                <input type="submit" value="BUSCAR" style="font-weight:bold; width:100px; height:30px; color:white; background-color:#885411;">
+                                                                                        </td>
+                                                                                </tr>
+                                                                        </table>
+                                                                </form>
+                                                        </div>
+                                                </div>
                                         </div>
                                 </div>
+                                <div id="footer">
+                                        <p>Un producto de Ñángara, Inc. <img src="images/vendor.png" alt="Una pieza del teclado de un computador, con el simbolo de ñangara." /></p>
+                                </div>
                         </div>
-                        <div id="footer">
-                                <p>Un producto de Ñángara, Inc. <img src="images/vendor.png" alt="Una pieza del teclado de un computador, con el simbolo de ñangara." /></p>
-                        </div>
-                </div>
-        </body>
-</html>
+                </body>
+        </html>

@@ -28,84 +28,84 @@
                                                         <h2 class="hidden">Indice</h2>
                                                 </div>
                                                 <div id="description">
-                                                                                                <center>
-                                                                                                        <div class="menu_elem">
-                                                                                                        <a href="insertar_jugador.php" class="link_hide">Nuevo Jugador</a>
-                                                                                                        </div>
+                                                        <center>
+                                                                <div class="menu_elem">
+                                                                        <a href="insertar_jugador.php" class="link_hide">Nuevo Jugador</a>
+                                                                </div>
 
-                                                                                                        <div class="menu_elem">
-                                                                                                        <a href="insertar_estadio.php" class="link_hide">Nuevo Estadio</a>
-                                                                                                        </div>
+                                                                <div class="menu_elem">
+                                                                        <a href="insertar_estadio.php" class="link_hide">Nuevo Estadio</a>
+                                                                </div>
 
-                                                                                                        <div class="menu_elem">
-                                                                                                        <a href="insertar_equipo.php" class="link_hide">Nuevo Equipo</a>
-                                                                                                        </div>
+                                                                <div class="menu_elem">
+                                                                        <a href="insertar_equipo.php" class="link_hide">Nuevo Equipo</a>
+                                                                </div>
 
-                                                                                                        <div class="menu_elem">
-                                                                                                        <a href="insertar_juego.php" class="link_hide">Nuevo Juego</a>
-                                                                                                        </div>
-                                                                                                </center>
+                                                                <div class="menu_elem">
+                                                                        <a href="insertar_juego.php" class="link_hide">Nuevo Juego</a>
+                                                                </div>
+                                                        </center>
 
                                                 </div>
                                         </div>
                                         <div id="content-right">
                                                 <div id="main">
-                                                                                                <center>
-                                                                                                        <h3 style="color:#885411;">Nuevo Juego</h3>
+                                                        <center>
+                                                                <h3 style="color:#885411;">Nuevo Juego</h3>
 
-                                                        <form action="consultaIJ.php" method="POST" id="insertar_juego">
-                                                                                                                <table border="0" style="text-align:left;" cellpadding="5px;" >
-                                                                                                                        <tr>
-                                                                                                                                <td>
-                                                                                                                                        Fecha:
-                                                                                                                                </td>
-                                                                                                                                <td>
-                                                                                                                                        <input type="text" size="25" name="fecha" id="fecha">
-                                                                                                                                </td>        
-                                                                                                                        </tr>
-                                                                                                                        <tr>
-                                                                                                                                <td>
-                                                                                                                                        Hora de inicio:
-                                                                                                                                </td>
-                                                                                                                                <td>
-                                                                                                                                        <input type="text" size="25" name="hora" id="hora">
-                                                                                                                                </td>        
-                                                                                                                        </tr>
-                                                                                                                        <tr>
-                                                                                                                                <td>
-                                                                                                                                        Equipo 1:
-                                                                                                                                </td>
-                                                                                                                                <td>
-                                                                                                                                        <input type="text" size="40" name="equipo1" id="equipo1">
-                                                                                                                                </td>        
-                                                                                                                        </tr>
-                                                                                                                        <tr>
-                                                                                                                                <td>
-                                                                                                                                        Equipo 2:
-                                                                                                                                </td>
-                                                                                                                                <td>
-                                                                                                                                        <input type="text" size="40" name="equipo2" id="equipo2">
-                                                                                                                                </td>        
-                                                                                                                        </tr>
-                                                                                                                        <tr>
-                                                                                                                                <td>
-                                                                                                                                        Estadio:
-                                                                                                                                </td>
-                                                                                                                                <td>
-                                                                                                                                        <input type="text" size="40" name="estadio" id="estadio">
-                                                                                                                                </td>        
-                                                                                                                        </tr>
+                                                                <form action="consultaIJ.php" method="POST" id="insertar_juego">
+                                                                        <table border="0" style="text-align:left;" cellpadding="5px;" >
+                                                                                <tr>
+                                                                                        <td>
+                                                                                                Fecha:
+                                                                                        </td>
+                                                                                        <td>
+                                                                                                <input type="text" size="25" name="fecha" id="fecha">
+                                                                                        </td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                        <td>
+                                                                                                Hora de inicio:
+                                                                                        </td>
+                                                                                        <td>
+                                                                                                <input type="text" size="25" name="hora" id="hora">
+                                                                                        </td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                        <td>
+                                                                                                Equipo 1:
+                                                                                        </td>
+                                                                                        <td>
+                                                                                                <input type="text" size="40" name="equipo1" id="equipo1">
+                                                                                        </td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                        <td>
+                                                                                                Equipo 2:
+                                                                                        </td>
+                                                                                        <td>
+                                                                                                <input type="text" size="40" name="equipo2" id="equipo2">
+                                                                                        </td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                        <td>
+                                                                                                Estadio:
+                                                                                        </td>
+                                                                                        <td>
+                                                                                                <input type="text" size="40" name="estadio" id="estadio">
+                                                                                        </td>
+                                                                                </tr>
 
-                                                                                                                        <tr>
-                                                                                                                                <td COLSPAN="2" style="text-align:center;">
-                                                                                                                                        <input type="submit" value="CREAR" style="font-weight:bold; width:100px; height:30px; color:white; background-color:#885411;">
-                                                                                                                                </td>        
-                                                                                                                        </tr>
+                                                                                <tr>
+                                                                                        <td COLSPAN="2" style="text-align:center;">
+                                                                                                <input type="submit" value="CREAR" style="font-weight:bold; width:100px; height:30px; color:white; background-color:#885411;">
+                                                                                        </td>
+                                                                                </tr>
 
 
-                                                                                                                </table>
-                                                                                                        </form>
-                                                                                                </center>        
+                                                                        </table>
+                                                                </form>
+                                                        </center>
                                                 </div>
                                         </div>
                                 </div>

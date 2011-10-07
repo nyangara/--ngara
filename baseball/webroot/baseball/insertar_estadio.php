@@ -28,91 +28,91 @@
                                                         <h2 class="hidden">Indice</h2>
                                                 </div>
                                                 <div id="description">
-                                                                                                <center>
-                                                                                                        <div class="menu_elem">
-                                                                                                        <a href="insertar_jugador.php" class="link_hide">Nuevo Jugador</a>
-                                                                                                        </div>
+                                                        <center>
+                                                                <div class="menu_elem">
+                                                                        <a href="insertar_jugador.php" class="link_hide">Nuevo Jugador</a>
+                                                                </div>
 
-                                                                                                        <div class="menu_elem">
-                                                                                                        <a href="insertar_estadio.php" class="link_hide">Nuevo Estadio</a>
-                                                                                                        </div>
+                                                                <div class="menu_elem">
+                                                                        <a href="insertar_estadio.php" class="link_hide">Nuevo Estadio</a>
+                                                                </div>
 
-                                                                                                        <div class="menu_elem">
-                                                                                                        <a href="insertar_equipo.php" class="link_hide">Nuevo Equipo</a>
-                                                                                                        </div>
+                                                                <div class="menu_elem">
+                                                                        <a href="insertar_equipo.php" class="link_hide">Nuevo Equipo</a>
+                                                                </div>
 
-                                                                                                        <div class="menu_elem">
-                                                                                                        <a href="insertar_juego.php" class="link_hide">Nuevo Juego</a>
-                                                                                                        </div>
-                                                                                                </center>
+                                                                <div class="menu_elem">
+                                                                        <a href="insertar_juego.php" class="link_hide">Nuevo Juego</a>
+                                                                </div>
+                                                        </center>
 
                                                 </div>
                                         </div>
                                         <div id="content-right">
                                                 <div id="main">
-                                                                                                <center>
-                                                                                                        <h3 style="color:#885411;">Nuevo Estadio</h3>
+                                                        <center>
+                                                                <h3 style="color:#885411;">Nuevo Estadio</h3>
 
-                                                        <form action="consultaIES.php" method="POST" id="insertar_estadio">
-                                                                                                                <table border="0" style="text-align:left;" cellpadding="5px;" >
-                                                                                                                        <tr>
-                                                                                                                                <td>
-                                                                                                                                        Nombre:
-                                                                                                                                </td>
-                                                                                                                                <td>
-                                                                                                                                        <input type="text" size="50" name="nombre" id="nombre">
-                                                                                                                                </td>        
-                                                                                                                        </tr>
-                                                                                                                        <tr>
-                                                                                                                                <td>
-                                                                                                                                        Capacidad:
-                                                                                                                                </td>
-                                                                                                                                <td>
-                                                                                                                                        <input type="text" size="40" name="capacidad" id="capacidad">
-                                                                                                                                </td>        
-                                                                                                                        </tr>
-                                                                                                                        <tr>
-                                                                                                                                <td>
-                                                                                                                                        Ciudad:
-                                                                                                                                </td>
-                                                                                                                                <td>
-                                                                                                                                        <input type="text" size="40" name="ciudad" id="ciudad">
-                                                                                                                                </td>        
-                                                                                                                        </tr>
-                                                                                                                        <tr>
-                                                                                                                                <td>
-                                                                                                                                        Estado:
-                                                                                                                                </td>
-                                                                                                                                <td>
-                                                                                                                                        <input type="text" size="40" name="estado" id="estado">
-                                                                                                                                </td>        
-                                                                                                                        </tr>
-                                                                                                                        <tr>
-                                                                                                                                <td>
-                                                                                                                                        Fundación:
-                                                                                                                                </td>
-                                                                                                                                <td>
-                                                                                                                                        <input type="text" size="30" name="fundacion" id="fundacion">
-                                                                                                                                </td>        
-                                                                                                                        </tr>
-                                                                                                                        <tr>
-                                                                                                                                <td>
-                                                                                                                                        Tipo de terreno:
-                                                                                                                                </td>
-                                                                                                                                <td>
-                                                                                                                                        <input type="text" size="30" name="terreno" id="terreno">
-                                                                                                                                </td>        
-                                                                                                                        </tr>                                                                                                                        
-                                                                                                                        <tr>
-                                                                                                                                <td COLSPAN="2" style="text-align:center;">
-                                                                                                                                        <input type="submit" value="CREAR" style="font-weight:bold; width:100px; height:30px; color:white; background-color:#885411;">
-                                                                                                                                </td>        
-                                                                                                                        </tr>
+                                                                <form action="consultaIES.php" method="POST" id="insertar_estadio">
+                                                                        <table border="0" style="text-align:left;" cellpadding="5px;" >
+                                                                                <tr>
+                                                                                        <td>
+                                                                                                Nombre:
+                                                                                        </td>
+                                                                                        <td>
+                                                                                                <input type="text" size="50" name="nombre" id="nombre">
+                                                                                        </td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                        <td>
+                                                                                                Capacidad:
+                                                                                        </td>
+                                                                                        <td>
+                                                                                                <input type="text" size="40" name="capacidad" id="capacidad">
+                                                                                        </td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                        <td>
+                                                                                                Ciudad:
+                                                                                        </td>
+                                                                                        <td>
+                                                                                                <input type="text" size="40" name="ciudad" id="ciudad">
+                                                                                        </td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                        <td>
+                                                                                                Estado:
+                                                                                        </td>
+                                                                                        <td>
+                                                                                                <input type="text" size="40" name="estado" id="estado">
+                                                                                        </td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                        <td>
+                                                                                                Fundación:
+                                                                                        </td>
+                                                                                        <td>
+                                                                                                <input type="text" size="30" name="fundacion" id="fundacion">
+                                                                                        </td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                        <td>
+                                                                                                Tipo de terreno:
+                                                                                        </td>
+                                                                                        <td>
+                                                                                                <input type="text" size="30" name="terreno" id="terreno">
+                                                                                        </td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                        <td COLSPAN="2" style="text-align:center;">
+                                                                                                <input type="submit" value="CREAR" style="font-weight:bold; width:100px; height:30px; color:white; background-color:#885411;">
+                                                                                        </td>
+                                                                                </tr>
 
 
-                                                                                                                </table>
-                                                                                                        </form>
-                                                                                                </center>        
+                                                                        </table>
+                                                                </form>
+                                                        </center>
                                                 </div>
                                         </div>
                                 </div>

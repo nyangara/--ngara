@@ -27,52 +27,48 @@
                                                 <div id="title">
                                                         <h2 class="hidden">Indice</h2>
                                                 </div>
-                                                                                                <center>
-                                                <div id="description" >
+                                                <center>
+                                                        <div id="description" >
+                                                                <div class="menu_elem">
+                                                                        <a href="consultar_equipo.php" class="link_hide">Por Equipo</a>
+                                                                </div>
 
-                                                                                                        <div class="menu_elem">
-                                                                                                        <a href="consultar_equipo.php" class="link_hide">Por Equipo</a>
-                                                                                                        </div>
+                                                                <div class="menu_elem">
+                                                                        <a href="consultar_juego.php" class="link_hide">Por Juego</a>
+                                                                </div>
 
-                                                                                                        <div class="menu_elem">
-                                                                                                        <a href="consultar_juego.php" class="link_hide">Por Juego</a>
-                                                                                                        </div>
-
-                                                                                                        <div class="menu_elem">
-                                                                                                        <a href="consultar_estadio.php" class="link_hide">Por Estadio</a>
-                                                                                                        </div>
-                                                </div>
-                                                                                                </center>
+                                                                <div class="menu_elem">
+                                                                        <a href="consultar_estadio.php" class="link_hide">Por Estadio</a>
+                                                                </div>
+                                                        </div>
+                                                </center>
                                         </div>
                                         <div id="content-right">
                                                 <div id="main">
 
-                                                                                                                        <form action="consultarjuego.php" method="POST" id="consultar_juego">
-                                                                                                                                <table border="0" style="text-align:left;" cellpadding="5px;" >                                                                                                                                                                                                                                                                
+                                                        <form action="consultarjuego.php" method="POST" id="consultar_juego">
+                                                                <table border="0" style="text-align:left;" cellpadding="5px;" >
 
-                                                                                                                                                <td>
-                                                                                                                                                        Estadio:
-                                                                                                                                                        <select name="estadio" id="estadio">
-                                                                                                                                                                <option >Estadio Universitario</option>
-                                                                                                                                                                <option >Estadio Enzo Hernández</option>
-                                                                                                                                                                <option > Estadio José Bernardo Pérez</option>
-                                                                                                                                                        </select>
-                                                                                                                                                </td>        
-                                                                                                                                                <tr>
-                                                                                                                                                        <td>
-                                                                                                                                                                <input type="radio" name="buscar" value="informacion"> Información general del estadio<br>
-                                                                                                                                                                <input type="radio" name="buscar" value="juegos"> Próximos Juegos<br>
-                                                                                                                                                        </td>
-                                                                                                                                                </tr>
-                                                                                                                                                <td COLSPAN="2" style="text-align:center;">
-                                                                                                                                                        <input type="submit" value="BUSCAR" style="font-weight:bold; width:100px; height:30px; color:white; background-color:#885411;">
-                                                                                                                                                </td>        
-
-
-
-                                                                                                                                </table>
-                                                                                                                        </form>                                                                                                                                                                                                                                                                                                                                                                                                                        
-                                                                            </div>
+                                                                        <td>
+                                                                                Estadio:
+                                                                                <select name="estadio" id="estadio">
+                                                                                        <option>Estadio Universitario</option>
+                                                                                        <option>Estadio Enzo Hernández</option>
+                                                                                        <option>Estadio José Bernardo Pérez</option>
+                                                                                </select>
+                                                                        </td>
+                                                                        <tr>
+                                                                                <td>
+                                                                                        <input type="radio" name="buscar" value="informacion"> Información general del estadio<br/>
+                                                                                        <input type="radio" name="buscar" value="juegos"> Próximos Juegos<br/>
+                                                                                </td>
+                                                                        </tr>
+                                                                        <td COLSPAN="2" style="text-align:center;">
+                                                                                <input type="submit" value="BUSCAR" style="font-weight:bold; width:100px; height:30px; color:white; background-color:#885411;">
+                                                                        </td>
+                                                                </table>
+                                                        </form>
+                                                </div>
                                         </div>
                                 </div>
                         </div>

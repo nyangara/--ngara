@@ -53,7 +53,7 @@
                                                                                                 <center>
                                                                                                         <h3 style="color:#885411;">Nuevo Jugador</h3>
 
-                                                        <form action="insertarjugador.php" method="POST" id="insertar_jugador">
+                                                        <form action="consulta.php" method="POST" id="insertar_jugador">
                                                                                                                 <table border="0" style="text-align:left;" cellpadding="5px;" >
                                                                                                                         <tr>
                                                                                                                                 <td>

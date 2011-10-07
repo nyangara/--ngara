@@ -53,7 +53,7 @@
                                                                                                 <center>
                                                                                                         <h3 style="color:#885411;">Nuevo Juego</h3>
 
-                                                        <form action="insertarjuego.php" method="POST" id="insertar_juego">
+                                                        <form action="consultaIJ.php" method="POST" id="insertar_juego">
                                                                                                                 <table border="0" style="text-align:left;" cellpadding="5px;" >
                                                                                                                         <tr>
                                                                                                                                 <td>
@@ -111,7 +111,7 @@
                                 </div>
                         </div>
                         <div id="footer">
-                                <p>Un producto de Ñángara, Inc. <img src="images/vendor.png" alt="Una pieza del teclado de un computador, con el simbolo de ñangara." /></p>
+                                <p>Un producto de Ã‘Ã¡ngara, Inc. <img src="images/vendor.png" alt="Una pieza del teclado de un computador, con el simbolo de Ã±angara." /></p>
                         </div>
                 </div>
         </body>

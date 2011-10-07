@@ -53,7 +53,7 @@
                                                                                                 <center>
                                                                                                         <h3 style="color:#885411;">Nuevo Estadio</h3>
 
-                                                        <form action="insertarestadio.php" method="POST" id="insertar_estadio">
+                                                        <form action="consultaIES.php" method="POST" id="insertar_estadio">
                                                                                                                 <table border="0" style="text-align:left;" cellpadding="5px;" >
                                                                                                                         <tr>
                                                                                                                                 <td>

@@ -1,0 +1,2 @@
+DROP DATABASE IF EXISTS "TriplePlay";
+DROP ROLE     IF EXISTS "TriplePlay";

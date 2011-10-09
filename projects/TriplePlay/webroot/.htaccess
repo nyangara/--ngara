@@ -1,0 +1,9 @@
+<Files .htaccess>
+        Order Allow, Deny
+        Deny from all
+</Files>
+
+<Files password.php>
+        Order Allow, Deny
+        Deny from all
+</Files>

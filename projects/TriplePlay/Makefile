@@ -1,7 +1,7 @@
 PROJECT=TriplePlay
 HTTPD_ROOT=/var/www
 
-.PHONY: all install symlink
+.PHONY: all install symlink uninstall password
 
 all:
 
@@ -13,3 +13,6 @@ symlink:
 
 uninstall:
 	rm -rf "$(HTTPD_ROOT)/$(PROJECT)"
+
+password:
+	./password

@@ -4,8 +4,7 @@ INSERT INTO "Estadio" ("nombre", "ciudad", "estado", "capacidad", "tipo de terre
 SELECT "Datos"."nombre", "Datos"."ciudad", "Datos"."estado", "Datos"."capacidad", "Tipo de terreno"."id", "Datos"."año de fundación"
 FROM
         "Tipo de terreno",
-        (
-                VALUES
+        (VALUES
                         ('Alfonso "Chico" Carrasquel'   , 'Puerto La Cruz'      , 'Anzoátegui'          , 18000,        'grama',        1234),
                         ('Enzo Hernández'               , 'El Tigre'            , 'Anzoátegui'          ,  5762,        'grama',        1234),
                         ('Antonio Herrera Gutiérrez'    , 'Barquisimeto'        , 'Lara'                , 20450,        'grama',        1234),
@@ -22,8 +21,7 @@ INSERT INTO "Equipo" ("nombre", "año de fundación", "ciudad", "estado", "estad
 SELECT "Datos"."nombre", "Datos"."año de fundación", "Datos"."ciudad", "Datos"."estado", "Estadio"."id"
 FROM
         "Estadio",
-        (
-                VALUES
+        (VALUES
                 ('Águilas del Zulia'        , 1968, 'Maracaibo'     , 'Zulia'           , 'Luis Aparicio'             ),
                 ('Bravos de Margarita'      , 2007, 'Porlamar'      , 'Nueva Esparta'   , 'Nueva Esparta'             ),
                 ('Cardenales de Lara'       , 1942, 'Barquisimeto'  , 'Lara'            , 'Antonio Herrera Gutiérrez' ),

@@ -48,17 +48,11 @@ CREATE TABLE "Equipo" (
 CREATE TABLE "Jugador" (
         "id"                    SERIAL                          NOT NULL,
         "nombre"                text                            NOT NULL,
-        "equipo"                integer                         NOT NULL,
-        "número"                integer                         NOT NULL,
         "fecha de nacimiento"   date                            NOT NULL,
         "lugar de procedencia"  text                            NOT NULL,
 
         CONSTRAINT "Jugador PRIMARY KEY"
-                PRIMARY KEY ("id"),
-
-        CONSTRAINT "Jugador FOREIGN KEY equipo REFERENCES Equipo"
-                FOREIGN KEY ("equipo")
-                REFERENCES "Equipo" ("id")
+                PRIMARY KEY ("id")
 );
 
 CREATE TABLE "Peso" (
@@ -82,8 +76,9 @@ CREATE TABLE "Altura" (
 CREATE TABLE "Juega" (
         "jugador"               integer                         NOT NULL,
         "equipo"                integer                         NOT NULL,
-        "inicio"                integer                         NOT NULL,
-        "fin"                   integer                             NULL,
+        "número"                integer                         NOT NULL,
+        "inicio"                date                            NOT NULL,
+        "fin"                   date                                NULL,
 
         CONSTRAINT "Juega PRIMARY KEY"
                 PRIMARY KEY ("jugador", "equipo", "inicio"),

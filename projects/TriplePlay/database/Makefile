@@ -1,14 +1,11 @@
 DATABASE=TriplePlay
 
-.PHONY: all create password schema load sample perm truncate delete distclean
+.PHONY: all create password schema load sample perm truncate truncate-sample delete distclean
 
 all: create password schema load perm
 
 create:
 	psql             -f create.sql
-
-password:
-	./password
 
 schema:
 	psql $(DATABASE) -f schema.sql
@@ -24,6 +21,9 @@ perm:
 
 truncate:
 	psql $(DATABASE) -f truncate.sql
+
+truncate-sample:
+	psql $(DATABASE) -f truncate-sample.sql
 
 delete:
 	psql $(DATABASE) -f delete.sql

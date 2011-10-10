@@ -1,5 +1,6 @@
 <?php
-include "config.php";
+include_once "functional.php";
+include_once "config.php";
 
 $as = array(
         'home' => array(
@@ -13,15 +14,14 @@ $as = array(
                 'vs'          => array(
                         'estadio' => array('name' => 'Estadios' , 'title' => 'Estadios' ),
                         'equipo'  => array('name' => 'Equipos'  , 'title' => 'Equipos'  ),
-                        'juego'   => array('name' => 'Juegos'   , 'title' => 'Juegos'   )
+                        'juego'   => array('name' => 'Juegos'   , 'title' => 'Juegos'   ),
+                        'jugador' => array('name' => 'Jugadores', 'title' => 'Jugadores')
                 )
         ),
         'insertar' => array(
                 'title'       => 'Inserción',
                 'main_div_id' => 'insert',
                 'vs'          => array(
-                        'estadio' => array('name' => 'Estadio'  , 'title' => 'Estadio'  ),
-                        'equipo'  => array('name' => 'Equipo'   , 'title' => 'Equipo'   ),
                         'juego'   => array('name' => 'Juego'    , 'title' => 'Juego'    ),
                         'jugador' => array('name' => 'Jugador'  , 'title' => 'Jugador'  )
                 )
@@ -30,8 +30,6 @@ $as = array(
                 'title'       => 'Actualización',
                 'main_div_id' => 'update',
                 'vs'          => array(
-                        'estadio' => array('name' => 'Estadios' , 'title' => 'Estadios' ),
-                        'equipo'  => array('name' => 'Equipos'  , 'title' => 'Equipos'  ),
                         'juego'   => array('name' => 'Juegos'   , 'title' => 'Juegos'   ),
                         'jugador' => array('name' => 'Jugadores', 'title' => 'Jugadores')
                 )
@@ -52,10 +50,11 @@ if (array_key_exists('v', $_GET) && !array_key_exists($_GET['v'], $a['vs'])) {
 }
 $v = $a['vs'][$_GET['v']];
 
-function print_contents   ($a, $v) { if ($a && $v) include $_GET['a'] . '_' . $_GET['v'] . ".php"; }
-function print_title      ($a) { echo $a['title'      ]; }
-function print_main_div_id($a) { echo $a['main_div_id']; }
-function print_views      ($a) {
+function print_contents($a, $v) {
+        if ($a && $v) include $_GET['a'] . '_' . $_GET['v'] . ".php";
+}
+
+function print_views($a) {
         foreach ($a['vs'] as $v => $ps) {
                 echo '<a href="tripleplay.php?a=' . $_GET['a'] . "&v=" . $v . '" class="link_hide"><div class="menu_elem">' . $ps['name'] . '</div></a>';
         }
@@ -68,36 +67,40 @@ function print_views      ($a) {
                 <title>Triple Play - <?php echo $a['title']; ?></title>
                 <link href="style.css" rel="stylesheet" type="text/css" />
         </head>
+
         <body>
-                <div id="wrapper" class="<?php echo $a['main_div_id']; ?>">
+                <div id="<?php echo $a['main_div_id']; ?>">
                         <div id="logo">
-                                <h1><a href="tripleplay.php"><span class="hidden">Triple Play</span></a></h1>
+                                <h1><a href="inicio.html"><span class="hidden">Triple Play</span></a></h1>
                         </div>
-                        <div id="top">
+                        <div id="container">
                                 <div id="header"></div>
-                                <h2 class="hidden">Navegación</h2>
-                                <ul id="navigation">
-                                        <li><a href="tripleplay.php?a=consultar"  class="consult"><span class="hidden">Consultar </span></a></li>
-                                        <li><a href="tripleplay.php?a=insertar"   class="insert" ><span class="hidden">Insertar  </span></a></li>
-                                        <li><a href="tripleplay.php?a=actualizar" class="update" ><span class="hidden">Actualizar</span></a></li>
-                                </ul>
+                                <div id="navigation">
+                                        <h2 class="hidden">Navigation</h2>
+                                        <ul>
+                                                <li><a href="tripleplay.php?a=consultar"  class="consult"><span class="hidden">Consultar </span></a></li>
+                                                <li><a href="tripleplay.php?a=insertar"   class="insert" ><span class="hidden">Insertar  </span></a></li>
+                                                <li><a href="tripleplay.php?a=actualizar" class="update" ><span class="hidden">Actualizar</span></a></li>
+                                        </ul>
+                                </div>
+                                <div id="content">
+                                        <div id="content-left">
+                                                <div id="title">
+                                                        <h2 class="hidden">Indice</h2>
+                                                </div>
+                                                <div id="description">
+                                                        <center><?php print_views($a); ?></center>
+                                                </div>
+                                        </div>
+                                        <div id="content-right">
+                                                <div id="main">
+                                                        <?php print_contents($a, $v); ?>
+                                                </div>
+                                        </div>
+                                </div>
                         </div>
-                        <div id="bottom">
-                                <div id="left">
-                                        <div id="title">
-                                                <h2 class="hidden"><?php echo $a['title']; ?></h2>
-                                        </div>
-                                        <div id="side-content">
-                                                <h3 class="hidden">Vistas</h3>
-                                                <center><?php echo nav($a); ?></center>
-                                        </div>
-                                </div>
-                                <div id="right">
-                                        <div id="main-content">
-                                                <h3 class="hidden">Contenido</h3>
-                                                <?php if ($a && $v) include $_GET['a'] . '_' . $_GET['v'] . ".php"; ?>
-                                        </div>
-                                </div>
+                        <div id="footer">
+                                <p>Un producto de Ñángara, Inc. <img src="images/vendor.png" alt="Una pieza del teclado de un computador, con el simbolo de ñangara." /></p>
                         </div>
                 </div>
         </body>

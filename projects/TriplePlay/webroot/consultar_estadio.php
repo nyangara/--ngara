@@ -1,4 +1,7 @@
 <?php
+include "config.php";
+include "dbconn.php";
+
 if ($_GET['id']) {
         $query = <<<'EOD'
                 SELECT

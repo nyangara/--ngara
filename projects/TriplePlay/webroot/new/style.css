@@ -236,3 +236,22 @@ table td {
         display: none;
 }
 
+.menu_elem {
+        color: white;
+        background-color: #885411;
+        width: 80%;
+        height: 40px;
+        line-height: 40px;
+        text-decoration: none;
+        margin-bottom: 5px;
+}
+
+.menu_elem: hover {
+        color: #885411;
+        background-color: #D2B48C;
+}
+
+.menu_elem a {
+        text-decoration: none;
+        color: inherit;
+}

@@ -9,7 +9,4 @@ function mb_ucfirst($string, $encoding) {
     $then = mb_substr($string, 1, $strlen - 1, $encoding);
     return mb_strtoupper($firstChar, $encoding) . $then;
 }
-
-include "password.php";
-$dbconn = pg_connect("host='localhost' dbname='TriplePlay' user='TriplePlay' password='" . TRIPLEPLAY_PSQL_PASSWORD . "'") or die('pg_connect: ' . pg_last_error());
 ?>

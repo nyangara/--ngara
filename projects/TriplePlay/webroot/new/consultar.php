@@ -14,8 +14,8 @@
                                 <div id="header"></div>
                                 <h2 class="hidden">Navegación</h2>
                                 <ul id="navigation">
-                                        <li><a href="consultar.php"  class="consult"><span class="hidden">Consultar</span></a></li>
-                                        <li><a href="insertar.php"   class="insert" ><span class="hidden">Insertar</span></a></li>
+                                        <li><a href="consultar.php"  class="consult"><span class="hidden">Consultar </span></a></li>
+                                        <li><a href="insertar.php"   class="insert" ><span class="hidden">Insertar  </span></a></li>
                                         <li><a href="actualizar.php" class="update" ><span class="hidden">Actualizar</span></a></li>
                                 </ul>
                         </div>

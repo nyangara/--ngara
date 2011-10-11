@@ -5,16 +5,14 @@ include_once "dbconn.php";
 <center>
         <h3 style="color:#885411;">Nuevo Juego</h3>
 
-        <form action="tripleplay.php?a=<?php echo $_GET['a']; ?>&v=<?php echo $_GET['v']; ?>" method="POST" id="insertar_jugador">
+        <form action="tripleplay.php?a=<?php echo $_GET['a']; ?>&v=<?php echo $_GET['v']; ?>" method="POST" id="insertar_juego">
                 <input type="hidden" name="insert" value="1"/>
-		<input type="hidden" name="a" value="<?php echo $_GET['a']; ?>"/>
-		<input type="hidden" name="v" value="<?php echo $_GET['v']; ?>"/>
                 <table border="0" style="text-align:left;" cellpadding="5px;" >
 		<tr>
 		        <td>EquipoLocal:</td>
 		        <td>
-		                <select name="equipolocal">
-		                        <option value="" <?php $_GET['equipolocal'] or print('selected'); ?>>Seleccione el equipo</option>
+		                <select name="equipolocal" id="equipo local">
+		                        <option value="">Seleccione el equipo</option>
 	<?php
 		$query = <<<'EOF'
 		        SELECT
@@ -27,7 +25,6 @@ EOF;
 		$result = pg_query($dbconn, $query) or die('Query failed: ' . pg_last_error());
 		while ($row = pg_fetch_row($result)) {
 		        echo '<option ';
-		        if ($_GET['equipolocal'] === $row[0]) echo 'selected ';
 		        echo 'value="' . $row[0] . '">' . $row[1] . '</option>\n';
 		}
 		echo "\n";
@@ -39,8 +36,8 @@ EOF;
 		<tr>
 		        <td>EquipoVisitante:</td>
 		        <td>
-		                <select name="equipovisitante">
-		                        <option value="" <?php $_GET['equipovisitante'] or print('selected'); ?>>Seleccione el equipo</option>
+		                <select name="equipovisitante" id="equipo visitante">
+		                        <option value="">Seleccione el equipo</option>
 	<?php
 		$query = <<<'EOF'
 		        SELECT
@@ -53,7 +50,6 @@ EOF;
 		$result = pg_query($dbconn, $query) or die('Query failed: ' . pg_last_error());
 		while ($row = pg_fetch_row($result)) {
 		        echo '<option ';
-		        if ($_GET['equipoisitante'] === $row[0]) echo 'selected ';
 		        echo 'value="' . $row[0] . '">' . $row[1] . '</option>\n';
 		}
 		echo "\n";
@@ -66,8 +62,8 @@ EOF;
 		<tr>
 		        <td>Estadio:</td>
 		        <td>
-		                <select name="estadio">
-		                        <option value="" <?php $_GET['estadio'] or print('selected'); ?>>Seleccione el estadio</option>
+		                <select name="estadio" id="estadio">
+		                        <option value="">Seleccione el estadio</option>
 	<?php
 		$query = <<<'EOF'
 		        SELECT
@@ -80,7 +76,6 @@ EOF;
 		$result = pg_query($dbconn, $query) or die('Query failed: ' . pg_last_error());
 		while ($row = pg_fetch_row($result)) {
 		        echo '<option ';
-		        if ($_GET['estadio'] === $row[0]) echo 'selected ';
 		        echo 'value="' . $row[0] . '">' . $row[1] . '</option>\n';
 		}
 		echo "\n";
@@ -102,7 +97,7 @@ EOF;
 
 		<tr>
 		        <td COLSPAN="2" style="text-align:center;">
-		                <input type="submit" value="Insertar" style="font-weight:bold; width:100px; height:30px; color:white; background-color:#885411;">
+		                <input type="submit" value="CREAR" style="font-weight:bold; width:100px; height:30px; color:white; background-color:#885411;">
 		        </td>
 		</tr>
 

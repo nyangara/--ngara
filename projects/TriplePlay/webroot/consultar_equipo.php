@@ -36,7 +36,7 @@ EOD;
         }
         pg_free_result($result);
         echo '</ul>';
-        echo '<p><a href="tripleplay.php?a=consultar&v=equipo">Ver todos</a></p>';
+        echo '<p><a href="tripleplay.php?a=' . $_GET['a'] . '&v=' . $_GET['v'] . '">Ver todos.</a></p>';
 } else {
         echo '<p>Equipos:</p>';
         $query = <<<'EOD'

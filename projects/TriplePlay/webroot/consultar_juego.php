@@ -44,14 +44,14 @@ EOF;
                                 "Juego"."equipo local",
                                 "Juego"."equipo visitante",
                                 "Juego"."estadio",
-				"Juego"."inicio"
+                                "Juego"."inicio"
                         FROM
-                                "Juego", 
-				"Equipo"
+                                "Juego",
+                                "Equipo"
                         WHERE
                                 "Juego"."equipo local" = "Equipo"."nombre"
-			AND
-				"Equipo"."id" = $1
+                        AND
+                                "Equipo"."id" = $1
 EOD;
 
                 $result = pg_prepare($dbconn, "jugador", $query) or die('pg_prepare: ' . pg_last_error());
@@ -104,28 +104,28 @@ EOD;
                                         "Juego"."equipo visitante",
                                         "Equipo local"."nombre",
                                         "Equipo visitante"."nombre",
-					"Juego"."inicio"
+                                        "Juego"."inicio"
                                 FROM
                                         "Juego",
-					"Equipo" AS "Equipo local",
-					"Equipo" AS "Equipo visitante"
-				WHERE
-					"Juego"."equipo local"     = "Equipo local"."id"     AND
-					"Juego"."equipo visitante" = "Equipo visitante"."id"
-				ORDER BY 
-					"Juego"."inicio"
-				DESC
+                                        "Equipo" AS "Equipo local",
+                                        "Equipo" AS "Equipo visitante"
+                                WHERE
+                                        "Juego"."equipo local"     = "Equipo local"."id"     AND
+                                        "Juego"."equipo visitante" = "Equipo visitante"."id"
+                                ORDER BY
+                                        "Juego"."inicio"
+                                DESC
 EOD;
 
                         $result = pg_query($dbconn, $query) or die('Query failed: ' . pg_last_error());
 
                         echo "<table>";
                         while ($row = pg_fetch_row($result)) {
-				echo '<tr>';
-                                echo '<td><a href="tripleplay.php?a=' . $_GET['a'] . '&v=equipo&id=' . $row[1] . '">' . $row[3] . '</a></td>';
-                                echo '<td><a href="tripleplay.php?a=' . $_GET['a'] . '&v=equipo&id=' . $row[2] . '">' . $row[4] . '</a></td>';
+                                echo '<tr>';
+                                echo '<td><a href="tripleplay.php?a=' . $_GET['a'] . '&v=equipo&id='             . $row[1] . '">' . $row[3] . '</a></td>';
+                                echo '<td><a href="tripleplay.php?a=' . $_GET['a'] . '&v=equipo&id='             . $row[2] . '">' . $row[4] . '</a></td>';
                                 echo '<td><a href="tripleplay.php?a=' . $_GET['a'] . '&v=' . $_GET['v'] . '&id=' . $row[0] . '">' . $row[5] . '</a></td>';
-				echo '</tr>';
+                                echo '</tr>';
                         }
                         echo "</table>";
 

@@ -48,7 +48,7 @@ EOD;
 
         echo "<ul>";
         while ($row = pg_fetch_row($result)) {
-                echo '<li><a href="consultar_estadio.php?id=' . $row[0] . '">' . $row[1] . '</a></li>';
+                echo '<li><a href="tripleplay.php?a=' . $_GET['a'] . '&v=' . $_GET['v'] . '&id=' . $row[0] . '">' . $row[1] . '</a></li>';
         }
         echo "</ul>";
 

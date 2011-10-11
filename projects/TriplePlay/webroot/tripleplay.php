@@ -45,10 +45,14 @@ if (array_key_exists('a', $_GET)) {
 }
 $a = $as[$_GET['a']];
 
-if (array_key_exists('v', $_GET) && !array_key_exists($_GET['v'], $a['vs'])) {
-        die ("Bad view: " . $_GET['v']);
+if (array_key_exists('v', $_GET)) {
+        if (!array_key_exists($_GET['v'], $a['vs'])) {
+                die ("Bad view: " . $_GET['v']);
+        }
+        $v = $a['vs'][$_GET['v']];
+} else {
+        $v = null;
 }
-$v = $a['vs'][$_GET['v']];
 
 function print_contents($a, $v) {
         if ($a && $v) include $_GET['a'] . '_' . $_GET['v'] . ".php";

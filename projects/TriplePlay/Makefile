@@ -1,11 +1,16 @@
 PROJECT=TriplePlay
 HTTPD_ROOT=/var/www
 
-.PHONY: all install symlink uninstall password
+.PHONY: all setup install copy symlink uninstall password
 
-all:
+all: setup password
 
-install:
+setup:
+	$(MAKE) -C database distclean all
+
+install: symlink
+
+copy:
 	cp -R webroot "$(HTTPD_ROOT)/$(PROJECT)"
 
 symlink:

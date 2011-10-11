@@ -43,6 +43,7 @@ CREATE TABLE "Equipo" (
         CONSTRAINT "Equipo FOREIGN KEY estadio principal REFERENCES Estadio"
                 FOREIGN KEY ("estadio principal")
                 REFERENCES "Estadio" ("id")
+                ON DELETE CASCADE
 );
 
 CREATE TABLE "Jugador" (
@@ -66,6 +67,7 @@ CREATE TABLE "Peso" (
         CONSTRAINT "Juega FOREIGN KEY jugador REFERENCES Jugador"
                 FOREIGN KEY ("jugador")
                 REFERENCES "Jugador" ("id")
+                ON DELETE CASCADE
 );
 
 CREATE TABLE "Altura" (
@@ -79,6 +81,7 @@ CREATE TABLE "Altura" (
         CONSTRAINT "Juega FOREIGN KEY jugador REFERENCES Jugador"
                 FOREIGN KEY ("jugador")
                 REFERENCES "Jugador" ("id")
+                ON DELETE CASCADE
 );
 
 CREATE TABLE "Juega" (
@@ -93,11 +96,13 @@ CREATE TABLE "Juega" (
 
         CONSTRAINT "Juega FOREIGN KEY jugador REFERENCES Jugador"
                 FOREIGN KEY ("jugador")
-                REFERENCES "Jugador" ("id"),
+                REFERENCES "Jugador" ("id")
+                ON DELETE CASCADE,
 
         CONSTRAINT "Juega FOREIGN KEY equipo REFERENCES Equipo"
                 FOREIGN KEY ("equipo")
                 REFERENCES "Equipo" ("id")
+                ON DELETE CASCADE
 );
 
 CREATE TABLE "Juego" (
@@ -112,13 +117,16 @@ CREATE TABLE "Juego" (
 
         CONSTRAINT "Juego FOREIGN KEY equipo local REFERENCES Equipo"
                 FOREIGN KEY ("equipo local")
-                REFERENCES "Equipo" ("id"),
+                REFERENCES "Equipo" ("id")
+                ON DELETE CASCADE,
 
         CONSTRAINT "Juego FOREIGN KEY equipo visitante REFERENCES Equipo"
                 FOREIGN KEY ("equipo visitante")
-                REFERENCES "Equipo" ("id"),
+                REFERENCES "Equipo" ("id")
+                ON DELETE CASCADE,
 
         CONSTRAINT "Juego FOREIGN KEY estadio REFERENCES Estadio"
                 FOREIGN KEY ("estadio")
                 REFERENCES "Estadio" ("id")
+                ON DELETE CASCADE
 );

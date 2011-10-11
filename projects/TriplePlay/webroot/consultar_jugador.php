@@ -22,7 +22,7 @@ EOF;
         $result = pg_query($dbconn, $query) or die('Query failed: ' . pg_last_error());
         while ($row = pg_fetch_row($result)) {
                 echo '<option ';
-                if ($_GET['equipo'] === $row[0]) echo 'selected ';
+                if (array_key_exists('equipo', $_GET) and $_GET['equipo'] === $row[0]) echo 'selected ';
                 echo 'value="' . $row[0] . '">' . $row[1] . '</option>\n';
         }
 

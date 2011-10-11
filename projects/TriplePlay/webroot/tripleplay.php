@@ -55,7 +55,13 @@ if (array_key_exists('v', $_GET)) {
 }
 
 function print_contents($a, $v) {
-        if ($a && $v) include $_GET['a'] . '_' . $_GET['v'] . ".php";
+        if ($a && $v) {
+                try {
+                        include $_GET['a'] . '_' . $_GET['v'] . ".php";
+                } catch (Exception $e) {
+                        echo '<!-- include failed: $e->getMessage(); -->';
+                }
+        }
 }
 
 function print_views($a) {

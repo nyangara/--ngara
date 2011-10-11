@@ -61,7 +61,11 @@ CREATE TABLE "Peso" (
         "fecha"                 date                            NOT NULL,
 
         CONSTRAINT "Peso PRIMARY KEY"
-                PRIMARY KEY ("jugador", "fecha")
+                PRIMARY KEY ("jugador", "fecha"),
+
+        CONSTRAINT "Juega FOREIGN KEY jugador REFERENCES Jugador"
+                FOREIGN KEY ("jugador")
+                REFERENCES "Jugador" ("id")
 );
 
 CREATE TABLE "Altura" (
@@ -70,7 +74,11 @@ CREATE TABLE "Altura" (
         "fecha"                 date                            NOT NULL,
 
         CONSTRAINT "Altura PRIMARY KEY"
-                PRIMARY KEY ("jugador", "fecha")
+                PRIMARY KEY ("jugador", "fecha"),
+
+        CONSTRAINT "Juega FOREIGN KEY jugador REFERENCES Jugador"
+                FOREIGN KEY ("jugador")
+                REFERENCES "Jugador" ("id")
 );
 
 CREATE TABLE "Juega" (

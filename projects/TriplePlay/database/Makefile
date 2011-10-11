@@ -1,3 +1,5 @@
+SQL=psql
+SQLOPTS=--quiet
 DATABASE=TriplePlay
 
 .PHONY: all create password schema load sample perm truncate truncate-sample delete distclean
@@ -5,29 +7,29 @@ DATABASE=TriplePlay
 all: create password schema load perm
 
 create:
-	psql             -f create.sql
+	$(SQL) $(SQLOPTS)             -f create.sql
 
 schema:
-	psql $(DATABASE) -f schema.sql
+	$(SQL) $(SQLOPTS) $(DATABASE) -f schema.sql
 
 load:
-	psql $(DATABASE) -f load.sql
+	$(SQL) $(SQLOPTS) $(DATABASE) -f load.sql
 
 sample:
-	psql $(DATABASE) -f sample.sql
+	$(SQL) $(SQLOPTS) $(DATABASE) -f sample.sql
 
 perm:
-	psql $(DATABASE) -f perm.sql
+	$(SQL) $(SQLOPTS) $(DATABASE) -f perm.sql
 
 truncate:
-	psql $(DATABASE) -f truncate.sql
+	$(SQL) $(SQLOPTS) $(DATABASE) -f truncate.sql
 
 truncate-sample:
-	psql $(DATABASE) -f truncate-sample.sql
+	$(SQL) $(SQLOPTS) $(DATABASE) -f truncate-sample.sql
 
 delete:
-	psql $(DATABASE) -f delete.sql
+	$(SQL) $(SQLOPTS) $(DATABASE) -f delete.sql
 
 distclean:
-	psql             -f distclean.sql
+	$(SQL) $(SQLOPTS)             -f distclean.sql
 

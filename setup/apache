@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+ed -s <<EOF
+e /etc/apache2/envvars
+g@^\s*export LANG=C@s@^@#@
+g@^\s*#. /etc/default/locale\>@s/^#//
+w
+q
+EOF

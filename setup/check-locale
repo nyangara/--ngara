@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+if !(locale | grep -q '^LANG=.*UTF-8')
+then
+        echo 'Las opciones de localización del sistema están mal definidas.  La codificación del local del sistema debe ser UTF-8.'
+        echo 'Se recomienda ejecutar el siguiente comando (válido para Ubuntu Linux 11.04)'
+        echo 'sudo bash -c '\''mv /etc/defaults/locale{,.bak}; echo LANG="en_US.UTF-8" > /etc/defaults/locale'\'
+        exit 1
+fi
+exit 0

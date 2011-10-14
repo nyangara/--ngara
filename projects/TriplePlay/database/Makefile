@@ -1,5 +1,6 @@
 SQL=psql
 SQLOPTS=--quiet
+USERNAME=TriplePlay
 DATABASE=TriplePlay
 
 .PHONY: all create password schema load sample perm truncate truncate-sample delete distclean
@@ -7,7 +8,8 @@ DATABASE=TriplePlay
 all: create password schema load perm
 
 create:
-	$(SQL) $(SQLOPTS)             -f create.sql
+	createuser -SDR "$(USERNAME)"
+	createdb -E UTF-8 "$(DATABASE)"
 
 schema:
 	$(SQL) $(SQLOPTS) $(DATABASE) -f schema.sql

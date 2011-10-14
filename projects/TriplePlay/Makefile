@@ -20,4 +20,4 @@ uninstall:
 	rm -rf "$(HTTPD_ROOT)/$(PROJECT)"
 
 password:
-	./password
+	./scripts/password

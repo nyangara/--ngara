@@ -81,7 +81,7 @@ function print_views($a) {
         <body>
                 <div id="<?php echo $a['main_div_id']; ?>">
                         <div id="logo">
-                                <h1><a href="inicio.html"><span class="hidden">Triple Play</span></a></h1>
+                                <h1><a href="index.html"><span class="hidden">Triple Play</span></a></h1>
                         </div>
                         <div id="container">
                                 <div id="header"></div>

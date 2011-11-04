@@ -1,0 +1,2 @@
+DROP DATABASE IF EXISTS "Fantasy";
+DROP ROLE     IF EXISTS "Fantasy";

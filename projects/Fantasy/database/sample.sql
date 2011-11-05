@@ -62,6 +62,6 @@ FROM
                 ('Navegantes del Magallanes', 'Leones del Caracas', 'José Bernardo Pérez'  , '2010/11/09 07:00 PM')
         ) as "Datos" ("equipo local", "equipo visitante", "estadio", "inicio")
 WHERE
-        "Datos"."equipo local"     = "Equipo local"."nombre"     AND
-        "Datos"."equipo visitante" = "Equipo visitante"."nombre" AND
+        "Datos"."equipo local"     = "Equipo local"."nombre completo"     AND
+        "Datos"."equipo visitante" = "Equipo visitante"."nombre completo" AND
         "Datos"."estadio"          = "Estadio"."nombre";

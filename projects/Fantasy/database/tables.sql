@@ -36,7 +36,9 @@ CREATE TABLE "Estadio" (
 
 CREATE TABLE "Equipo" (
         "id"                    SERIAL                          NOT NULL,
-        "nombre"                text                            NOT NULL,
+        "nombre completo"       text                            NOT NULL,
+        "nombre corto"          text                            NOT NULL,
+        "siglas"                char(3)                         NOT NULL,
         "año de fundación"      integer                         NOT NULL,
         "ciudad"                text                            NOT NULL,
         "estado"                text                            NOT NULL,
@@ -45,8 +47,14 @@ CREATE TABLE "Equipo" (
         CONSTRAINT "Equipo PRIMARY KEY"
                 PRIMARY KEY ("id"),
 
-        CONSTRAINT "Equipo UNIQUE nombre"
-                UNIQUE ("nombre"),
+        CONSTRAINT "Equipo UNIQUE nombre completo"
+                UNIQUE ("nombre completo"),
+
+        CONSTRAINT "Equipo UNIQUE nombre corto"
+                UNIQUE ("nombre corto"),
+
+        CONSTRAINT "Equipo UNIQUE siglas"
+                UNIQUE ("siglas"),
 
         CONSTRAINT "Equipo FOREIGN KEY estadio principal REFERENCES Estadio"
                 FOREIGN KEY ("estadio principal")

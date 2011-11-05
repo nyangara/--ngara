@@ -1,14 +1,10 @@
 SQL=psql
 SQLOPTS=--quiet
-USERNAME=Fantasy
 DATABASE=Fantasy
 
-.PHONY: all user database include language password tables triggers load sample perms truncate truncate-sample drop-tables distclean
+.PHONY: all database include language password users tables triggers load sample perms truncate truncate-sample drop-tables distclean
 
-all: user database include language password tables triggers load sample perms
-
-user:
-	createuser -LSDR "$(USERNAME)"
+all: database include language password users tables triggers load sample perms
 
 database:
 	createdb -E UTF-8 "$(DATABASE)"
@@ -21,6 +17,9 @@ language:
 
 password:
 	"$(SQL)" $(SQLOPTS) -d "$(DATABASE)" -f password.sql
+
+users:
+	"$(SQL)" $(SQLOPTS) -d "$(DATABASE)" -f users.sql
 
 tables:
 	"$(SQL)" $(SQLOPTS) -d "$(DATABASE)" -f tables.sql

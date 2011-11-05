@@ -42,7 +42,7 @@ FROM
                 ('Ricardo Monascal',  'Leones del Caracas'       , 12, '2003/09/22', NULL        ),
                 ('Miguel Ambrosio' ,  'Navegantes del Magallanes', 45, '2005/09/19', NULL        )
         ) as "Datos" ("jugador", "equipo", "número", "inicio", "fin")
-WHERE "Datos"."jugador" = "Jugador"."nombre" AND "Datos"."equipo" = "Equipo"."nombre";
+WHERE "Datos"."jugador" = "Jugador"."nombre" AND "Datos"."equipo" = "Equipo"."nombre completo";
 
 INSERT INTO
         "Juego" ("inicio", "equipo local", "equipo visitante", "estadio")

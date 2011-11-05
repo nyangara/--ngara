@@ -18,7 +18,7 @@ FROM
 WHERE "Datos"."tipo de terreno" = "Tipo de terreno"."nombre";
 
 INSERT INTO "Equipo" ("nombre completo", "nombre corto", "siglas", "año de fundación", "ciudad", "estado", "estadio principal")
-SELECT "Datos"."nombre completo", "Datos"."nombre corto", "Datos"."siglas" "Datos"."año de fundación", "Datos"."ciudad", "Datos"."estado", "Estadio"."id"
+SELECT "Datos"."nombre completo", "Datos"."nombre corto", "Datos"."siglas", "Datos"."año de fundación", "Datos"."ciudad", "Datos"."estado", "Estadio"."id"
 FROM
         "Estadio",
         (VALUES

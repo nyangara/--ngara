@@ -1,7 +1,7 @@
 PROJECT=Fantasy
 HTTPD_ROOT=/var/www
 
-.PHONY: all setup install copy symlink uninstall password
+.PHONY: all setup install copy symlink uninstall password clean distclean
 
 all: setup password
 
@@ -21,3 +21,8 @@ uninstall:
 
 password:
 	./scripts/password
+
+clean:
+	rm -f webroot/password-auth.php webroot/password-user.php webroot/password-admin.php
+
+distclean: clean

@@ -1,6 +1,6 @@
 <?php
-        include_once "config.php";
-        include_once "dbconn.php";
+        include_once "include/config.php";
+        include_once "include/dbconn.php";
 ?>
 <center>
         <h3 style="color:#885411;">Nuevo Juego</h3>

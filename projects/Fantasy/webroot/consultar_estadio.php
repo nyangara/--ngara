@@ -1,6 +1,6 @@
 <?php
-include_once "config.php";
-include_once "dbconn.php";
+include_once "include/config.php";
+include_once "include/dbconn.php";
 
 if ($_GET['id']) {
         $query = <<<'EOD'

@@ -1,6 +1,6 @@
 <?php
-include_once "functional.php";
-include_once "config.php";
+include_once "include/functional.php";
+include_once "include/config.php";
 
 $as = array(
         'home' => array(

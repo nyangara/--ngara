@@ -1,14 +1,14 @@
-INSERT INTO "Jugador" ("nombre", "fecha de nacimiento", "lugar de procedencia")
+INSERT INTO "Fantasy"."Jugador" ("nombre", "fecha de nacimiento", "lugar de procedencia")
 VALUES
         ('Fabiana Reggio'  , '1990/01/02', 'San Antonio, Venezuela'),
         ('Krisvely Varela' , '1990/03/04', 'Caracas, Venezuela'    ),
         ('Miguel Ambrosio' , '1988/05/06', 'Caracas, Venezuela'    ),
         ('Ricardo Monascal', '1846/08/12', 'San Antonio, Venezuela');
 
-INSERT INTO "Peso" ("jugador", "peso", "fecha")
+INSERT INTO "Fantasy"."Peso" ("jugador", "peso", "fecha")
 SELECT "Jugador"."id", "Datos"."peso", to_date("Datos"."fecha", 'YYYY/MM/DD')
 FROM
-        "Jugador",
+        "Fantasy"."Jugador",
         (VALUES
                 ('Fabiana Reggio'  ,  50.3, '2011/10/01'),
                 ('Fabiana Reggio'  ,  51.0, '2011/10/02'),
@@ -25,16 +25,16 @@ FROM
 WHERE "Datos"."nombre" = "Jugador"."nombre";
 
 INSERT INTO
-        "Juega" ("jugador", "equipo", "número", "inicio", "fin")
+        "Fantasy"."Juega" ("jugador", "equipo", "número", "inicio", "fin")
 SELECT
-        "Jugador"."id",
-        "Equipo"."id",
+        "Fantasy"."Jugador"."id",
+        "Fantasy"."Equipo"."id",
         "Datos"."número",
         to_date("Datos"."inicio", 'YYYY/MM/DD'),
         to_date("Datos"."fin"   , 'YYYY/MM/DD')
 FROM
-        "Jugador",
-        "Equipo",
+        "Fantasy"."Jugador",
+        "Fantasy"."Equipo",
         (VALUES
                 ('Fabiana Reggio'  ,  'Tigres de Aragua'         , 12, '2007/09/17', '2009/04/12'),
                 ('Fabiana Reggio'  ,  'Navegantes del Magallanes', 12, '2009/09/03', NULL        ),
@@ -42,19 +42,19 @@ FROM
                 ('Ricardo Monascal',  'Leones del Caracas'       , 12, '2003/09/22', NULL        ),
                 ('Miguel Ambrosio' ,  'Navegantes del Magallanes', 45, '2005/09/19', NULL        )
         ) as "Datos" ("jugador", "equipo", "número", "inicio", "fin")
-WHERE "Datos"."jugador" = "Jugador"."nombre" AND "Datos"."equipo" = "Equipo"."nombre completo";
+WHERE "Datos"."jugador" = "Fantasy"."Jugador"."nombre" AND "Datos"."equipo" = "Fantasy"."Equipo"."nombre completo";
 
 INSERT INTO
-        "Juego" ("inicio", "equipo local", "equipo visitante", "estadio")
+        "Fantasy"."Juego" ("inicio", "equipo local", "equipo visitante", "estadio")
 SELECT
         to_timestamp("Datos"."inicio", 'YYYY/MM/DD'),
         "Equipo local"."id",
         "Equipo visitante"."id",
         "Estadio"."id"
 FROM
-        "Equipo" AS "Equipo local",
-        "Equipo" AS "Equipo visitante",
-        "Estadio",
+        "Fantasy"."Equipo" AS "Equipo local",
+        "Fantasy"."Equipo" AS "Equipo visitante",
+        "Fantasy"."Estadio",
         (VALUES
                 ('Tigres de Aragua'         , 'Leones del Caracas', 'José Pérez Colmenares', '2010/11/03 06:30 PM'),
                 ('Navegantes del Magallanes', 'Tigres de Aragua'  , 'José Bernardo Pérez'  , '2010/11/04 07:45 PM'),
@@ -62,6 +62,6 @@ FROM
                 ('Navegantes del Magallanes', 'Leones del Caracas', 'José Bernardo Pérez'  , '2010/11/09 07:00 PM')
         ) as "Datos" ("equipo local", "equipo visitante", "estadio", "inicio")
 WHERE
-        "Datos"."equipo local"     = "Equipo local"."nombre"     AND
-        "Datos"."equipo visitante" = "Equipo visitante"."nombre" AND
-        "Datos"."estadio"          = "Estadio"."nombre";
+        "Datos"."equipo local"     = "Equipo local"."nombre completo"     AND
+        "Datos"."equipo visitante" = "Equipo visitante"."nombre completo" AND
+        "Datos"."estadio"          = "Fantasy"."Estadio"."nombre";

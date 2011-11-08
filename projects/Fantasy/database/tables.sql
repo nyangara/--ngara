@@ -1,41 +1,46 @@
-CREATE TABLE "passwd" (
-        "username"              text                            NOT NULL,
-        "password"              password                        NOT NULL,
-
-        CONSTRAINT "passwd PRIMARY KEY"
-                PRIMARY KEY ("username")
-);
-
-CREATE TABLE "Tipo de terreno" (
-        "id"                    SERIAL                          NOT NULL,
+CREATE TABLE "Fantasy"."Usuario" (
+        "id"                    serial                          NOT NULL,
         "nombre"                text                            NOT NULL,
+        "nombre completo"       text                            NOT NULL,
+        "género"                "género"                            NULL,
+        "fecha de nacimiento"   date                                NULL,
+        "es administrador"      bool                            NOT NULL,
 
-        CONSTRAINT "Tipo de terreno PRIMARY KEY"
+        CONSTRAINT "Usuario PRIMARY KEY"
                 PRIMARY KEY ("id"),
 
-        CONSTRAINT "Tipo de terreno UNIQUE nombre"
+        CONSTRAINT "Usuario UNIQUE nombre"
                 UNIQUE ("nombre")
 );
 
-CREATE TABLE "Estadio" (
-        "id"                    SERIAL                          NOT NULL,
+CREATE TABLE "Fantasy"."passwd" (
+        "usuario"               integer                         NOT NULL,
+        "password"              password                        NOT NULL,
+
+        CONSTRAINT "passwd PRIMARY KEY"
+                PRIMARY KEY ("usuario"),
+
+        CONSTRAINT "passwd FOREIGN KEY usuario REFERENCES Usuario"
+                FOREIGN KEY ("usuario")
+                REFERENCES "Fantasy"."Usuario" ("id")
+                ON DELETE RESTRICT
+);
+
+CREATE TABLE "Fantasy"."Estadio" (
+        "id"                    serial                          NOT NULL,
         "nombre"                text                            NOT NULL,
         "ciudad"                text                            NOT NULL,
         "estado"                text                            NOT NULL,
         "capacidad"             integer                         NOT NULL,
-        "tipo de terreno"       integer                         NOT NULL,
+        "tipo de terreno"       "tipo de terreno"               NOT NULL,
         "año de fundación"      integer                         NOT NULL,
 
         CONSTRAINT "Estadio PRIMARY KEY"
-                PRIMARY KEY ("id"),
-
-        CONSTRAINT "Estadio FOREIGN KEY tipo de terreno REFERENCES Tipo de terreno"
-                FOREIGN KEY ("tipo de terreno")
-                REFERENCES "Tipo de terreno" ("id")
+                PRIMARY KEY ("id")
 );
 
-CREATE TABLE "Equipo" (
-        "id"                    SERIAL                          NOT NULL,
+CREATE TABLE "Fantasy"."Equipo" (
+        "id"                    serial                          NOT NULL,
         "nombre completo"       text                            NOT NULL,
         "nombre corto"          text                            NOT NULL,
         "siglas"                char(3)                         NOT NULL,
@@ -58,12 +63,12 @@ CREATE TABLE "Equipo" (
 
         CONSTRAINT "Equipo FOREIGN KEY estadio principal REFERENCES Estadio"
                 FOREIGN KEY ("estadio principal")
-                REFERENCES "Estadio" ("id")
-                ON DELETE CASCADE
+                REFERENCES "Fantasy"."Estadio" ("id")
+                ON DELETE RESTRICT
 );
 
-CREATE TABLE "Jugador" (
-        "id"                    SERIAL                          NOT NULL,
+CREATE TABLE "Fantasy"."Jugador" (
+        "id"                    serial                          NOT NULL,
         "nombre"                text                            NOT NULL,
         "fecha de nacimiento"   date                            NOT NULL,
         "lugar de procedencia"  text                            NOT NULL,
@@ -72,7 +77,7 @@ CREATE TABLE "Jugador" (
                 PRIMARY KEY ("id")
 );
 
-CREATE TABLE "Peso" (
+CREATE TABLE "Fantasy"."Peso" (
         "jugador"               integer                         NOT NULL,
         "peso"                  real                            NOT NULL,
         "fecha"                 date                            NOT NULL,
@@ -82,11 +87,11 @@ CREATE TABLE "Peso" (
 
         CONSTRAINT "Juega FOREIGN KEY jugador REFERENCES Jugador"
                 FOREIGN KEY ("jugador")
-                REFERENCES "Jugador" ("id")
+                REFERENCES "Fantasy"."Jugador" ("id")
                 ON DELETE CASCADE
 );
 
-CREATE TABLE "Altura" (
+CREATE TABLE "Fantasy"."Altura" (
         "jugador"               integer                         NOT NULL,
         "altura"                real                            NOT NULL,
         "fecha"                 date                            NOT NULL,
@@ -96,11 +101,11 @@ CREATE TABLE "Altura" (
 
         CONSTRAINT "Juega FOREIGN KEY jugador REFERENCES Jugador"
                 FOREIGN KEY ("jugador")
-                REFERENCES "Jugador" ("id")
+                REFERENCES "Fantasy"."Jugador" ("id")
                 ON DELETE CASCADE
 );
 
-CREATE TABLE "Juega" (
+CREATE TABLE "Fantasy"."Juega" (
         "jugador"               integer                         NOT NULL,
         "equipo"                integer                         NOT NULL,
         "número"                integer                         NOT NULL,
@@ -112,17 +117,17 @@ CREATE TABLE "Juega" (
 
         CONSTRAINT "Juega FOREIGN KEY jugador REFERENCES Jugador"
                 FOREIGN KEY ("jugador")
-                REFERENCES "Jugador" ("id")
+                REFERENCES "Fantasy"."Jugador" ("id")
                 ON DELETE CASCADE,
 
         CONSTRAINT "Juega FOREIGN KEY equipo REFERENCES Equipo"
                 FOREIGN KEY ("equipo")
-                REFERENCES "Equipo" ("id")
+                REFERENCES "Fantasy"."Equipo" ("id")
                 ON DELETE CASCADE
 );
 
-CREATE TABLE "Juego" (
-        "id"                    SERIAL                          NOT NULL,
+CREATE TABLE "Fantasy"."Juego" (
+        "id"                    serial                          NOT NULL,
         "inicio"                timestamp with time zone        NOT NULL,
         "equipo local"          integer                         NOT NULL,
         "equipo visitante"      integer                         NOT NULL,
@@ -133,16 +138,16 @@ CREATE TABLE "Juego" (
 
         CONSTRAINT "Juego FOREIGN KEY equipo local REFERENCES Equipo"
                 FOREIGN KEY ("equipo local")
-                REFERENCES "Equipo" ("id")
+                REFERENCES "Fantasy"."Equipo" ("id")
                 ON DELETE CASCADE,
 
         CONSTRAINT "Juego FOREIGN KEY equipo visitante REFERENCES Equipo"
                 FOREIGN KEY ("equipo visitante")
-                REFERENCES "Equipo" ("id")
+                REFERENCES "Fantasy"."Equipo" ("id")
                 ON DELETE CASCADE,
 
         CONSTRAINT "Juego FOREIGN KEY estadio REFERENCES Estadio"
                 FOREIGN KEY ("estadio")
-                REFERENCES "Estadio" ("id")
+                REFERENCES "Fantasy"."Estadio" ("id")
                 ON DELETE CASCADE
 );

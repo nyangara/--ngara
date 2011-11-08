@@ -2,9 +2,9 @@ SQL=psql
 SQLOPTS=--quiet
 DATABASE=Fantasy
 
-.PHONY: all database include language password users tables triggers load sample perms truncate truncate-sample drop-tables distclean
+.PHONY: all database include language password types schema tables functions triggers load sample users perms truncate truncate-sample drop-tables distclean
 
-all: database include language password users tables triggers load sample perms
+all: database include language password types schema tables functions triggers load sample users perms
 
 database:
 	createdb -E UTF-8 "$(DATABASE)"
@@ -18,11 +18,17 @@ language:
 password:
 	"$(SQL)" $(SQLOPTS) -d "$(DATABASE)" -f password.sql
 
-users:
-	"$(SQL)" $(SQLOPTS) -d "$(DATABASE)" -f users.sql
+types:
+	"$(SQL)" $(SQLOPTS) -d "$(DATABASE)" -f types.sql
+
+schema:
+	"$(SQL)" $(SQLOPTS) -d "$(DATABASE)" -f schema.sql
 
 tables:
 	"$(SQL)" $(SQLOPTS) -d "$(DATABASE)" -f tables.sql
+
+functions:
+	"$(SQL)" $(SQLOPTS) -d "$(DATABASE)" -f functions.sql
 
 triggers:
 	"$(SQL)" $(SQLOPTS) -d "$(DATABASE)" -f triggers.sql
@@ -32,6 +38,9 @@ load:
 
 sample:
 	"$(SQL)" $(SQLOPTS) -d "$(DATABASE)" -f sample.sql
+
+users:
+	"$(SQL)" $(SQLOPTS) -d "$(DATABASE)" -f users.sql
 
 perms:
 	"$(SQL)" $(SQLOPTS) -d "$(DATABASE)" -f perms.sql

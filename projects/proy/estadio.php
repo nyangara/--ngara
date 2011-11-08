@@ -2,7 +2,7 @@
 include("Static/head.php");
 include("Static/header.php");
 echo '
-<!--Menu de Navegación-->
+<!--Menu de NavegaciÃ³n-->
 
     <!-- COMO USAR MENU DE NAVEGACION 
 		Se debe cambiar el codigo que dice class="on", dependiendo
@@ -49,18 +49,6 @@ include_once "dbconn.php";
 
 echo '
 <div id="Layer1" style="width:580px; height:500px; overflow: scroll;">';
-	if (array_key_exists('consult',$_POST) && $_POST['consult']) {
-	echo date("Y-m-d: H:i:s").'<br>';
-	echo '
-		<form action="index.php" method="POST" id="insertar_noticia">
-		<input type="hidden" name="consult" value="1"/>
-			<select name="filtro">
-				<option value="1">Noticias por Jugador.
-				<option value="2">Noticias por Equipo.
-				<option value="3">Noticias por Equipo.
-		        </select>
-		</form>		
-	';
 
 	echo '<table width="90%" border="0" cellspacing="10" cellpadding="10" align="left">';
 
@@ -69,68 +57,24 @@ echo '
                         "urlimg",
                         "titulo",
                         "contenido",
-			"fecha"
-                FROM
-                        "Noticia","Jugador"
-		WHERE
-			"Noticia"."titulo" = "Jugador"."articulo"
-		ORDER BY
-			"fecha" DESC
-EOD;
-
-        $result = pg_prepare($dbconn, "noticia", $query) or die('pg_prepare: ' . pg_last_error());
-        $result = pg_execute($dbconn, "noticia") or die('pg_execute: ' . pg_last_error());
-        while ($row = pg_fetch_row($result)) {
-		echo '<tr><td><img src="' . $row[0] . '"></img><td>';
-                echo '<td width="50px"><h3 >' . $row[1] . '</h3><p>' . $row[2] . '</p>';
-		echo '<p><small>' . $row[3] . '</small></p></td></tr>';
-        }
-                
-             
-        pg_free_result($result);
-
-}else{
-	echo date("Y-m-d: H:i:s").'<br>';
-	echo '
-		<form action="index.php" method="POST" id="insertar_noticia">
-		<input type="hidden" name="consult" value="1"/>
-			<select name="filtro">
-				<option value="1">Noticias por Jugador.
-				<option value="2">Noticias por Equipo.
-				<option value="3">Noticias por Equipo.
-		        </select>
-		</form>		
-	';
-
-	echo '<table width="90%" border="0" cellspacing="10" cellpadding="10" align="left">';
-
-        $query = <<<'EOD'
-                SELECT
-                        "urlimg",
-                        "titulo",
-                        "contenido",
-			"fecha"
+						"fecha"
                 FROM
                         "Noticia"
-		WHERE
-			"fecha" <= $1
-		AND
-			"fecha" >= $2
-		ORDER BY
-			"fecha" DESC
+				WHERE
+						"fecha"='2011-11-01'
 EOD;
 
         $result = pg_prepare($dbconn, "noticia", $query) or die('pg_prepare: ' . pg_last_error());
-        $result = pg_execute($dbconn, "noticia", array(date('Y-m-d'),date('Y-m-d', strtotime("-3 days")) )) or die('pg_execute: ' . pg_last_error());
+        $result = pg_execute($dbconn, "noticia", array()) or die('pg_execute: ' . pg_last_error());
         while ($row = pg_fetch_row($result)) {
-		echo '<tr><td><img src="' . $row[0] . '"></img><td>';
-                echo '<td width="50px"><h3 >' . $row[1] . '</h3><p>' . $row[2] . '</p>';
-		echo '<p><small>' . $row[3] . '</small></p></td></tr>';
+			echo '<tr><td><img width="300px" src="' . $row[0] . '"></img><td>';
+			echo '<td width="100px"><h3 >' . $row[1] . '</h3><p>' . $row[2] . '</p>';
+			echo '<p><small>' . $row[3] . '</small></p></td></tr>';
         }
                 
              
         pg_free_result($result);
-}
+
 	echo '</table></div>';
 
 

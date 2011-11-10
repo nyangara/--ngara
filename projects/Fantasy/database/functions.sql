@@ -17,18 +17,33 @@ $BODY$;
 
 
 
-CREATE OR REPLACE FUNCTION "Fantasy"."registrar"(IN "nombre de usuario" text, IN "password" text) RETURNS void
+-- TODO: manejar errores (parámetros nulos, usuario ya existente, etc)
+CREATE OR REPLACE FUNCTION "Fantasy"."registrar"(
+        IN      "parámetro: nombre"             text,
+        IN      "parámetro: nombre completo"    text,
+        IN      "parámetro: password"           text
+) RETURNS void
         VOLATILE
         STRICT
         SECURITY DEFINER
-        LANGUAGE SQL
+        LANGUAGE 'plpgsql'
 AS $BODY$
-        INSERT INTO "Fantasy"."passwd"
-        SELECT
-                "Fantasy"."Usuario"."id",
-                $2
-        FROM
-                "Fantasy"."Usuario"
-        WHERE
-                "nombre" = $1
+        BEGIN
+                INSERT INTO "Fantasy"."Usuario" (
+                        "nombre",
+                        "nombre completo"
+                ) VALUES (
+                        "parámetro: nombre",
+                        "parámetro: nombre completo"
+                );
+
+                INSERT INTO "Fantasy"."passwd"
+                SELECT
+                        "Fantasy"."Usuario"."id",
+                        "parámetro: password"
+                FROM
+                        "Fantasy"."Usuario"
+                WHERE
+                        "nombre" = "parámetro: nombre";
+        END;
 $BODY$;

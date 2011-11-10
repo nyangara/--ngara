@@ -1,8 +1,7 @@
 <?php
         require_once("Classes/EstadioFachade.php");
 
-        include("static/head.php");
-        include("static/header.php");
+        include('include/pre.html');
 
         $equipo = array('Siglas', 'Nombre_Estadio', 'Nombre', 'AVG', 'JJ', 'VB', 'CA', 'BA', 'H', 'H2', 'H3', 'HR', 'CI', 'BB', 'SO', 'SH', 'SF', 'BR', 'ORB', 'SLG', 'HB', 'OBG', 'EFE', 'JJ_Picheo', 'JI', 'JG', 'JP', 'JS', 'JC', 'IP', 'H_Picheo', 'H2_Picheo', 'H3_Picheo', 'HR_Picheo', 'BB_Picheo', 'SO_Picheo', 'Carreras_Limpias', 'WP', 'BK');
 ?>
@@ -43,7 +42,6 @@
                                 <tr><?php for($i = 12; $i < 21; $i++) if($i != 19) echo "<td>".$equipo[$i]."</td>";                                        ?></tr>
 
 <?php
-// Me dio ladilla seguir arreglando el código.  Por favor trabajen con un poco de orden para que su código sea legible y editable.
 echo "<tr>";
 for($i=12;$i<21;$i++) {
         if($i != 19) {
@@ -102,7 +100,4 @@ echo "</tr>";
         </div>
 </div>
 
-<?php
-        include("Static/sideBar.php");
-        include("Static/footer.php");
-?>
+<?php include('include/post.html'); ?>

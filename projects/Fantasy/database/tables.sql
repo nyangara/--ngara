@@ -13,13 +13,13 @@ CREATE TABLE "Fantasy"."Usuario" (
 );
 
 CREATE TABLE "Fantasy"."Manager" (
-        "usuario"               integer                         NOT NULL,
+        "id"               integer                         NOT NULL,
 
         CONSTRAINT "Manager PRIMARY KEY"
-                PRIMARY KEY ("usuario"),
+                PRIMARY KEY ("id"),
 
-        CONSTRAINT "Manager FOREIGN KEY usuario REFERENCES Usuario"
-                FOREIGN KEY ("usuario")
+        CONSTRAINT "Manager FOREIGN KEY id REFERENCES Usuario"
+                FOREIGN KEY ("id")
                 REFERENCES "Fantasy"."Usuario" ("id")
                 ON DELETE CASCADE
 );

@@ -19,13 +19,13 @@
                         <!--?php echo date("Y-m-d: H:i:s") . '<br/>'; ?-->
                         <table width="90%" border="0" cellspacing="10" cellpadding="10" align="left">
 <?php
-        include_once "include/config.php";
-        include_once "include/dbconn.php";
+        include_once('include/config.php');
+        include_once('include/dbconn-user.php');
 
         $query = <<<'EOD'
                 SELECT
                         "URL de imagen",
-                        "título",
+                        "tÃ­tulo",
                         "contenido",
                         "fecha"
                 FROM

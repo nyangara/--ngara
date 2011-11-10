@@ -1,3 +1,6 @@
 *~
 .*.swp*
-projects/TriplePlay/webroot/consultar_juega.php
+projects/TriplePlay/webroot/password.php
+projects/Fantasy/webroot/include/password-auth.php
+projects/Fantasy/webroot/include/password-user.php
+projects/Fantasy/webroot/include/password-admin.php

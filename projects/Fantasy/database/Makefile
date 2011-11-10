@@ -4,7 +4,7 @@ DATABASE=Fantasy
 
 .PHONY: all database include language password types schema tables functions triggers load sample users perms truncate truncate-sample drop-tables distclean
 
-all: database include language password types schema tables functions triggers load sample users perms
+all: database include language password types schema tables functions triggers load users perms
 
 database:
 	createdb -E UTF-8 "$(DATABASE)"

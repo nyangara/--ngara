@@ -294,3 +294,15 @@ CREATE TABLE "Fantasy"."Juego" (
                 REFERENCES "Fantasy"."Estadio" ("id")
                 ON DELETE CASCADE
 );
+
+-- TODO: implementar relaciones con "Equipo", "Jugador" y "Juego"
+CREATE TABLE "Fantasy"."Noticia" (
+        "id"                    serial                          NOT NULL,
+        "URL de imagen"         text                            NOT NULL,
+        "título"                text                            NOT NULL,
+        "contenido"             text                            NOT NULL,
+        "fecha"                 timestamp with time zone        NOT NULL,
+
+        CONSTRAINT "Noticia PRIMARY KEY"
+                PRIMARY KEY ("id")
+);

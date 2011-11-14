@@ -1,1 +1,1 @@
-<?php define("FANTASY_AUTH_PSQL_PASSWORD", '5h6s546sv546'); ?>
+<?php define("FANTASY_AUTH_PSQL_PASSWORD", '5546ve546v'); ?>

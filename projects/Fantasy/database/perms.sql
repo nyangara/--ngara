@@ -42,7 +42,8 @@ ON
         "Fantasy"."Peso",
         "Fantasy"."Altura",
         "Fantasy"."Juega",
-        "Fantasy"."Juego"
+        "Fantasy"."Juego",
+        "Fantasy"."Noticia"
 TO "Fantasy (usuario normal)";
 
 -- Secuencias de tablas de lectura y escritura:

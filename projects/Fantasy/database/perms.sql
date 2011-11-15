@@ -43,7 +43,11 @@ ON
         "Fantasy"."Altura",
         "Fantasy"."Juega",
         "Fantasy"."Juego",
-        "Fantasy"."Noticia"
+        "Fantasy"."Noticia",
+        "Fantasy"."Jugador en noticia",
+        "Fantasy"."Juego en noticia",
+        "Fantasy"."Equipo en noticia",
+        "Fantasy"."Estadio en noticia"
 TO "Fantasy (usuario normal)";
 
 -- Secuencias de tablas de lectura y escritura:

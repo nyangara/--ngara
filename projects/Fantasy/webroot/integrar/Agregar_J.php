@@ -2,16 +2,16 @@
 
 require_once("Clases/Jugador.php");
 require_once("Clases/Equipo.php");
-require_once("Clases/EquipoFachade.php");
-require_once("Clases/JugadorFachade.php");
+require_once("Clases/EquipoFachada.php");
+require_once("Clases/JugadorFachada.php");
 
-$FachadaE = new EquipoFachade();
+$FachadaE = new EquipoFachada();
 
 // En caso de que se valla a agregar
 if(isset($_POST['Aplicar'])){
 	
 
-	$FachadaJ = new JugadorFachade();
+	$FachadaJ = new JugadorFachada();
 	
 	$fecha = $_POST['anio'].'-'.$_POST['mes'].'-'.$_POST['dia'];
 	

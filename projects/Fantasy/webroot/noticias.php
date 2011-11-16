@@ -1,16 +1,16 @@
 <?php include('include/pre.html'); ?>
         <ul id="navigation">
-                <li class="on"><a href="index.php">Inicio</a></li>
-                <li><a href="#">Jugadores</a></li>
-                <li><a href="#">Equipos</a></li>
-                <li><a href="#">Estadios</a></li>
-                <li><a href="#">Mi Perfil</a></li>
-                <li><a href="#">Roster</a></li>
-                <li><a href="#">Ligas</a></li>
-                <li><a href="#">Calendario</a></li>
-                <li><a href="#">Resultados</a></li>
-                <li><a href="#">Reglas</a></li>
-                <li><a href="#">Cont&aacutectenos</a></li>
+                <li class="on"><a href="index.php">Inicio     </a></li>
+                <li           ><a href="#"        >Jugadores  </a></li>
+                <li           ><a href="#"        >Equipos    </a></li>
+                <li           ><a href="#"        >Estadios   </a></li>
+                <li           ><a href="#"        >Mi Perfil  </a></li>
+                <li           ><a href="#"        >Roster     </a></li>
+                <li           ><a href="#"        >Ligas      </a></li>
+                <li           ><a href="#"        >Calendario </a></li>
+                <li           ><a href="#"        >Resultados </a></li>
+                <li           ><a href="#"        >Reglas     </a></li>
+                <li           ><a href="#"        >Contáctenos</a></li>
         </ul>
 </div>
 <div id="content">

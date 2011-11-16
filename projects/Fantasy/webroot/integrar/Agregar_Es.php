@@ -1,9 +1,9 @@
 <?php
 
 require_once("Clases/Estadio.php");
-require_once("Clases/EstadioFachade.php");
+require_once("Clases/EstadioFachada.php");
 
-$FachadaE = new EstadioFachade();
+$FachadaE = new EstadioFachada();
 
 // En caso de que se valla a agregar
 if(isset($_POST['Aplicar'])){

@@ -1,13 +1,13 @@
 <?php
 
 require_once("Clases/Equipo.php");
-require_once("Clases/EquipoFachade.php");
-require_once("Clases/EstadioFachade.php");
+require_once("Clases/EquipoFachada.php");
+require_once("Clases/EstadioFachada.php");
 
 $ID_Equipo = isset($_POST['idequipo'])?$_POST['idequipo']:-1;
 
-$FachadaE = new EquipoFachade();
-$FachadaEstadio = new EstadioFachade();
+$FachadaE = new EquipoFachada();
+$FachadaEstadio = new EstadioFachada();
 
 $Equipo = $FachadaE->getEquipo($ID_Equipo);
 

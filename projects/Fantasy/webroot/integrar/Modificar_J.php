@@ -2,14 +2,14 @@
 
 require_once("Clases/Jugador.php");
 require_once("Clases/Equipo.php");
-require_once("Clases/EquipoFachade.php");
-require_once("Clases/JugadorFachade.php");
+require_once("Clases/EquipoFachada.php");
+require_once("Clases/JugadorFachada.php");
 
 $ID_Jugador = isset($_POST['idjugador'])?$_POST['idjugador']:-1;
 
-$FachadaJ = new JugadorFachade();
+$FachadaJ = new JugadorFachada();
 $Jugador = $FachadaJ->getJugador($ID_Jugador);
-$FachadaE = new EquipoFachade();
+$FachadaE = new EquipoFachada();
 
 // En caso de que modifique
 

@@ -1,9 +1,9 @@
 <?php
 require_once("Clases/Estadio.php");
-require_once("Clases/EstadioFachade.php");
+require_once("Clases/EstadioFachada.php");
 
 $ID_Estadio = isset($_POST['idestadio'])?$_POST['idestadio']:-1;
-$FachadaE = new EstadioFachade();
+$FachadaE = new EstadioFachada();
 $Estadio = $FachadaE->getEstadio($ID_Estadio);
 
 include("Static/head.php");

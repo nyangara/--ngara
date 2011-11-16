@@ -2,16 +2,16 @@
 
 require_once("Clases/Jugador.php");
 require_once("Clases/Equipo.php");
-require_once("Clases/EquipoFachade.php");
-require_once("Clases/JugadorFachade.php");
+require_once("Clases/EquipoFachada.php");
+require_once("Clases/JugadorFachada.php");
 
 require_once("Clases/EstadisticaBateo.php");
 require_once("Clases/EstadisticaPicheo.php");
-require_once("Clases/EstadisticaFachade.php");
+require_once("Clases/EstadisticaFachada.php");
 
 
 $ID_Jugador = isset($_POST['idjugador'])?$_POST['idjugador']:-1;
-$FachadaJ = new JugadorFachade();
+$FachadaJ = new JugadorFachada();
 $Jugador = $FachadaJ->getJugador($ID_Jugador);
 
 // En caso de que se valla a agregar
@@ -24,7 +24,7 @@ if(isset($_POST['Aplicar'])){
 	else
 		$Estadistica = new Estadistica_Pitcheo($_POST['el'],$_POST['cl'],$_POST['i'],$_POST['bb'],$_POST['k'],$_POST['jg'],$_POST['e'],$fecha,$ID_Jugador);
 	
-	$FachadaE = new EstadisticaFachade();
+	$FachadaE = new EstadisticaFachada();
 	
 	$FachadaE->addEstadistica($Estadistica);
 	

@@ -27,7 +27,7 @@
                 </form>
                 <h2>Estadios</h2>
 <?
-        $FachadaEstadio = new EstadioFachade;
+        $FachadaEstadio = new EstadioFachada;
         $Estadios = $FachadaEstadio->getAllEstadio();
 
         $N = count($Estadios);

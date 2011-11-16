@@ -2,7 +2,7 @@
 
 require_once("Clases/Jugador.php");
 require_once("Clases/Equipo.php");
-require_once("Clases/EquipoFachade.php");
+require_once("Clases/EquipoFachada.php");
 
 include("Static/head.php");
 include("Static/header.php");
@@ -38,7 +38,7 @@ echo '
 		echo '<h2>Jugadores</h2>';
 
 
-		$FachadaEquipos = new EquipoFachade;
+		$FachadaEquipos = new EquipoFachada;
 		$equipos = $FachadaEquipos->getAllequipo();
 
 		for($i=0;$i<$equipos->count();$i++){

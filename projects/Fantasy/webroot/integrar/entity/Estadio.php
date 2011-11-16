@@ -11,8 +11,5 @@
                         'tipo de terreno',
                         'año de fundación'
                 );
-
-                function __construct() {
-                }
         }
 ?>

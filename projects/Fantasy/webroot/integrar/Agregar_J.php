@@ -27,8 +27,8 @@ if(isset($_POST['Aplicar'])){
 
 <?php
 
-include("Static/head.php");
-include("Static/header.php");
+include("static/head.php");
+include("static/header.php");
 
 echo '<link rel="stylesheet" href="assets/styles/style_Agregar_J.css"  type="text/css" />';
 
@@ -140,7 +140,7 @@ echo'
 	</div>';
 
 echo '</div>';
-include("Static/sideBar.php");
-include("Static/footer.php");	
+include("static/sideBar.php");
+include("static/footer.php");	
 
 ?>

@@ -212,13 +212,13 @@ CREATE TABLE "Fantasy"."Contenido de roster" (
 CREATE TABLE "Fantasy"."Estadística de bateo" (
         "jugador"                       integer                         NOT NULL,
         "fecha"                         date                            NOT NULL,
-        "ci"                            integer                         NOT NULL,
-        "ca"                            integer                         NOT NULL,
-        "tb"                            integer                         NOT NULL,
-        "br"                            integer                         NOT NULL,
-        "bb"                            integer                         NOT NULL,
-        "k"                             integer                         NOT NULL,
-        "e"                             integer                         NOT NULL,
+        "carreras impulsadas"           integer                         NOT NULL,
+        "carreras anotadas"             integer                         NOT NULL,
+        "total de bases"                integer                         NOT NULL,
+        "bases robadas"                 integer                         NOT NULL,
+        "bases por bola"                integer                         NOT NULL,
+        "punchouts"                     integer                         NOT NULL,
+        "errores"                       integer                         NOT NULL,
 
         CONSTRAINT "Estadística de bateo PRIMARY KEY"
                 PRIMARY KEY ("jugador", "fecha"),
@@ -232,12 +232,13 @@ CREATE TABLE "Fantasy"."Estadística de bateo" (
 CREATE TABLE "Fantasy"."Estadística de pitcheo" (
         "jugador"                       integer                         NOT NULL,
         "fecha"                         date                            NOT NULL,
-        "sl"                            integer                         NOT NULL,
-        "cl"                            integer                         NOT NULL,
-        "i"                             integer                         NOT NULL,
-        "bb"                            integer                         NOT NULL,
-        "k"                             integer                         NOT NULL,
-        "jg"                            integer                         NOT NULL,
+        "entradas lanzadas"             integer                         NOT NULL,
+        "carreras limpias"              integer                         NOT NULL,
+        "imparables"                    integer                         NOT NULL,
+        "bases por bola"                integer                         NOT NULL,
+        "punchouts"                     integer                         NOT NULL,
+        "juegos ganados"                integer                         NOT NULL,
+        "errores"                       integer                         NOT NULL,
 
         CONSTRAINT "Estadística de pitcheo PRIMARY KEY"
                 PRIMARY KEY ("jugador", "fecha"),

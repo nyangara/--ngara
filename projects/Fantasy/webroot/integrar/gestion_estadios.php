@@ -26,7 +26,7 @@
                         <input type="submit" value="Agregar Estadio"/>
                 </form>
                 <h2>Estadios</h2>
-<?
+<?php
         $FachadaEstadio = new EstadioFachada;
         $Estadios = $FachadaEstadio->getAllEstadio();
 
@@ -36,16 +36,16 @@
 ?>
                 <div class="alcanceEstadio">
                         <form class="Fila" action="datos_es.php" method="post">
-                                <input type="hidden" name="idestadio" value="<? echo $Estadios[$i]->getId(); ?>"/>
+                                <input type="hidden" name="idestadio" value="<?php echo $Estadios[$i]->getId(); ?>"/>
                                 <input type="image" class="imagen" src="assets/images/fotos_estadios/generico.jpg"/>
                                 <div class="datos">
-                                        <div>Nombre:      <? echo $Estadios[$i]->getnombre()     ; ?></div>
-                                        <div>Ubicacion:   <? echo $Estadios[$i]->getubicacion()  ; ?></div>
-                                        <div>Propietario: <? echo $Estadios[$i]->getpropietario(); ?></div>
+                                        <div>Nombre:      <?php echo $Estadios[$i]->getnombre()     ; ?></div>
+                                        <div>Ubicacion:   <?php echo $Estadios[$i]->getubicacion()  ; ?></div>
+                                        <div>Propietario: <?php echo $Estadios[$i]->getpropietario(); ?></div>
                                 </div>
                         </form>
                 </div>
-<?
+<?php
         }
 
         echo '</div>';

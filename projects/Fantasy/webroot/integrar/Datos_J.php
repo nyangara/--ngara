@@ -11,8 +11,8 @@ $FachadaJ = new JugadorFachada();
 $Jugador = $FachadaJ->getJugador($ID_Jugador);
 $Est = $FachadaJ->getAVGEst($Jugador); //Estadisticas de Jugador
 
-include("Static/head.php");
-include("Static/header.php");
+include("static/head.php");
+include("static/header.php");
 
 ?>
 
@@ -184,7 +184,7 @@ echo'
 	</div>';
 
 echo '</div>';
-include("Static/sideBar.php");
-include("Static/footer.php");	
+include("static/sideBar.php");
+include("static/footer.php");	
 
 ?>

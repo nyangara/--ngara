@@ -1,4 +1,4 @@
-<?
+<?php
                 echo '<form id="form" action="Agregar_Eq.php" method="post">
                         <input type="submit" value="Agregar Equipo">
                       </form>';
@@ -16,7 +16,7 @@
                                 <div class="alcanceEquipo">
                                         <form class="Fila" action="Datos_Eq.php" method="post" >
                                                 <input type="hidden" name="idequipo" value="'.$Equipos[$i]->getId().'">
-                                                <input class="imagen" type="image" src="assets/images/Fotos_Equipos/generico.jpg" />
+                                                <input class="imagen" type="image" src="static/images/Fotos_Equipos/generico.jpg" />
                                                 <div class="datos">
                                                         <div>Nombre: '.$Equipos[$i]->getnombre().'</div>
                                                         <div>Siglas: '.$Equipos[$i]->getsiglas().'</div>
@@ -27,7 +27,7 @@
                 }
 
 echo '</div>';
-include("Static/sideBar.php");
-include("Static/footer.php");
+include("static/sideBar.php");
+include("static/footer.php");
 
 ?>

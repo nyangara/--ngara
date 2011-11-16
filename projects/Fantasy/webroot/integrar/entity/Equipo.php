@@ -2,6 +2,7 @@
         require_once 'Entity.php';
 
         class Equipo extends Entity {
+                protected static $table = "Equipo";
                 protected static $fields = array(
                         "id",
                         "nombre completo",

@@ -1,0 +1,49 @@
+.Fila {
+
+	background-color: #6E8303;
+	padding:10px;
+	margin-bottom:10px;
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	height: 145px;
+	margin-left:20px;
+	clear: both;
+	width: 80%;
+}
+
+.datos {
+	margin-left:10px;
+	margin-right:60px;
+	float: left;
+	font-family: Verdana, Geneva, sans-serif;
+	font-size: 14px;
+	color: #CCC;
+}
+
+#form {
+	margin: 10px;
+	float: right;
+	
+}
+
+#content #contenido_interno_esta{
+	overflow:auto;
+	width: 600px;
+	height: 500px;
+	float: left;
+	background-color: #333;
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+}
+
+#box_info{
+	margin-left: 20px;
+	margin-top: 5px;
+	color: #CCC;
+	padding: 5px;
+	width: 550px;
+	height: 400px;
+	background-color: #6E8303;
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+}

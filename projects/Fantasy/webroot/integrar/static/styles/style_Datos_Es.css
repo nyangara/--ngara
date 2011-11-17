@@ -1,0 +1,77 @@
+#Alcance #Foto {
+	text-align:center;
+	width: 100%;
+	height: 200px;
+	float: left;
+}
+
+#Alcance #InfBas {
+	clear:both;
+	height: 125px;
+	width: 100%;
+}
+
+#Alcance #InfBas div {
+	display: block;
+	height: 2em;
+	padding-top: 0.5em;
+	text-align: center;
+}
+
+#Alcance #InfExt {
+	clear:both;
+	height: 150px;
+	width: 100%;
+}
+
+#Alcance #InfExt div {
+	display: block;
+	height: 2em;
+	padding-top: 0.5em;
+	text-align: center;
+}
+
+#env  {
+	height: 25px;
+	width: 100%;
+	clear: both;
+}
+
+#env form {
+	float: left;
+	margin-right: 24px;
+	margin-left: 24px;
+}
+
+
+#Alcance #env input{
+	display: inline;
+}
+
+#Alcance #Foto img {
+	margin-top:6px;
+	height: 180px;
+	width: 80%;
+	background-position: center center;
+}
+
+#box_info{
+	margin-left: 20px;
+	margin-top: 5px;
+	color: #CCC;
+	padding: 5px;
+	width: 550px;
+	height: 450px;
+	background-color: #6E8303;
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+}
+
+#content #contenido_interno_datos{
+	width: 600px;
+	height: 500px;
+	float: left;
+	background-color: #333;
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+}

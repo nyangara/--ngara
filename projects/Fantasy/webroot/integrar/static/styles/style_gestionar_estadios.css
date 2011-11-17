@@ -1,0 +1,50 @@
+.alcanceEstadio {
+	height: auto;
+	width: 100%;
+}
+.alcanceEstadio .imagen {
+	margin: 4px;
+	height: 50px;
+	width: 50px;
+	border: thin solid #000;
+	float: left;
+}
+.alcanceEstadio .Fila {
+	height: 80px;
+	margin-left:20px;
+}
+.alcanceEstadio .datos {
+	width: 250px;
+	float: left;
+	font-family: Verdana, Geneva, sans-serif;
+	font-size: 14px;
+	color: #CCC;
+	text-align: justify;
+	padding-left:50px;
+}
+
+#form {
+	margin: 10px;
+	float: right;
+}
+
+#content #contenido_interno_jugadores{
+	overflow:auto;
+	width: 600px;
+	height: 500px;
+	float: left;
+	background-color: #333;
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+}
+
+#box_jugador{
+	width:400px;
+	border:#666;
+	background-color: #6E8303;
+	padding:10px;
+	margin-bottom:10px;
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	
+}

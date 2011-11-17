@@ -1,5 +1,5 @@
 <?php
-        require_once("Classes/EstadioFachade.php");
+        require_once("classes/estadio_fachada.php");
 
         include('include/pre.html');
 
@@ -21,7 +21,7 @@
                                                 <select name="Nombre_Estadio">
                                                         <option size="30" value="000" selected>Seleccionar</option>
                                                         <?php
-                                                                $eFac = new EstadioFachade();
+                                                                $eFac = new EstadioFachada();
                                                                 $estadio = $eFac->getAllEstadio();
                                                                 $n = count($estadio);
 

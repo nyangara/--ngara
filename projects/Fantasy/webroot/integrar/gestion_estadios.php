@@ -1,9 +1,8 @@
 <?php
-        require_once("clases/estadio.php"        );
-        require_once("clases/estadio_fachade.php");
+        require_once("include/model/entity/Estadio.php"      );
+        require_once("include/model/facade/FacadeEstadio.php");
 
-        include("static/head.php"  );
-        include("static/header.php");
+        include("static/pre.html");
 ?>
         <link rel="stylesheet" href="assets/styles/style_gestionar_estadios.css" type="text/css"/>
         <ul id="navigation">
@@ -27,21 +26,17 @@
                 </form>
                 <h2>Estadios</h2>
 <?php
-        $FachadaEstadio = new EstadioFachada;
-        $Estadios = $FachadaEstadio->getAllEstadio();
-
-        $N = count($Estadios);
-
-        for($i = 0; $i < $N; $i++) {
+        $es = FachadaEstadio::retrieveAll();
+        foreach ($es as $e) {
 ?>
                 <div class="alcanceEstadio">
                         <form class="Fila" action="datos_es.php" method="post">
-                                <input type="hidden" name="idestadio" value="<?php echo $Estadios[$i]->getId(); ?>"/>
+                                <input type="hidden" name="idestadio" value="<?php echo $e[$i]->get("id"); ?>"/>
                                 <input type="image" class="imagen" src="assets/images/fotos_estadios/generico.jpg"/>
                                 <div class="datos">
-                                        <div>Nombre:      <?php echo $Estadios[$i]->getnombre()     ; ?></div>
-                                        <div>Ubicacion:   <?php echo $Estadios[$i]->getubicacion()  ; ?></div>
-                                        <div>Propietario: <?php echo $Estadios[$i]->getpropietario(); ?></div>
+                                        <p>Nombre: <?php echo $e[$i]->get("nombre"); ?></p>
+                                        <p>Ciudad: <?php echo $e[$i]->get("ciudad"); ?></p>
+                                        <p>Estado: <?php echo $e[$i]->get("estado"); ?></p>
                                 </div>
                         </form>
                 </div>
@@ -49,6 +44,5 @@
         }
 
         echo '</div>';
-        include("static/side_bar.php");
-        include("static/footer.php");
+        include("static/post.html");
 ?>

@@ -1,5 +1,13 @@
 <?php
         class Entity {
+                public function table() {
+                        return static::$table;
+                }
+
+                public function fields() {
+                        return static::$fields;
+                }
+
                 public function get($field) {
                         if (array_key_exists($field, $this->data)) {
                                 return $this->data[$field];
@@ -12,10 +20,6 @@
                                 $this->data[$field] = $datum;
                         }
                         return $this;
-                }
-
-                public function table() {
-                        return static::$table;
                 }
         }
 ?>

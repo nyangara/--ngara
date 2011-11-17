@@ -1,7 +1,7 @@
 <?php
         require_once 'Entity.php';
 
-        class EstadisticaBateo {
+        class EstadisticaBateo extends Entity {
                 protected static $table = "Estadística de bateo";
                 protected static $fields = array(
                         "jugador",

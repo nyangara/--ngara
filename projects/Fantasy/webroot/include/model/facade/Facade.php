@@ -1,8 +1,10 @@
 <?php
         class Facade {
                 public static function create($entity) {
+                        global $dbconn;
+
                         $ec = static::$entity_class;
-                        $en = $ec::$table;
+                        $en = $ec::table();
                         $fs = $ec::fields();
                         $fn = count($fs);
                         $fr = range(1, $fn);
@@ -15,7 +17,7 @@
                                 'INSERT INTO "Fantasy"."' . $en . '" (' .
                                 join(',', array_map($quote, $fs))       .
                                 ') VALUES ('                            .
-                                join(',', array_map($dolar, $fr)        .
+                                join(',', array_map($dolar, $fr))       .
                                 ')';
 
                         $data = array_map($get, $fs);
@@ -27,8 +29,10 @@
                 }
 
                 public static function retrieveAll() {
+                        global $dbconn;
+
                         $ec = static::$entity_class;
-                        $en = $ec::$table;
+                        $en = $ec::table();
                         $fs = $ec::fields();
 
                         $quote = function ($i) { return '"' . $i . '"'; };
@@ -55,8 +59,10 @@
                 }
 
                 public static function retrieve($id) {
+                        global $dbconn;
+
                         $ec = static::$entity_class;
-                        $en = $ec::$table;
+                        $en = $ec::table();
                         $fs = $ec::fields();
 
                         $quote = function ($i) { return '"' . $i . '"'; };
@@ -65,7 +71,7 @@
                                 'SELECT ' . join(',', array_map($quote, $fs)) .
                                 'FROM "Fantasy"."' . $en . '" WHERE "id" = $1';
 
-                        $data = array($id)
+                        $data = array($id);
 
                         $result = pg_prepare($dbconn, 'SELECT ' . $en, $query) or die('pg_prepare: ' . pg_last_error());
                         $result = pg_execute($dbconn, 'SELECT ' . $en, $data ) or die('pg_execute: ' . pg_last_error());
@@ -85,8 +91,10 @@
                 }
 
                 public static function update($entity) {
+                        global $dbconn;
+
                         $ec = static::$entity_class;
-                        $en = $ec::$table;
+                        $en = $ec::table();
                         $fs = $ec::fields();
                         $fn = count($fs);
                         $fr = range(1, $fn);
@@ -99,7 +107,7 @@
                                 join(',', array_map($sets, $fs, $fr)) .
                                 'WHERE "id" = $' . ($fn + 1);
 
-                        $data = array_merge(array_map($get, $fs), array($entity->get("id")))
+                        $data = array_merge(array_map($get, $fs), array($entity->get("id")));
 
                         $result = pg_prepare($dbconn, 'UPDATE ' . $en, $query)     or die('pg_prepare: ' . pg_last_error());
                         $result = pg_execute($dbconn, 'UPDATE ' . $en, $data ) or die('pg_execute: ' . pg_last_error());
@@ -109,7 +117,9 @@
                 }
 
                 public static function removeAll() {
-                        $en = $ec::$table;
+                        global $dbconn;
+
+                        $en = $ec::table();
 
                         $query = 'DELETE FROM "Fantasy"."' . $en . '"';
 
@@ -120,10 +130,12 @@
                 }
 
                 public static function remove($entity) {
-                        $en = $ec::$table;
+                        global $dbconn;
+
+                        $en = $ec::table();
 
                         $query = 'DELETE FROM "Fantasy"."' . $en . '" WHERE "id" = $1';
-                        $data  = array($entity->get("id"))
+                        $data  = array($entity->get("id"));
 
                         $result = pg_prepare($dbconn, 'SELECT ' . $en, $query) or die('pg_prepare: ' . pg_last_error());
                         $result = pg_execute($dbconn, 'SELECT ' . $en, $data ) or die('pg_execute: ' . pg_last_error());

@@ -336,7 +336,7 @@ CREATE TABLE "Fantasy"."Jugador en noticia" (
 
         CONSTRAINT "Jugador en noticia FOREIGN KEY noticia REFERENCES Noticia"
                 FOREIGN KEY ("noticia")
-                REFERENCES "Fantasy"."Equipo" ("id")
+                REFERENCES "Fantasy"."Jugador" ("id")
                 ON DELETE CASCADE
 );
 
@@ -354,7 +354,7 @@ CREATE TABLE "Fantasy"."Juego en noticia" (
 
         CONSTRAINT "Juego en noticia FOREIGN KEY noticia REFERENCES Noticia"
                 FOREIGN KEY ("noticia")
-                REFERENCES "Fantasy"."Equipo" ("id")
+                REFERENCES "Fantasy"."Juego" ("id")
                 ON DELETE CASCADE
 );
 

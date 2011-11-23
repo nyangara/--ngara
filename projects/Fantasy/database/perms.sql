@@ -56,6 +56,7 @@ GRANT
         SELECT,
         UPDATE
 ON SEQUENCE
+        "Fantasy"."Noticia_id_seq",
         "Fantasy"."Juego_id_seq",
         "Fantasy"."Jugador_id_seq"
 TO "Fantasy (usuario normal)";

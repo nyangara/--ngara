@@ -58,7 +58,7 @@
                         return $r;
                 }
 
-                public static function retrieve($id) {
+                public static function retrieve($entity) {
                         global $dbconn;
 
                         $ec = static::$entity_class;
@@ -71,7 +71,7 @@
                                 'SELECT ' . join(',', array_map($quote, $fs)) .
                                 'FROM "Fantasy"."' . $en . '" WHERE "id" = $1';
 
-                        $data = array($id);
+                        $data = array($entity->get('id'));
 
                         $result = pg_prepare($dbconn, 'SELECT ' . $en, $query) or die('pg_prepare: ' . pg_last_error());
                         $result = pg_execute($dbconn, 'SELECT ' . $en, $data ) or die('pg_execute: ' . pg_last_error());

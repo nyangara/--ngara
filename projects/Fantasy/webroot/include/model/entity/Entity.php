@@ -1,5 +1,7 @@
 <?php
         class Entity {
+                protected $data;
+
                 public function table() {
                         return static::$table;
                 }

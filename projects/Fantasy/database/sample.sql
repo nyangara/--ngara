@@ -54,7 +54,7 @@ WHERE "Datos"."jugador" = "Fantasy"."Jugador"."nombre" AND "Datos"."equipo" = "F
 
 INSERT INTO "Fantasy"."Juego" ("inicio", "equipo local", "equipo visitante", "estadio")
 SELECT
-        to_timestamp("Datos"."inicio", 'YYYY/MM/DD'),
+        to_timestamp("Datos"."inicio", 'YYYY/MM/DD HH12:MI AM'),
         "Equipo local"."id",
         "Equipo visitante"."id",
         "Estadio"."id"

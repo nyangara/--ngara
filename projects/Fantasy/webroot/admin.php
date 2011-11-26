@@ -1,11 +1,13 @@
 <?php
+        require_once 'include/config.php';
+        require_once 'include/dbconn-admin.php';
         require_once 'include/model/facade/FacadeEstadio.php';
         require_once 'include/model/facade/FacadeEquipo.php';
 
         ////////////////////////////////////////////////////////////////////////////////
         require_once 'include/model/entity/Juego.php';
 
-        if ($_POST['submit']) {
+        if (array_key_exists('submit', $_POST)) {
                 $fecha = $_POST['year'  ] . '-' .
                          $_POST['month' ] . '-' .
                          $_POST['day'   ] . ' ' .
@@ -33,7 +35,7 @@
                 return $r . "</select>";
         }
 
-        $equipo = FacadeEquipo::retrieveAll();
+        $equipos = FacadeEquipo::retrieveAll();
         $estadios = FacadeEstadio::retrieveAll();
 
         require("include/pre.html");
@@ -86,7 +88,7 @@
                                                         Seleccione el equipo local:
                                                         <select name="equipo_local">
 <?php
-        foreach ($es as $e) {
+        foreach ($equipos as $e) {
                 echo '<option value="' . $e->get('id') . '">' . $e->get('nombre corto') . '</option>';
         }
 ?>
@@ -98,7 +100,7 @@
                                                         Seleccione el equipo visitante:
                                                         <select name="equipo_visitante">
 <?php
-        foreach ($es as $e) {
+        foreach ($equipos as $e) {
                 echo '<option value="' . $e->get('id') . '">' . $e->get('nombre corto') . '</option>';
         }
 ?>
@@ -110,7 +112,7 @@
                                                         Seleccione el estadio:
                                                         <select name="estadio">
 <?php
-        foreach ($es as $e) {
+        foreach ($estadios as $e) {
                 echo '<option value="' . $e->get('id') . '">' . $e->get('nombre') . '</option>';
         }
 ?>

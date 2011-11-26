@@ -276,6 +276,12 @@ CREATE TABLE "Fantasy"."Juego" (
         "equipo local"                  integer                         NOT NULL,
         "equipo visitante"              integer                         NOT NULL,
         "estadio"                       integer                         NOT NULL,
+        "carreras del equipo local"     integer                             NULL,
+        "carreras del equipo visitante" integer                             NULL,
+        "hits del equipo local"         integer                             NULL,
+        "hits del equipo visitante"     integer                             NULL,
+        "errores del equipo local"      integer                             NULL,
+        "errores del equipo visitante"  integer                             NULL,
 
         CONSTRAINT "Juego PRIMARY KEY"
                 PRIMARY KEY ("id"),
@@ -294,20 +300,6 @@ CREATE TABLE "Fantasy"."Juego" (
                 FOREIGN KEY ("estadio")
                 REFERENCES "Fantasy"."Estadio" ("id")
                 ON DELETE CASCADE
-);
-
-CREATE TABLE "Fantasy"."Resultados de juego" (
-        "id"                            serial                          NOT NULL,
-        "carreras del equipo local"
-
-        CONSTRAINT "Resultados de juego PRIMARY KEY"
-                PRIMARY KEY ("id"),
-
-        CONSTRAINT "Resultados de juego FOREIGN KEY id REFERENCES Juego"
-                FOREIGN KEY ("id")
-                REFERENCES "Fantasy"."Juego" ("id")
-                ON DELETE CASCADE,
-
 );
 
 -- TODO: implementar relaciones con "Equipo", "Jugador" y "Juego"

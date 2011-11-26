@@ -1,8 +1,9 @@
 <?php
         require_once 'include/config.php';
         require_once 'include/dbconn-user.php';
-        require_once 'include/model/entity/Equipo.php';
         require_once 'include/model/facade/FacadeEquipo.php';
+        require_once 'include/model/facade/FacadeEstadio.php';
+        require_once 'include/model/facade/FacadeJuego.php';
         require      'include/pre.html';
 ?>
         <!-- FIXME: se puede poner un link fuera del head?  Creo que no... -->
@@ -36,10 +37,10 @@
                         </tr>
 <?php
         foreach (FacadeJuego::retrieveAll() as $j) {
-                $l = FacadeEquipo ::retrieve($j->get("equipo local"    ));
-                $v = FacadeEquipo ::retrieve($j->get("equipo visitante"));
-                $s = FacadeEstadio::retrieve($j->get("estadio"         ));
-                $date = strtotime($j->get([0]);
+                $l = FacadeEquipo ::retrieve($j->get('equipo local'    ));
+                $v = FacadeEquipo ::retrieve($j->get('equipo visitante'));
+                $s = FacadeEstadio::retrieve($j->get('estadio'         ));
+                $date = strtotime($j->get('inicio'));
 ?>
                         <tr>
                                 <td style="border: 1px solid #cccccc">

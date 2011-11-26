@@ -1,10 +1,10 @@
 <?php
         class Entity {
-                public function table() {
+                public static function table() {
                         return static::$table;
                 }
 
-                public function fields() {
+                public static function fields() {
                         return static::$fields;
                 }
 

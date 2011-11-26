@@ -2,6 +2,7 @@
         class Facade {
                 public static function create($entity) {
                         global $dbconn;
+                        global $prepared;
 
                         $ec = static::$entity_class;
                         $en = $ec::table();
@@ -13,19 +14,23 @@
                         $quote = function ($i) { return '"' . $i . '"';   };
                         $get   = function ($i) { return $entity->get($i); };
 
-                        $query =
-                                'INSERT INTO "Fantasy"."' . $en . '" (' .
-                                join(',', array_map($quote, $fs))       .
-                                ') VALUES ('                            .
-                                join(',', array_map($dolar, $fr))       .
-                                ')';
-
                         $data = array_map($get, $fs);
 
-                        $result = pg_prepare($dbconn, 'INSERT ' . $en, $query) or die('pg_prepare: ' . pg_last_error());
+                        if (!isset($prepared)) $prepared = array();
+                        if (!in_array('INSERT ' . $en, $prepared)) {
+                                $query =
+                                        'INSERT INTO "Fantasy"."' . $en . '" (' .
+                                        join(',', array_map($quote, $fs))       .
+                                        ') VALUES ('                            .
+                                        join(',', array_map($dolar, $fr))       .
+                                        ')';
+                                $result = pg_prepare($dbconn, 'INSERT ' . $en, $query) or die('pg_prepare: ' . pg_last_error());
+                                $prepared[] = 'INSERT ' . $en;
+                        }
+
                         $result = pg_execute($dbconn, 'INSERT ' . $en, $data ) or die('pg_execute: ' . pg_last_error());
 
-                        pg_close($dbconn);
+                        return;
                 }
 
                 public static function retrieveAll() {
@@ -54,12 +59,12 @@
                         }
                         pg_free_result($result);
 
-                        pg_close($dbconn);
                         return $r;
                 }
 
                 public static function retrieve($id) {
                         global $dbconn;
+                        global $prepared;
 
                         $ec = static::$entity_class;
                         $en = $ec::table();
@@ -67,13 +72,18 @@
 
                         $quote = function ($i) { return '"' . $i . '"'; };
 
-                        $query =
-                                'SELECT ' . join(',', array_map($quote, $fs)) .
-                                'FROM "Fantasy"."' . $en . '" WHERE "id" = $1';
-
                         $data = array($id);
 
-                        $result = pg_prepare($dbconn, 'SELECT ' . $en, $query) or die('pg_prepare: ' . pg_last_error());
+                        if (!isset($prepared)) $prepared = array();
+                        if (!in_array('SELECT ' . $en, $prepared)) {
+                                $query =
+                                        'SELECT ' . join(',', array_map($quote, $fs)) .
+                                        'FROM "Fantasy"."' . $en . '" WHERE "id" = $1';
+
+                                $result = pg_prepare($dbconn, 'SELECT ' . $en, $query) or die('pg_prepare: ' . pg_last_error());
+                                $prepared[] = 'SELECT ' . $en;
+                        }
+
                         $result = pg_execute($dbconn, 'SELECT ' . $en, $data ) or die('pg_execute: ' . pg_last_error());
 
                         if (pg_num_rows($result) === 0) return null;
@@ -86,12 +96,12 @@
                         }
                         pg_free_result($result);
 
-                        pg_close($dbconn);
                         return $e;
                 }
 
                 public static function update($entity) {
                         global $dbconn;
+                        global $prepared;
 
                         $ec = static::$entity_class;
                         $en = $ec::table();
@@ -102,17 +112,20 @@
                         $get   = function ($i)     { return $entity->get($i);            };
                         $sets  = function ($i, $j) { return 'SET "' . $i . '" = $' . $j; };
 
-                        $query =
-                                'UPDATE "Fantasy"."' . $en . '" SET ' .
-                                join(',', array_map($sets, $fs, $fr)) .
-                                'WHERE "id" = $' . ($fn + 1);
-
                         $data = array_merge(array_map($get, $fs), array($entity->get("id")));
 
-                        $result = pg_prepare($dbconn, 'UPDATE ' . $en, $query)     or die('pg_prepare: ' . pg_last_error());
+                        if (!isset($prepared)) $prepared = array();
+                        if (!in_array('UPDATE ' . $en, $prepared)) {
+                                $query =
+                                        'UPDATE "Fantasy"."' . $en . '" SET ' .
+                                        join(',', array_map($sets, $fs, $fr)) .
+                                        'WHERE "id" = $' . ($fn + 1);
+                                $result = pg_prepare($dbconn, 'UPDATE ' . $en, $query)     or die('pg_prepare: ' . pg_last_error());
+                                $prepared[] = 'UPDATE ' . $en;
+                        }
+
                         $result = pg_execute($dbconn, 'UPDATE ' . $en, $data ) or die('pg_execute: ' . pg_last_error());
 
-                        pg_close($dbconn);
                         return true;
                 }
 
@@ -125,22 +138,26 @@
 
                         $result = pg_query($dbconn, $query) or die('pg_prepare: ' . pg_last_error());
 
-                        pg_close($dbconn);
                         return true;
                 }
 
                 public static function remove($entity) {
                         global $dbconn;
+                        global $prepared;
 
                         $en = $ec::table();
 
-                        $query = 'DELETE FROM "Fantasy"."' . $en . '" WHERE "id" = $1';
                         $data  = array($entity->get("id"));
 
-                        $result = pg_prepare($dbconn, 'SELECT ' . $en, $query) or die('pg_prepare: ' . pg_last_error());
-                        $result = pg_execute($dbconn, 'SELECT ' . $en, $data ) or die('pg_execute: ' . pg_last_error());
+                        if (!isset($prepared)) $prepared = array();
+                        if (!in_array('DELETE ' . $en, $prepared)) {
+                                $query = 'DELETE FROM "Fantasy"."' . $en . '" WHERE "id" = $1';
+                                $result = pg_prepare($dbconn, 'DELETE ' . $en, $query) or die('pg_prepare: ' . pg_last_error());
+                                $prepared[] = 'DELETE ' . $en;
+                        }
 
-                        pg_close($dbconn);
+                        $result = pg_execute($dbconn, 'DELETE ' . $en, $data ) or die('pg_execute: ' . pg_last_error());
+
                         return true;
                 }
         }

@@ -1,4 +1,7 @@
-CREATE OR REPLACE FUNCTION "Fantasy"."autenticar"(IN "nombre de usuario" text, IN "password" text) RETURNS integer
+CREATE OR REPLACE FUNCTION "Fantasy"."autenticar"(
+        IN "nombre de usuario" text,
+        IN "password" text
+) RETURNS integer
         STABLE
         STRICT
         SECURITY DEFINER
@@ -19,9 +22,10 @@ $BODY$;
 
 -- TODO: manejar errores (parámetros nulos, usuario ya existente, etc)
 CREATE OR REPLACE FUNCTION "Fantasy"."registrar"(
-        IN      "parámetro: nombre"             text,
+        IN      "parámetro: username"           text,
         IN      "parámetro: nombre completo"    text,
-        IN      "parámetro: password"           text
+        IN      "parámetro: password"           text,
+        IN      "parámetro: es administrador"   boolean
 ) RETURNS void
         VOLATILE
         STRICT
@@ -31,15 +35,17 @@ AS $BODY$
         BEGIN
                 INSERT INTO "Fantasy"."Usuario" (
                         "nombre",
-                        "nombre completo"
+                        "nombre completo",
+                        "es administrador"
                 ) VALUES (
                         "parámetro: nombre",
-                        "parámetro: nombre completo"
+                        "parámetro: nombre completo",
+                        "parámetro: es administrador"
                 );
 
                 INSERT INTO "Fantasy"."passwd"
                 SELECT
-                        "Fantasy"."Usuario"."id",
+                        "Fantasy"."Usuario"."username",
                         "parámetro: password"
                 FROM
                         "Fantasy"."Usuario"

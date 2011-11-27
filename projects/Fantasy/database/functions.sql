@@ -1,5 +1,5 @@
 CREATE OR REPLACE FUNCTION "Fantasy"."autenticar"(
-        IN "nombre de usuario" text,
+        IN "username" text,
         IN "password" text
 ) RETURNS integer
         STABLE
@@ -13,9 +13,9 @@ AS $BODY$
                 "Fantasy"."Usuario",
                 "Fantasy"."passwd"
         WHERE
-                "Fantasy"."Usuario"."nombre"  = $1                           AND
-                "Fantasy"."Usuario"."id"      = "Fantasy"."passwd"."usuario" AND
-                "Fantasy"."passwd"."password" = $2
+                "Fantasy"."Usuario"."username" = "Fantasy"."passwd"."username" AND
+                "Fantasy"."passwd"."username"  = $1                            AND
+                "Fantasy"."passwd"."password"  = $2
 $BODY$;
 
 
@@ -34,11 +34,11 @@ CREATE OR REPLACE FUNCTION "Fantasy"."registrar"(
 AS $BODY$
         BEGIN
                 INSERT INTO "Fantasy"."Usuario" (
-                        "nombre",
+                        "username",
                         "nombre completo",
                         "es administrador"
                 ) VALUES (
-                        "parámetro: nombre",
+                        "parámetro: username",
                         "parámetro: nombre completo",
                         "parámetro: es administrador"
                 );
@@ -50,6 +50,6 @@ AS $BODY$
                 FROM
                         "Fantasy"."Usuario"
                 WHERE
-                        "nombre" = "parámetro: nombre";
+                        "username" = "parámetro: username";
         END;
 $BODY$;

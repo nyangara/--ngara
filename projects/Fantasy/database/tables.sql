@@ -12,7 +12,7 @@ CREATE TABLE "Fantasy"."Usuario" (
                 PRIMARY KEY ("id"),
 
         CONSTRAINT "Usuario UNIQUE e-mail"
-                UNIQUE ("e-mail")
+                UNIQUE ("dirección de e-mail"),
 
         CONSTRAINT "Usuario UNIQUE username"
                 UNIQUE ("username")
@@ -26,7 +26,7 @@ CREATE TABLE "Fantasy"."passwd" (
         "password"                      password                        NOT NULL,
 
         CONSTRAINT "passwd PRIMARY KEY"
-                PRIMARY KEY ("usuario"),
+                PRIMARY KEY ("username"),
 
         CONSTRAINT "passwd FOREIGN KEY username REFERENCES Usuario"
                 FOREIGN KEY ("username")
@@ -44,7 +44,7 @@ CREATE TABLE "Fantasy"."Liga" (
                 PRIMARY KEY ("id"),
 
         CONSTRAINT "Liga UNIQUE nombre, creador"
-                UNIQUE ("nombre", "creador")
+                UNIQUE ("nombre", "creador"),
 
         CONSTRAINT "Liga FOREIGN KEY creador REFERENCES Usuario"
                 FOREIGN KEY ("creador")
@@ -135,7 +135,6 @@ CREATE TABLE "Fantasy"."Roster" (
         "nombre"                        text                            NOT NULL,
         "usuario"                       integer                         NOT NULL,
         "liga"                          integer                         NOT NULL,
-        "nombre"                        text                                NULL,
         "puntaje"                       integer                             NULL,
         "fecha de creación"             timestamp with time zone        NOT NULL,
 
@@ -173,6 +172,38 @@ CREATE TABLE "Fantasy"."Contenido de roster" (
         CONSTRAINT "Contenido de roster FOREIGN KEY jugador REFERENCES Jugador"
                 FOREIGN KEY ("jugador")
                 REFERENCES "Fantasy"."Jugador" ("id")
+                ON DELETE CASCADE
+);
+
+CREATE TABLE "Fantasy"."Juego" (
+        "id"                            serial                          NOT NULL,
+        "inicio"                        timestamp with time zone        NOT NULL,
+        "equipo local"                  integer                         NOT NULL,
+        "equipo visitante"              integer                         NOT NULL,
+        "estadio"                       integer                         NOT NULL,
+        "carreras del equipo local"     integer                             NULL,
+        "carreras del equipo visitante" integer                             NULL,
+        "hits del equipo local"         integer                             NULL,
+        "hits del equipo visitante"     integer                             NULL,
+        "errores del equipo local"      integer                             NULL,
+        "errores del equipo visitante"  integer                             NULL,
+
+        CONSTRAINT "Juego PRIMARY KEY"
+                PRIMARY KEY ("id"),
+
+        CONSTRAINT "Juego FOREIGN KEY equipo local REFERENCES Equipo"
+                FOREIGN KEY ("equipo local")
+                REFERENCES "Fantasy"."Equipo" ("id")
+                ON DELETE CASCADE,
+
+        CONSTRAINT "Juego FOREIGN KEY equipo visitante REFERENCES Equipo"
+                FOREIGN KEY ("equipo visitante")
+                REFERENCES "Fantasy"."Equipo" ("id")
+                ON DELETE CASCADE,
+
+        CONSTRAINT "Juego FOREIGN KEY estadio REFERENCES Estadio"
+                FOREIGN KEY ("estadio")
+                REFERENCES "Fantasy"."Estadio" ("id")
                 ON DELETE CASCADE
 );
 
@@ -245,38 +276,6 @@ CREATE TABLE "Fantasy"."Juega" (
         CONSTRAINT "Juega FOREIGN KEY equipo REFERENCES Equipo"
                 FOREIGN KEY ("equipo")
                 REFERENCES "Fantasy"."Equipo" ("id")
-                ON DELETE CASCADE
-);
-
-CREATE TABLE "Fantasy"."Juego" (
-        "id"                            serial                          NOT NULL,
-        "inicio"                        timestamp with time zone        NOT NULL,
-        "equipo local"                  integer                         NOT NULL,
-        "equipo visitante"              integer                         NOT NULL,
-        "estadio"                       integer                         NOT NULL,
-        "carreras del equipo local"     integer                             NULL,
-        "carreras del equipo visitante" integer                             NULL,
-        "hits del equipo local"         integer                             NULL,
-        "hits del equipo visitante"     integer                             NULL,
-        "errores del equipo local"      integer                             NULL,
-        "errores del equipo visitante"  integer                             NULL,
-
-        CONSTRAINT "Juego PRIMARY KEY"
-                PRIMARY KEY ("id"),
-
-        CONSTRAINT "Juego FOREIGN KEY equipo local REFERENCES Equipo"
-                FOREIGN KEY ("equipo local")
-                REFERENCES "Fantasy"."Equipo" ("id")
-                ON DELETE CASCADE,
-
-        CONSTRAINT "Juego FOREIGN KEY equipo visitante REFERENCES Equipo"
-                FOREIGN KEY ("equipo visitante")
-                REFERENCES "Fantasy"."Equipo" ("id")
-                ON DELETE CASCADE,
-
-        CONSTRAINT "Juego FOREIGN KEY estadio REFERENCES Estadio"
-                FOREIGN KEY ("estadio")
-                REFERENCES "Fantasy"."Estadio" ("id")
                 ON DELETE CASCADE
 );
 

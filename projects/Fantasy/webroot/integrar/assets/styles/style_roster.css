@@ -1,0 +1,98 @@
+/* CSS Document */
+#wrapper #content #contenido_roster {
+	overflow:auto;
+	width: 900px;
+	height: 500px;
+	float: left;
+	background-color: #333;
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+}
+
+#campo_juego{
+	background-color: #060;
+	background-image:url(../images/campo_background.png);
+	margin: 10px 8px 10px 8px;
+	width: 480px;
+	height: 480px;
+	float: left;
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;		
+}
+
+#lista_jugadores{
+	//background-color: #000;
+	background-image:url(../images/panelJugadores.jpg);
+	background-repeat:repeat-y;
+	margin: 10px 8px 10px 8px;
+	width: 380px;
+	height: 480px;
+	float: left;
+	-webkit-border-radius: 12px;
+	-moz-border-radius: 12px;
+}
+
+#LF, #CF, #RF, #SS, #B2, #B3, #B1, #P, #RE{
+	width:50px;
+	height:50px;
+	background-color:#333;
+	float:left;
+}
+
+#LF{
+	margin-top:140px;
+	margin-left: 90px;
+}
+
+#CF{
+	margin-top:120px;
+	margin-left: 75px;
+}
+
+#RF{
+	margin-top:140px;
+	margin-left: 75px;
+}
+
+#SS{
+	margin-top:25px;
+	margin-left: 140px;
+}
+
+#B2{
+	margin-top:25px;
+	margin-left: 100px;	
+}
+
+#B3{
+	margin-top:25px;
+	margin-left: 100px;	
+} 
+#B1{
+	margin-top:25px;
+	margin-left: 170px;	
+}
+#P{
+	margin-top:-60px;
+	margin-left: 215px;
+}
+#RE{
+	margin-top:60px;
+	margin-left: 215px;
+}
+h3     {
+	font-family: Verdana, Geneva, sans-serif;
+	font-size: 14px;
+	color: #999;
+	margin-top: 10px;
+	margin-left: 100px;
+	margin-bottom: -30px;
+	display: block;
+	background-color: #000;
+	height: 24px;
+	width: 300px;
+	text-align: center;
+	padding-top: 6px;
+	-webkit-border-radius: 6px;
+	-moz-border-radius: 10px;
+}

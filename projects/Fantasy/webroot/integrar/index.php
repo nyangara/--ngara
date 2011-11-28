@@ -1,6 +1,6 @@
 <?php
-include("static/head.php");
-include("static/header.php");
+include("Static/head.php");
+include("Static/header.php");
 echo '
 
 	
@@ -10,7 +10,7 @@ echo '
           <li><a href="gestion_equipos.php">Equipos</a></li>
           <li><a href="gestion_estadios.php">Estadios</a></li>
           <li><a href="#">Mi Perfil</a></li>
-          <li><a href="#">Roster</a></li>
+          <li><a href="gestion_rosters.php">Roster</a></li>
           <li><a href="#">Ligas</a></li>
           <li><a href="#">Calendario</a></li>
           <li><a href="#">Resultados</a></li>
@@ -31,7 +31,7 @@ echo '
 		
 		
 echo '</div>';
-include("static/sideBar.php");
-include("static/footer.php");
+include("Static/sideBar.php");
+include("Static/footer.php");
 ?>
 

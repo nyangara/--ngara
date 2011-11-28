@@ -1,28 +1,29 @@
 <?php
 
-require_once("Clases/Jugador.php");
-require_once("Clases/Equipo.php");
-require_once("Clases/EquipoFachada.php");
-require_once("Clases/JugadorFachada.php");
+    require_once("Clases/fachadaInterface.php");
+    $instancia = fachadaInterface::singleton();
 
-$ID_Jugador = isset($_POST['idjugador'])?$_POST['idjugador']:-1;
+    $id = $_POST['id'];
+    unset($_POST);
 
-$FachadaJ = new JugadorFachada();
-$Jugador = $FachadaJ->getJugador($ID_Jugador);
-$Est = $FachadaJ->getAVGEst($Jugador); //Estadisticas de Jugador
+    $_POST['id']=$id;
+    $_POST['TIPO']='Jugador';
+    $Jugador = $instancia->obtener();
+    $Est = $instancia->consultarEstadisticas($Jugador); //Estadisticas de Jugador
+    unset ($_POST);
 
-include("static/head.php");
-include("static/header.php");
+    $_POST['id']=$Jugador->equipo;
+    $_POST['TIPO']='Equipo';
+    $Equipo = $instancia->obtener();
+
+
+    include("Static/head.php");
+    include("Static/header.php");
 
 ?>
 
 <link rel="stylesheet" href="assets/styles/style_Datos_J.css"  type="text/css" />
 
-<?php
-
-echo '
-
-	
         <ul id="navigation">
           <li><a href="index.php">Inicio</a></li>
           <li><a class="on" href="gestion_jugadores.php">Jugadores</a></li>
@@ -40,151 +41,125 @@ echo '
   </div>
 
 	   
-	<div id="content">
-		<div id="contenido_interno_datos">';
+    <div id="content">
+        <div id="contenido_interno_datos">
 
-echo'
+            <div id="box_info">
+                <form id="Alcance">
+                    <table width="550" border="0">
+                        <tr>
+                            <td>
+                                <table width="400" border="0">
+                                    <tr>
+                                        <td colspan="2" align="right">Nombre del Equipo:</td>
+                                        <td colspan="2" align="center"><?php echo $Equipo->nombre; ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Nombre:</td>
+                                        <td><?php echo $Jugador->nombres; ?></td>
+                                        <td>Apellido:</td>
+                                        <td><?php echo $Jugador->apellidos; ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Numero:</td>
+                                        <td><?php echo $Jugador->numero; ?></td>
+                                        <td>Precio:</td>
+                                        <td><?php echo $Jugador->precio; ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Posicion:</td>
+                                        <td><?php echo $Jugador->posicion; ?></td>
+                                        <td>Fecha de nacimiento:</td>
+                                        <td><?php echo $Jugador->fecha_nacimiento; ?></td>
+                                    </tr>
+                                </table>
 
-	<div id="box_info">
-		
-		
-		<form id="Alcance">
-			<div id="Foto">
-				<img src="assets/images/Fotos_Jugadores/generica.jpg" />
-			</div>
-			<div id="InfBas">
-			
-				<div>
-					<label for="nombreEquipo">Nombre Del Equipo: </label>
-					<input size="10" type="text" name="nombreEquipo" id="nombreEquipo" value="'.$FachadaJ->getNombreEquipo($Jugador).'"  readonly/>
-				</div>
-		
-				<div>
-					<label for="nombre">Nombre</label>
-					<input size="10" type="text" name="nombre" id="nombre" value="'.$Jugador->getnombres().'"  readonly/>
-					<label for="apellido">Apellido</label>
-					<input size="10" type="text" name="apellido" id="apellido" value="'.$Jugador->getapellidos().'"  readonly/>
-				</div>
-			
-				<div>
-					<label for="numero">Numero</label>
-					<input size="10" type="text" name="numero" id="numero" value="'.$Jugador->getNumero().'"  readonly/>
-					<label for="precio">Precio</label>
-					<input size="10" type="text" name="precio" id="precio" value="'.$Jugador->getPrecio().'"  readonly/>
-				</div>
-			
-				<div>
-				
-					<label for="posicion">Posicion</label>
-					<input size="10" type="text" name="posicion" id="posicion" value="'.$Jugador->getPosicion().'"  readonly/>
-			
-				</div>
-			
-				<label style="display:block; text-align:center" >Fecha de nacimiento:</label>
-				<div> 
-				
-					<input size="10" type="text" name="fecha_nac" id="fecha_nac" value="'.$Jugador->getfecha_nacimiento().'"  readonly/>
-				
-				</div>                      
-						  
-			</div>
-		
-				<div id="InfExt">
-		
-			';
-		
-			if($Jugador->getPosicion()=='P')
-			{
-			echo'
-				<div id="ExpL" >		
-			
-				<div>
-					<label for="el">Entradas Lanzadas</label>
-					<input size="8" type="text" name="el" id="el" value="'.$Est[0].'" readonly/>		
-					<label for="cl">Carreras Limpias</label>
-					<input size="8" type="text" name="cl" id="cl" value="'.$Est[1].'" readonly/>
-				</div>
+<?php
+                if($Jugador->posicion=='P'){
+                  echo '<table width="400" border="0">
+                            <tr>
+                                <td>Entradas Lanzadas</td>
+                                <td>'. (isset($Est['el']) ? $Est['el'] : 0) .'</td>
+                                <td>Carreras Limpias</td>
+                                <td>'. (isset($Est['cl']) ? $Est['cl'] : 0) .'</td>
+                            </tr>
+                            <tr>
+                                <td>Imparables</td>
+                                <td>'. (isset($Est['i']) ? $Est['i'] : 0) .'</td>
+                                <td>Bases por Bolas</td>
+                                <td>'. (isset($Est['bb']) ? $Est['bb'] : 0) .'</td>
+                            </tr>
+                            <tr>
+                                <td>Ponches</td>
+                                <td>'. (isset($Est['k']) ? $Est['k'] : 0) .'</td>
+                                <td>Juegos Ganados  </td>
+                                <td>'. (isset($Est['jg']) ? $Est['jg'] : 0) .'</td>
+                            </tr>
+                            <tr>
+                                <td>Errores</td>
+                                <td>'. (isset($Est['errores']) ? $Est['errores'] : 0) .'</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                            </tr>
+                        </table>';
+                } else  {
+                echo '<table width="400" border="0">
+                            <tr>
+                                <td>Carreras Anotadas</td>
+                                <td>'. (isset($Est['ca']) ? $Est['ca'] : 0) .'</td>
+                                <td>Total de Bases</td>
+                                <td>'. (isset($Est['tb']) ? $Est['tb'] : 0) .'</td>
+                            </tr>
+                            <tr>
+                                <td>Carreras Impulsadas</td>
+                                <td>'. (isset($Est['ci']) ? $Est['ci'] : 0) .'</td>
+                                <td>Bases por Bolas</td>
+                                <td>'. (isset($Est['bb']) ? $Est['bb'] : 0) .'</td>
+                            </tr>
+                            <tr>
+                                <td>Bases Robadas</td>
+                                <td>'. (isset($Est['br']) ? $Est['br'] : 0) .'</td>
+                                <td>Ponches</td>
+                                <td>'. (isset($Est['k']) ? $Est['k'] : 0) .'</td>
+                            </tr>
+                        </table>';                  
+                }
+?>
+                        
+                            </td>
+                            <td>
+                                <img src="<?php echo $Jugador->foto; ?>" width="132" height="180" />
+                            </td>
+                        </tr>
+                    </table>
+                </form>	
+                <div id="env" >
+                    <form action="gestion_jugadores.php">
+                            <input type="submit" value="Regresar"/>
+                    </form>
 
-				<div>
-					<label for="i">Imparables</label>
-					<input size="8" type="text" name="i" id="i" value="'.$Est[2].'" readonly/>		
-					<label for="bb">Bases por Bola</label>
-					<input size="8" type="text" name="bb" id="bb" value="'.$Est[3].'" readonly/>
-				</div>
+                    <form action="Listar_D_J.php" method="post">
+                            <input type="hidden" name="id" value="<?php echo $Jugador->id; ?>" />
+                            <input type="submit" name="Detalles" value="Ver Detalles"  />
 
-				<div>
-					<label for="k">Ponches</label>
-					<input size="8" type="text" name="k" id="k" value="'.$Est[4].'" readonly/>		
-					<label for="jg">Juegos Ganados</label>
-					<input size="8" type="text" name="jg" id="jg" value="'.$Est[5].'" readonly/>
-					<label for="e">Errores</label>
-					<input size="8" type="text" name="e" id="e" value="'.$Est[6].'" readonly/>						
-				</div>
-					
-			</div>';
-			
-		} else
-		{
-		echo '
-			<div id="ExpB">
+                    </form>
 
-				<div>
-					<label for="ca">Carreras Anotadas</label>
-					<input size="8" type="text" name="ca" id="ca" value="'.$Est[0].'" readonly/>		
-					<label for="tb">Total de Bases</label>
-					<input size="8" type="text" name="tb" id="tb" value="'.$Est[1].'" readonly/>
-				</div>	
+                    <form action="Modificar_J.php" method="post">
+                            <input type="hidden" name="id" value="<?php echo $Jugador->id; ?>" />
+                            <input type="submit" name="Modificar" value="Modificar"  />      
+                    </form>			
 
-				<div>
-					<label for="ci">Carreras Impulsadas</label>
-					<input size="8" type="text" name="ci" id="ci" value="'.$Est[2].'" readonly/>
-					<label for="bb">Bases por Bolas</label>
-					<input size="8" type="text" name="bb" id="bb" value="'.$Est[3].'" readonly/>
-				</div>
+                    <form action="Modificar_J.php" method="post">
+                            <input type="hidden" name="id" value="<?php echo $Jugador->id; ?>" />
+                            <input type="submit" name="Eliminar" value="Eliminar"  />      
+                    </form>			
+                </div>
+            </div>
+        </div>
+        
+<?php
 
-					<div>
-						<label for="br">Bases Robadas</label>
-						<input size="8" type="text" name="br" id="br" value="'.$Est[4].'" readonly/>
-						<label for="k">Ponches</label>
-						<input size="8" type="text" name="k" id="k" value="'.$Est[5].'" readonly/>
-						<label for="e">Errores</label>
-						<input size="8" type="text" name="e" id="e" value="'.$Est[6].'" readonly/>
-					</div>	
-				</div>
-			
-			
-			';
-		}
-		echo '
-		</div>
-	</form>	
-		<div id="env" >
-		
-			<form action="gestion_jugadores.php">
-				<input type="submit" value="Regresar"/>
-			</form>
-
-			<form action="Listar_D_J.php" method="post">
-				<input type="hidden" name="idjugador" id="idjugador" value="'.$Jugador->getId().'" />
-				<input type="submit" name="Detalles" value="Ver Detalles"  />
-				
-			</form>
-
-			<form action="Modificar_J.php" method="post">
-				<input type="hidden" name="idjugador" id="idjugador" value="'.$Jugador->getId().'" />
-				<input type="submit" name="Modificar" value="Modificar"  />      
-			</form>			
-		
-			<form action="Modificar_J.php" method="post">
-				<input type="hidden" name="idjugador" id="idjugador" value="'.$Jugador->getId().'" />
-				<input type="submit" name="Eliminar" value="Eliminar"  />      
-			</form>			
-		 
-		</div>
-	</div>';
-
-echo '</div>';
-include("static/sideBar.php");
-include("static/footer.php");	
+    include("Static/sideBar.php");
+    include("Static/footer.php");	
 
 ?>

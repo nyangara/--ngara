@@ -1,21 +1,18 @@
 <?php
 
-require_once("Clases/Jugador.php");
-require_once("Clases/Equipo.php");
-require_once("Clases/EquipoFachada.php");
-require_once("Clases/JugadorFachada.php");
+require_once("Clases/fachadaInterface.php");
+$instancia = fachadaInterface::singleton();
 
-require_once("Clases/EstadisticaBateo.php");
-require_once("Clases/EstadisticaPicheo.php");
-require_once("Clases/EstadisticaFachada.php");
+$id = $_POST['id'];
+unset($_POST);
 
 
 $ID_Jugador = isset($_POST['idjugador'])?$_POST['idjugador']:-1;
 $Fecha = isset($_POST['fecha'])?$_POST['fecha']:-1;
 
-$FachadaJ = new JugadorFachada();
+$FachadaJ = new JugadorFachade();
 $Jugador = $FachadaJ->getJugador($ID_Jugador);
-$FachadaE = new EstadisticaFachada();
+$FachadaE = new EstadisticaFachade();
 $Estadistica=$FachadaE->getEstadistica($Jugador,$Fecha);
 
 $est = $Estadistica->getArregloEstadisticas(); // de Fecha hasta el ultimo
@@ -43,8 +40,8 @@ if(isset($_POST['Eliminar'])){
 
 <?php
 
-include("static/head.php");
-include("static/header.php");
+include("Static/head.php");
+include("Static/header.php");
 
 
 
@@ -109,7 +106,7 @@ echo '
 	echo '</div>';
 		
 		
-include("static/sideBar.php");
-include("static/footer.php");
+include("Static/sideBar.php");
+include("Static/footer.php");
 
 ?>

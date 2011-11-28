@@ -1,16 +1,22 @@
 <?php
 
-require_once("Clases/Jugador.php");
-require_once("Clases/Equipo.php");
-require_once("Clases/EquipoFachada.php");
-require_once("Clases/JugadorFachada.php");
+require_once("Clases/fachadaInterface.php");
+$instancia = fachadaInterface::singleton();
 
-$ID_Jugador = isset($_POST['idjugador'])?$_POST['idjugador']:-1;
-$FachadaJ = new JugadorFachada();
-$Jugador = $FachadaJ->getJugador($ID_Jugador);
+$id = $_POST['id'];
+$posicion = $_POST['posicion'];
+unset($_POST);
 
-include("static/head.php");
-include("static/header.php");
+if($posicion=='P')
+    $_POST['TIPO']='Estadistica_Pitcheo';
+else
+    $_POST['TIPO']='Estadistica_Bateo';
+$_POST['jugador']=$id;
+$Estadisticas = $instancia->obtenerTodos();
+
+
+include("Static/head.php");
+include("Static/header.php");
 
 
 
@@ -39,48 +45,40 @@ echo '
 		<div id="contenido_interno_esta">';
 		
 		echo '<form id="form" action="Agregar_E.php" method="post">
-				<input type="hidden" name="idjugador" value="'.$ID_Jugador.'"/>
+				<input type="hidden" name="id" value="'.$id.'"/>
 		        <input type="submit" value="Agregar Estadistica" />
 		      </form>';
 		
 		echo '<h2>Estadisticas</h2>';
+                  for($i=0;$i<count($Estadisticas);$i++){
+                        $Tmp = $Estadisticas[$i];
+                                echo'
+                                          <div class="Fila">
+                                                <div class="datos">';
+                                         
+                                                       echo '<div> DATOS </div>';
+                                                        
+                                echo'		</div>
+
+                                                        <form action="Modificar_E.php" method="post">
+                                                                <input type="hidden" name="id" value="'.$Tmp->id.'"/>
+                                                                <input type="submit" name="Modificar" value="Modificar Estadistica" />										
+                                                        </form>
+
+                                                        <form action="Modificar_E.php" method="post">
+                                                                <input type="hidden" name="id" value="'.$Tmp->id.'"/>
+                                                                <input type="submit" name="Eliminar" value="Eliminar Estadistica" />																				
+                                                        </form>
 
 
-				  $iterador = $Jugador->getIteratorE();
-				  while($iterador->valid()) {
-					$Tmp = $iterador->current();
-					$Desc = $Tmp-> getArregloDescriptor();
-					$Estd = $Tmp-> getArregloEstadisticas();
-						echo'
-							  <div class="Fila">
-									<div class="datos">';
-										for($i=0;$i<8;$i++){
-											echo '<div>'.$Desc[$i].': '.$Estd[$i].'</div>';
-										}
-						echo'		</div>
-						
-									<form action="Modificar_E.php" method="post">
-										<input type="hidden" name="fecha"     value="'.$Tmp->getfecha().'"/>
-										<input type="hidden" name="idjugador" value="'.$ID_Jugador.'"/>
-										<input type="submit" name="Modificar" value="Modificar Estadistica" />										
-									</form>
-									
-									<form action="Modificar_E.php" method="post">
-										<input type="hidden" name="fecha"     value="'.$Tmp->getfecha().'"/>
-										<input type="hidden" name="idjugador" value="'.$ID_Jugador.'"/>
-										<input type="submit" name="Eliminar" value="Eliminar Estadistica" />																				
-									</form>
-						
-									
-							  </div>
-							';
-					$iterador->next();
-				  }
+                                          </div>
+                                        ';
+                  }
 				  
 		
 		
 echo '</div>';
-include("static/sideBar.php");
-include("static/footer.php");
+include("Static/sideBar.php");
+include("Static/footer.php");
 
 ?>

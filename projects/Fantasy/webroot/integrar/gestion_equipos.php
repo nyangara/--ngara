@@ -1,8 +1,10 @@
 <?php
 
-require_once("Clases/Jugador.php");
-require_once("Clases/Equipo.php");
-require_once("Clases/EquipoFachade.php");
+require_once("Clases/fachadaInterface.php");
+
+$instancia = fachadaInterface::singleton();
+$_POST['TIPO']='Equipo';
+$Equipos = $instancia->obtenerTodos();
 
 include("Static/head.php");
 include("Static/header.php");
@@ -36,23 +38,17 @@ echo '
 		      </form>';
 		
 		echo '<h2>Equipos</h2>';
-
-
-		$FachadaEquipo = new EquipoFachade;
-		$Equipos = $FachadaEquipo->getEquipos();
 		
-		$N = count($Equipos);
-		
-		for($i=0;$i<$N;$i++){
+		for($i=0;$i<count($Equipos);$i++){
 			echo'
 				<div class="alcanceEquipo">
 					<form class="Fila" action="Datos_Eq.php" method="post" >
-						<input type="hidden" name="idequipo" value="'.$Equipos[$i]->getId().'">
-						<input class="imagen" type="image" src="assets/images/Fotos_Equipos/generico.jpg" />
+						<input type="hidden" name="id" value="'.$Equipos[$i]->id.'">
+						<input class="imagen" type="image" src="'.$Equipos[$i]->logo.'" />
 						<div class="datos">
-							<div>Nombre: '.$Equipos[$i]->getnombre().'</div>
-							<div>Siglas: '.$Equipos[$i]->getsiglas().'</div>
-							<div>Fecha de Fundacion: '.$Equipos[$i]->getfecha_fundacion().'</div>
+							<div>Nombre: '.$Equipos[$i]->nombre.'</div>
+							<div>Siglas: '.$Equipos[$i]->siglas.'</div>
+							<div>Fecha de Fundacion: '.$Equipos[$i]->fecha_fundacion.'</div>
 						</div>
 					</form>
 				</div>';

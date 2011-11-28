@@ -1,21 +1,20 @@
 <?php
-require_once("Clases/Estadio.php");
-require_once("Clases/EstadioFachada.php");
+require_once("Clases/fachadaInterface.php");
+$instancia = fachadaInterface::singleton();
 
-$ID_Estadio = isset($_POST['idestadio'])?$_POST['idestadio']:-1;
-$FachadaE = new EstadioFachada();
-$Estadio = $FachadaE->getEstadio($ID_Estadio);
+$id = $_POST['id'];
+unset($_POST);
 
-include("static/head.php");
-include("static/header.php");
+$_POST['id']=$id;
+$_POST['TIPO']='Estadio';
+$Estadio = $instancia->obtener();
+
+include("Static/head.php");
+include("Static/header.php");
 
 ?>
 
 <link rel="stylesheet" href="assets/styles/style_Datos_Es.css"  type="text/css" />
-
-<?php
-
-echo '
 
 	
         <ul id="navigation">
@@ -34,88 +33,98 @@ echo '
   </div>
 
 	   
-	<div id="content">
-		<div id="contenido_interno_datos">';
+    <div id="content">
+        <div id="contenido_interno_datos">
+            <div id="box_info">
+                <form id="Alcance">
 
-echo'
+                    <table width="550" border="0">
+                        <tr>
+                            <td>
+                                <img src="<?php echo $Estadio->foto; ?>" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <table width="500" border="0" align="center">
+                                    <tr>
+                                        <td colspan="2">Nombre del estadio: </td>
+                                        <td colspan="2"><?php echo $Estadio->nombre; ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Ubicación: </td>
+                                        <td colspan="3"><?php echo $Estadio->ubicacion; ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Propietario: </td>
+                                        <td><?php echo $Estadio->propietario; ?></td>
+                                        <td>Fecha de Fundación: </td>
+                                        <td><?php echo $Estadio->fecha_fundacion; ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Left Field: </td>
+                                        <td><?php echo $Estadio->medida_left_field; ?></td>
+                                        <td>Center Field: </td>
+                                        <td><?php echo $Estadio->medida_center_field; ?></td>
+                                    </tr>
+                                        <tr>
+                                        <td>Right Field: </td>
+                                        <td><?php echo $Estadio->medida_right_field; ?></td>
+                                        <td>Tipo de Terreno: </td>
+                                        <td><?php echo $Estadio->tipo_terreno; ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Capacidad: </td>
+                                        <td><?php echo $Estadio->capacidad; ?></td>
+                                        <td colspan="2">&nbsp;</td>
+                                    </tr>
+                                    <tr>
 
-		<div id="box_info">
-		
-		
-            <form id="Alcance">
-                <div id="Foto">
-                	<img src="assets/images/Fotos_Estadios/generico.jpg" />
-                </div>
-                
-                <div id="InfBas">
-                    <div>
-                        <label for="nombre">Nombre del Estadio: </label>
-                        <input size="10" type="text" name="nombre" id="nombre" value="'.$Estadio->getnombre().'"  readonly/>
-                    </div>
-                    
-                    <div>                    
-                        <label for="ubicacion">Ubicacion: </label>
-                        <input size="50" type="text" name="ubicacion" id="ubicacion" value="'.$Estadio->getubicacion().'"  readonly/>
-                    </div>
-                    
-                    <div>
-                        <label for="propietario">Propietario: </label>
-                        <input size="10" type="text" name="propietario" id="propietario" value="'.$Estadio->getpropietario().'"  readonly/> 
-                        <label for="fecha_fundacion">Fecha de Fndacion: </label>
-                        <input size="10" type="text" name="fecha_fundacion" id="fecha_fundacion" value="'.$Estadio->getfecha_fundacion().'"  readonly/>                    
-                    
-                    </div>                                         
-                </div>
-                <div id="InfExt">
-                
-                    <div>
-                        <label for="mlf">Medida del Left Field: </label>
-                        <input size="10" type="text" name="mlf" id="mlf" value="'.$Estadio->getmedida_left_field().'"  readonly/>   
-					</div>
-					
-					<div>
-                        <label for="mcf">Medida del Center Field: </label>
-                        <input size="10" type="text" name="mcf" id="mcf" value="'.$Estadio->getmedida_center_field().'"  readonly/>                 
-                    </div>
-                    
-                    <div>
-                        <label for="mrf">Medida del Right Field: </label>
-                        <input size="10" type="text" name="mrf" id="mrf" value="'.$Estadio->getmedida_right_field().'"  readonly/>                 
-                        <label for="tt">Tipo de Terreno: </label>
-                        <input size="10" type="text" name="tt" id="tt" value="'.$Estadio->gettipo_terreno().'"  readonly/>                 
-                    </div>                                            
-                </div>
-            </form>	
-		</div>            
-		<div id="env" >
-		
-			<form action="gestion_estadio.php" method="post">
-				<input type="submit" value="Regresar"/>
-			</form>
-		
-			<form action="Listar_D_Es.php" method="post">
-				<input type="hidden" name="idjugador" id="idjugador" value="'.$Estadio->getId().'" />
-				<input type="submit" name="Detalles" value="Ver Detalles"  />        
-			</form>
-		
-			<form action="Modificar_Es.php" method="post">
-				<input type="hidden" name="idjugador" id="idjugador" value="'.$Estadio->getId().'" />
-				<input type="submit" name="Modificar" value="Modificar"  />      
-			</form>			
-		
-			<form action="Modificar_Es.php" method="post">
-				<input type="hidden" name="idjugador" id="idjugador" value="'.$Estadio->getId().'" />
-				<input type="submit" name="Eliminar" value="Eliminar"  />      
-			</form>			
-		
-		</div>
-		      
+                                        <td></br></td>
+
+                                    </tr>
+                                    <tr>
+                                        <td colspan="4">Descripción:</td>
+
+                                    </tr>
+                                    <tr>
+                                        <td colspan="4"><?php echo $Estadio->descripcion; ?></td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
 
 
-	';
+                </form>	
+            </div>    
 
-echo '</div>';
-include("static/sideBar.php");
-include("static/footer.php");	
+            <div id="env" >
+
+                <form action="gestion_estadios.php" method="post">
+                    <input type="submit" value="Regresar"/>
+                </form>
+
+                <form action="Listar_D_Es.php" method="post">
+                    <input type="hidden" name="id" value="<?php echo $Estadio->id; ?>" />
+                    <input type="submit" name="Detalles" value="Ver Detalles"  />        
+                </form>
+
+                <form action="Modificar_Es.php" method="post">
+                    <input type="hidden" name="id" value="<?php echo $Estadio->id; ?>" />
+                    <input type="submit" name="Modificar" value="Modificar"  />      
+                </form>			
+
+                <form action="Modificar_Es.php" method="post">
+                    <input type="hidden" name="id" value="<?php echo $Estadio->id; ?>" />
+                    <input type="submit" name="Eliminar" value="Eliminar"  />      
+                </form>			
+
+            </div>
+        </div>
+        
+<?php
+include("Static/sideBar.php");
+include("Static/footer.php");	
 
 ?>

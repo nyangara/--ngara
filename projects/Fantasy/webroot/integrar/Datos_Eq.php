@@ -1,27 +1,21 @@
 <?php
 
-require_once("Clases/Equipo.php");
-require_once("Clases/EquipoFachada.php");
-require_once("Clases/EstadioFachada.php");
+    require_once("Clases/fachadaInterface.php");
+    $instancia = fachadaInterface::singleton();
 
-$ID_Equipo = isset($_POST['idequipo'])?$_POST['idequipo']:-1;
+    $id = $_POST['id'];
+    unset($_POST);
 
-$FachadaE = new EquipoFachada();
-$FachadaEstadio = new EstadioFachada();
+    $_POST['id']=$id;
+    $_POST['TIPO']='Equipo';
+    $Equipo = $instancia->obtener();
 
-$Equipo = $FachadaE->getEquipo($ID_Equipo);
-
-include("static/head.php");
-include("static/header.php");
+    include("Static/head.php");
+    include("Static/header.php");
 
 ?>
 
 <link rel="stylesheet" href="assets/styles/style_Datos_Es.css"  type="text/css" />
-
-<?php
-
-echo '
-
 	
         <ul id="navigation">
           <li><a href="index.php">Inicio</a></li>
@@ -38,76 +32,68 @@ echo '
         </ul>
   </div>
 
-	   
-	<div id="content">
-		<div id="contenido_interno_datos">';
 
-echo'
-		<div id="box_info">
+    <div id="content">
+    <div id="contenido_interno_datos">
 
-		
+        <div id="box_info">
             <form id="Alcance">
-                <div id="Foto">
-                	<img src="assets/images/Fotos_Equipos/generico.jpg" />
-                </div>
-                
-                <div id="InfBas">
-                	
-                    <div>
-                        <label for="siglas">Siglas: </label>
-                        <input size="10" type="text" name="siglas" id="siglas" value="'.$Equipo->getSiglas().'"  readonly/>                    
-                    </div>
-                
-                    <div>
-                        <label for="nombre">Nombre del Equipo: </label>
-                        <input size="10" type="text" name="nombre" id="nombre" value="'.$Equipo->getnombre().'"  readonly/>
-                    </div>
-                    
+                <table width="550" border="0">
+                    <tr>
+                        <td>
+                            <img src="<?php echo $Equipo->logo; ?>" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <table width="400" border="0" align="center">
+                                <tr>
+                                    <td>Nombre del Equipo </td>
+                                    <td><?php echo $Equipo->nombre; ?></td>
+                                    <td>Siglas </td>
+                                    <td><?php echo $Equipo->siglas; ?></td>
+                                </tr>
+                                <tr>
+                                    <td>Fecha de fundación </td>
+                                    <td><?php echo $Equipo->fecha_fundacion; ?></td>
+                                    <td>Casa</td>
+                                    <td><?php echo $Equipo->home; ?></td>
+                                </tr>
+                                <tr>
+                                    <td>Precio </td>
+                                    <td><?php echo $Equipo->precio; ?></td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+        
+        <div id="env" >
+            <form action="gestion_equipos.php" method="post">
+                <input type="submit" value="Regresar"/>
+            </form>
+            <form action="Listar_D_Eq.php" method="post">
+                <input type="hidden" name="id" value="<?php echo $Equipo->id; ?>" />
+                <input type="submit" name="Detalles" value="Ver Detalles"  />        
+            </form>
+            <form action="Modificar_Eq.php" method="post">
+                <input type="hidden" name="id" value="<?php echo $Equipo->id; ?>" />
+                <input type="submit" name="Modificar" value="Modificar"  />      
+            </form>			
+            <form action="Modificar_Eq.php" method="post">
+                <input type="hidden" name="id" value="<?php echo $Equipo->id; ?>" />
+                <input type="submit" name="Eliminar" value="Eliminar"  />      
+            </form>
+        </div>
 
-                    
-                    <div>
-                        <label for="fecha_fundacion">Fecha de Fundacion: </label>
-                        <input size="10" type="text" name="fecha_fundacion" id="fecha_fundacion" value="'.$Equipo->getFecha_fundacion().'"  readonly/>                    
-                    </div>     
-                    
-                    <div>
-                        <label for="home">Casa: </label>
-                        <input size="10" type="text" name="home" id="home" value="'.$FachadaEstadio->getNombre($Equipo->gethome()).'"  readonly/>                    
-                    </div>                                                           
-                </div>
-                <div id="InfExt">
-                
-                                       
-                </div>
-            </form>	
-      </div>      
-		<div id="env" >
-		
-			<form action="gestion_equipos.php" method="post">
-				<input type="submit" value="Regresar"/>
-			</form>
-		
-			<form action="Listar_D_Eq.php" method="post">
-				<input type="hidden" name="idjugador" id="idjugador" value="'.$Equipo->getId().'" />
-				<input type="submit" name="Detalles" value="Ver Detalles"  />        
-			</form>
-		
-			<form action="Modificar_Eq.php" method="post">
-				<input type="hidden" name="idjugador" id="idjugador" value="'.$Equipo->getId().'" />
-				<input type="submit" name="Modificar" value="Modificar"  />      
-			</form>			
-		
-			<form action="Modificar_Eq.php" method="post">
-				<input type="hidden" name="idjugador" id="idjugador" value="'.$Equipo->getId().'" />
-				<input type="submit" name="Eliminar" value="Eliminar"  />      
-			</form>			
-		
-		</div>
-		      
-	';
-
-echo '</div>';
-include("static/sideBar.php");
-include("static/footer.php");	
+    </div>
+        
+<?
+    include("Static/sideBar.php");
+    include("Static/footer.php");	
 
 ?>

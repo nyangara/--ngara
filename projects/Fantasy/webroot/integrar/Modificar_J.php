@@ -1,53 +1,90 @@
 <?php
 
-require_once("Clases/Jugador.php");
-require_once("Clases/Equipo.php");
-require_once("Clases/EquipoFachada.php");
-require_once("Clases/JugadorFachada.php");
-
-$ID_Jugador = isset($_POST['idjugador'])?$_POST['idjugador']:-1;
-
-$FachadaJ = new JugadorFachada();
-$Jugador = $FachadaJ->getJugador($ID_Jugador);
-$FachadaE = new EquipoFachada();
-
-// En caso de que modifique
+require_once("Clases/fachadaInterface.php");
+$instancia = fachadaInterface::singleton();
 
 if(isset($_POST['Aplicar'])){
 	
+    $fecha = $_POST['anio'].'-'.$_POST['mes'].'-'.$_POST['dia'];
+    $_POST['fecha_nacimiento']=$fecha;
+    unset($_POST['anio']);
+    unset($_POST['mes']);
+    unset($_POST['dia']);
+    unset($_POST['Aplicar']);
 
-	$fecha = $_POST['anio'].'-'.$_POST['mes'].'-'.$_POST['dia'];
-	
-	$Jugador->setequipo($FachadaE->getidEquipo($_POST['nombreEquipo']));
-	$Jugador->setnombres($_POST['nombre']);
-	$Jugador->setapellidos($_POST['apellido']);
-	$Jugador->setNumero($_POST['numero']);
-	$Jugador->setPosicion($_POST['posicion']);
-	$Jugador->setfecha_nacimiento($fecha);
-	$Jugador->setPrecio($_POST['precio']);
-	
-	$FachadaJ->updateJugador($Jugador);
-	
-	header('Location: gestion_jugadores.php'); 
+    $instancia->actualizar();
+
+    header('Location: gestion_jugadores.php'); 
 	
 }
 
 //En caso de que se elimine
 if(isset($_POST['Eliminar'])){
-	$FachadaJ->deleteJugador($Jugador);
-	header('Location: gestion_jugadores.php'); 
+    $_POST['TIPO']='Jugador';
+    unset($_POST['Eliminar']);
+    $instancia->eliminar();
+    header('Location: gestion_jugadores.php'); 
 }
+
+$id = $_POST['id'];
+unset($_POST);
+
+$_POST['TIPO']='Equipo';
+$Equipos = $instancia->obtenerTodos();
+    
+unset($_POST);
+$_POST['TIPO']='Jugador';
+$_POST['id']=$id;
+$Jugador = $instancia->obtener();
 
 ?>
 
 <?php
 
-include("static/head.php");
-include("static/header.php");
+//Esta Area es para Calcular todas las Selecciones del Formulario
+date_default_timezone_set('America/Caracas');
+$Eq = '<select name="equipo">';
+foreach($Equipos as $Equipo)
+    if( $Jugador->equipo == $Equipo->id)
+            $Eq .= "<option value=".$Equipo->id." selected>".$Equipo->nombre."</option>";
+    else
+            $Eq .= "<option value=".$Equipo->id.">".$Equipo->nombre."</option>";
+$Eq .= '</select>';
+    
+$fecha = $Jugador->fecha_nacimiento;
+$Aux = explode("-", $fecha); //Separa la fecha en Aï¿½o, Mes  y dia
+$d = '<select name="dia">';
+for ($i = 1 ; $i<=31 ; $i++)
+    if($Aux[2]==$i)
+        $d .= "<option value=".$i." selected>".$i."</option>";
+    else
+        $d .= "<option value=".$i.">".$i."</option>";
+$d .= '</select>';
 
-echo '<link rel="stylesheet" href="assets/styles/style_Modificar_J.css"  type="text/css" />';
+$mes = array("Enero", "Febrero", "Marzo", "Abril", "Mayo", "Julio", "Junio", "Agosto", "Septiembre","Octubre", "Noviembre", "Diciembre");
+$m = '<select name="mes">';
+for ($i = 0 ; $i < 12 ; $i++)
+    if($Aux[1]==$i)
+        $m .= "<option value=".$i." selected>".$mes[$i]."</option>";
+    else
+        $m .= "<option value=".$i.">".$mes[$i]."</option>";
+$m .= '</select>';
+			
+$a = '<select name="anio">';
+for ($i = 1960 ; $i<= date('Y') ; $i++)
+    if($Aux[0]==$i)
+        $a .= "<option value=".$i." selected>".$i."</option>";
+    else
+        $a .= "<option value=".$i.">".$i."</option>";
+$a .= '</select>';    
 
-echo '
+
+include("Static/head.php");
+include("Static/header.php");
+?>
+
+<link rel="stylesheet" href="assets/styles/style_Modificar_J.css"  type="text/css" />
+
 
 	
         <ul id="navigation">
@@ -65,110 +102,68 @@ echo '
         </ul>
   </div>
 
-	   
-	<div id="content">
-		<div id="contenido_interno">';
+    <div id="content">
+		
+        <div id="contenido_interno">
+            <div id="box_info">
+                <form id="Alcance" action="Modificar_J.php" method="post">
 
-echo'<div id="box_info">
-	<form id="Alcance" action="Modificar_J.php" method="post">
-		<div id="Foto">
-			<img src="assets/images/Fotos_Jugadores/generica.jpg" />
-		</div>
-		<div id="InfBas">
-		
-		
-						
-			<div>
-				<label for="nombreEquipo">Nombre Del Equipo: </label>
-				<select name="nombreEquipo"> ';
-					$NE = $FachadaE->getTagsEquipo(); //Nombres Equipos
-					$N = count($NE);
-					$EA = $FachadaJ->getNombreEquipo($Jugador); //Equipo Actual
-					for ($i = 0 ; $i<$N ; $i++)
-						if( $EA == $NE[$i])
-							echo "<option value=".$NE[$i]." selected>".$NE[$i]."</option>";
-						else
-							echo "<option value=".$NE[$i].">".$NE[$i]."</option>";
-				echo'
-				</select>
-				
-			</div>
-		
-		    <div>
-				<label for="nombre">Nombre</label>
-				<input size="10" type="text" name="nombre" id="nombre" value="'.$Jugador->getnombres().'" />
-				<label for="apellido">Apellido</label>
-				<input size="10" type="text" name="apellido" id="apellido" value="'.$Jugador->getapellidos().'"  />
-			</div>
-			
-			<div>
-				<label for="numero">Numero</label>
-				<input size="10" type="text" name="numero" id="numero" value="'.$Jugador->getNumero().'"  />
-				<label for="posicion">Posicion</label>
-				<input size="10" type="text" name="posicion" id="posicion" value="'.$Jugador->getPosicion().'"  />
-			</div>
+                    <table width="550" border="0">
+                        <tr>
+                            <td>
+                                <table width="400" border="0">
+                                    <tr>
+                                        <td colspan="3">Nombre del Equipo:</td>
+                                        <td colspan="3"><?php echo $Eq; ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Nombre:</td>
+                                        <td colspan="2">
+                                            <input size="10" name="nombres" type="text" value="<?php echo $Jugador->nombres; ?>" />
+                                        </td>
+                                        <td>Apellido:</td>
+                                        <td colspan="2">
+                                            <input size="10" name="apellidos" type="text" value="<?php echo $Jugador->apellidos; ?>" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>NÃºmero:</td>
+                                        <td colspan="2">
+                                            <input size="10" name="numero" type="text" value="<?php echo $Jugador->numero; ?>" />
+                                        </td>
+                                        <td>PosiciÃ³n:</td>
+                                        <td colspan="2">
+                                            <input size="10" name="posicion" type="text" value="<?php echo $Jugador->posicion; ?>" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="6" align="center">Fecha de Nacimiento:</td>
+                                    </tr>
+                                    <tr>
+                                        <td>DÃ­a:</td>
+                                        <td><?php echo $d; ?></td>
+                                        <td>Mes:</td>
+                                        <td><?php echo $m; ?></td>
+                                        <td>AÃ±o:</td>
+                                        <td><?php echo $a; ?></td>
+                                    </tr>
+                                </table>
+                            <td>
+                                <img src="<?php echo $Jugador->foto; ?>" width="132" height="180"  />
+                            </td>
+                        </tr>
+                    </table>
+                    
+                    <input type="hidden" name="id" value="<?php echo $Jugador->id; ?>" />
+                    <input type="hidden" name="TIPO" value="Jugador" />
+                    <input type="submit" name="Aplicar" value="Aplicar"  />
+                </form>
 
-			
-			<label style="display:block; text-align:center" >Fecha de nacimiento:</label>
-			<div > 
-            
-				<label for="dia">Día: </label>
-					<select name="dia">';
-						
-						$fecha = $Jugador->getfecha_nacimiento();
-						$Aux = explode("-", $fecha); //Separa la fecha en Año, Mes  y dia
-						
-						for ($i = 1 ; $i<=31 ; $i++)
-							if($Aux[2]==$i)
-								echo "<option value=".$i." selected>".$i."</option>";
-							else
-								echo "<option value=".$i.">".$i."</option>";
-				echo '
-					</select>
-			
-				<label for="mes">Mes: </label>
-				<select name="mes">
-				';
-		
-					$mes = array("Enero", "Febrero", "Marzo", "Abril", "Mayo", "Julio", "Junio", "Agosto", "Septiembre","Octubre", "Noviembre", "Diciembre");
-					
-					for ($i = 0 ; $i < 12 ; $i++)
-						if($Aux[1]==$i)
-							echo "<option value=".$i." selected>".$mes[$i]."</option>";
-						else
-							echo "<option value=".$i.">".$mes[$i]."</option>";
-			
-				echo '
-				</select>
-		
-				<label for="anio">Año: </label>
-		
-				<select name="anio">
-				';
-			           
-					for ($i = 1960 ; $i<=date('Y') ; $i++)
-						if($Aux[0]==$i)
-							echo "<option value=".$i." selected>".$i."</option>";
-						else
-							echo "<option value=".$i.">".$i."</option>";
-				
-				
-				echo '
-				</select>
-			</div>                   
-			
-		</div>
-		
-		<div id="env" >
-		
-			<input type="hidden" name="idjugador" id="idjugador" value="'.$Jugador->getId().'" />
-			<input type="submit" name="Aplicar" value="Aplicar"  />
-		 
-		</div>
-	</form></div>';
+            </div>
 
-echo '</div>';
-include("static/sideBar.php");
-include("static/footer.php");	
-
+        </div>
+        
+<?php
+include("Static/sideBar.php");
+include("Static/footer.php");	
 ?>

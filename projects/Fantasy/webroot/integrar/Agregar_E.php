@@ -1,51 +1,45 @@
 <?php
 
-require_once("Clases/Jugador.php");
-require_once("Clases/Equipo.php");
-require_once("Clases/EquipoFachada.php");
-require_once("Clases/JugadorFachada.php");
-
-require_once("Clases/EstadisticaBateo.php");
-require_once("Clases/EstadisticaPicheo.php");
-require_once("Clases/EstadisticaFachada.php");
-
-
-$ID_Jugador = isset($_POST['idjugador'])?$_POST['idjugador']:-1;
-$FachadaJ = new JugadorFachada();
-$Jugador = $FachadaJ->getJugador($ID_Jugador);
+require_once("Clases/fachadaInterface.php");
+$instancia = fachadaInterface::singleton();
 
 // En caso de que se valla a agregar
 if(isset($_POST['Aplicar'])){
 
-        $fecha = $_POST['anio'].'-'.$_POST['mes'].'-'.$_POST['dia'];
-
-        if($Jugador->getPosicion()<>'P')
-                $Estadistica = new Estadistica_Bateo($_POST['ca'],$_POST['tb'],$_POST['ci'],$_POST['bb'],$_POST['br'],$_POST['k'],$_POST['e'],$fecha,$ID_Jugador);
-        else
-                $Estadistica = new Estadistica_Pitcheo($_POST['el'],$_POST['cl'],$_POST['i'],$_POST['bb'],$_POST['k'],$_POST['jg'],$_POST['e'],$fecha,$ID_Jugador);
-
-        $FachadaE = new EstadisticaFachada();
-
-        $FachadaE->addEstadistica($Estadistica);
-
-        header('Location: gestion_jugadores.php');
+	$fecha = $_POST['anio'].'-'.$_POST['mes'].'-'.$_POST['dia'];
+	
+	if($Jugador->getPosicion()<>'P')
+		$Estadistica = new Estadistica_Bateo($_POST['ca'],$_POST['tb'],$_POST['ci'],$_POST['bb'],$_POST['br'],$_POST['k'],$_POST['e'],$fecha,$ID_Jugador);
+	else
+		$Estadistica = new Estadistica_Pitcheo($_POST['el'],$_POST['cl'],$_POST['i'],$_POST['bb'],$_POST['k'],$_POST['jg'],$_POST['e'],$fecha,$ID_Jugador);
+	
+	$FachadaE = new EstadisticaFachade();
+	
+	$FachadaE->addEstadistica($Estadistica);
+	
+	header('Location: gestion_jugadores.php'); 
 }
 
+$id = $_POST['id'];
+unset($_POST);
+
+$_POST['jugador']=$id;
+$instancia->agregar();
 
 ?>
 
 <?php
 
-include("static/head.php");
-include("static/header.php");
+include("Static/head.php");
+include("Static/header.php");
 
 
 
-echo '<link rel="stylesheet" href="assets/styles/style_Listar_D_J.css"  type="text/css" />';
+echo '<link rel="stylesheet" href="assets/styles/style_Listar_D_J.css"  type="text/css" />'; 
 
 echo '
 
-
+	
         <ul id="navigation">
           <li><a href="index.php">Inicio</a></li>
           <li><a class="on" href="gestion_jugadores.php">Jugadores</a></li>
@@ -61,159 +55,163 @@ echo '
         </ul>
   </div>
 
+	   
+	<div id="content">
+		<div id="contenido_interno">';
+		
+		if($Jugador->getPosicion()<>'P'){ //bateador
+		
+		echo '
+		
+			<div id="box_info">
+			
+			<form  action="Agregar_E.php" method="post">
+				<input type="hidden" name="idjugador" value="'.$ID_Jugador.'"/>
 
-        <div id="content">
-                <div id="contenido_interno">';
+				<label for="fecha">Fecha del Juego </label>
 
-                if($Jugador->getPosicion()<>'P'){ //bateador
+				<div id="fecha" > 
 
-                echo '
+					<label for="dia">D&iacutea: </label>
+					<select name="dia">';
+						for ($i = 1 ; $i<=31 ; $i++)
+							echo "<option value=".$i.">".$i."</option>";
+					
+				echo'
+					</select>
+				
+					<label for="mes">Mes: </label>
+					<select name="mes">
+					';
+			
+						$mes = array("Enero", "Febrero", "Marzo", "Abril", "Mayo", "Julio", "Junio", "Agosto", "Septiembre","Octubre", "Noviembre", "Diciembre");
+						
+						for ($i = 0 ; $i < 12 ; $i++)
+							echo "<option value=".$i.">".$mes[$i]."</option>";
+				
+				echo '
+					</select>
+			
+					<label for="anio">A&ntildeo: </label>
+			
+					<select name="anio">
+					';
+						   
+						for ($i = 1960 ; $i<=date('Y') ; $i++)
+							echo "<option value=".$i.">".$i."</option>";
+					
+					
+					echo '
+					</select>
+				</div>    
+				
+	
+				<label for="ca">Carreras Anotadas</label>
+				<input size="10" type="text" name="ca" value="" />
+				
+				<label for="tb">Total de Bases</label>
+				<input size="10" type="text" name="tb" value="" />
 
-                        <div id="box_info">
+				<label for="ci">Carreras impulsadas</label>
+				<input size="10" type="text" name="ci" value="" />
 
-                        <form  action="Agregar_E.php" method="post">
-                                <input type="hidden" name="idjugador" value="'.$ID_Jugador.'"/>
+				<label for="bb">Bases por Bola</label>
+				<input size="10" type="text" name="bb" value="" />
 
-                                <label for="fecha">Fecha del Juego </label>
+				<label for="br">Bases Robadas</label>
+				<input size="10" type="text" name="br" value="" />
 
-                                <div id="fecha" >
+				<label for="k">Ponches</label>
+				<input size="10" type="text" name="k" value="" />
 
-                                        <label for="dia">D&iacutea: </label>
-                                        <select name="dia">';
-                                                for ($i = 1 ; $i<=31 ; $i++)
-                                                        echo "<option value=".$i.">".$i."</option>";
+				<label for="e">Errores</label>
+				<input size="10" type="text" name="e" value="" />
 
-                                echo'
-                                        </select>
+		        <input type="submit" name="Aplicar" value="Agregar A Estadistica" />
+		      </form>
+			  
+			</div>';
+		
+		}
+		else{ //picheo
+		
+		echo '
+		
+		
+			<div id="box_info">
+		
+				<form  action="Agregar_E.php" method="post">
+				<input type="hidden" name="idjugador" value="'.$ID_Jugador.'"/>
 
-                                        <label for="mes">Mes: </label>
-                                        <select name="mes">
-                                        ';
+				<label for="fecha">Fecha del Juego </label>
 
-                                                $mes = array("Enero", "Febrero", "Marzo", "Abril", "Mayo", "Julio", "Junio", "Agosto", "Septiembre","Octubre", "Noviembre", "Diciembre");
+				<div id="fecha" > 
 
-                                                for ($i = 0 ; $i < 12 ; $i++)
-                                                        echo "<option value=".$i.">".$mes[$i]."</option>";
+					<label for="dia">D&iacutea: </label>
+					<select name="dia">';
+						for ($i = 1 ; $i<=31 ; $i++)
+							echo "<option value=".$i.">".$i."</option>";
+					
+				echo'
+					</select>
+				
+					<label for="mes">Mes: </label>
+					<select name="mes">
+					';
+			
+						$mes = array("Enero", "Febrero", "Marzo", "Abril", "Mayo", "Julio", "Junio", "Agosto", "Septiembre","Octubre", "Noviembre", "Diciembre");
+						
+						for ($i = 0 ; $i < 12 ; $i++)
+							echo "<option value=".$i.">".$mes[$i]."</option>";
+				
+				echo '
+					</select>
+			
+					<label for="anio">A&ntildeo: </label>
+			
+					<select name="anio">
+					';
+						   
+						for ($i = 1960 ; $i<=date('Y') ; $i++)
+							echo "<option value=".$i.">".$i."</option>";
+					
+					
+					echo '
+					</select>
+				</div>  			
+	
+				<label for="el">Entradas Lanzadas</label>
+				<input size="10" type="text" name="el" value="" />
+				
+				<label for="cl">Carreras Limpias</label>
+				<input size="10" type="text" name="cl" value="" />
 
-                                echo '
-                                        </select>
+				<label for="i">Imparables</label>
+				<input size="10" type="text" name="i" value="" />
 
-                                        <label for="anio">A&ntildeo: </label>
+				<label for="bb">Bases por Bola</label>
+				<input size="10" type="text" name="bb" value="" />
 
-                                        <select name="anio">
-                                        ';
+				<label for="k">Ponches</label>
+				<input size="10" type="text" name="k" value="" />
 
-                                                for ($i = 1960 ; $i<=date('Y') ; $i++)
-                                                        echo "<option value=".$i.">".$i."</option>";
+				<label for="jg">Juegos Ganados</label>
+				<input size="10" type="text" name="jg" value="" />
 
+				<label for="e">Errores</label>
+				<input size="10" type="text" name="e" value="" />
 
-                                        echo '
-                                        </select>
-                                </div>
+		        <input type="submit" name="Aplicar" value="Agregar A Estadistica" />
+		      </form>
+			  
+			</div>';
+		
+		}
+		
+		
+		
+echo '</div>';
+include("Static/sideBar.php");
+include("Static/footer.php");
 
-
-                                <label for="ca">Carreras Anotadas</label>
-                                <input size="10" type="text" name="ca" value="" />
-
-                                <label for="tb">Total de Bases</label>
-                                <input size="10" type="text" name="tb" value="" />
-
-                                <label for="ci">Carreras impulsadas</label>
-                                <input size="10" type="text" name="ci" value="" />
-
-                                <label for="bb">Bases por Bola</label>
-                                <input size="10" type="text" name="bb" value="" />
-
-                                <label for="br">Bases Robadas</label>
-                                <input size="10" type="text" name="br" value="" />
-
-                                <label for="k">Ponches</label>
-                                <input size="10" type="text" name="k" value="" />
-
-                                <label for="e">Errores</label>
-                                <input size="10" type="text" name="e" value="" />
-
-                        <input type="submit" name="Aplicar" value="Agregar A Estadistica" />
-                      </form>
-
-                        </div>';
-
-                }
-                else{ //picheo
-
-                echo '
-
-
-                        <div id="box_info">
-
-                                <form  action="Agregar_E.php" method="post">
-                                <input type="hidden" name="idjugador" value="'.$ID_Jugador.'"/>
-
-                                <label for="fecha">Fecha del Juego </label>
-
-                                <div id="fecha" >
-
-                                        <label for="dia">D&iacutea: </label>
-                                        <select name="dia">';
-                                                for ($i = 1 ; $i<=31 ; $i++)
-                                                        echo "<option value=".$i.">".$i."</option>";
-
-                                echo'
-                                        </select>
-
-                                        <label for="mes">Mes: </label>
-                                        <select name="mes">
-                                        ';
-
-                                                $mes = array("Enero", "Febrero", "Marzo", "Abril", "Mayo", "Julio", "Junio", "Agosto", "Septiembre","Octubre", "Noviembre", "Diciembre");
-
-                                                for ($i = 0 ; $i < 12 ; $i++)
-                                                        echo "<option value=".$i.">".$mes[$i]."</option>";
-
-                                echo '
-                                        </select>
-
-                                        <label for="anio">A&ntildeo: </label>
-
-                                        <select name="anio">
-                                        ';
-
-                                                for ($i = 1960 ; $i<=date('Y') ; $i++)
-                                                        echo "<option value=".$i.">".$i."</option>";
-
-
-                                        echo '
-                                        </select>
-                                </div>
-
-                                <label for="el">Entradas Lanzadas</label>
-                                <input size="10" type="text" name="el" value="" />
-
-                                <label for="cl">Carreras Limpias</label>
-                                <input size="10" type="text" name="cl" value="" />
-
-                                <label for="i">Imparables</label>
-                                <input size="10" type="text" name="i" value="" />
-
-                                <label for="bb">Bases por Bola</label>
-                                <input size="10" type="text" name="bb" value="" />
-
-                                <label for="k">Ponches</label>
-                                <input size="10" type="text" name="k" value="" />
-
-                                <label for="jg">Juegos Ganados</label>
-                                <input size="10" type="text" name="jg" value="" />
-
-                                <label for="e">Errores</label>
-                                <input size="10" type="text" name="e" value="" />
-
-                        <input type="submit" name="Aplicar" value="Agregar A Estadistica" />
-                      </form>
-
-                        </div>';
-
-                }
-        echo '</div>';
-        include("static/sideBar.php");
-        include("static/footer.php");
 ?>

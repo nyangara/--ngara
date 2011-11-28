@@ -1,11 +1,13 @@
 <?php
 
-require_once("Clases/Jugador.php");
-require_once("Clases/Equipo.php");
-require_once("Clases/EquipoFachada.php");
+require_once("Clases/fachadaInterface.php");
 
-include("static/head.php");
-include("static/header.php");
+$instancia = fachadaInterface::singleton();
+$_POST['TIPO']='Jugador';
+$Jugadores = $instancia->obtenerTodos();
+
+include("Static/head.php");
+include("Static/header.php");
 
 echo '<link rel="stylesheet" href="assets/styles/style_Ljugadores.css"  type="text/css" />'; 
 
@@ -37,44 +39,30 @@ echo '
 		
 		echo '<h2>Jugadores</h2>';
 
-
-		$FachadaEquipos = new EquipoFachada;
-		$equipos = $FachadaEquipos->getAllequipo();
-
-		for($i=0;$i<$equipos->count();$i++){
-			$Tmp = $equipos->offsetGet($i);
+		for($i=0;$i<count($Jugadores);$i++){
+			$Tmp = $Jugadores[$i];
 			echo'
 				<div class="alcanceEquipoJ">
-				';
-				  $iterador = $Tmp->getIteratorJ();
-				  while($iterador->valid()) {
-					$TmpJ = $iterador->current();
-						echo'
-						
-							<center>
-							  <div id="box_jugador">
-							
-								<form class="Fila" action="Datos_J.php" method="post" >
-									<input type="hidden" name="idjugador" value="'.$TmpJ->getId().'">
-									<input class="imagen" type="image" src="assets/images/Fotos_Jugadores/generica.jpg" />
-									<div class="datos">
-										<div>Nombre: '.$TmpJ->getnombres().' '.$TmpJ->getapellidos().'</div>
-										<div>Numero: '.$TmpJ->getNumero().'</div>
-										<div>Posicion: '.$TmpJ->getPosicion().'</div>
-										<div>Precio: '.$TmpJ->getPrecio().'</div>
-									</div>
-							  </form>
-							  </div>
-							<center>
-							';
-					$iterador->next();
-				  }
-				  
-			echo '</div>';
+					<center>
+					  <div id="box_jugador">
+					
+						<form class="Fila" action="Datos_J.php" method="post" >
+							<input type="hidden" name="id" value="'.$Tmp->id.'">
+							<input class="imagen" type="image" src="'.$Tmp->foto.'" />
+							<div class="datos">
+								<div>Nombre: '.$Tmp->nombres.' '.$Tmp->apellidos.'</div>
+								<div>Numero: '.$Tmp->numero.'</div>
+								<div>Posicion: '.$Tmp->posicion.'</div>
+								<div>Precio: '.$Tmp->precio.'</div>
+							</div>
+					  </form>
+					  </div>
+					<center>
+				</div>';
 		}
 		
 echo '</div>';
-include("static/sideBar.php");
-include("static/footer.php");
+include("Static/sideBar.php");
+include("Static/footer.php");
 
 ?>

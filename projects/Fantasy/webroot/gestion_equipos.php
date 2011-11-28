@@ -1,8 +1,7 @@
 <?php
         require_once 'include/config.php';
-        require_once 'include/dbconn-user.php';
-        require_once 'include/model/entity/Equipo.php';
-        require_once 'include/model/facade/FacadeEquipo.php';
+        require_once 'include/dbconn/user.php';
+        require_once 'model/Equipo.php';
         require      'include/pre.php';
 ?>
 <div id="contenido_interno">
@@ -11,7 +10,7 @@
                         <input type="submit" value="Agregar equipo"/>
                 </form>
                 <h2>Equipos</h2>
-<?php foreach (FacadeEquipo::retrieveAll() as $e) { ?>
+<?php foreach (Equipo::retrieveAll() as $e) { ?>
                 <div class="alcanceEquipo">
                         <form class="Fila" action="Datos_Eq.php" method="post" >
                                 <input type="hidden" name="idequipo" value="<?php echo $e->get("id"); ?>"/>

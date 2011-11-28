@@ -1,33 +1,9 @@
-INSERT INTO "Fantasy"."Jugador" ("nombre", "fecha de nacimiento", "lugar de procedencia")
+INSERT INTO "Fantasy"."Jugador" ("nombre completo", "fecha de nacimiento", "lugar de procedencia")
 VALUES
         ('Fabiana Reggio'  , '1990/01/02', 'San Antonio, Venezuela'),
         ('Krisvely Varela' , '1990/03/04', 'Caracas, Venezuela'    ),
         ('Miguel Ambrosio' , '1988/05/06', 'Caracas, Venezuela'    ),
         ('Ricardo Monascal', '1846/08/12', 'San Antonio, Venezuela');
-
-
-
-INSERT INTO "Fantasy"."Peso" ("jugador", "peso", "fecha")
-SELECT
-        "Jugador"."id",
-        "Datos"."peso",
-        to_date("Datos"."fecha", 'YYYY/MM/DD')
-FROM
-        "Fantasy"."Jugador",
-        (VALUES
-                ('Fabiana Reggio'  ,  50.3, '2011/10/01'),
-                ('Fabiana Reggio'  ,  51.0, '2011/10/02'),
-                ('Fabiana Reggio'  ,  50.5, '2011/10/03'),
-                ('Fabiana Reggio'  ,  49.2, '2011/10/04'),
-                ('Fabiana Reggio'  ,  50.8, '2011/10/05'),
-                ('Ricardo Monascal',  80.8, '2011/05/01'),
-                ('Ricardo Monascal',  87.1, '2011/06/01'),
-                ('Ricardo Monascal',  96.3, '2011/07/01'),
-                ('Ricardo Monascal', 102.7, '2011/08/01'),
-                ('Ricardo Monascal', 107.4, '2011/09/01'),
-                ('Ricardo Monascal', 119.6, '2011/10/01')
-        ) as "Datos" ("nombre", "peso", "fecha")
-WHERE "Datos"."nombre" = "Jugador"."nombre";
 
 
 
@@ -48,7 +24,7 @@ FROM
                 ('Ricardo Monascal',  'Leones del Caracas'       , 12, '2003/09/22', NULL        ),
                 ('Miguel Ambrosio' ,  'Navegantes del Magallanes', 45, '2005/09/19', NULL        )
         ) as "Datos" ("jugador", "equipo", "número", "inicio", "fin")
-WHERE "Datos"."jugador" = "Fantasy"."Jugador"."nombre" AND "Datos"."equipo" = "Fantasy"."Equipo"."nombre completo";
+WHERE "Datos"."jugador" = "Fantasy"."Jugador"."nombre completo" AND "Datos"."equipo" = "Fantasy"."Equipo"."nombre completo";
 
 
 

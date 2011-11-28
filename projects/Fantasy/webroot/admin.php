@@ -1,8 +1,8 @@
 <?php
         require_once 'include/config.php';
-        require_once 'include/dbconn-admin.php';
-        require_once 'include/model/facade/FacadeEstadio.php';
-        require_once 'include/model/facade/FacadeEquipo.php';
+        require_once 'include/dbconn/admin.php';
+        require_once 'model/Estadio.php';
+        require_once 'model/Equipo.php';
 
         ////////////////////////////////////////////////////////////////////////////////
         require_once 'include/model/entity/Juego.php';
@@ -35,8 +35,8 @@
                 return $r . "</select>";
         }
 
-        $equipos = FacadeEquipo::retrieveAll();
-        $estadios = FacadeEstadio::retrieveAll();
+        $equipos = Equipo::retrieveAll();
+        $estadios = Estadio::retrieveAll();
 
         require("include/pre.php");
 ?>

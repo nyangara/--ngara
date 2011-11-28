@@ -1,5 +1,5 @@
 <?php
-        require_once 'Entity.php';
+        require_once 'include/Entity.php';
 
         class EstadisticaBateo extends Entity {
                 protected static $table = 'Estadística de bateo';
@@ -12,7 +12,11 @@
                         'bases robadas',
                         'bases por bola',
                         'ponches',
-                        'errores',
+                        'errores'
+                );
+                protected static $pk = array(
+                        'jugador',
+                        'fecha'
                 );
                 protected $data;
         }

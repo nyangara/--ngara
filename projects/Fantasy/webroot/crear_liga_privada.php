@@ -1,10 +1,8 @@
 <?php
         require_once 'include/config.php';
-        require_once 'include/dbconn-user.php';
-        require_once 'include/model/entity/Liga.php';
-        require_once 'include/model/facade/FacadeLiga.php';
-        require_once 'include/model/entity/Usuario.php';
-        require_once 'include/model/facade/FacadeUsuario.php';
+        require_once 'include/dbconn/user.php';
+        require_once 'model/Liga.php';
+        require_once 'model/Usuario.php';
         require      'include/pre.php';
 ?>
 <div id="contenido_interno">
@@ -12,6 +10,7 @@
                 <h2>Mis ligas</h2>
                 <form id="form" action="agregar_equipo.php" method="post">
                         <input type="submit" value="crear"/>
-                </form>                </div>
+                </form>
+        </div>
 </div>
 <?php require('include/post.html'); ?>

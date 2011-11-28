@@ -1,9 +1,9 @@
 <?php
         require_once 'include/config.php';
-        require_once 'include/dbconn-user.php';
-        require_once 'include/model/facade/FacadeEquipo.php';
-        require_once 'include/model/facade/FacadeEstadio.php';
-        require_once 'include/model/facade/FacadeJuego.php';
+        require_once 'include/dbconn/user.php';
+        require_once 'model/Equipo.php';
+        require_once 'model/Estadio.php';
+        require_once 'model/Juego.php';
         require      'include/pre.php';
 ?>
 <div id="contenido_interno" style="height: auto">
@@ -19,10 +19,10 @@
                                 <th style="border: 2px solid #cccccc">Estadio         </th>
                         </tr>
 <?php
-        foreach (FacadeJuego::retrieveAll() as $j) {
-                $l = FacadeEquipo ::retrieve($j->get('equipo local'    ));
-                $v = FacadeEquipo ::retrieve($j->get('equipo visitante'));
-                $s = FacadeEstadio::retrieve($j->get('estadio'         ));
+        foreach (Juego::retrieveAll() as $j) {
+                $l = new Equipo (); $l->set('id', $j->get('equipo local'    )); $l = $l->select();
+                $v = new Equipo (); $v->set('id', $j->get('equipo visitante')); $v = $v->select();
+                $s = new Estadio(); $s->set('id', $j->get('estadio'         )); $s = $s->select();
                 $date = strtotime($j->get('inicio'));
 ?>
                         <tr>

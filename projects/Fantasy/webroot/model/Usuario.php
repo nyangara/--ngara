@@ -1,5 +1,5 @@
 <?php
-        require_once 'Usuario.php';
+        require_once 'include/Entity.php';
 
         class Usuario extends Entity {
                 protected static $table = 'Usuario';
@@ -13,5 +13,9 @@
                         'dirección de e-mail',
                         'URL del avatar'
                 );
+                protected static $pk = array(
+                        'id'
+                );
+                protected $data;
         }
 ?>

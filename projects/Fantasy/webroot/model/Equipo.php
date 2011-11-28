@@ -1,5 +1,5 @@
 <?php
-        require_once 'Entity.php';
+        require_once 'include/Entity.php';
 
         class Equipo extends Entity {
                 protected static $table = 'Equipo';
@@ -12,6 +12,9 @@
                         'ciudad',
                         'estado',
                         'estadio principal'
+                );
+                protected static $pk = array(
+                        'id'
                 );
                 protected $data;
         }

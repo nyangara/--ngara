@@ -1,10 +1,10 @@
 <?php
         class Facade {
-                public static function create($entity) {
+                public static function insert($entity) {
                         global $dbconn;
                         global $prepared;
 
-                        $ec = static::$entity_class;
+                        $ec = get_class($entity);
                         $en = $ec::table();
                         $fs = $ec::fields();
                         $fn = count($fs);
@@ -12,7 +12,7 @@
 
                         $dolar = function ($i) { return '$' . $i;         };
                         $quote = function ($i) { return '"' . $i . '"';   };
-                        $get   = function ($i) { return $entity->get($i); };
+                        $get   = function ($i) use (&$entity) { return $entity->get($i); };
 
                         $data = array_map($get, $fs);
 
@@ -33,10 +33,9 @@
                         return;
                 }
 
-                public static function retrieveAll() {
+                public static function retrieveAll($ec) {
                         global $dbconn;
 
-                        $ec = static::$entity_class;
                         $en = $ec::table();
                         $fs = $ec::fields();
 
@@ -62,27 +61,29 @@
                         return $r;
                 }
 
-                public static function retrieve($entity) {
+                public static function select($entity) {
                         global $dbconn;
                         global $prepared;
 
-                        $ec = static::$entity_class;
+                        $ec = get_class($entity);
                         $en = $ec::table();
                         $fs = $ec::fields();
+                        $pk = $ec::pk();
+                        $kn = count($pk);
+                        $kr = range(1, $kn);
 
                         $quote = function ($i) { return '"' . $i . '"'; };
+                        $get   = function ($i) use (&$entity) { return $entity->get($i); };
+                        $conds = function ($i, $j) { return '"' . $i . '" = $' . $j; };
 
-                        $query =
-                                'SELECT ' . join(',', array_map($quote, $fs)) .
-                                'FROM "Fantasy"."' . $en . '" WHERE "id" = $1';
-
-                        $data = array($entity->get('id'));
+                        $data = array_map($get, $pk);
 
                         if (!isset($prepared)) $prepared = array();
                         if (!in_array('SELECT ' . $en, $prepared)) {
                                 $query =
                                         'SELECT ' . join(',', array_map($quote, $fs)) .
-                                        'FROM "Fantasy"."' . $en . '" WHERE "id" = $1';
+                                        'FROM "Fantasy"."' . $en . '" WHERE '         .
+                                        join(' AND ', array_map($conds, $pk, $kr));
 
                                 $result = pg_prepare($dbconn, 'SELECT ' . $en, $query) or die('pg_prepare: ' . pg_last_error());
                                 $prepared[] = 'SELECT ' . $en;
@@ -107,23 +108,27 @@
                         global $dbconn;
                         global $prepared;
 
-                        $ec = static::$entity_class;
+                        $ec = get_class($entity);
                         $en = $ec::table();
                         $fs = $ec::fields();
                         $fn = count($fs);
                         $fr = range(1, $fn);
+                        $pk = $ec::pk();
+                        $kn = count($pk);
+                        $kr = range(1, $kn);
 
-                        $get  = function ($i)     { return $entity->get($i);            };
-                        $sets = function ($i, $j) { return 'SET "' . $i . '" = $' . $j; };
+                        $get   = function ($i) use (&$entity) { return $entity->get($i); };
+                        $sets  = function ($i, $j) { return 'SET "' . $i . '" = $' . $j; };
+                        $conds = function ($i, $j) { return '"' . $i . '" = $' . ($j + $fn); };
 
-                        $data = array_merge(array_map($get, $fs), array($entity->get("id")));
+                        $data = array_merge(array_map($get, $fs), array_map($get, $pk));
 
                         if (!isset($prepared)) $prepared = array();
                         if (!in_array('UPDATE ' . $en, $prepared)) {
                                 $query =
                                         'UPDATE "Fantasy"."' . $en . '" SET ' .
                                         join(',', array_map($sets, $fs, $fr)) .
-                                        'WHERE "id" = $' . ($fn + 1);
+                                        'WHERE ' . join(' AND ', array_map($conds, $pk, $kr));
                                 $result = pg_prepare($dbconn, 'UPDATE ' . $en, $query) or die('pg_prepare: ' . pg_last_error());
                                 $prepared[] = 'UPDATE ' . $en;
                         }
@@ -133,7 +138,7 @@
                         return true;
                 }
 
-                public static function removeAll() {
+                public static function removeAll($ec) {
                         global $dbconn;
 
                         $en = $ec::table();
@@ -150,12 +155,21 @@
                         global $prepared;
 
                         $en = $ec::table();
+                        $pk = $ec::pk();
+                        $kn = count($pk);
+                        $kr = range(1, $kn);
 
-                        $data  = array($entity->get("id"));
+                        $quote = function ($i) { return '"' . $i . '"'; };
+                        $get   = function ($i) use (&$entity) { return $entity->get($i); };
+                        $conds = function ($i, $j) { return '"' . $i . '" = $' . $j; };
+
+                        $data = array_map($get, $pk);
 
                         if (!isset($prepared)) $prepared = array();
                         if (!in_array('DELETE ' . $en, $prepared)) {
-                                $query = 'DELETE FROM "Fantasy"."' . $en . '" WHERE "id" = $1';
+                                $query =
+                                        'DELETE FROM "Fantasy"."' . $en . '" WHERE ' .
+                                        join(' AND ', array_map($conds, $pk, $kr));
                                 $result = pg_prepare($dbconn, 'DELETE ' . $en, $query) or die('pg_prepare: ' . pg_last_error());
                                 $prepared[] = 'DELETE ' . $en;
                         }

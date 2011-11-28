@@ -1,4 +1,7 @@
-CREATE OR REPLACE FUNCTION "Fantasy"."autenticar"(IN "nombre de usuario" text, IN "password" text) RETURNS integer
+CREATE OR REPLACE FUNCTION "Fantasy"."autenticar"(
+        IN "username" text,
+        IN "password" text
+) RETURNS integer
         STABLE
         STRICT
         SECURITY DEFINER
@@ -10,18 +13,20 @@ AS $BODY$
                 "Fantasy"."Usuario",
                 "Fantasy"."passwd"
         WHERE
-                "Fantasy"."Usuario"."nombre"  = $1                           AND
-                "Fantasy"."Usuario"."id"      = "Fantasy"."passwd"."usuario" AND
-                "Fantasy"."passwd"."password" = $2
+                "Fantasy"."Usuario"."username" = "Fantasy"."passwd"."username" AND
+                "Fantasy"."passwd"."username"  = $1                            AND
+                "Fantasy"."passwd"."password"  = $2
 $BODY$;
 
 
 
 -- TODO: manejar errores (parámetros nulos, usuario ya existente, etc)
 CREATE OR REPLACE FUNCTION "Fantasy"."registrar"(
-        IN      "parámetro: nombre"             text,
-        IN      "parámetro: nombre completo"    text,
-        IN      "parámetro: password"           text
+        IN      "parámetro: username"                   text,
+        IN      "parámetro: nombre completo"            text,
+        IN      "parámetro: dirección de e-mail"        text,
+        IN      "parámetro: es administrador"           boolean,
+        IN      "parámetro: password"                   text
 ) RETURNS void
         VOLATILE
         STRICT
@@ -30,20 +35,24 @@ CREATE OR REPLACE FUNCTION "Fantasy"."registrar"(
 AS $BODY$
         BEGIN
                 INSERT INTO "Fantasy"."Usuario" (
-                        "nombre",
-                        "nombre completo"
+                        "username",
+                        "nombre completo",
+                        "dirección de e-mail",
+                        "es administrador"
                 ) VALUES (
-                        "parámetro: nombre",
-                        "parámetro: nombre completo"
+                        "parámetro: username",
+                        "parámetro: nombre completo",
+                        "parámetro: dirección de e-mail",
+                        "parámetro: es administrador"
                 );
 
                 INSERT INTO "Fantasy"."passwd"
                 SELECT
-                        "Fantasy"."Usuario"."id",
+                        "Fantasy"."Usuario"."username",
                         "parámetro: password"
                 FROM
                         "Fantasy"."Usuario"
                 WHERE
-                        "nombre" = "parámetro: nombre";
+                        "username" = "parámetro: username";
         END;
 $BODY$;

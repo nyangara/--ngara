@@ -39,11 +39,10 @@ GRANT
         TRUNCATE
 ON
         "Fantasy"."Jugador",
-        "Fantasy"."Peso",
-        "Fantasy"."Altura",
         "Fantasy"."Juega",
         "Fantasy"."Juego",
         "Fantasy"."Noticia",
+        "Fantasy"."Liga",
         "Fantasy"."Jugador en noticia",
         "Fantasy"."Juego en noticia",
         "Fantasy"."Equipo en noticia",
@@ -57,6 +56,7 @@ GRANT
         UPDATE
 ON SEQUENCE
         "Fantasy"."Noticia_id_seq",
+        "Fantasy"."Liga_id_seq",
         "Fantasy"."Juego_id_seq",
         "Fantasy"."Jugador_id_seq"
 TO "Fantasy (usuario normal)";

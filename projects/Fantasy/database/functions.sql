@@ -13,9 +13,9 @@ AS $BODY$
                 "Fantasy"."Usuario",
                 "Fantasy"."passwd"
         WHERE
-                "Fantasy"."Usuario"."username" = "Fantasy"."passwd"."username" AND
-                "Fantasy"."passwd"."username"  = $1                            AND
-                "Fantasy"."passwd"."password"  = $2
+                "Fantasy"."Usuario"."id" = "Fantasy"."passwd"."usuario" AND
+                "Fantasy"."Usuario"."username" = $1 AND
+                "Fantasy"."passwd"."password" = $2
 $BODY$;
 
 
@@ -48,11 +48,11 @@ AS $BODY$
 
                 INSERT INTO "Fantasy"."passwd"
                 SELECT
-                        "Fantasy"."Usuario"."username",
+                        "Fantasy"."Usuario"."id",
                         "parámetro: password"
                 FROM
                         "Fantasy"."Usuario"
                 WHERE
-                        "username" = "parámetro: username";
+                        "Fantasy"."Usuario"."username" = "parámetro: username";
         END;
 $BODY$;

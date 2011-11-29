@@ -22,15 +22,15 @@ CREATE TABLE "Fantasy"."Usuario" (
 -- Nadie debe tener permisos sobre esta tabla ni sus columnas.
 -- Hacer todo a través de funciones seguras.
 CREATE TABLE "Fantasy"."passwd" (
-        "username"                      text                            NOT NULL,
+        "usuario"                       integer                         NOT NULL,
         "password"                      password                        NOT NULL,
 
         CONSTRAINT "passwd PRIMARY KEY"
-                PRIMARY KEY ("username"),
+                PRIMARY KEY ("usuario"),
 
-        CONSTRAINT "passwd FOREIGN KEY username REFERENCES Usuario"
-                FOREIGN KEY ("username")
-                REFERENCES "Fantasy"."Usuario" ("username")
+        CONSTRAINT "passwd FOREIGN KEY usuario REFERENCES Usuario"
+                FOREIGN KEY ("usuario")
+                REFERENCES "Fantasy"."Usuario" ("id")
                 ON DELETE CASCADE
 );
 

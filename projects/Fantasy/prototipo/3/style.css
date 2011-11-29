@@ -1,0 +1,113 @@
+@charset "utf-8";
+/* CSS Document */
+
+/*
+.admin {display: none !important;}
+.owner {display: none !important;}
+*/
+
+body {
+	margin: 1.25em 1em 5em;
+}
+
+div {
+	margin: 1em;
+}
+
+ul, li {
+	display: inline-block;
+}
+
+form {
+	display: inline;
+}
+
+div.contenido {
+	display: block;
+}
+
+div.noticias, div.estadios {
+	min-height: 200px;
+}
+
+div.informacion {
+	min-height: 100px;
+}
+
+div.contenido img {
+	float: left;
+	margin: 0 1em 1em 0;
+}
+
+div.contenido div {
+	
+	float: right;
+}
+
+table, th, td {
+	border: 1px solid grey;
+}
+
+td {
+	text-align: center;
+	vertical-align: center;
+}
+
+table img {
+	height: 3em;
+	width: auto;
+}
+
+td.img {
+	width: 4em;
+}
+
+div.liga div {
+	display: inline-block;
+}
+
+div.liga h3,
+div.usuario h3 {
+	display: inline;
+}
+
+.admin {
+	width: auto;
+	text-align: center;
+	border: 2px solid red;
+	color: red;
+	padding: 0.25em;
+}
+
+.owner {
+	width: auto;
+	text-align: center;
+	border: 2px solid orange;
+	color: orange;
+	padding: 0.25em;
+}
+
+.comment {
+	color: blue;
+}
+
+.comment:before {
+	content: "Comentario: ";
+	font-weight: bold;
+}
+
+div.comment {
+	position: fixed;
+	top: auto;
+	left: 0;
+	bottom: 0;
+	background-color: white;
+	border: 1px solid blue;
+	width: 90%;
+	padding: 1em;
+	margin: 0;
+}
+
+div.liga {
+	margin-bottom: 0;
+}

@@ -4,7 +4,7 @@ DATABASE=Fantasy
 
 .PHONY: all database include language password types schema tables functions triggers load sample roles perms truncate truncate-sample drop-tables distclean
 
-all: database include language password types schema tables functions triggers load roles perms
+all: database include language password types schema tables functions triggers load roles perms sample
 
 database:
 	createdb -E UTF-8 "$(DATABASE)"
@@ -43,7 +43,7 @@ roles:
 	"$(SQL)" $(SQLOPTS) -d "$(DATABASE)" -f roles.sql
 
 perms:
-	"$(SQL)" $(SQLOPTS) -d "$(DATABASE)" -f perms.sql
+	$(MAKE) -C perms all
 
 truncate:
 	"$(SQL)" $(SQLOPTS) -d "$(DATABASE)" -f truncate.sql

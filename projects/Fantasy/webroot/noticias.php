@@ -1,40 +1,32 @@
-<?php require 'include/pre.php'; ?>
+<?php
+        require_once 'include/config.php';
+        require_once 'include/dbconn/user.php';
+        require_once 'model/Noticia.php';
+
+        require      'include/pre.php';
+?>
 <div id="contenido_interno">
         <div id="Layer1" style="width:580px; height:500px; overflow: scroll;">
-                <!--?php echo date("Y-m-d: H:i:s") . '<br/>'; ?-->
                 <table width="90%" border="0" cellspacing="10" cellpadding="10" align="left">
+<?php   foreach (Noticia::retrieveAll() as $n) { ?>
+                        <tr>
 <?php
-        include_once('include/config.php');
-        include_once('include/dbconn-user.php');
-
-        $query = <<<'EOD'
-                SELECT
-                        "URL de imagen",
-                        "título",
-                        "contenido",
-                        "fecha"
-                FROM
-                        "Fantasy"."Noticia"
-                WHERE
-                        "fecha" <= $1
-                OR
-                        "fecha" >= $2
-                ORDER BY
-                        "fecha" DESC
-EOD;
-
-        $result = pg_prepare($dbconn, "noticia", $query) or die('pg_prepare: ' . pg_last_error());
-        $result = pg_execute($dbconn, "noticia", array(date('Y-m-d'), date('Y-m-d', strtotime("-2 days")))) or die('pg_execute: ' . pg_last_error());
-
-        while ($row = pg_fetch_row($result)) {
-                echo '<tr><td><img src="' . $row[0] . '"></img><td>';
-                echo '<td width="50px"><h3 >' . $row[1] . '</h3><p>' . $row[2] . '</p>';
-                echo '<p><small>' . $row[3] . '</small></p></td></tr>';
-        }
-
-        pg_free_result($result);
+                $i = $n->get('URL de imagen');
+                if ($i) {
 ?>
+                                <td>
+                                        <img src="imágenes/<?php echo $i; ?>"/>
+                                </td>
+<?php           } ?>
+                                <td width="50px">
+                                        <h3><?php echo $n->get('título'); ?></h3>
+                                        <p><?php echo $n->get('contenido'); ?></p>
+                                        <p><small><?php echo $n->get('fecha'); ?></small></p>
+                                        <p><small>Tags: <?php echo $n->get('tags'); ?></small></p>
+                                </td>
+                        </tr>
+<?php   } ?>
                 </table>
         </div>
 </div>
-<?php include('include/post.html'); ?>
+<?php   include('include/post.html'); ?>

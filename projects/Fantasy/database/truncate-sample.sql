@@ -1,13 +1,9 @@
 TRUNCATE
         "Fantasy"."Usuario",
-        "Fantasy"."Manager",
-        "Fantasy"."Administrador",
         "Fantasy"."passwd",
         "Fantasy"."Liga",
         "Fantasy"."Participa",
         "Fantasy"."Jugador",
-        "Fantasy"."Peso",
-        "Fantasy"."Altura",
         "Fantasy"."Roster",
         "Fantasy"."Contenido de roster",
         "Fantasy"."Estadística de bateo",

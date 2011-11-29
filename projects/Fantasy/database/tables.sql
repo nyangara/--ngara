@@ -216,7 +216,6 @@ CREATE TABLE "Fantasy"."Estadística de bateo" (
         "bases robadas"                 integer                         NOT NULL,
         "bases por bola"                integer                         NOT NULL,
         "strike outs"                   integer                         NOT NULL,
-        "errores"                       integer                         NOT NULL,
         "hits"                          integer                         NOT NULL,
 
         CONSTRAINT "Estadística de bateo PRIMARY KEY"
@@ -242,7 +241,6 @@ CREATE TABLE "Fantasy"."Estadística de pitcheo" (
         "imparables"                    integer                         NOT NULL,
         "bases por bola"                integer                         NOT NULL,
         "strike outs"                   integer                         NOT NULL,
-        "errores"                       integer                         NOT NULL,
 
         CONSTRAINT "Estadística de pitcheo PRIMARY KEY"
                 PRIMARY KEY ("jugador", "juego"),
@@ -279,86 +277,14 @@ CREATE TABLE "Fantasy"."Juega" (
                 ON DELETE CASCADE
 );
 
--- TODO: implementar relaciones con "Equipo", "Jugador" y "Juego"
 CREATE TABLE "Fantasy"."Noticia" (
         "id"                            serial                          NOT NULL,
-        "URL de imagen"                 text                            NOT NULL,
         "título"                        text                            NOT NULL,
         "contenido"                     text                            NOT NULL,
         "fecha"                         timestamp with time zone        NOT NULL,
+        "URL de imagen"                 text                                NULL,
+        "tags"                          text                                NULL,
 
         CONSTRAINT "Noticia PRIMARY KEY"
                 PRIMARY KEY ("id")
-);
-
-CREATE TABLE "Fantasy"."Jugador en noticia" (
-        "jugador"                       integer                         NOT NULL,
-        "noticia"                       integer                         NOT NULL,
-
-        CONSTRAINT "Jugador en noticia PRIMARY KEY"
-                PRIMARY KEY ("jugador", "noticia"),
-
-        CONSTRAINT "Jugador en noticia FOREIGN KEY jugador REFERENCES Jugador"
-                FOREIGN KEY ("jugador")
-                REFERENCES "Fantasy"."Jugador" ("id")
-                ON DELETE CASCADE,
-
-        CONSTRAINT "Jugador en noticia FOREIGN KEY noticia REFERENCES Noticia"
-                FOREIGN KEY ("noticia")
-                REFERENCES "Fantasy"."Jugador" ("id")
-                ON DELETE CASCADE
-);
-
-CREATE TABLE "Fantasy"."Juego en noticia" (
-        "juego"                         integer                         NOT NULL,
-        "noticia"                       integer                         NOT NULL,
-
-        CONSTRAINT "Juego en noticia PRIMARY KEY"
-                PRIMARY KEY ("juego", "noticia"),
-
-        CONSTRAINT "Juego en noticia FOREIGN KEY juego REFERENCES Juego"
-                FOREIGN KEY ("juego")
-                REFERENCES "Fantasy"."Juego" ("id")
-                ON DELETE CASCADE,
-
-        CONSTRAINT "Juego en noticia FOREIGN KEY noticia REFERENCES Noticia"
-                FOREIGN KEY ("noticia")
-                REFERENCES "Fantasy"."Juego" ("id")
-                ON DELETE CASCADE
-);
-
-CREATE TABLE "Fantasy"."Equipo en noticia" (
-        "equipo"                        integer                         NOT NULL,
-        "noticia"                       integer                         NOT NULL,
-
-        CONSTRAINT "Equipo en noticia PRIMARY KEY"
-                PRIMARY KEY ("equipo", "noticia"),
-
-        CONSTRAINT "Equipo en noticia FOREIGN KEY equipo REFERENCES Equipo"
-                FOREIGN KEY ("equipo")
-                REFERENCES "Fantasy"."Equipo" ("id")
-                ON DELETE CASCADE,
-
-        CONSTRAINT "Equipo en noticia FOREIGN KEY noticia REFERENCES Noticia"
-                FOREIGN KEY ("noticia")
-                REFERENCES "Fantasy"."Equipo" ("id")
-                ON DELETE CASCADE
-);
-
-CREATE TABLE "Fantasy"."Estadio en noticia" (
-        "estadio"                       integer                         NOT NULL,
-        "noticia"                       integer                         NOT NULL,
-
-        CONSTRAINT "Estadio en noticia PRIMARY KEY"
-                PRIMARY KEY ("estadio", "noticia"),
-
-        CONSTRAINT "Estadio en noticia FOREIGN KEY estadio REFERENCES Estadio"
-                FOREIGN KEY ("estadio")
-                REFERENCES "Fantasy"."Estadio" ("id")
-                ON DELETE CASCADE,
-
-        CONSTRAINT "Estadio en noticia FOREIGN KEY noticia REFERENCES Noticia"
-                FOREIGN KEY ("noticia")
-                REFERENCES "Fantasy"."Equipo" ("id")
-                ON DELETE CASCADE
 );

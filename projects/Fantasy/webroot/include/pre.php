@@ -46,11 +46,12 @@
                 'Inicio'      => 'index',
                 'Noticias'    => 'noticias',
                 'Estadios'    => 'estadios',
+                'Equipos'     => 'equipos',
                 'Calendario'  => 'calendario',
                 'Resultados'  => 'resultados',
                 'Ligas'       => 'ligas',
                 'Reglas'      => 'reglas',
-                'Información' => 'informacion'
+                'Información' => 'información'
         );
 
         foreach ($vs as $v => $f) echo '<li' . ($f == basename($_SERVER['SCRIPT_NAME'], '.php') ? ' class="on"' : '') . '><a href="' . $f . '">' . $v . '</a></li>';

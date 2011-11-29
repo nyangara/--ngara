@@ -1,5 +1,10 @@
 <?php
         class Facade {
+                protected static function dolar($i) { return '$' . $i; }
+                protected static function quote($i) { return '"' . $i . '"'; }
+                protected static function conds($i, $j) { return self::quote($i) . ' = ' . self::dolar($j); }
+                protected static function sets ($i, $j) { return 'SET ' . self::conds($i, $j); }
+
                 public static function insert($entity) {
                         global $dbconn;
                         global $prepared;
@@ -10,19 +15,18 @@
                         $fn = count($fs);
                         $fr = range(1, $fn);
 
-                        $dolar = function ($i) { return '$' . $i;         };
-                        $quote = function ($i) { return '"' . $i . '"';   };
-                        $get   = function ($i) use (&$entity) { return $entity->get($i); };
-
-                        $data = array_map($get, $fs);
+                        $data = array_map(
+                                function ($i) use (&$entity) { return $entity->get($i); },
+                                $fs
+                        );
 
                         if (!isset($prepared)) $prepared = array();
                         if (!in_array('INSERT ' . $en, $prepared)) {
                                 $query =
-                                        'INSERT INTO "Fantasy"."' . $en . '" (' .
-                                        join(',', array_map($quote, $fs))       .
-                                        ') VALUES ('                            .
-                                        join(',', array_map($dolar, $fr))       .
+                                        'INSERT INTO "Fantasy"."' . $en . '" ('  .
+                                        join(',', array_map('self::quote', $fs)) .
+                                        ') VALUES ('                             .
+                                        join(',', array_map('self::dolar', $fr)) .
                                         ')';
                                 $result = pg_prepare($dbconn, 'INSERT ' . $en, $query) or die('pg_prepare: ' . pg_last_error());
                                 $prepared[] = 'INSERT ' . $en;
@@ -39,10 +43,8 @@
                         $en = $ec::table();
                         $fs = $ec::fields();
 
-                        $quote = function ($i) { return '"' . $i . '"'; };
-
                         $query =
-                                'SELECT ' . join(',', array_map($quote, $fs)) .
+                                'SELECT ' . join(',', array_map('self::quote', $fs)) .
                                 'FROM "Fantasy"."' . $en . '"';
 
                         $result = pg_query($dbconn, $query) or die('pg_prepare: ' . pg_last_error());
@@ -72,18 +74,17 @@
                         $kn = count($pk);
                         $kr = range(1, $kn);
 
-                        $quote = function ($i) { return '"' . $i . '"'; };
-                        $get   = function ($i) use (&$entity) { return $entity->get($i); };
-                        $conds = function ($i, $j) { return '"' . $i . '" = $' . $j; };
-
-                        $data = array_map($get, $pk);
+                        $data = array_map(
+                                function ($i) use (&$entity) { return $entity->get($i); },
+                                $pk
+                        );
 
                         if (!isset($prepared)) $prepared = array();
                         if (!in_array('SELECT ' . $en, $prepared)) {
                                 $query =
-                                        'SELECT ' . join(',', array_map($quote, $fs)) .
-                                        'FROM "Fantasy"."' . $en . '" WHERE '         .
-                                        join(' AND ', array_map($conds, $pk, $kr));
+                                        'SELECT ' . join(',', array_map('self::quote', $fs)) .
+                                        'FROM "Fantasy"."' . $en . '" WHERE '                .
+                                        join(' AND ', array_map('self::conds', $pk, $kr));
 
                                 $result = pg_prepare($dbconn, 'SELECT ' . $en, $query) or die('pg_prepare: ' . pg_last_error());
                                 $prepared[] = 'SELECT ' . $en;
@@ -115,20 +116,17 @@
                         $fr = range(1, $fn);
                         $pk = $ec::pk();
                         $kn = count($pk);
-                        $kr = range(1, $kn);
+                        $kr = range($fn + 1, $fn + $kn);
 
-                        $get   = function ($i) use (&$entity) { return $entity->get($i); };
-                        $sets  = function ($i, $j) { return 'SET "' . $i . '" = $' . $j; };
-                        $conds = function ($i, $j) { return '"' . $i . '" = $' . ($j + $fn); };
-
+                        $get = function ($i) use (&$entity) { return $entity->get($i); };
                         $data = array_merge(array_map($get, $fs), array_map($get, $pk));
 
                         if (!isset($prepared)) $prepared = array();
                         if (!in_array('UPDATE ' . $en, $prepared)) {
                                 $query =
-                                        'UPDATE "Fantasy"."' . $en . '" SET ' .
-                                        join(',', array_map($sets, $fs, $fr)) .
-                                        'WHERE ' . join(' AND ', array_map($conds, $pk, $kr));
+                                        'UPDATE "Fantasy"."' . $en . '" SET '                        .
+                                        join(','    , array_map('self::conds', $fs, $fr)) . 'WHERE ' .
+                                        join(' AND ', array_map('self::conds', $pk, $kr));
                                 $result = pg_prepare($dbconn, 'UPDATE ' . $en, $query) or die('pg_prepare: ' . pg_last_error());
                                 $prepared[] = 'UPDATE ' . $en;
                         }
@@ -159,17 +157,16 @@
                         $kn = count($pk);
                         $kr = range(1, $kn);
 
-                        $quote = function ($i) { return '"' . $i . '"'; };
-                        $get   = function ($i) use (&$entity) { return $entity->get($i); };
-                        $conds = function ($i, $j) { return '"' . $i . '" = $' . $j; };
-
-                        $data = array_map($get, $pk);
+                        $data = array_map(
+                                function ($i) use (&$entity) { return $entity->get($i); },
+                                $pk
+                        );
 
                         if (!isset($prepared)) $prepared = array();
                         if (!in_array('DELETE ' . $en, $prepared)) {
                                 $query =
                                         'DELETE FROM "Fantasy"."' . $en . '" WHERE ' .
-                                        join(' AND ', array_map($conds, $pk, $kr));
+                                        join(' AND ', array_map('self::conds', $pk, $kr));
                                 $result = pg_prepare($dbconn, 'DELETE ' . $en, $query) or die('pg_prepare: ' . pg_last_error());
                                 $prepared[] = 'DELETE ' . $en;
                         }

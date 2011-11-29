@@ -76,7 +76,7 @@
                         $Jugador->G_Estadistica($_POST);
                 }
 
-                public function consultarEstadisticas($obj) {
+                public static function consultarEstadisticas($obj) {
                         $Res = array();
                         unset($_POST); // WTF???
                         switch (get_class($obj)):
@@ -87,41 +87,46 @@
                         case "Equipo":
                                 $_POST['TIPO'] = 'Jugador';
                                 $_POST['equipo'] = $obj->id;
-                                $Jugadores = $this->retrieveAll();
+                                $Jugadores = self::retrieveAll();
 
                                 $i = 0;
                                 $j = 0;
                                 foreach ($Jugadores as $Jugador) {
-                                        if($Jugador->posicion == 'P') {
-                                                $TmpP[$i] = $this->consultarEstadisticas($Jugador);
+                                        if ($Jugador->posicion == 'P') {
+                                                $TmpP[$i] = self::consultarEstadisticas($Jugador);
                                                 $i++;
-                                        }else{
-                                                $TmpB[$j] = $this->consultarEstadisticas($Jugador);
+                                        } else {
+                                                $TmpB[$j] = self::consultarEstadisticas($Jugador);
                                                 $j++;
                                         }
                                 }
 
-                                $i = 0;
-                                for($i = 0; $i<count($TmpP); $i++)
-                                        foreach ($TmpP[$i] as $key => $value) {
-                                                if(is_int($value))
-                                                        if(isset($Res[0][$key]))
+                                foreach ($TmpP as $i) {
+                                        foreach ($i as $key => $value) {
+                                                if (is_int($value)) {
+                                                        if (isset($Res[0][$key])) {
                                                                 $Res[0][$key] += $value;
-                                                        else
+                                                        } else {
                                                                 $Res[0][$key] = $value;
+                                                        }
+                                                }
                                         }
-                                $i = 0;
-                                for($i = 0; $i<count($TmpB); $i++)
-                                        foreach ($TmpB[$i] as $key => $value) {
-                                                if(is_int($value))
-                                                        if(isset($Res[1][$key]))
+                                }
+
+                                foreach ($TmpB as $i) {
+                                        foreach ($i as $key => $value) {
+                                                if (is_int($value)) {
+                                                        if (isset($Res[1][$key])) {
                                                                 $Res[1][$key] += $value;
-                                                        else
+                                                        } else {
                                                                 $Res[1][$key] = $value;
+                                                        }
+                                                }
                                         }
+                                }
 
                                 break;
-        endswitch;
+endswitch;
 
                         return $Res;
                 }
@@ -131,10 +136,10 @@
                         $m = count($Matriz[0]);
 
                         echo '<table id="' . $id . '">';
-                        for($i = 0; $i < $n; ++$i) {
+                        for ($i = 0; $i < $n; ++$i) {
                                 echo '<tr id="' . $id . '.' . $i . '">';
-                                for($j = 0; $j < $m; ++$j) {
-                                        if($Matriz[$i][$j]!=null)
+                                for ($j = 0; $j < $m; ++$j) {
+                                        if ($Matriz[$i][$j]!=null)
                                                 echo '<td id="' $id . "." . $i . '.' . $j . '">' . $Matriz[$i][$j] . '</td>';
                                 }
                                 echo '</tr>';

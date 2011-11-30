@@ -9,8 +9,14 @@
                         'ciudad',
                         'estado',
                         'capacidad',
+                        'año de fundación',
                         'tipo de terreno',
-                        'año de fundación'
+                        'propietario',
+                        'medida del left field',
+                        'medida del center field',
+                        'medida del right field',
+                        'descripción',
+                        'URL del logo'
                 );
                 protected static $pk = array(
                         'id'

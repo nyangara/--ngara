@@ -6,13 +6,13 @@
                 <meta name="keywords"    content="fantasy, beisbol venezolano, liga venezolana de beisbol profesional, lvbp"/>
                 <meta name="description" content="Fantasy de la liga venezolana de beisbol profesional."/>
 
-                <link rel="stylesheet" href="assets/styles/style.css" type="text/css"/>
+                <link rel="stylesheet" href="static/styles/style.css" type="text/css"/>
+                <link rel="stylesheet" href="static/styles/style_index.css" type="text/css"/>
                 <link rel="stylesheet" href="static/styles/style_<?php echo basename($_SERVER['SCRIPT_NAME'], '.php'); ?>.css" type="text/css"/>
-                <link rel="Shortcut Icon" href="assets/images/10thinning.ico">
-                <link href="styles/style_index.css" rel="stylesheet" type="text/css"/>
+                <link rel="Shortcut Icon" href="static/images/favicon.ico">
                 <style type="text/css">
                         body {
-                                background-image: url(assets/images/background1.png);
+                                background-image: url(static/images/background1.png);
                         }
                 </style>
         </head>
@@ -22,7 +22,7 @@
                                 <div id="logo">
                                         <div id="logo_header">
                                                 <div id="logo_carrera">
-                                                        <img src="assets/images/LogoGrande.png" alt="logo" width="48" height="48"/>
+                                                        <img src="static/images/LogoGrande.png" alt="logo" width="48" height="48"/>
                                                         <p id="nombresistema">Fantasy</p>
                                                 </div>
                                         </div>
@@ -54,8 +54,12 @@
                 'Información' => 'información'
         );
 
-        foreach ($vs as $v => $f) echo '<li' . ($f == basename($_SERVER['SCRIPT_NAME'], '.php') ? ' class="on"' : '') . '><a href="' . $f . '">' . $v . '</a></li>';
+        foreach ($vs as $v => $f) {
+                $on = '';
+                if ($f == basename($_SERVER['SCRIPT_NAME'], '.php')) $on = ' class="on"';
 ?>
+                                        <li<?php echo $on; ?>><a href="<?php echo $f; ?>"><?php echo $v; ?></a></li>
+<?php   } ?>
                                 </ul>
                         </div>
                         <div id="content">

@@ -123,11 +123,22 @@ CREATE TABLE "Fantasy"."Jugador" (
         "nombre completo"               text                            NOT NULL,
         "fecha de nacimiento"           date                                NULL,
         "lugar de procedencia"          text                                NULL,
-        "precio"                        integer                             NULL,
         "URL de la foto"                text                                NULL,
+        "equipo"                        integer                         NOT NULL,
+        "número"                        integer                         NOT NULL,
+        "posición"                      "posición"                      NOT NULL,
+        "precio"                        integer                         NOT NULL,
 
         CONSTRAINT "Jugador PRIMARY KEY"
-                PRIMARY KEY ("id")
+                PRIMARY KEY ("id"),
+
+        CONSTRAINT "Jugador UNIQUE (equipo, número)"
+                UNIQUE ("equipo", "número"),
+
+        CONSTRAINT "Jugador FOREIGN KEY equipo REFERENCES Equipo"
+                FOREIGN KEY ("equipo")
+                REFERENCES "Fantasy"."Equipo" ("id")
+                ON DELETE CASCADE
 );
 
 CREATE TABLE "Fantasy"."Roster" (

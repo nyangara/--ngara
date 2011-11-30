@@ -4,6 +4,7 @@ body {
 	background-color: #e6e3dc;
 	background-image: url(../images/background.png);
 	background-repeat: repeat-x;
+
 }
 
 a {
@@ -339,4 +340,8 @@ ul {
 	border-bottom-color: #000;
 	border-left-color: #000;
 	margin-right: 40px;
+}
+
+#video{
+	margin-left: 20px;
 }

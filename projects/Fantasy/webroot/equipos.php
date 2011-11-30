@@ -10,15 +10,18 @@
                         <input type="submit" value="Agregar equipo"/>
                 </form>
                 <h2>Equipos</h2>
-<?php   foreach (Equipo::retrieveAll() as $e) { ?>
+<?php
+        foreach (Equipo::retrieveAll() as $e) {
+                $img = $e->get('URL del logo') or $img = 'generico.jpg';
+?>
                 <div class="alcanceEquipo">
                         <form class="Fila" action="Datos_Eq.php" method="post" >
-                                <input type="hidden" name="idequipo" value="<?php echo $e->get("id"); ?>"/>
-                                <input value="Ver equipo" class="imagen" type="image" src="static/images/fotosEquipo/generico.jpg"/>
+                                <input type="hidden" name="idequipo" value="<?php echo $e->get('id'); ?>"/>
+                                <img class="imagen" src="static/images/equipo/<?php echo $img; ?>"/>
                                 <div class="datos">
-                                        <div>Nombre:           <?php echo $e->get("nombre completo" ); ?></div>
-                                        <div>Siglas:           <?php echo $e->get("siglas"          ); ?></div>
-                                        <div>Año de fundacion: <?php echo $e->get("año de fundación"); ?></div>
+                                        <div>Nombre:           <?php echo $e->get('nombre completo' ); ?></div>
+                                        <div>Siglas:           <?php echo $e->get('siglas'          ); ?></div>
+                                        <div>Año de fundacion: <?php echo $e->get('año de fundación'); ?></div>
                                 </div>
                         </form>
                 </div>

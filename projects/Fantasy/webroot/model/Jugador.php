@@ -5,9 +5,14 @@
                 protected static $table = 'Jugador';
                 protected static $fields = array(
                         'id',
-                        'nombre',
+                        'nombre completo',
                         'fecha de nacimiento',
-                        'lugar de procedencia'
+                        'lugar de procedencia',
+                        'URL de la foto',
+                        'equipo',
+                        'número',
+                        'posición',
+                        'precio',
                 );
                 protected static $pk = array(
                         'id'

@@ -11,7 +11,8 @@
                         'año de fundación',
                         'ciudad',
                         'estado',
-                        'estadio principal'
+                        'estadio principal',
+                        'URL del logo'
                 );
                 protected static $pk = array(
                         'id'

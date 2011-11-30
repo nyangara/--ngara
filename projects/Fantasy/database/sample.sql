@@ -1,5 +1,10 @@
-SELECT "Fantasy"."registrar"("username", "nombre completo", "dirección de e-mail", "es administrador", "password")
-FROM
+SELECT "Fantasy"."registrar"(
+        "username",
+        "nombre completo",
+        "dirección de e-mail",
+        "es administrador",
+        "password"
+) FROM
         (VALUES
                 ('minender' , 'Federico Flaviani', 'federico.flaviani@gmail.com', true , 'conflictodeintereses'),
                 ('mgomezch' , 'Manuel Gómez'     , 'manuel.gomez.ch@gmail.com'  , true , 'merwebo'             ),
@@ -10,17 +15,41 @@ FROM
 
 
 
-INSERT INTO "Fantasy"."Jugador" ("nombre completo", "fecha de nacimiento", "lugar de procedencia")
-VALUES
-        ('Fabiana Reggio'  , '1990/01/02', 'San Antonio, Venezuela'),
-        ('Krisvely Varela' , '1990/03/04', 'Caracas, Venezuela'    ),
-        ('Miguel Ambrosio' , '1988/05/06', 'Caracas, Venezuela'    ),
-        ('Ricardo Monascal', '1846/08/12', 'San Antonio, Venezuela');
+INSERT INTO "Fantasy"."Jugador" (
+        "nombre completo",
+        "fecha de nacimiento",
+        "lugar de procedencia",
+        "equipo",
+        "número",
+        "posición",
+        "precio"
+) SELECT
+        "Datos"."nombre completo",
+        to_date("Datos"."fecha de nacimiento", 'YYYY/MM/DD'),
+        "Datos"."lugar de procedencia",
+        "Fantasy"."Equipo"."id",
+        "Datos"."número",
+        "Datos"."posición"::"posición",
+        "Datos"."precio"
+FROM
+        "Fantasy"."Equipo",
+        (VALUES
+                ('Fabiana Reggio'  , '1990/01/02', 'San Antonio, Venezuela', 'Tigres de Aragua'         , 01, 'pitcher'            , 100),
+                ('Krisvely Varela' , '1990/03/04', 'Caracas, Venezuela'    , 'Navegantes del Magallanes', 12, 'jardinero izquierdo', 200),
+                ('Miguel Ambrosio' , '1988/05/06', 'Caracas, Venezuela'    , 'Leones del Caracas'       , 23, 'tercera base'       , 300),
+                ('Ricardo Monascal', '1846/08/12', 'San Antonio, Venezuela', 'Navegantes del Magallanes', 42, 'catcher'            , 400)
+        ) AS "Datos" ("nombre completo", "fecha de nacimiento", "lugar de procedencia", "equipo", "número", "posición", "precio")
+WHERE "Datos"."equipo" = "Fantasy"."Equipo"."nombre completo";
 
 
 
-INSERT INTO "Fantasy"."Juega" ("jugador", "equipo", "número", "inicio", "fin")
-SELECT
+INSERT INTO "Fantasy"."Juega" (
+        "jugador",
+        "equipo",
+        "número",
+        "inicio",
+        "fin"
+) SELECT
         "Fantasy"."Jugador"."id",
         "Fantasy"."Equipo"."id",
         "Datos"."número",
@@ -30,18 +59,22 @@ FROM
         "Fantasy"."Jugador",
         "Fantasy"."Equipo",
         (VALUES
-                ('Fabiana Reggio'  ,  'Tigres de Aragua'         , 12, '2007/09/17', '2009/04/12'),
-                ('Fabiana Reggio'  ,  'Navegantes del Magallanes', 12, '2009/09/03', NULL        ),
-                ('Krisvely Varela' ,  'Navegantes del Magallanes', 34, '2007/09/17', NULL        ),
-                ('Ricardo Monascal',  'Leones del Caracas'       , 12, '2003/09/22', NULL        ),
-                ('Miguel Ambrosio' ,  'Navegantes del Magallanes', 45, '2005/09/19', NULL        )
+                ('Fabiana Reggio'  , 'Tigres de Aragua'         , 12, '2007/09/17', '2009/04/12'),
+                ('Fabiana Reggio'  , 'Navegantes del Magallanes', 12, '2009/09/03', NULL        ),
+                ('Krisvely Varela' , 'Navegantes del Magallanes', 34, '2007/09/17', NULL        ),
+                ('Ricardo Monascal', 'Leones del Caracas'       , 12, '2003/09/22', NULL        ),
+                ('Miguel Ambrosio' , 'Navegantes del Magallanes', 45, '2005/09/19', NULL        )
         ) AS "Datos" ("jugador", "equipo", "número", "inicio", "fin")
 WHERE "Datos"."jugador" = "Fantasy"."Jugador"."nombre completo" AND "Datos"."equipo" = "Fantasy"."Equipo"."nombre completo";
 
 
 
-INSERT INTO "Fantasy"."Juego" ("inicio", "equipo local", "equipo visitante", "estadio")
-SELECT
+INSERT INTO "Fantasy"."Juego" (
+        "inicio",
+        "equipo local",
+        "equipo visitante",
+        "estadio"
+) SELECT
         to_timestamp("Datos"."inicio", 'YYYY/MM/DD HH12:MI AM'),
         "Equipo local"."id",
         "Equipo visitante"."id",
@@ -63,8 +96,13 @@ WHERE
 
 
 
-INSERT INTO "Fantasy"."Noticia" ("fecha", "URL de imagen", "título", "tags", "contenido")
-VALUES
+INSERT INTO "Fantasy"."Noticia" (
+        "fecha",
+        "URL de imagen",
+        "título",
+        "tags",
+        "contenido"
+) VALUES
         (
                 to_timestamp('2011/11/02', 'YYYY/MM/DD'),
                 'noti1.jpg',

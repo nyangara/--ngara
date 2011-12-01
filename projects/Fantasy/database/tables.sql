@@ -83,7 +83,7 @@ CREATE TABLE "Fantasy"."Estadio" (
         "medida del center field"       integer                             NULL,
         "medida del right field"        integer                             NULL,
         "descripción"                   text                                NULL,
-        "URL del logo"                  text                                NULL,
+        "URL de la foto"                text                                NULL,
 
         CONSTRAINT "Estadio PRIMARY KEY"
                 PRIMARY KEY ("id")

@@ -1,14 +1,27 @@
-INSERT INTO "Fantasy"."Estadio" ("nombre", "ciudad", "estado", "capacidad", "tipo de terreno", "año de fundación")
-VALUES
-        ('Alfonso "Chico" Carrasquel'   , 'Puerto La Cruz'      , 'Anzoátegui'          , 18000,        'grama',        1234),
-        ('Enzo Hernández'               , 'El Tigre'            , 'Anzoátegui'          ,  5762,        'grama',        1234),
-        ('Antonio Herrera Gutiérrez'    , 'Barquisimeto'        , 'Lara'                , 20450,        'grama',        1234),
-        ('José Pérez Colmenares'        , 'Maracay'             , 'Aragua'              , 15000,        'grama',        1234),
-        ('José Bernardo Pérez'          , 'Valencia'            , 'Carabobo'            , 15000,        'grama',        1234),
-        ('Luis Aparicio'                , 'Maracaibo'           , 'Zulia'               , 23000,        'grama',        1234),
-        ('Nueva Esparta'                , 'Porlamar'            , 'Nueva Esparta'       , 16000,        'grama',        1234),
-        ('Universitario'                , 'Caracas'             , 'Distrito Capital'    , 20763,        'grama',        1234),
-        ('La Ceiba'                     , 'Ciudad Guayana'      , 'Bolívar'             , 30000,        'grama',        1234);
+INSERT INTO "Fantasy"."Estadio" (
+        "nombre",
+        "ciudad",
+        "estado",
+        "capacidad",
+        "año de fundación",
+        "tipo de terreno",
+        "medida del left field",
+        "medida del center field",
+        "medida del right field",
+        "URL de la foto",
+        "descripción"
+) VALUES
+        ('Alfonso "Chico" Carrasquel'      , 'Puerto La Cruz', 'Anzoátegui'      , 18000, 1991, 'grama artificial', NULL, NULL, NULL, NULL               , NULL),
+        ('Antonio Herrera Gutiérrez'       , 'Barquisimeto'  , 'Lara'            , 22000, 1969, 'grama'           , NULL, NULL, NULL, NULL               , NULL),
+        ('Bachiller Julio Hernández Molina', 'Araure'        , 'Portuguesa'      , 12000, 1967, 'grama'           ,  333,  383,  333, NULL               , NULL),
+        ('Enzo Hernández'                  , 'El Tigre'      , 'Anzoátegui'      ,  5762, 2006, 'grama artificial',  330,  405,  330, NULL               , NULL),
+        ('José Bernardo Pérez'             , 'Valencia'      , 'Carabobo'        , 15000, 1955, 'grama'           , NULL, NULL, NULL, 'JoseBernardo.jpg' , NULL),
+        ('José Pérez Colmenares'           , 'Maracay'       , 'Aragua'          , 12647, 1965, 'grama'           ,  348,  384,  348, NULL               , NULL),
+        ('La Ceiba'                        , 'Ciudad Guayana', 'Bolívar'         , 30000, 1998, 'grama'           , NULL, NULL, NULL, NULL               , NULL),
+        ('Luis Aparicio "El Grande"'       , 'Maracaibo'     , 'Zulia'           , 23900, 1963, 'grama'           , NULL, NULL, NULL, NULL               , NULL),
+        ('Metropolitano de San Cristóbal'  , 'San Cristóbal' , 'Táchira'         , 22000, 2005, 'grama'           , NULL, NULL, NULL, NULL               , NULL),
+        ('Nueva Esparta'                   , 'Porlamar'      , 'Nueva Esparta'   , 16100, 1990, 'grama'           , NULL, NULL, NULL, NULL               , NULL),
+        ('Universitario'                   , 'Caracas'       , 'Distrito Capital', 23700, 1951, 'grama'           ,  347,  385,  347, 'Universitario.jpg', NULL);
 
 INSERT INTO "Fantasy"."Equipo" (
         "nombre completo",
@@ -31,7 +44,7 @@ INSERT INTO "Fantasy"."Equipo" (
 FROM
         "Fantasy"."Estadio",
         (VALUES
-                ('Águilas del Zulia'        , 'Águilas'   , 'ZUL', 1968, 'Maracaibo'     , 'Zulia'           , 'Luis Aparicio'             , 'aguilas.jpg'),
+                ('Águilas del Zulia'        , 'Águilas'   , 'ZUL', 1968, 'Maracaibo'     , 'Zulia'           , 'Luis Aparicio "El Grande"' , 'aguilas.jpg'),
                 ('Bravos de Margarita'      , 'Bravos'    , 'MAR', 2007, 'Porlamar'      , 'Nueva Esparta'   , 'Nueva Esparta'             , NULL),
                 ('Cardenales de Lara'       , 'Cardenales', 'LAR', 1942, 'Barquisimeto'  , 'Lara'            , 'Antonio Herrera Gutiérrez' , NULL),
                 ('Caribes de Anzoátegui'    , 'Caribes'   , 'CAR', 1987, 'Puerto La Cruz', 'Anzoátegui'      , 'Alfonso "Chico" Carrasquel', NULL),

@@ -16,7 +16,7 @@
                         'medida del center field',
                         'medida del right field',
                         'descripción',
-                        'URL del logo'
+                        'URL de la foto'
                 );
                 protected static $pk = array(
                         'id'

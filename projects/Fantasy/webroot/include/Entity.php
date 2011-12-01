@@ -1,5 +1,5 @@
 <?php
-        require_once 'include/Facade.php';
+        require_once 'include/DataFacade.php';
 
         class Entity {
                 protected $data;
@@ -28,12 +28,12 @@
                 public static function fields() { return static::$fields; }
                 public static function pk    () { return static::$pk    ; }
 
-                public function insert() { return Facade::insert($this); }
-                public function select() { return Facade::select($this); }
-                public function update() { return Facade::update($this); }
-                public function remove() { return Facade::remove($this); }
+                public function insert() { return DataFacade::insert($this); }
+                public function select() { return DataFacade::select($this); }
+                public function update() { return DataFacade::update($this); }
+                public function remove() { return DataFacade::remove($this); }
 
-                public static function retrieveAll() { return Facade::retrieveAll(get_called_class()); }
-                public static function removeAll  () { return Facade::removeAll  (get_called_class()); }
+                public static function retrieveAll() { return DataFacade::retrieveAll(get_called_class()); }
+                public static function removeAll  () { return DataFacade::removeAll  (get_called_class()); }
         }
 ?>

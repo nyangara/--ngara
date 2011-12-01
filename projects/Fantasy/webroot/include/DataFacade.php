@@ -1,5 +1,5 @@
 <?php
-        class Facade {
+        class DataFacade {
                 protected static function dolar($i) { return '$' . $i; }
                 protected static function quote($i) { return '"' . $i . '"'; }
                 protected static function conds($i, $j) { return self::quote($i) . ' = ' . self::dolar($j); }

@@ -4,7 +4,6 @@ body {
 	background-color: #e6e3dc;
 	background-image: url(../images/background.png);
 	background-repeat: repeat-x;
-
 }
 
 a {
@@ -22,6 +21,10 @@ a:hover {
   margin: 0 auto;
 }
 
+#header {
+
+}
+
 #logo {
 	width: 240px;
 	height: 50px;
@@ -35,7 +38,6 @@ a:hover {
   font-family: "Tahoma", Arial, Helvetica, sans-serif;
   padding-top: 5px;
 }
-
 #updates span {
   font-size: 13px;
 }
@@ -98,7 +100,7 @@ ul {
 	list-style: none;
 	margin: 0px;
 	padding: 0px;
-}
+	}
 
 #navigation {
 	float:right;
@@ -127,6 +129,7 @@ ul {
 	margin-bottom: 5px;
 }
 
+
 #navigation li a:hover {
 	background-repeat: no-repeat;
 	-webkit-border-top-left-radius: 10px;
@@ -143,6 +146,7 @@ ul {
 	-moz-border-radius-topleft: 10px;
 	-moz-border-radius-topright: 10px;
 	background-color: #6D8103;
+
 }
 
 #content {
@@ -170,7 +174,7 @@ ul {
   width: 90%;
 }
 
-#footer{
+#footer {
 	height: 65px;
 	font-family: "Tahoma", Arial, Helvetica, sans-serif;
 	font-size:14px;
@@ -188,7 +192,7 @@ ul {
 	float:left;
 }
 
-#nombresistema{
+#nombresistema       {
 	font-family: Verdana, Geneva, sans-serif;
 	font-size: 18px;
 	color: #CCC;
@@ -197,12 +201,11 @@ ul {
 	margin-top: 10px;
 }
 
-#sideBar #twitter{
+#sidebar #twitter {
 	padding-right: 30px;
 	padding-left: 30px;
 }
-
-.logoCluster{
+.logoCluster {
 	background-image: url(../images/logoClusterSS.png);
 	height: 71px;
 	width: 137px;
@@ -213,7 +216,7 @@ ul {
 	margin-left: 20px;
 }
 
-.logoNiangara{
+.logoNiangara {
 	background-image: url(../images/niangaralogo.png);
 	height: 71px;
 	width: 137px;
@@ -225,32 +228,29 @@ ul {
 	margin-left: 70%;
 	margin-right: -40px;
 }
-
-#contacto{
+#contacto {
 	text-align: center;
 	width: 760px;
 }
 
-#sideBar{
+#sidebar {
 	float: right;
 	height: 500px;
 	padding-right: 0px;
 }
-
-  #buscador{
+  #buscador {
 	padding-top: 10px;
 	padding-right: 15px;
 	padding-bottom: 15px;
 	padding-left: 20px;
 }
-
-#contenido_titulo{
+#contenido_titulo {
 	float: left;
 	width: 300px;
 }
 
-#content #contenido_interno{
-	width: 600px;
+#content #contenido_interno {
+	width: 580px;
 	height: 500px;
 	float: left;
 	background-color: #333;
@@ -261,8 +261,7 @@ ul {
 #content #contenido_interno p{
 	color: grey;
 }
-
-.Boton {
+.Boton  {
 	background-color: #708403;
 	display: block;
 	height: 20px;
@@ -279,7 +278,6 @@ ul {
 	margin-right: 8px;
 
 }
-
 .Boton:hover {
 	background-color: #690;
 	display: block;
@@ -296,7 +294,6 @@ ul {
 	margin-top: -36px;
 	margin-right: 8px;
 }
-
 #wrapper #header .Boton a {
 	text-decoration: none;
 }
@@ -312,16 +309,15 @@ ul {
 	height: 300px;
 	margin: 0px;
 }
-
 #wrapper #content #contenido #formulario p {
 	color: #FFF;
 }
-
 #wrapper #content #contenido {
 	background-color: #333;
 	-webkit-border-radius: 10px;
 	-moz-border-radius: 10px;
 }
+
 
 #wrapper #content #contenido .user {
 	background-image: url(../images/user.png);
@@ -340,8 +336,4 @@ ul {
 	border-bottom-color: #000;
 	border-left-color: #000;
 	margin-right: 40px;
-}
-
-#video{
-	margin-left: 20px;
 }

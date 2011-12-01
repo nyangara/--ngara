@@ -47,6 +47,7 @@
                 'Noticias'    => 'noticias',
                 'Estadios'    => 'estadios',
                 'Equipos'     => 'equipos',
+                'Jugadores'   => 'jugadores',
                 'Calendario'  => 'calendario',
                 'Resultados'  => 'resultados',
                 'Ligas'       => 'ligas',

@@ -1,0 +1,61 @@
+.alcanceEquipoJ {
+	height: auto;
+	width: 100%;
+}
+.alcanceEquipoJ .imagen {
+	margin: 4px;
+	height: 50px;
+	width: 50px;
+	border: thin solid #000;
+	float: left;
+}
+.alcanceEquipoJ .Fila {
+	height: 70px;
+	margin-left:20px;
+}
+.alcanceEquipoJ .datos {
+	width: 250px;
+	float: left;
+	font-family: Verdana, Geneva, sans-serif;
+	font-size: 14px;
+	color: #000;
+	text-align: justify;
+	padding-left:50px;
+}
+
+#form {
+	margin: 10px;
+	float: right;
+}
+
+#content #contenido_interno_jugadores{
+	overflow:auto;
+	width: 600px;
+	height: 500px;
+	float: left;
+	background-color: #333;
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+}
+
+#box_jugador{
+	width:400px;
+	border:#666;
+	//background-color: #6E8303;
+	background: rgb(191,210,85); /* Old browsers */
+background: -moz-linear-gradient(top,  rgba(191,210,85,1) 0%, rgba(142,185,42,1) 50%, rgba(114,170,0,1) 51%, rgba(158,203,45,1) 100%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(191,210,85,1)), color-stop(50%,rgba(142,185,42,1)), color-stop(51%,rgba(114,170,0,1)), color-stop(100%,rgba(158,203,45,1))); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(top,  rgba(191,210,85,1) 0%,rgba(142,185,42,1) 50%,rgba(114,170,0,1) 51%,rgba(158,203,45,1) 100%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(top,  rgba(191,210,85,1) 0%,rgba(142,185,42,1) 50%,rgba(114,170,0,1) 51%,rgba(158,203,45,1) 100%); /* Opera 11.10+ */
+background: -ms-linear-gradient(top,  rgba(191,210,85,1) 0%,rgba(142,185,42,1) 50%,rgba(114,170,0,1) 51%,rgba(158,203,45,1) 100%); /* IE10+ */
+background: linear-gradient(top,  rgba(191,210,85,1) 0%,rgba(142,185,42,1) 50%,rgba(114,170,0,1) 51%,rgba(158,203,45,1) 100%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#bfd255', endColorstr='#9ecb2d',GradientType=0 ); /* IE6-9 */
+
+	
+	
+	padding:10px;
+	margin-bottom:10px;
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	
+}

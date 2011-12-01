@@ -8,7 +8,7 @@
 
                 <link rel="stylesheet" href="assets/styles/style.css" type="text/css"/>
                 <link rel="stylesheet" href="static/styles/style_<?php echo basename($_SERVER['SCRIPT_NAME'], '.php'); ?>.css" type="text/css"/>
-                <link rel="Shortcut Icon" href="assets/images/10thinning.ico">
+                <link rel="Shortcut Icon" href="assets/images/10thinning.ico"/>
                 <link href="styles/style_index.css" rel="stylesheet" type="text/css"/>
                 <style type="text/css">
                         body {

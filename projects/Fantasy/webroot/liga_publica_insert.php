@@ -11,7 +11,7 @@
                 <form action="controller_liga_insert" method="post">
                         <p>Nombre: <input type="text" name="nombre"/></p>
                         <input type="hidden" name="creador"    value="1"    /><!-- FIXME: tomar de sesión -->
-                        <input type="hidden" name="es pública" value="f"    />
+                        <input type="hidden" name="es pública" value="t"    />
                         <input type="submit" name="insertLiga" value="Crear"/>
                 </form>
         </div>

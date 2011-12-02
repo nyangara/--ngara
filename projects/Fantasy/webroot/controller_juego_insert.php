@@ -12,12 +12,15 @@
                         $_POST['ampm'  ];
 
                 $juego = new Juego();
-                $data = array('inicio' => $fecha);
-                foreach (Juego::fields() as $f) {
-                        $k = str_replace(' ', '_', $f);
-                        if (array_key_exists($k, $_POST)) $data[$f] = $_POST[$k];
-                }
-                $juego->set_all($data);
+                $juego->set_all(array_reduce(
+                        Juego::fields(),
+                        function ($acc, $f) {
+                                $k = str_replace(' ', '_', $f);
+                                if (array_key_exists($k, $_POST)) $acc[$f] = $_POST[$k];
+                                return $acc;
+                        },
+                        array('inicio' => $fecha)
+                ));
                 $juego->insert();
         }
 

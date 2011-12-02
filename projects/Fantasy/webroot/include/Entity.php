@@ -11,6 +11,15 @@
                         return null;
                 }
 
+                public function is_set($field) {
+                        return array_key_exists($field, $this->data);
+                }
+
+                public function undef($field) {
+                        unset($this->data[$field]);
+                        return $this;
+                }
+
                 public function set($field, $datum) {
                         if (in_array($field, $this->fields())) {
                                 $this->data[$field] = $datum;

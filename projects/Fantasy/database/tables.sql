@@ -202,6 +202,9 @@ CREATE TABLE "Fantasy"."Juego" (
         CONSTRAINT "Juego PRIMARY KEY"
                 PRIMARY KEY ("id"),
 
+        CONSTRAINT "Juego UNIQUE (inicio, estadio)"
+                UNIQUE ("inicio", "estadio"),
+
         CONSTRAINT "Juego FOREIGN KEY equipo local REFERENCES Equipo"
                 FOREIGN KEY ("equipo local")
                 REFERENCES "Fantasy"."Equipo" ("id")

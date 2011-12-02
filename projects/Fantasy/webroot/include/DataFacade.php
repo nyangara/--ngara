@@ -5,40 +5,41 @@
                 protected static function conds($i, $j) { return self::quote($i) . ' = ' . self::dolar($j); }
                 protected static function sets ($i, $j) { return 'SET ' . self::conds($i, $j); }
 
+                // No se incluyen en el query a los campos que no estén definidos.
+                // Si están definidos y valen null, sí se incluyen y se guarda NULL.
                 public static function insert($entity) {
                         global $dbconn;
-                        global $prepared;
+                        global $pqs;
 
                         $ec = get_class($entity);
                         $en = $ec::table();
-                        $fs = $ec::fields();
-                        if ($entity->get('id') == null) {
-                                $fs = array_filter(
-                                        $fs,
-                                        function ($f) { return $f != 'id'; }
-                                );
-                        }
-                        $fn = count($fs);
-                        $fr = range(1, $fn);
-
-                        $data = array_map(
-                                function ($i) use (&$entity) { $datum = $entity->get($i); return ($datum ? $datum : null); },
-                                $fs
+                        $ef = $ec::fields();
+                        $fs = array_reduce(
+                                $ef,
+                                function ($acc, $f) use (&$entity) {
+                                        if ($entity->is_set($f)) $acc[$f] = $entity->get($f);
+                                        return $acc;
+                                },
+                                array()
                         );
+                        $fn = array_keys($fs);
+                        $fc = count($fs);
+                        $fr = range(1, $fc);
+                        $pq = 'INSERT ' . $en . '(' . join(',', $fn) . ')';
 
-                        if (!isset($prepared)) $prepared = array();
-                        if (!in_array('INSERT ' . $en, $prepared)) {
+                        if (!isset($pqs)) $pqs = array();
+                        if (!in_array($pq, $pqs)) {
                                 $query =
                                         'INSERT INTO "Fantasy"."' . $en . '" ('  .
-                                        join(',', array_map('self::quote', $fs)) .
+                                        join(',', array_map('self::quote', $fn)) .
                                         ') VALUES ('                             .
                                         join(',', array_map('self::dolar', $fr)) .
                                         ')';
-                                $result = pg_prepare($dbconn, 'INSERT ' . $en, $query) or die('pg_prepare: ' . pg_last_error());
-                                $prepared[] = 'INSERT ' . $en;
+                                $result = pg_prepare($dbconn, $pq, $query) or die('pg_prepare: ' . pg_last_error());
+                                $pqs[] = $pq;
                         }
 
-                        $result = pg_execute($dbconn, 'INSERT ' . $en, $data) or die('pg_execute: ' . pg_last_error());
+                        $result = pg_execute($dbconn, $pq, array_values($fs)) or die('pg_execute: ' . pg_last_error());
 
                         return;
                 }
@@ -47,10 +48,10 @@
                         global $dbconn;
 
                         $en = $ec::table();
-                        $fs = $ec::fields();
+                        $ef = $ec::fields();
 
                         $query =
-                                'SELECT ' . join(',', array_map('self::quote', $fs)) .
+                                'SELECT ' . join(',', array_map('self::quote', $ef)) .
                                 'FROM "Fantasy"."' . $en . '"';
 
                         $result = pg_query($dbconn, $query) or die('pg_prepare: ' . pg_last_error());
@@ -71,32 +72,33 @@
 
                 public static function select($entity) {
                         global $dbconn;
-                        global $prepared;
+                        global $pqs;
 
                         $ec = get_class($entity);
                         $en = $ec::table();
-                        $fs = $ec::fields();
+                        $ef = $ec::fields();
                         $pk = $ec::pk();
                         $kn = count($pk);
                         $kr = range(1, $kn);
+                        $pq = 'SELECT ' . $en;
 
                         $data = array_map(
                                 function ($i) use (&$entity) { return $entity->get($i); },
                                 $pk
                         );
 
-                        if (!isset($prepared)) $prepared = array();
-                        if (!in_array('SELECT ' . $en, $prepared)) {
+                        if (!isset($pqs)) $pqs = array();
+                        if (!in_array($pq, $pqs)) {
                                 $query =
-                                        'SELECT ' . join(',', array_map('self::quote', $fs)) .
+                                        'SELECT ' . join(',', array_map('self::quote', $ef)) .
                                         'FROM "Fantasy"."' . $en . '" WHERE '                .
                                         join(' AND ', array_map('self::conds', $pk, $kr));
 
-                                $result = pg_prepare($dbconn, 'SELECT ' . $en, $query) or die('pg_prepare: ' . pg_last_error());
-                                $prepared[] = 'SELECT ' . $en;
+                                $result = pg_prepare($dbconn, $pq, $query) or die('pg_prepare: ' . pg_last_error());
+                                $pqs[] = $pq;
                         }
 
-                        $result = pg_execute($dbconn, 'SELECT ' . $en, $data) or die('pg_execute: ' . pg_last_error());
+                        $result = pg_execute($dbconn, $pq, $data) or die('pg_execute: ' . pg_last_error());
 
                         if (pg_num_rows($result) === 0) return null;
                         $row = pg_fetch_row($result) or die('pg_fetch_row: ' . pg_last_error());
@@ -113,31 +115,32 @@
 
                 public static function update($entity) {
                         global $dbconn;
-                        global $prepared;
+                        global $pqs;
 
                         $ec = get_class($entity);
                         $en = $ec::table();
                         $fs = $ec::fields();
-                        $fn = count($fs);
-                        $fr = range(1, $fn);
+                        $fc = count($fs);
+                        $fr = range(1, $fc);
                         $pk = $ec::pk();
                         $kn = count($pk);
-                        $kr = range($fn + 1, $fn + $kn);
+                        $kr = range($fc + 1, $fc + $kn);
+                        $pq = 'UPDATE ' . $en;
 
                         $get = function ($i) use (&$entity) { return $entity->get($i); };
                         $data = array_merge(array_map($get, $fs), array_map($get, $pk));
 
-                        if (!isset($prepared)) $prepared = array();
-                        if (!in_array('UPDATE ' . $en, $prepared)) {
+                        if (!isset($pqs)) $pqs = array();
+                        if (!in_array($pq, $pqs)) {
                                 $query =
                                         'UPDATE "Fantasy"."' . $en . '" SET '                        .
                                         join(','    , array_map('self::conds', $fs, $fr)) . 'WHERE ' .
                                         join(' AND ', array_map('self::conds', $pk, $kr));
-                                $result = pg_prepare($dbconn, 'UPDATE ' . $en, $query) or die('pg_prepare: ' . pg_last_error());
-                                $prepared[] = 'UPDATE ' . $en;
+                                $result = pg_prepare($dbconn, $pq, $query) or die('pg_prepare: ' . pg_last_error());
+                                $pqs[] = $pq;
                         }
 
-                        $result = pg_execute($dbconn, 'UPDATE ' . $en, $data) or die('pg_execute: ' . pg_last_error());
+                        $result = pg_execute($dbconn, $pq, $data) or die('pg_execute: ' . pg_last_error());
 
                         return true;
                 }
@@ -156,28 +159,29 @@
 
                 public static function remove($entity) {
                         global $dbconn;
-                        global $prepared;
+                        global $pqs;
 
                         $en = $ec::table();
                         $pk = $ec::pk();
                         $kn = count($pk);
                         $kr = range(1, $kn);
+                        $pq = 'DELETE ' . $en;
 
                         $data = array_map(
                                 function ($i) use (&$entity) { return $entity->get($i); },
                                 $pk
                         );
 
-                        if (!isset($prepared)) $prepared = array();
-                        if (!in_array('DELETE ' . $en, $prepared)) {
+                        if (!isset($pqs)) $pqs = array();
+                        if (!in_array($pq, $pqs)) {
                                 $query =
                                         'DELETE FROM "Fantasy"."' . $en . '" WHERE ' .
                                         join(' AND ', array_map('self::conds', $pk, $kr));
-                                $result = pg_prepare($dbconn, 'DELETE ' . $en, $query) or die('pg_prepare: ' . pg_last_error());
-                                $prepared[] = 'DELETE ' . $en;
+                                $result = pg_prepare($dbconn, $pq, $query) or die('pg_prepare: ' . pg_last_error());
+                                $pqs[] = $pq;
                         }
 
-                        $result = pg_execute($dbconn, 'DELETE ' . $en, $data) or die('pg_execute: ' . pg_last_error());
+                        $result = pg_execute($dbconn, $pq, $data) or die('pg_execute: ' . pg_last_error());
 
                         return true;
                 }

@@ -4,36 +4,24 @@
         require_once 'include/UIFacade.php';
         require      'include/pre.php';
 ?>
-<div id="contenido_interno" style="height: auto">
-        <div style="height:500px; overflow-y: scroll;">
-                <table width="100%" border="0" cellspacing="5" cellpadding="5" align="left" style="color: #cccccc">
-                        <tr>
-                                <th colspan="4" style="border: 2px solid #cccccc">Calendario</th>
-                        </tr>
-                        <tr>
-                                <th style="border: 2px solid #cccccc">Fecha           </th>
-                                <th style="border: 2px solid #cccccc">Equipo local    </th>
-                                <th style="border: 2px solid #cccccc">Equipo visitante</th>
-                                <th style="border: 2px solid #cccccc">Estadio         </th>
-                        </tr>
+<h2>Calendario</h2>
+<table width="100%" border="0" cellspacing="5" cellpadding="5">
+    <tr>
+        <th>Fecha           </th>
+        <th>Equipo local    </th>
+        <th>Equipo visitante</th>
+        <th>Estadio         </th>
+    </tr>
 <?php
-        foreach (UIFacade::calendario() as $c) {
-                $date = strtotime($c['juego']->get('inicio'));
+    foreach (UIFacade::calendario() as $c) {
+    $date = strtotime($c['juego']->get('inicio'));
 ?>
-                        <tr>
-                                <td style="border: 1px solid #cccccc">
-                                        <?php echo date('d/m/Y', $date); ?>
-                                        <br/>
-                                        <?php echo date('h:i A', $date); ?>
-                                </td>
-                                <td style="border: 1px solid #cccccc"><?php echo $c['equipo local'    ]->get('nombre corto'); ?></td>
-                                <td style="border: 1px solid #cccccc"><?php echo $c['equipo visitante']->get('nombre corto'); ?></td>
-                                <td style="border: 1px solid #cccccc"><?php echo $c['estadio'         ]->get('nombre'         ); ?></td>
-                        </tr>
-<?php
-        }
-?>
-                </table>
-        </div>
-</div>
+<tr>
+    <td><?php echo date('d/m/Y', $date); ?><br /><?php echo date('h:i A', $date); ?></td>
+    <td><?php echo $c['equipo local'    ]->get('nombre corto'); ?></td>
+    <td><?php echo $c['equipo visitante']->get('nombre corto'); ?></td>
+    <td><?php echo $c['estadio'         ]->get('nombre'      ); ?></td>
+</tr>
+<?php } ?>
+</table>
 <?php require('include/post.html'); ?>

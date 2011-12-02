@@ -1,52 +1,15 @@
-                                <div id="sidebar">
-                                        <div id="buscador">
-                                                Buscar:
-                                                <input id ="busca" name="Buscar" type="text" lang="es" maxlength="20"/>
-                                        </div>
-                                        <div id="twitter">
-                                                <script src="http://widgets.twimg.com/j/2/widget.js"></script>
-                                                <script>
-                                                        new TWTR.Widget({
-                                                                        version:  2,
-                                                                        type:     'profile',
-                                                                        rpp:      4,
-                                                                        interval: 30000,
-                                                                        width:    180,
-                                                                        height:   230,
-                                                                        theme: {
-                                                                                shell: {
-                                                                                        background: '#333333',
-                                                                                        color: '#ffffff'
-                                                                                },
-                                                                                tweets: {
-                                                                                        background: '#6D8103',
-                                                                                        color: '#ffffff',
-                                                                                        links: '#e6e3dc'
-                                                                                }
-                                                                        },
-                                                                        features: {
-                                                                                scrollbar: false,
-                                                                                loop: false,
-                                                                                live: false,
-                                                                                hashtags: true,
-                                                                                timestamp: true,
-                                                                                avatars: false,
-                                                                                behavior: 'all'
-                                                                        }
-                                                        }).render().setUser('lvbp_oficial').start();
-                                                </script>
-                                        </div>
-                                </div>
-                        </div>
-                        <div id="footer">
-                                <span class="logoCluster"></span>
-                                <div id="contacto">
-                                        <p>Ñángara &amp; Cluster System Solutions</p>
-                                        <p>CI3715 - Septiembre-Diciembre 2011</p>
-                                        <p>Universidad Simón Bolívar</p>
-                                </div>
-                                <span class="logoNiangara"></span>
-                        </div>
-                </div>
-        </body>
+        </div><!-- main -->
+        <div id="sidebar">
+            <div id="twitter">
+            <script src="http://widgets.twimg.com/j/2/widget.js"></script>
+            <script src="static/js/twitter.js"></script>
+            </div>
+        </div>
+    </div><!-- content -->
+    <div id="footer">
+    <p><a href="reglas.php">Reglas</a> | <a href="faq.php">FAQ</a> | <a href="informacion.php">Acerca de</a></p>
+    <p class="copyright">Ñángara &amp; Cluster System Solutions © 2011</p>
+    </div>
+</div>
+</body>
 </html>

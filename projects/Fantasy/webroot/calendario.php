@@ -26,9 +26,9 @@
                                         <br/>
                                         <?php echo date('h:i A', $date); ?>
                                 </td>
-                                <td style="border: 1px solid #cccccc"><?php echo $c['equipo local'    ]->get('nombre'); ?></td>
-                                <td style="border: 1px solid #cccccc"><?php echo $c['equipo visitante']->get('nombre'); ?></td>
-                                <td style="border: 1px solid #cccccc"><?php echo $c['estadio'         ]->get('nombre'); ?></td>
+                                <td style="border: 1px solid #cccccc"><?php echo $c['equipo local'    ]->get('nombre corto'); ?></td>
+                                <td style="border: 1px solid #cccccc"><?php echo $c['equipo visitante']->get('nombre corto'); ?></td>
+                                <td style="border: 1px solid #cccccc"><?php echo $c['estadio'         ]->get('nombre'         ); ?></td>
                         </tr>
 <?php
         }

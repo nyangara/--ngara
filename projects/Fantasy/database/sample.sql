@@ -15,6 +15,26 @@ SELECT "Fantasy"."registrar"(
 
 
 
+INSERT INTO "Fantasy"."Liga" (
+        "nombre",
+        "creador",
+        "es pública"
+) SELECT
+        "Datos"."nombre",
+        "Usuario"."id",
+        "Datos"."es pública"
+FROM
+        "Fantasy"."Usuario",
+        (VALUES
+                ('Rubik'     , 'minender' , true ),
+                ('Weierstraß', 'minender' , false),
+                ('GOMITAS!!!', 'nanielito', false),
+                ('Croacroac' , 'pebbe'    , false)
+        ) AS "Datos" ("nombre", "username", "es pública")
+WHERE "Datos"."username" = "Fantasy"."Usuario"."username";
+
+
+
 INSERT INTO "Fantasy"."Jugador" (
         "nombre completo",
         "fecha de nacimiento",

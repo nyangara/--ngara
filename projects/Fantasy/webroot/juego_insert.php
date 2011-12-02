@@ -1,26 +1,7 @@
 <?php
         require_once 'include/config.php';
-        require_once 'include/dbconn/admin.php';
-        require_once 'model/Estadio.php';
-        require_once 'model/Equipo.php';
-
-        ////////////////////////////////////////////////////////////////////////////////
-        require_once 'include/model/entity/Juego.php';
-
-        if (array_key_exists('submit', $_POST)) {
-                $fecha = $_POST['year'  ] . '-' .
-                         $_POST['month' ] . '-' .
-                         $_POST['day'   ] . ' ' .
-                         $_POST['hour'  ] . ':' .
-                         $_POST['minute'] . ' ' .
-                         $_POST['am_pm'];
-                $juego = new Juego();
-                $juego->set('fecha'           , $fecha                    )
-                      ->set('equipo local'    , $_POST['equipo local'    ])
-                      ->set('equipo visitante', $_POST['equipo visitante'])
-                      ->set('estadio'         , $_POST['estadio'         ]);
-        }
-        ////////////////////////////////////////////////////////////////////////////////
+        require_once 'include/dbconn/user.php';
+        require_once 'include/UIFacade.php';
 
         function select_opts($name, $range, $now, $format) {
                 $r = '<select name="' . $name . '">';
@@ -35,10 +16,10 @@
                 return $r . "</select>";
         }
 
-        $equipos = Equipo::retrieveAll();
-        $estadios = Estadio::retrieveAll();
+        $equipos  = UIFacade::retrieveAll('Equipo');
+        $estadios = UIFacade::retrieveAll('Estadio');
 
-        require("include/pre.php");
+        require 'include/pre.php';
 ?>
 <div id="contenido_interno" style="height: auto">
         <div style="height:500px; overflow-y: scroll;">
@@ -48,7 +29,7 @@
                                         Agregar juego
                                 </th>
                         </tr>
-                        <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post">
+                        <form action="controller_juego_insert" method="post">
                                 <tr>
                                         <td style="border: 1px solid #cccccc">
                                                 Introduzca la fecha:
@@ -65,30 +46,26 @@
                                                 <?php echo select_opts('hour', range(1, 12), date('h'), '%02d'); ?>
                                                 :
                                                 <?php echo select_opts('minute', range(0, 59), date('i'), '%02d'); ?>
-                                                <?php echo select_opts('am_pm', array('AM', 'PM'), date('A'), '%s'); ?>
+                                                <?php echo select_opts('ampm', array('AM', 'PM'), date('A'), '%s'); ?>
                                         </td>
                                 </tr>
                                 <tr>
                                         <td style="border: 1px solid #cccccc">
                                                 Seleccione el equipo local:
-                                                <select name="equipo_local">
-<?php
-        foreach ($equipos as $e) {
-                echo '<option value="' . $e->get('id') . '">' . $e->get('nombre corto') . '</option>';
-        }
-?>
+                                                <select name="equipo local" id="equipo_local">
+<?php   foreach ($equipos as $e) { ?>
+                                                        <option value="<?php echo $e->get('id'); ?>"><?php echo $e->get('nombre completo'); ?></option>
+<?php   } ?>
                                                 </select>
                                         </td>
                                 </tr>
                                 <tr>
                                         <td style="border: 1px solid #cccccc">
                                                 Seleccione el equipo visitante:
-                                                <select name="equipo_visitante">
-<?php
-        foreach ($equipos as $e) {
-                echo '<option value="' . $e->get('id') . '">' . $e->get('nombre corto') . '</option>';
-        }
-?>
+                                                <select name="equipo visitante">
+<?php   foreach ($equipos as $e) { ?>
+                                                        <option value="<?php echo $e->get('id'); ?>"><?php echo $e->get('nombre completo'); ?></option>
+<?php   } ?>
                                                 </select>
                                         </td>
                                 </tr>
@@ -96,21 +73,19 @@
                                         <td style="border: 1px solid #cccccc">
                                                 Seleccione el estadio:
                                                 <select name="estadio">
-<?php
-        foreach ($estadios as $e) {
-                echo '<option value="' . $e->get('id') . '">' . $e->get('nombre') . '</option>';
-        }
-?>
+<?php   foreach ($estadios as $s) { ?>
+                                                        <option value="<?php echo $s->get('id'); ?>"><?php echo $s->get('nombre'); ?></option>
+<?php   } ?>
                                                 </select>
                                         </td>
                                 </tr>
                                 <tr>
                                         <td style="border: 1px solid #cccccc">
-                                                <input name="submit" type="submit"/>
+                                                <input name="juego_insert" type="submit"/>
                                         </td>
                                 </tr>
                         </form>
                 </table>
         </div>
 </div>
-<?php require('include/post.html'); ?>
+<?php   require 'include/post.html'; ?>

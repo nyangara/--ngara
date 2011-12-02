@@ -11,7 +11,8 @@ GRANT
         TRUNCATE
 ON
         "Fantasy"."Estadio",
-        "Fantasy"."Equipo"
+        "Fantasy"."Equipo",
+        "Fantasy"."Juego"
 TO "Fantasy (administrador)";
 
 -- Secuencias correspondientes:
@@ -21,5 +22,6 @@ GRANT
         UPDATE
 ON SEQUENCE
         "Fantasy"."Estadio_id_seq",
-        "Fantasy"."Equipo_id_seq"
+        "Fantasy"."Equipo_id_seq",
+        "Fantasy"."Juego_id_seq"
 TO "Fantasy (administrador)";

@@ -12,11 +12,17 @@
                         $ec = get_class($entity);
                         $en = $ec::table();
                         $fs = $ec::fields();
+                        if ($entity->get('id') == null) {
+                                $fs = array_filter(
+                                        $fs,
+                                        function ($f) { return $f != 'id'; }
+                                );
+                        }
                         $fn = count($fs);
                         $fr = range(1, $fn);
 
                         $data = array_map(
-                                function ($i) use (&$entity) { return $entity->get($i); },
+                                function ($i) use (&$entity) { $datum = $entity->get($i); return ($datum ? $datum : null); },
                                 $fs
                         );
 
@@ -53,7 +59,7 @@
                         $r = array();
                         while ($row = pg_fetch_row($result)) {
                                 $e = new $ec;
-                                for ($i = 1; $i < $n; ++$i) {
+                                for ($i = 0; $i < $n; ++$i) {
                                         $e->set(pg_field_name($result, $i), $row[$i]);
                                 }
                                 $r[] = $e;

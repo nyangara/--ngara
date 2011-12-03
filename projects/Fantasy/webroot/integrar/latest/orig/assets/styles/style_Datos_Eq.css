@@ -1,0 +1,90 @@
+#Alcance #Foto {
+	text-align:center;
+	width: 200px;
+	height: 160px;
+	float: left;
+	margin-left:150px;
+	margin-bottom: 30px;
+}
+
+#Alcance #InfBas {
+	clear:both;
+	height: 125px;
+	width: 100%;
+}
+
+#Alcance #InfBas div {
+	display: block;
+	height: 2em;
+	padding-top: 0.5em;
+	text-align: center;
+}
+
+#Alcance #InfExt {
+	clear:both;
+	height: 100px;
+	width: 100%;
+}
+
+#Alcance #InfExt div {
+	display: block;
+	height: 2em;
+	padding-top: 0.5em;
+	text-align: center;
+}
+
+#env  {
+	height: 50px;
+	width: 100%;
+	clear: both;
+}
+
+#env form {
+	float: left;
+	margin-right: 24px;
+	margin-left: 24px;
+}
+
+
+#Alcance #env input{
+	display: inline;
+}
+
+#Alcance #Foto img {
+	margin-top:6px;
+	height: 180px;
+	width: 80%;
+	background-position: center center;
+}
+
+#box_info{
+	margin-left: 20px;
+	margin-top: 60px;
+	color: #000;
+	padding: 5px;
+	width: 550px;
+	height: 340px;
+	//background-color: #6E8303;
+			background: rgb(191,210,85); /* Old browsers */
+background: -moz-linear-gradient(top,  rgba(191,210,85,1) 0%, rgba(142,185,42,1) 50%, rgba(114,170,0,1) 51%, rgba(158,203,45,1) 100%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(191,210,85,1)), color-stop(50%,rgba(142,185,42,1)), color-stop(51%,rgba(114,170,0,1)), color-stop(100%,rgba(158,203,45,1))); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(top,  rgba(191,210,85,1) 0%,rgba(142,185,42,1) 50%,rgba(114,170,0,1) 51%,rgba(158,203,45,1) 100%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(top,  rgba(191,210,85,1) 0%,rgba(142,185,42,1) 50%,rgba(114,170,0,1) 51%,rgba(158,203,45,1) 100%); /* Opera 11.10+ */
+background: -ms-linear-gradient(top,  rgba(191,210,85,1) 0%,rgba(142,185,42,1) 50%,rgba(114,170,0,1) 51%,rgba(158,203,45,1) 100%); /* IE10+ */
+background: linear-gradient(top,  rgba(191,210,85,1) 0%,rgba(142,185,42,1) 50%,rgba(114,170,0,1) 51%,rgba(158,203,45,1) 100%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#bfd255', endColorstr='#9ecb2d',GradientType=0 ); /* IE6-9 */
+
+	
+	
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+}
+
+#content #contenido_interno_datos{
+	width: 600px;
+	height: 500px;
+	float: left;
+	background-color: #333;
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+}

@@ -170,6 +170,7 @@
                         global $dbconn;
                         global $pqs;
 
+                        $ec = get_class($entity);
                         $en = $ec::table();
                         $pk = $ec::pk();
                         $kn = count($pk);

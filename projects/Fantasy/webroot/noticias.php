@@ -18,10 +18,11 @@
         <div class="admin">
                 <form method="post" action="controller_contenido_remove">
                         <input type="hidden" name="id" value="<?php echo $id; ?>"/>
-                        <input type="submit" name="contenido_remove" value="Eliminar" />
+                        <input type="hidden" name="goto" value="noticias"/>
+                        <input type="submit" name="contenido_remove" value="Eliminar"/>
                 </form>
                 <form method="post" action="contenido_update">
-                        <input type="hidden" name="id" value="<?php echo $id; ?>"/>
+                        <input type="hidden" name="id"   value="<?php echo $id; ?>"/>
                         <input type="submit" name="contenido_update" value="Modificar"/>
                 </form>
         </div>

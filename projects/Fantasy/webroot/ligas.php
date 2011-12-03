@@ -10,11 +10,11 @@
 <div>
         <h4><a href="#"><?php echo $l['liga']->get('nombre'); ?></a></h4>
         <p><strong>Creador:</strong> <a href="#"><?php echo $l['usuario']->get('username'); ?></a></p>
-        <form action="Datos_Eq.php" method="post" >
-                <input name="id" type="hidden" value="<?php echo $l['liga']->get('id'); ?>"/>
-                <input name=""   type="submit" value="Invitar"  />
-                <input name=""   type="submit" value="Modificar"/>
-                <input name=""   type="submit" value="Eliminar" />
+        <form action="Datos_Eq.php" method="post">
+                <input type="hidden" name="id" value="<?php echo $l['liga']->get('id'); ?>"/>
+                <input type="submit" name=""   value="Invitar"  />
+                <input type="submit" name=""   value="Modificar"/>
+                <input type="submit" name=""   value="Eliminar" />
         </form>
 </div>
 <?php   } ?>

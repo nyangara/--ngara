@@ -7,6 +7,7 @@ CREATE TABLE "Fantasy"."Usuario" (
         "es administrador"              boolean                         NOT NULL,
         "dirección de e-mail"           text                            NOT NULL,
         "URL del avatar"                text                                NULL,
+        "puntaje"                       integer                             NULL,
 
         CONSTRAINT "Usuario PRIMARY KEY"
                 PRIMARY KEY ("id"),
@@ -141,48 +142,39 @@ CREATE TABLE "Fantasy"."Jugador" (
                 ON DELETE CASCADE
 );
 
-CREATE TABLE "Fantasy"."Roster" (
-        "id"                            serial                          NOT NULL,
-        "nombre"                        text                            NOT NULL,
+CREATE TABLE "Fantasy"."Usuario tiene jugador" (
         "usuario"                       integer                         NOT NULL,
-        "liga"                          integer                         NOT NULL,
-        "puntaje"                       integer                             NULL,
-        "fecha de creación"             timestamp with time zone        NOT NULL,
+        "jugador"                       integer                         NOT NULL,
 
-        CONSTRAINT "Roster PRIMARY KEY"
-                PRIMARY KEY ("id"),
+        CONSTRAINT "Usuario tiene jugador PRIMARY KEY"
+                PRIMARY KEY ("usuario", "jugador"),
 
-        CONSTRAINT "Roster UNIQUE (usuario, liga)"
-                UNIQUE ("usuario", "liga"),
-
-        CONSTRAINT "Roster FOREIGN KEY usuario REFERENCES Usuario"
+        CONSTRAINT "Usuario tiene jugador FOREIGN KEY usuario REFERENCES Usuario"
                 FOREIGN KEY ("usuario")
                 REFERENCES "Fantasy"."Usuario" ("id")
                 ON DELETE CASCADE,
 
-        CONSTRAINT "Roster FOREIGN KEY liga REFERENCES Liga"
-                FOREIGN KEY ("liga")
-                REFERENCES "Fantasy"."Liga" ("id")
+        CONSTRAINT "Usuario tiene jugador FOREIGN KEY jugador REFERENCES Jugador"
+                FOREIGN KEY ("jugador")
+                REFERENCES "Fantasy"."Jugador" ("id")
                 ON DELETE CASCADE
 );
 
-CREATE TABLE "Fantasy"."Contenido de roster" (
-        "roster"                        integer                         NOT NULL,
-        "jugador"                       integer                         NOT NULL,
-        "fecha de compra"               timestamp with time zone        NOT NULL,
-        "fecha de venta"                timestamp with time zone            NULL,
+CREATE TABLE "Fantasy"."Usuario tiene lanzadores" (
+        "usuario"                       integer                         NOT NULL,
+        "equipo"                        integer                         NOT NULL,
 
-        CONSTRAINT "Contenido de roster PRIMARY KEY"
-                PRIMARY KEY ("roster", "jugador"),
+        CONSTRAINT "Usuario tiene lanzadores PRIMARY KEY"
+                PRIMARY KEY ("usuario", "equipo"),
 
-        CONSTRAINT "Contenido de roster FOREIGN KEY roster REFERENCES Roster"
-                FOREIGN KEY ("roster")
-                REFERENCES "Fantasy"."Roster" ("id")
+        CONSTRAINT "Usuario tiene lanzadores FOREIGN KEY usuario REFERENCES Usuario"
+                FOREIGN KEY ("usuario")
+                REFERENCES "Fantasy"."Usuario" ("id")
                 ON DELETE CASCADE,
 
-        CONSTRAINT "Contenido de roster FOREIGN KEY jugador REFERENCES Jugador"
-                FOREIGN KEY ("jugador")
-                REFERENCES "Fantasy"."Jugador" ("id")
+        CONSTRAINT "Usuario tiene lanzadores FOREIGN KEY equipo REFERENCES Equipo"
+                FOREIGN KEY ("equipo")
+                REFERENCES "Fantasy"."Equipo" ("id")
                 ON DELETE CASCADE
 );
 
@@ -291,14 +283,18 @@ CREATE TABLE "Fantasy"."Juega" (
                 ON DELETE CASCADE
 );
 
-CREATE TABLE "Fantasy"."Noticia" (
+CREATE TABLE "Fantasy"."Contenido" (
         "id"                            serial                          NOT NULL,
         "título"                        text                            NOT NULL,
-        "contenido"                     text                            NOT NULL,
+        "texto"                         text                            NOT NULL,
         "fecha"                         timestamp with time zone        NOT NULL,
         "URL de imagen"                 text                                NULL,
         "tags"                          text                                NULL,
+        "tipo"                          "tipo de contenido"             NOT NULL,
 
-        CONSTRAINT "Noticia PRIMARY KEY"
-                PRIMARY KEY ("id")
+        CONSTRAINT "Contenido PRIMARY KEY"
+                PRIMARY KEY ("id"),
+
+        CONSTRAINT "Contenido UNIQUE (título, fecha)"
+                UNIQUE ("título", "fecha")
 );

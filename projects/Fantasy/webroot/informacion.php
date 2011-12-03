@@ -5,15 +5,15 @@
 
         require 'include/pre.php';
 ?>
-<h2>Noticias<h2>
+<h2>Información<h2>
 <?
         foreach (UIFacade::retrieveAll('Contenido') as $c) {
-                if ($c->get('tipo') == 'noticia') {
+                if ($c->get('tipo') == 'información') {
                         $img  = $c->get('URL de imagen');
                         $tags = $c->get('tags'         );
                         $id   = $c->get('id'           );
 ?>
-<div class="contenido_noticias">
+<div class="contenido_informacion">
         <div class="admin">
                 <form method="post" action="controller_contenido_remove">
                         <input type="hidden" name="id" value="<?php echo $id; ?>"/>
@@ -24,7 +24,7 @@
                         <input type="submit" name="contenido_update" value="Modificar"/>
                 </form>
         </div>
-        <?php if ($img) { ?><img src="static/images/noticia/<?php echo $img; ?>"/><?php } ?>
+        <?php if ($img) { ?><img src="static/images/informacion/<?php echo $img; ?>"/><?php } ?>
         <h3><?php echo $c->get('título'); ?></h3>
         <h4><?php echo $c->get('fecha'); ?></h4>
         <?php echo $c->get('texto'); ?>

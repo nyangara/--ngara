@@ -1,15 +1,16 @@
 <?php
         require_once 'include/Entity.php';
 
-        class Noticia extends Entity {
-                protected static $table = 'Noticia';
+        class Contenido extends Entity {
+                protected static $table = 'Contenido';
                 protected static $fields = array(
-                        'id',
+                        "id",
                         "título",
-                        "contenido",
+                        "texto",
                         "fecha",
                         "URL de imagen",
-                        "tags"
+                        "tags",
+                        "tipo"
                 );
                 protected static $pk = array(
                         'id'

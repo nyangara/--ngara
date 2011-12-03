@@ -15,7 +15,7 @@ ON
         "Fantasy"."Estadística de bateo",
         "Fantasy"."Estadística de pitcheo",
         "Fantasy"."Juega",
-        "Fantasy"."Noticia"
+        "Fantasy"."Contenido"
 TO "Fantasy (usuario normal)";
 
 
@@ -41,8 +41,8 @@ GRANT
 ON
         "Fantasy"."Liga",
         "Fantasy"."Participa",
-        "Fantasy"."Roster",
-        "Fantasy"."Contenido de roster"
+        "Fantasy"."Usuario tiene jugador",
+        "Fantasy"."Usuario tiene lanzadores"
 TO "Fantasy (usuario normal)";
 
 -- Secuencias correspondientes:

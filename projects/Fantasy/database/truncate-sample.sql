@@ -10,4 +10,4 @@ TRUNCATE
         "Fantasy"."Estadística de pitcheo",
         "Fantasy"."Juega",
         "Fantasy"."Juego",
-        "Fantasy"."Noticia";
+        "Fantasy"."Contenido";

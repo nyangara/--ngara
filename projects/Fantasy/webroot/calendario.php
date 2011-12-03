@@ -18,7 +18,7 @@
                 $date = strtotime($c['juego']->get('inicio'));
 ?>
         <tr>
-                <td><?php echo date('d/m/Y', $date); ?><br /><?php echo date('h:i A', $date); ?></td>
+                <td><?php echo date('d/m/Y', $date); ?><br/><?php echo date('h:i A', $date); ?></td>
                 <td><?php echo $c['equipo local'    ]->get('nombre corto'); ?></td>
                 <td><?php echo $c['equipo visitante']->get('nombre corto'); ?></td>
                 <td><?php echo $c['estadio'         ]->get('nombre'      ); ?></td>

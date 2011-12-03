@@ -21,3 +21,10 @@ CREATE TYPE "género" AS ENUM (
         'femenino',
         'otro'
 );
+
+CREATE TYPE "tipo de contenido" AS ENUM (
+        'noticia',
+        'regla',
+        'pregunta frecuente',
+        'información'
+);

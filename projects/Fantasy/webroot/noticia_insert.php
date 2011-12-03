@@ -1,18 +1,4 @@
 <?php
-/*
-<?php
-        if(isset($_POST['Aplicar'])){
-                date_default_timezone_set('America/Caracas');
-                $fecha = date('Y-m-d');
-                $_POST['fecha']=$fecha;
-                $_POST['tipoC']='noticia';
-
-                unset($_POST['Aplicar']);
-                UIFacade::insert('Contenido');
-                header('Location: noticias');
-        }
-?>
-*/
         require_once 'include/config.php';
         require_once 'include/dbconn/user.php';
         require_once 'include/UIFacade.php';
@@ -21,19 +7,23 @@
 ?>
 <div id="contenido_interno">
         <div id="box_info">
-                <form action="controller_noticia_update" method="post" id="Alcance">
+                <form action="controller_contenido_insert" method="post" id="Alcance">
+                        <input type="hidden" name="tipo" value="noticia"/>
+                        <input type="hidden" name="goto" value="noticias"/>
                         <table width="550" border="0">
                         <tr>
                                 <th style="border: 2px solid #cccccc">
-                                        Agregar juego
+                                        Agregar noticia
                                 </th>
                         </tr>
                                 <tr>
                                         <td>
                                                 <table width="400" border="0">
                                                         <tr>
-                                                                Título:<!--&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-->
-                                                                <input type="text" name="título" value="" size="25"/>
+                                                                <td>Título:</td>
+                                                                <td>
+                                                                        <input type="text" name="título" value="" size="25"/>
+                                                                </td>
                                                         </tr>
                                                         <tr>
                                                                 <td>Contenido:</td>
@@ -44,7 +34,7 @@
                                                         <tr>
                                                                 <td>URL de la imagen:</td>
                                                                 <td colspan="2">
-                                                                        <input type="text" name="URL de la imagen" value="" size="25"/>
+                                                                        <input type="text" name="URL de imagen" value="" size="25"/>
                                                                 </td>
                                                         </tr>
                                                         <tr>
@@ -57,8 +47,7 @@
                                         </td>
                                 </tr>
                         </table>
-                        <input type="hidden" name="id" value="<?php echo $_POST['id']; ?>"/>
-                        <input type="submit" name="noticia_update" value="Aplicar"/>
+                        <input type="submit" name="contenido_insert" value="Aplicar"/>
                 </form>
         </div>
 </div>

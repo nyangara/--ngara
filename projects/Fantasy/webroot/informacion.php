@@ -12,7 +12,7 @@
                         $id   = $c->get('id'           );
                         $tags = $c->get('tags'         );
                         $img  = $c->get('URL de imagen');
-                        if (!filter_var($img, FILTER_VALIDATE_URL)) $img = 'static/images/contenido/' . $img;
+                        if ($img and !filter_var($img, FILTER_VALIDATE_URL)) $img = 'static/images/contenido/' . $img;
 ?>
 <div class="contenido_informacion">
         <div class="admin">

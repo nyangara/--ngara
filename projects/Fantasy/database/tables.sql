@@ -262,27 +262,6 @@ CREATE TABLE "Fantasy"."Estadística de pitcheo" (
                 ON DELETE CASCADE
 );
 
-CREATE TABLE "Fantasy"."Juega" (
-        "jugador"                       integer                         NOT NULL,
-        "equipo"                        integer                         NOT NULL,
-        "número"                        integer                         NOT NULL,
-        "inicio"                        date                            NOT NULL,
-        "fin"                           date                                NULL,
-
-        CONSTRAINT "Juega PRIMARY KEY"
-                PRIMARY KEY ("jugador", "equipo", "inicio"),
-
-        CONSTRAINT "Juega FOREIGN KEY jugador REFERENCES Jugador"
-                FOREIGN KEY ("jugador")
-                REFERENCES "Fantasy"."Jugador" ("id")
-                ON DELETE CASCADE,
-
-        CONSTRAINT "Juega FOREIGN KEY equipo REFERENCES Equipo"
-                FOREIGN KEY ("equipo")
-                REFERENCES "Fantasy"."Equipo" ("id")
-                ON DELETE CASCADE
-);
-
 CREATE TABLE "Fantasy"."Contenido" (
         "id"                            serial                          NOT NULL,
         "título"                        text                            NOT NULL,

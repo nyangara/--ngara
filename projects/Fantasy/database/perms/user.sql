@@ -7,14 +7,12 @@ GRANT USAGE   ON SCHEMA   "Fantasy" TO "Fantasy (usuario normal)";
 GRANT
         SELECT
 ON
-        "Fantasy"."Usuario",
         "Fantasy"."Estadio",
         "Fantasy"."Equipo",
         "Fantasy"."Jugador",
         "Fantasy"."Juego",
         "Fantasy"."Estadística de bateo",
         "Fantasy"."Estadística de pitcheo",
-        "Fantasy"."Juega",
         "Fantasy"."Contenido"
 TO "Fantasy (usuario normal)";
 
@@ -51,6 +49,5 @@ GRANT
         SELECT,
         UPDATE
 ON SEQUENCE
-        "Fantasy"."Liga_id_seq",
-        "Fantasy"."Roster_id_seq"
+        "Fantasy"."Liga_id_seq"
 TO "Fantasy (usuario normal)";

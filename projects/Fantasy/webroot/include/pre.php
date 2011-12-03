@@ -20,13 +20,12 @@
                                 <ul>
 <?php
         $vs = array(
-                'Noticias'    => 'noticias',
-                'Estadios'    => 'estadios',
-                'Equipos'     => 'equipos',
-                'Jugadores'   => 'jugadores',
-                'Calendario'  => 'calendario',
-                'Resultados'  => 'resultados',
-                'Ligas'       => 'ligas'
+                'Noticias'   => 'noticias',
+                'Calendario' => 'calendario',
+                'Equipos'    => 'equipos',
+                'Jugadores'  => 'jugadores',
+                'Estadios'   => 'estadios',
+                'Ligas'      => 'ligas'
         );
 
         foreach ($vs as $v => $f) {

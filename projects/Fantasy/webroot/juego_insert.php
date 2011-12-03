@@ -23,13 +23,13 @@
 ?>
 <div id="contenido_interno" style="height: auto">
         <div style="height:500px; overflow-y: scroll;">
-                <table width="100%" border="0" cellspacing="5" cellpadding="5" align="left" style="color: #cccccc">
-                        <tr>
-                                <th style="border: 2px solid #cccccc">
-                                        Agregar juego
-                                </th>
-                        </tr>
-                        <form action="controller_juego_insert" method="post">
+                <form action="controller_juego_insert" method="post">
+                        <table width="100%" border="0" cellspacing="5" cellpadding="5" align="left" style="color: #cccccc">
+                                <tr>
+                                        <th style="border: 2px solid #cccccc">
+                                                Agregar juego
+                                        </th>
+                                </tr>
                                 <tr>
                                         <td style="border: 1px solid #cccccc">
                                                 Introduzca la fecha:
@@ -79,13 +79,9 @@
                                                 </select>
                                         </td>
                                 </tr>
-                                <tr>
-                                        <td style="border: 1px solid #cccccc">
-                                                <input name="juego_insert" type="submit"/>
-                                        </td>
-                                </tr>
-                        </form>
-                </table>
+                        </table>
+                        <input type="submit" name="juego_insert" value="Insertar"/>
+                </form>
         </div>
 </div>
 <?php   require 'include/post.html'; ?>

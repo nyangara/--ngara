@@ -16,7 +16,6 @@ ON
         "Fantasy"."Juego",
         "Fantasy"."Estadística de bateo",
         "Fantasy"."Estadística de pitcheo",
-        "Fantasy"."Juega",
         "Fantasy"."Contenido"
 TO "Fantasy (administrador)";
 

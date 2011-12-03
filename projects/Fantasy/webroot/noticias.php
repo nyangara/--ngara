@@ -9,9 +9,10 @@
 <?
         foreach (UIFacade::retrieveAll('Contenido') as $c) {
                 if ($c->get('tipo') == 'noticia') {
-                        $img  = $c->get('URL de imagen');
-                        $tags = $c->get('tags'         );
                         $id   = $c->get('id'           );
+                        $tags = $c->get('tags'         );
+                        $img  = $c->get('URL de imagen');
+                        if (!filter_var($img, FILTER_VALIDATE_URL)) $img = 'static/images/contenido/' . $img;
 ?>
 <div class="contenido_noticias">
         <div class="admin">
@@ -24,11 +25,15 @@
                         <input type="submit" name="contenido_update" value="Modificar"/>
                 </form>
         </div>
-        <?php if ($img) { ?><img src="static/images/noticia/<?php echo $img; ?>"/><?php } ?>
+<?php                   if ($img) { ?>
+        <img src="<?php echo $img; ?>"/>
+<?php                   } ?>
         <h3><?php echo $c->get('título'); ?></h3>
         <h4><?php echo $c->get('fecha'); ?></h4>
         <?php echo $c->get('texto'); ?>
-        <?php if ($tags) { ?><p><small>Tags: <?php echo $tags; ?></small></p><?php } ?>
+<?php                   if ($tags) { ?>
+        <p><small>Tags: <?php echo $tags; ?></small></p>
+<?php                   } ?>
 </div>
 <?php
                 }

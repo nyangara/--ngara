@@ -35,6 +35,39 @@ WHERE "Datos"."username" = "Fantasy"."Usuario"."username";
 
 
 
+INSERT INTO "Fantasy"."Participa" (
+        "usuario",
+        "liga"
+) SELECT
+        "Miembro"."id",
+        "Liga"."id"
+FROM
+        "Fantasy"."Liga",
+        "Fantasy"."Usuario" AS "Creador",
+        "Fantasy"."Usuario" AS "Miembro",
+        (VALUES
+                ('Rubik'     , 'minender' , 'minender' ),
+                ('Rubik'     , 'minender' , 'pebbe'    ),
+                ('Rubik'     , 'minender' , 'fante'    ),
+
+                ('Weierstraß', 'minender' , 'minender' ),
+                ('Weierstraß', 'minender' , 'mgomezch' ),
+                ('Weierstraß', 'minender' , 'nanielito'),
+
+                ('GOMITAS!!!', 'nanielito', 'nanielito'),
+                ('GOMITAS!!!', 'nanielito', 'mgomezch' ),
+                ('GOMITAS!!!', 'nanielito', 'pebbe'    ),
+
+                ('Croacroac' , 'pebbe'    , 'pebbe'    ),
+                ('Croacroac' , 'pebbe'    , 'fante'    )
+        ) AS "Datos" ("liga", "creador", "miembro")
+WHERE
+        "Datos"."liga"    = "Fantasy"."Liga"."nombre" AND
+        "Datos"."creador" = "Creador"."username"      AND
+        "Datos"."miembro" = "Miembro"."username";
+
+
+
 INSERT INTO "Fantasy"."Jugador" (
         "nombre completo",
         "fecha de nacimiento",
@@ -42,7 +75,8 @@ INSERT INTO "Fantasy"."Jugador" (
         "equipo",
         "número",
         "posición",
-        "precio"
+        "precio",
+        "URL de la foto"
 ) SELECT
         "Datos"."nombre completo",
         to_date("Datos"."fecha de nacimiento", 'YYYY/MM/DD'),
@@ -50,42 +84,18 @@ INSERT INTO "Fantasy"."Jugador" (
         "Fantasy"."Equipo"."id",
         "Datos"."número",
         "Datos"."posición"::"posición",
-        "Datos"."precio"
+        "Datos"."precio",
+        "Datos"."URL de la foto"
 FROM
         "Fantasy"."Equipo",
         (VALUES
-                ('Fabiana Reggio'  , '1990/01/02', 'San Antonio, Venezuela', 'Tigres de Aragua'         , 01, 'pitcher'            , 100),
-                ('Krisvely Varela' , '1990/03/04', 'Caracas, Venezuela'    , 'Navegantes del Magallanes', 12, 'jardinero izquierdo', 200),
-                ('Miguel Ambrosio' , '1988/05/06', 'Caracas, Venezuela'    , 'Leones del Caracas'       , 23, 'tercera base'       , 300),
-                ('Ricardo Monascal', '1846/08/12', 'San Antonio, Venezuela', 'Navegantes del Magallanes', 42, 'catcher'            , 400)
-        ) AS "Datos" ("nombre completo", "fecha de nacimiento", "lugar de procedencia", "equipo", "número", "posición", "precio")
+                ('Fabiana Reggio'  , '1990/01/02', 'San Antonio, Venezuela', 'Tigres de Aragua'         , 01, 'pitcher'            ,  100, 'fabiana.jpg' ),
+                ('Krisvely Varela' , '1990/03/04', 'Caracas, Venezuela'    , 'Navegantes del Magallanes', 12, 'jardinero izquierdo',  200, 'krisvely.jpg'),
+                ('Miguel Ambrosio' , '1988/05/06', 'Caracas, Venezuela'    , 'Leones del Caracas'       , 23, 'tercera base'       ,  300, 'miguel.jpg'  ),
+                ('Ricardo Monascal', '1846/08/12', 'San Antonio, Venezuela', 'Navegantes del Magallanes', 42, 'catcher'            ,  400, 'ricardo.jpg' ),
+                ('Chuck Norris'    , '1337/01/01', 'Here There Be Monsters', 'Navegantes del Magallanes', 00, 'campo corto'        , 9999, NULL          )
+        ) AS "Datos" ("nombre completo", "fecha de nacimiento", "lugar de procedencia", "equipo", "número", "posición", "precio", "URL de la foto")
 WHERE "Datos"."equipo" = "Fantasy"."Equipo"."nombre completo";
-
-
-
-INSERT INTO "Fantasy"."Juega" (
-        "jugador",
-        "equipo",
-        "número",
-        "inicio",
-        "fin"
-) SELECT
-        "Fantasy"."Jugador"."id",
-        "Fantasy"."Equipo"."id",
-        "Datos"."número",
-        to_date("Datos"."inicio", 'YYYY/MM/DD'),
-        to_date("Datos"."fin"   , 'YYYY/MM/DD')
-FROM
-        "Fantasy"."Jugador",
-        "Fantasy"."Equipo",
-        (VALUES
-                ('Fabiana Reggio'  , 'Tigres de Aragua'         , 12, '2007/09/17', '2009/04/12'),
-                ('Fabiana Reggio'  , 'Navegantes del Magallanes', 12, '2009/09/03', NULL        ),
-                ('Krisvely Varela' , 'Navegantes del Magallanes', 34, '2007/09/17', NULL        ),
-                ('Ricardo Monascal', 'Leones del Caracas'       , 12, '2003/09/22', NULL        ),
-                ('Miguel Ambrosio' , 'Navegantes del Magallanes', 45, '2005/09/19', NULL        )
-        ) AS "Datos" ("jugador", "equipo", "número", "inicio", "fin")
-WHERE "Datos"."jugador" = "Fantasy"."Jugador"."nombre completo" AND "Datos"."equipo" = "Fantasy"."Equipo"."nombre completo";
 
 
 

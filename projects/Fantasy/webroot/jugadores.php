@@ -16,10 +16,10 @@
                   <h3><?php echo $j['jugador']->get('nombre completo'); ?></h3>
                   <br/>
                   <img class="imagen" src="static/images/jugador/<?php echo $img; ?>"/>
-                  <p><strong>Equipo:</strong>   <?php echo $j['equipo' ]->get('nombre completo'); ?></p>
-                  <p><strong>Número:</strong>   <?php echo $j['jugador']->get('número'         ); ?></p>
+                  <p><strong>Equipo:  </strong> <?php echo $j['equipo' ]->get('nombre completo'); ?></p>
+                  <p><strong>Número:  </strong> <?php echo $j['jugador']->get('número'         ); ?></p>
                   <p><strong>Posición:</strong> <?php echo $j['jugador']->get('posición'       ); ?></p>
-                  <p><strong>Precio:</strong>   <?php echo $j['jugador']->get('precio'         ); ?></p>
+                  <p><strong>Precio:  </strong> <?php echo $j['jugador']->get('precio'         ); ?></p>
         </form>
         </div>
 <?php   } ?>

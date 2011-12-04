@@ -13,6 +13,8 @@
                 public static function retrieveAll($entity_class) { return $entity_class::retrieveAll(); }
                 public static function removeAll  ($entity_class) { return $entity_class::removeAll  (); }
 
+                public static function enum_values($type_name) { return DataFacade::enum_values($type_name); }
+
                 protected static function run($action, $entity_class, $data) {
                         $o = new $entity_class();
                         $o->set_all($data);

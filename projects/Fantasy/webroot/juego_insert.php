@@ -23,7 +23,8 @@
 ?>
 <div id="contenido_interno" style="height: auto">
         <div style="height:500px; overflow-y: scroll;">
-                <form action="controller_juego_insert" method="post">
+                <form action="controller" method="post">
+                        <input type="hidden" name="goto" value="calendario"/>
                         <table width="100%" border="0" cellspacing="5" cellpadding="5" align="left" style="color: #cccccc">
                                 <tr>
                                         <th style="border: 2px solid #cccccc">
@@ -80,7 +81,7 @@
                                         </td>
                                 </tr>
                         </table>
-                        <input type="submit" name="juego_insert" value="Insertar"/>
+                        <button type="submit" name="action" value="juego_insert">Insertar</button>
                 </form>
         </div>
 </div>

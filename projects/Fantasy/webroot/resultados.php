@@ -47,13 +47,14 @@
                 <td><?php echo $c['estadio']->get('nombre'); ?></td>
 
                 <td>
-                        <form method="post" action="contenido_update">
+                        <form method="post" action="juego_update">
                                 <input type="hidden" name="id" value="<?php echo $id; ?>"/>
-                                <input type="submit" name="contenido_update" value="Modificar"/>
+                                <input type="submit" name="juego_update" value="Modificar"/>
                         </form>
-                        <form method="post" action="controller_contenido_remove">
+                        <form method="post" action="controller">
                                 <input type="hidden" name="id" value="<?php echo $id; ?>"/>
-                                <input type="submit" name="contenido_remove" value="Eliminar" />
+                                <input type="hidden" name="goto" value="juegos"/>
+                                <button type="submit" name="action" value="juego_remove">Eliminar</button>
                         </form>
                 </td>
         </tr>

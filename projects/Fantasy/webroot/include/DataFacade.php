@@ -5,6 +5,35 @@
                 protected static function conds($i, $j) { return self::quote($i) . ' = ' . self::dolar($j); }
                 protected static function sets ($i, $j) { return 'SET ' . self::conds($i, $j); }
 
+                public static function enum_values($type_name) {
+                        global $dbconn;
+                        global $pqs;
+                        $pq = 'ENUM';
+
+                        if (!isset($pqs)) $pqs = array();
+                        if (!in_array($pq, $pqs)) {
+                                $query = <<<'EOF'
+                                        SELECT pg_enum.enumlabel
+                                        FROM pg_catalog.pg_enum
+                                        WHERE pg_enum.enumtypid = (
+                                                SELECT pg_type.typelem
+                                                FROM   pg_type
+                                                WHERE  pg_type.typname = '_' || $1
+                                        );
+EOF;
+                                $result = pg_prepare($dbconn, $pq, $query) or die('pg_prepare: ' . pg_last_error());
+                                $pqs[] = $pq;
+                        }
+
+                        $result = pg_execute($dbconn, $pq, array($type_name)) or die('pg_execute: ' . pg_last_error());
+
+                        $r = array();
+                        while ($row = pg_fetch_row($result)) $r[] = $row[0];
+                        pg_free_result($result);
+
+                        return $r;
+                }
+
                 // No se incluyen en el query a los campos que no estén definidos.
                 // Si están definidos y valen null, sí se incluyen y se guarda NULL.
                 public static function insert($entity) {

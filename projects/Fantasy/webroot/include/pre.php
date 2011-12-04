@@ -9,21 +9,24 @@
                 <link rel="Shortcut Icon" href="static/images/favicon.ico" />
         </head>
         <body id="<?php echo basename($_SERVER['SCRIPT_NAME'], '.php') ?>">
+                <div id="marquee">
+                    <div><span>Novedades:</span> <marquee behavior="scroll" direction="left" scrollamount="3">Esto es un marquee de prueba.</marquee></div>
+                </div>
                 <div id="wrapper">
                         <div id="header">
                                 <div id="logo">
                                         <img src="static/images/LogoGrande.png" alt="logo" width="48" height="48"/>
                                         <h1><a href="index.php">Liga Fantástica</a></h1>
                                 </div>
-                        </div>
                         <div id="navigation">
                                 <ul>
 <?php
         $vs = array(
+                'Inicio'      => 'index',
                 'Noticias'    => 'noticias',
-                'Estadios'    => 'estadios',
-                'Equipos'     => 'equipos',
                 'Jugadores'   => 'jugadores',
+                'Equipos'     => 'equipos',
+                'Estadios'    => 'estadios',
                 'Calendario'  => 'calendario',
                 'Resultados'  => 'resultados',
                 'Ligas'       => 'ligas'
@@ -36,6 +39,7 @@
                                 <li<?php echo $on; ?>><a href="<?php echo $f . ".php"; ?>"><?php echo $v; ?></a></li>
 <?php   } ?>
                                 </ul>
+                        </div>
                         </div>
                         <div id="content">
                                 <div id="main">

@@ -10,14 +10,13 @@
                 $img = $e->get('URL del logo') or $img = 'generico.jpg';
 ?>
 <div>
-        <form class="Fila" action="Datos_Eq.php" method="post">
-                <input type="hidden" name="id" value="<?php echo $e->get('id'); ?>"/>
-                <img class="imagen" src="static/images/equipo/<?php echo $img; ?>"/>
-                <div class="datos">
-                        <div>Nombre:           <?php echo $e->get('nombre completo' ); ?></div>
-                        <div>Siglas:           <?php echo $e->get('siglas'          ); ?></div>
-                        <div>Año de fundacion: <?php echo $e->get('año de fundación'); ?></div>
-                </div>
+        <form action="Datos_Eq.php" method="post">
+                <input name="id" type="hidden" value="<?php echo $e->get('id'); ?>"/>
+                <h3><?php echo $e->get('nombre completo' ); ?></h3>
+                <br />
+                <img src="static/images/equipo/<?php echo $img; ?>"/>
+                <p><strong>Siglas:</strong>           <?php echo $e->get('siglas'          ); ?></p>
+                <p><strong>Año de fundacion:</strong> <?php echo $e->get('año de fundación'); ?></p>
         </form>
 </div>
 <?php   } ?>

@@ -5,15 +5,13 @@
 
         require 'include/pre.php';
 ?>
-<div id="contenido_interno" style="height: auto">
-        <h2>Ligas públicas</h2>
-        <div id="box_info" style="height:500px; overflow-y: scroll;">
+<h2>Ligas públicas</h2>
 <?php
         foreach (UIFacade::ligas() as $l) {
                 if ($l['liga']->get('es pública') == 't') {
 ?>
-                <div class="datos">
-                        <h4><a href="#"><?php echo $l['liga']->get('nombre'); ?></a></h4>
+                <div>
+                        <h3><a href="#"><?php echo $l['liga']->get('nombre'); ?></a></h3>
                         <p><strong>Creador:</strong> <a href="#"><?php echo $l['usuario']->get('username'); ?></a></p>
                         <input name="" type="submit" value="Unirse"/>
                         <input name="" type="submit" value="Modificar"/>
@@ -23,7 +21,5 @@
                 }
         }
 ?>
-                <a href="liga_publica_insert.php">Crear liga pública</a>
-        </div>
-</div>
+<form action="liga_publica_insert.php"><input name="" type="submit" value="Crear liga pública" /></form>
 <?php   require 'include/post.html'; ?>

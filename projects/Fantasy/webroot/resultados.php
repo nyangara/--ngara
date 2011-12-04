@@ -5,7 +5,7 @@
 
         require 'include/pre.php';
 ?>
-<h2>Calendario</h2>
+<h2>Resultados</h2>
 <div>
 <form><input name="" type="text" /> <select name=""><option>Fecha</option><option>Equipo</option><option>Estadio</option></select> <input name="" type="submit" value="Buscar" /></form>
 </div>
@@ -43,7 +43,4 @@
         </tr>
 <?php   } ?>
 </table>
-<form id="form" action="agregar_equipo.php" method="post">
-        <input type="submit" value="Agregar juego"/>
-</form>
 <?php   require('include/post.html'); ?>

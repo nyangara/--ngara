@@ -5,13 +5,13 @@
 
         require 'include/pre.php';
 ?>
-<h2>Calendario</h2>
+<h2>Resultados</h2>
 <div>
         <form>
                 <input type="text" name=""/>
                 <select name="">
-                        <option>Fecha  </option>
-                        <option>Equipo </option>
+                        <option>Fecha</option>
+                        <option>Equipo</option>
                         <option>Estadio</option>
                 </select>
                 <input type="submit" name="" value="Buscar"/>
@@ -32,26 +32,31 @@
                 $img_visitante = $c['equipo visitante']->get('URL del logo') or $img_visitante = 'generico.jpg';
 ?>
         <tr>
-                <td><?php echo date('d/m/Y', $date); ?><br/><?php echo date('h:i A', $date); ?></td>
+                <td>
+                        <?php echo date('d/m/Y', $date); ?>
+                        <br/>
+                        <?php echo date('h:i A', $date); ?>
+                </td>
+
                 <td class="img"><img src="static/images/equipo/<?php echo $img_local; ?>"/>
-                <td><?php echo $c['equipo local'    ]->get('nombre corto'); ?></td>
+                <td><?php echo $c['equipo local']->get('nombre corto'); ?></td>
+
                 <td class="img"><img src="static/images/equipo/<?php echo $img_visitante; ?>"/>
                 <td><?php echo $c['equipo visitante']->get('nombre corto'); ?></td>
-                <td><?php echo $c['estadio'         ]->get('nombre'      ); ?></td>
+
+                <td><?php echo $c['estadio']->get('nombre'); ?></td>
+
                 <td>
-                <form method="post" action="contenido_update">
-                        <input type="hidden" name="id" value="<?php echo $id; ?>"/>
-                        <input type="submit" name="contenido_update" value="Modificar"/>
-                </form>
-                <form method="post" action="controller_contenido_remove">
-                        <input type="hidden" name="id" value="<?php echo $id; ?>"/>
-                        <input type="submit" name="contenido_remove" value="Eliminar" />
-                </form>
+                        <form method="post" action="contenido_update">
+                                <input type="hidden" name="id" value="<?php echo $id; ?>"/>
+                                <input type="submit" name="contenido_update" value="Modificar"/>
+                        </form>
+                        <form method="post" action="controller_contenido_remove">
+                                <input type="hidden" name="id" value="<?php echo $id; ?>"/>
+                                <input type="submit" name="contenido_remove" value="Eliminar" />
+                        </form>
                 </td>
         </tr>
 <?php   } ?>
 </table>
-<form id="form" action="agregar_equipo.php" method="post">
-        <input type="submit" value="Agregar juego"/>
-</form>
-<?php   require('include/post.html'); ?>
+<?php   require 'include/post.html'; ?>

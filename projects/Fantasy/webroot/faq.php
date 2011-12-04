@@ -5,7 +5,7 @@
 
         require 'include/pre.php';
 ?>
-<h2>Preguntas frecuentes<h2>
+<h2>Preguntas Frecuentes<h2>
 <?
         foreach (UIFacade::retrieveAll('Contenido') as $c) {
                 if ($c->get('tipo') == 'pregunta frecuente') {

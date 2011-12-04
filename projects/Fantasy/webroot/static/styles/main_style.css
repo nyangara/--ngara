@@ -1,3 +1,7 @@
+/*
+div { border: 1px solid white; }
+*/
+
 /* Overrides default styles ***************************************************/
 
 * {
@@ -8,15 +12,15 @@
 
 body {
   /*background: #E6E3DC url(../images/background.png) repeat-x;*/
-  background-color: #333333;
+  background-color: #E6E3DC;
 }
 
 a {
-  color: #CCCCCC;
+  color: inherit;
 }
 
 a:hover {
-  color: #060;
+  color: #6D8103;
 }
 
 ul {
@@ -25,6 +29,10 @@ ul {
 
 table {
   border: 1px solid #000000;
+}
+
+th, td {
+  padding: 0.25em;
 }
 
 th {
@@ -45,12 +53,13 @@ form {
 }
 
 input[type="text"],
-input[type="password"] {
-  width: 8em;
+input[type="password"],
+select {
+  width: 10em;
   padding: 0.25em;
   
   background-color: #EEEEEE;
-  border: none;
+  border: 1px solid #999999;
   -moz-border-radius: 0.25em;
   -webkit-border-radius: 0.25em;
   
@@ -65,23 +74,62 @@ input[type="submit"] {
 
 /* Main structure style *******************************************************/
 
-#wrapper {
+#marquee {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 999;
+  
+  width: 100%;
+  
+  background-color: #6D8103;
+  
+  font-size: medium;
+  color: #CCCCCC;
+}
+
+#marquee > div {
+  display: table;
   width: 900px;
+  
   margin: 0 auto;
+  padding: 0.85em 0 0.65em;
+  
+  text-align: center;
+}
+
+#marquee span {
+  display: table-cell;
+  width: 15%;
+  font-weight: bold;
+}
+
+#marquee marquee {
+  display: table-cell;
+}
+
+#wrapper {
+}
+
+#wrapper > div {
+  display: block;
 }
 
 #header {
-  display: block;
+  width: 100%;
   
-  border: 1px solid red;
+  padding-top: 3em;
+  
+  background-color: #434343;
+  
+  color: #E6E3DC;
 }
 
 #logo {
+  width: 900px;
   min-height: 50px;
   
-  margin: 1em 1.25em;
-
-  border: 1px solid pink;
+  margin: 1em auto 1.5em;
 }
 
 #logo img {
@@ -91,7 +139,6 @@ input[type="submit"] {
 #logo h1 {
   display: inline-block;
   margin: 5px 0px 0px 15px;
-  color: #CCCCCC;
 }
 
 #logo a {
@@ -103,9 +150,6 @@ input[type="submit"] {
 }
 
 #navigation {
-  display: block;
-  
-  border: 1px solid orange;
 }
 
 #navigation ul {
@@ -120,52 +164,61 @@ input[type="submit"] {
 #navigation li {
   display: inline-block;
   
-  margin: 0 0.5em;
+  margin: 0 0.1em;
 }
 
 #navigation li a {
   display: block;
   
-  padding: 0.5em 0.75em 0.25em;
+  padding: 0.5em 0.5em 0.25em;
   
-  color: #e6e3dc;
+  color: #E6E3DC;
   text-align: center;
   text-decoration: none;
 }
 
 #navigation li a:hover,
 #navigation .on {
-background-color: #6D8103;
--moz-border-radius: 0.5em 0.5em 0 0;
--webkit-border-radius: 0.5em 0.5em 0 0;
+  background-color: #6D8103;
+  -moz-border-radius: 0.5em 0.5em 0 0;
+  -webkit-border-radius: 0.5em 0.5em 0 0;
+}
+
+#navigation li a:hover {
+  text-decoration: underline;
+}
+
+#navigation .on {
+  font-weight: bold;
 }
 
 #content {
-  display: block;
-  
-  background: brown url(../images/FondoEscrito.jpg) no-repeat;
-  
-  border: 1px solid white;
+  width: 975px;
+  margin: 0 auto;
+    
+  /*background: brown url(../images/FondoEscrito.jpg) no-repeat;*/
 }
 
 #content > div {
   display: inline-block;
-  padding: 1em;
+  
+  padding: 1em 0.5em;
 }
 
 #main {
-  width: 65%;
+  width: 75%;
   min-height: 500px;
-  
-  border: 1px solid blue;
 }
+
+#main > * {
+  margin: 0 0 1em 0;
+}
+
 
 #sidebar {
   float: right;
   
-  width: 25%;
-  
-  border: 1px solid lightblue;
+  width: 20%;
 }
 
 #sidebar div {
@@ -173,10 +226,7 @@ background-color: #6D8103;
 }
 
 #footer {
-  display: block;
-  height: 50px;
-  
-  padding: 10px;
+  padding: 1em 1em 2em;
   
   background: #434343 /*url(../images/footback2.png) no-repeat*/;
   /*-moz-border-radius-bottomleft: 10px;
@@ -184,10 +234,10 @@ background-color: #6D8103;
   -webkit-border-bottom-left-radius: 10px;
   -webkit-border-bottom-right-radius: 10px;*/
   
-  border: 1px solid grey;
+  /*border: 1px solid grey;*/
   
   font-size: medium;
-  color: #FFFFFF;
+  color: #E6E3DC;
 }
 
 p.copyright {
@@ -195,117 +245,186 @@ p.copyright {
   text-transform: uppercase;
 }
 
-/*
-#content h2 {
-font-size: 23px;
-color: #9bb50b;
-margin-top: 10px;
-}
-
-#content p {
-font-size: 13px;
-padding-left: 15px;
-margin: 0;
-width: 90%;
-}
-
-#contenido_titulo {
-float: left;
-width: 300px;
-}
-
-#content #contenido_interno {
-width: 580px;
-height: 500px;
-float: left;
-background-color: #333;
--webkit-border-radius: 10px;
--moz-border-radius: 10px;
-}
-
-#content #contenido_interno p{
-color: grey;
-}
-.Boton  {
-background-color: #708403;
-display: block;
-height: 20px;
-width: 70px;
-float: right;
-color: #FFF;
-font-size: 12px;
-text-align: center;
-padding-top: 5px;
--webkit-border-radius: 10px;
--moz-border-radius: 10px;
-margin-top: -36px;
-margin-right: 8px;
-
-}
-.Boton:hover {
-background-color: #690;
-display: block;
-height: 20px;
-width: 70px;
-float: right;
-color: #FFF;
-font-size: 12px;
-text-align: center;
-padding-top: 5px;
--webkit-border-radius: 10px;
--moz-border-radius: 10px;
-margin-top: -36px;
-margin-right: 8px;
-}
-#wrapper #header .Boton a {
-text-decoration: none;
-}
-
-
-#wrapper #content #contenido h2{
-text-align: center;
-}
-
-#wrapper #content #contenido #formulario {
-float: left;
-width: 550px;
-height: 300px;
-margin: 0px;
-}
-#wrapper #content #contenido #formulario p {
-color: #FFF;
-}
-#wrapper #content #contenido {
-background-color: #333;
--webkit-border-radius: 10px;
--moz-border-radius: 10px;
-}
-
-
-#wrapper #content #contenido .user {
-background-image: url(../images/user.png);
-background-repeat: no-repeat;
-background-position: left top;
-float: right;
-margin-left: 40px;
-height: 94px;
-width: 92px;
-border-top-style: solid;
-border-right-style: solid;
-border-bottom-style: solid;
-border-left-style: solid;
-border-top-color: #000;
-border-right-color: #000;
-border-bottom-color: #000;
-border-left-color: #000;
-margin-right: 40px;
-}
-*/
-
 /* Specific sections styles ***************************************************/
 
-#ligas #main div {
-  margin: 1em;
+#main > div {
+  display: block;
+}
+
+div.admin-options {
+  float: right;
+}
+
+#noticias #main > div,
+#jugadores #main > div,
+#equipos #main > div,
+#estadios #main > div {
+  padding: 25px;
+}
+
+#noticias #main > div img,
+#jugadores #main > div img,
+#equipos #main > div img,
+#estadios #main > div img {
+  float: left;
   
-  background-color: white;
+  margin: 0 20px 5px 0;
+  
+  border: 1px solid #000000;
+}
+
+#noticias #main > div {
+  min-height: 150px;
+}
+
+#noticias #main > div img {
+  width: auto;
+  height: 150px;
+}
+
+#jugadores #main > div {
+  min-height: 175px;
+}
+
+#jugadores #main > div img {
+  width: auto;
+  height: 125px;
+}
+
+#equipos #main > div {
+  min-height: 180px;
+}
+
+#equipos #main > div img {
+  padding: 15px;
+  
+  width: auto;
+  height: 100px;
+  
+  background-color: #FFFFFF;
+}
+
+#estadios #main > div {
+  min-height: 200px;
+}
+
+#estadios #main > div img {
+  width: auto;
+  height: 150px;
+}
+
+#ligas #main > div h3,
+#ligas #main > div p,
+#ligas_publicas #main > div h3,
+#ligas_publicas #main > div p,
+#ligas_privadas #main > div h3,
+#ligas_privadas #main > div p {
+  margin: 0.5em;
+}
+
+#calendario #main tr *,
+#resultados #main tr * {
+  text-align: center;
+}
+
+#calendario #main table img,
+#resultados #main table img {
+  width: auto;
+  height: 50px;
+}
+
+#calendario #main table td.img,
+#resultados #main table td.img {
+  background-color: #FFFFFF;
+  width: 50px;
+}
+
+/* Slider *********************************************************************/
+
+#slider,
+#sliderContent,
+.sliderImage span {
+  width: 600px; /* important to be same as image width */
+}
+
+#slider {
+  height: 300px; /* important to be same as image height */
+}
+
+.left,
+.right {
+  width: 200px !important;
+  padding: 10px;
+  height: 280px; /* = #slider.height - ((this.padding * 2)) */
+  -moz-border-radius: 0.5em 0 0 0.5em;
+  -webkit-border-radius: 0.5em 0 0 0.5em;
+}
+
+.left {
+  top: 0;
+  left: 0;
+  -moz-border-radius: 0.5em 0 0 0.5em;
+  -webkit-border-radius: 0.5em 0 0 0.5em;
+}
+
+.right {
+  right: 1px;
+  bottom: 5px;
+  -moz-border-radius: 0 0.5em 0.5em 0;
+  -webkit-border-radius: 0 0.5em 0.5em 0;
+}
+
+#slider {
+  position: relative; /* important */
+  overflow: hidden; /* important */
+  
+  margin: 0 auto;
+}
+
+#sliderContent {
+  position: absolute;
+  top: 0;
+}
+
+.sliderImage {
+  position: relative;
+  
+  display: none;
+  float: left;
+}
+
+.sliderImage span {
+  position: absolute;
+  
+  display: none;
+  
+  background-color: #000;
+  filter: alpha(opacity=70);
+  -moz-opacity: 0.7;
+  -khtml-opacity: 0.7;
+  opacity: 0.7;
+  
+  font-size: normal;
+  color: #fff;
+}
+
+.sliderImage img {
+  -moz-border-radius: 0.5em;
+  -webkit-border-radius: 0.5em;
+}
+
+.clear {
+  clear: both;
+}
+
+#login {
+  display: table;
+  width: 600px;
+  margin: 1em auto;
+}
+
+#login div {
+  display: table-cell;
+  padding: 1em;
+  width: 300px;
 }

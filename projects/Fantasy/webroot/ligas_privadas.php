@@ -5,24 +5,22 @@
 
         require 'include/pre.php';
 ?>
-<div id="contenido_interno" style="height: auto">
-        <h2>Ligas privadas</h2>
-        <div id="box_info" style="height:500px; overflow-y: scroll;">
+<h2>Ligas privadas</h2>
 <?php
         foreach (UIFacade::ligas() as $l) {
                 if ($l['liga']->get('es pública') == 'f') {
 ?>
-                <div class="datos">
-                    <h4><a href="#"><?php echo $l['liga']->get('nombre'); ?></a></h4>
-                    <p><strong>Creador:</strong> <a href="#"><?php echo $l['usuario']->get('username'); ?></a></p>
-                    <input name="" type="submit" value="Modificar"/>
-                    <input name="" type="submit" value="Eliminar"/>
-                </div>
+<div>
+        <h3><a href="#"><?php echo $l['liga']->get('nombre'); ?></a></h3>
+        <p><strong>Creador:</strong> <a href="#"><?php echo $l['usuario']->get('username'); ?></a></p>
+        <input name="" type="submit" value="Modificar"/>
+        <input name="" type="submit" value="Eliminar"/>
+</div>
 <?php
                 }
         }
 ?>
-                <a href="liga_privada_insert.php">Crear liga privada</a>
-        </div>
-</div>
+<form action="liga_privada_insert.php">
+        <input type="submit" name="" value="Crear liga privada"/>
+</form>
 <?php   require 'include/post.html'; ?>

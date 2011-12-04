@@ -8,7 +8,6 @@
 <h2>Estadios</h2>
 <?php
         $show = array(
-                'nombre',
                 'ciudad',
                 'estado',
                 'capacidad',
@@ -25,14 +24,14 @@
                 $img = $s->get('URL de la foto') or $img = 'generico.jpg';
 ?>
 <div>
-        <form class="Fila" action="Datos_Es.php" method="post">
+        <form action="Datos_Es.php" method="post">
                 <input type="hidden" name="id" value="<?php echo $s->get('id'); ?>"/>
-                <img class="imagen" src="static/images/estadio/<?php echo $img; ?>"/>
-                <div class="datos">
+                <h3><?php echo $s->get('nombre'); ?></h3>
+                <br/>
+                <img src="static/images/estadio/<?php echo $img; ?>"/>
 <?php           foreach ($show as $f) if ($s->get($f)) { ?>
-                        <div><?php echo mb_ucfirst($f, 'utf-8'); ?>: <?php echo $s->get($f); ?></div>
+                        <p><strong><?php echo mb_ucfirst($f, 'utf-8'); ?>:</strong> <?php echo $s->get($f); ?></p>
 <?php           } ?>
-                </div>
         </form>
 </div>
 <?php   } ?>

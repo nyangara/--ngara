@@ -7,8 +7,7 @@
 ?>
 <div id="contenido_interno">
         <div id="box_info">
-                <form action="controller_contenido_insert" method="post" id="Alcance">
-                        <input type="hidden" name="tipo" value="noticia"/>
+                <form action="controller" method="post" id="Alcance">
                         <input type="hidden" name="goto" value="noticias"/>
                         <table width="550" border="0">
                         <tr>
@@ -47,7 +46,7 @@
                                         </td>
                                 </tr>
                         </table>
-                        <input type="submit" name="contenido_insert" value="Aplicar"/>
+                        <button type="submit" name="action" value="noticia_insert">Aplicar</button>
                 </form>
         </div>
 </div>

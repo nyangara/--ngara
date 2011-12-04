@@ -20,10 +20,10 @@
 ?>
 <div>
         <div class="admin-options">
-                <form method="post" action="controller_contenido_remove">
+                <form method="post" action="controller">
                         <input type="hidden" name="id" value="<?php echo $id; ?>"/>
                         <input type="hidden" name="goto" value="noticias"/>
-                        <input type="submit" name="contenido_remove" value="Eliminar"/>
+                        <button type="submit" name="action" value="contenido_remove">Eliminar</button>
                 </form>
                 <form method="post" action="contenido_update">
                         <input type="hidden" name="id" value="<?php echo $id; ?>"/>

@@ -8,6 +8,8 @@
                 public static function update($entity_class, $data) { return self::run('update', $entity_class, $data); }
                 public static function remove($entity_class, $data) { return self::run('remove', $entity_class, $data); }
 
+                public static function fields     ($entity_class) { return $entity_class::fields     (); }
+                public static function pk         ($entity_class) { return $entity_class::pk         (); }
                 public static function retrieveAll($entity_class) { return $entity_class::retrieveAll(); }
                 public static function removeAll  ($entity_class) { return $entity_class::removeAll  (); }
 

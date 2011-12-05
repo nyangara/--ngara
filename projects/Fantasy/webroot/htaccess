@@ -1,3 +1,0 @@
-rewriteEngine on
-RewriteRule ^ci3725\.html$ http://ldc.usb.ve/~05-38235/cursos/CI3725/2011SD/ [R=permanent,L]
-RewriteRule ^CI3725((/.*)?)$ http://ldc.usb.ve/~05-38235/cursos/CI3725$1 [R=permanent,L]

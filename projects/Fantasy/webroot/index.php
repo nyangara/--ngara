@@ -1,10 +1,4 @@
-<?php
-        require_once 'include/config.php';
-        require_once 'include/dbconn/user.php';
-        require_once 'include/UIFacade.php';
-
-        require 'include/pre.php';
-?>
+<?php   require 'include/pre.php'; ?>
 <h2>Noticias</h2>
 
 <!-- Starting slider... -->
@@ -70,7 +64,6 @@
     <div class="admin-options">
       <form method="post" action="controller">
         <input type="hidden" name="id" value="<?php echo $id; ?>"/>
-        <input type="hidden" name="goto" value="noticias"/>
         <button type="submit" name="action" value="contenido_remove">Eliminar</button>
       </form>
       <form method="post" action="contenido_update">

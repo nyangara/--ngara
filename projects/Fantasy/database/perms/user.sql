@@ -1,20 +1,4 @@
-GRANT CONNECT ON DATABASE "Fantasy" TO "Fantasy (usuario normal)";
-GRANT USAGE   ON SCHEMA   "Fantasy" TO "Fantasy (usuario normal)";
-
-
-
--- Tablas de solo lectura:
-GRANT
-        SELECT
-ON
-        "Fantasy"."Estadio",
-        "Fantasy"."Equipo",
-        "Fantasy"."Jugador",
-        "Fantasy"."Juego",
-        "Fantasy"."Estadística de bateo",
-        "Fantasy"."Estadística de pitcheo",
-        "Fantasy"."Contenido"
-TO "Fantasy (usuario normal)";
+-- El rol de usuario normal hereda todo del usuario visitante
 
 
 

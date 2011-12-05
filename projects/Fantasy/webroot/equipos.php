@@ -1,9 +1,4 @@
-<?php
-        require_once 'include/config.php';
-        require_once 'include/dbconn/user.php';
-        require_once 'include/UIFacade.php';
-        require      'include/pre.php';
-?>
+<?php   require 'include/pre.php'; ?>
 <h2>Equipos</h2>
 <?php
         foreach (UIFacade::retrieveAll('Equipo') as $e) {

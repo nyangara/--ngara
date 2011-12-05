@@ -1,10 +1,4 @@
-<?php
-        require_once 'include/config.php';
-        require_once 'include/dbconn/user.php';
-        require_once 'include/UIFacade.php';
-
-        require 'include/pre.php';
-?>
+<?php   require 'include/pre.php'; ?>
 <h2>Agregar contenido</h2>
 <div>
         <form action="controller" method="post" id="Alcance">

@@ -1,7 +1,8 @@
+<?php   require 'include/session.php'; ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <title>Liga Fantabulosa</title>
+    <title>Liga Fantástica</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta name="keywords"    content="fantasy, beisbol venezolano, liga venezolana de beisbol profesional, lvbp"/>
     <meta name="description" content="Fantasy de la liga venezolana de beisbol profesional."/>
@@ -16,14 +17,25 @@
           <h1><a href="index.php">Liga Fantástica</a></h1>
         </div>
         <div id="login">
-          <form id="loginform" action="login" method="post">
-            <input type="text"     name="username" value="Nombre de usuario" onclick="if (value == 'Nombre de usuario') { value = ''; }"/>
-            <input type="password" name="password" value="Contraseña"        onclick="if (value == 'Contraseña'       ) { value = ''; }"/>
-            <input type="submit"   name="Login"    value="Acceder"/>
+<?php   if (userdata()) { ?>
+          <form action="logout" method="post" id="loginform">
+            <p>
+              <?php echo userdata()->get('username') . (userdata()->get('es administrador') ? ' (administrador)' : ''); ?>
+              <button type="submit" name="action" class="submit" value="logout">Logout</button>
+            </p>
           </form>
-          <form action="register">
-            <input name="Login" type="submit" value="Regístrate"/>
+<?php   } else { ?>
+          <form action="login" method="post" id="loginform">
+            <p>
+              <input type="text"     title="username" name="username" class="username" value="Username" onclick="if (value == 'Username') { value = ''; }"/>
+              <input type="password" title="password" name="password" class="password" value="Password" onclick="if (value == 'Password') { value = ''; }"/>
+              <button type="submit" name="action" class="submit" value="login">Login</button>
+            </p>
           </form>
+          <span class="Boton">
+                  <a href="register">Regístrate</a>
+          </span>
+<?php   } ?>
         </div>
         <div id="updates">
           <span>
@@ -35,19 +47,19 @@
           <ul>
 <?php
         $vs = array(
-                'Noticias'    => 'noticias',
-                'Jugadores'   => 'jugadores',
-                'Equipos'     => 'equipos',
-                'Estadios'    => 'estadios',
-                'Calendario'  => 'calendario',
-                'Resultados'  => 'resultados',
-                'Ligas'       => 'ligas'
+                'Noticias'   => array('index'     ),
+                'Jugadores'  => array('jugadores' ),
+                'Equipos'    => array('equipos'   ),
+                'Estadios'   => array('estadios'  ),
+                'Calendario' => array('calendario'),
+                'Resultados' => array('resultados'),
+                'Ligas'      => array('ligas'     , 'ligas_privadas', 'ligas_publicas')
         );
 
         foreach ($vs as $v => $f) {
 ?>
-            <li<?php echo ($f == basename($_SERVER['SCRIPT_NAME'], '.php')) ? ' class="on"' : ''; ?>>
-              <a href="<?php echo $f . ".php"; ?>"><?php echo $v; ?></a>
+            <li<?php echo in_array(basename($_SERVER['SCRIPT_NAME'], '.php'), $f) ? ' class="on"' : ''; ?>>
+              <a href="<?php echo $f[0] . '.php'; ?>"><?php echo $v; ?></a>
             </li>
 <?php   } ?>
           </ul>

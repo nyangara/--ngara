@@ -1,10 +1,4 @@
-<?php
-        require_once 'include/config.php';
-        require_once 'include/dbconn/user.php';
-        require_once 'include/UIFacade.php';
-
-        require 'include/pre.php';
-?>
+<?php   require 'include/pre.php'; ?>
 <h2>Ligas públicas</h2>
 <?php
         foreach (UIFacade::ligas() as $l) if ($l['liga']->get('es pública') == 't') {
@@ -33,10 +27,7 @@
 <?php   } ?>
 <h2><a href="ligas">Ver todas las ligas</a></h2>
 <h2><a href="ligas_privadas">Ver ligas privadas</a></h2>
-<form action="liga_publica_insert"><!-- FIXME: condicionar a que seas administrador -->
-  <input type="submit" value="Crear liga pública"/>
-</form>
-<form action="liga_privada_insert">
-  <input type="submit" value="Crear liga privada"/>
+<form action="liga_insert">
+  <input type="submit" value="Crear liga"/>
 </form>
 <?php   require 'include/post.html'; ?>

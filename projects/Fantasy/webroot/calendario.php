@@ -1,10 +1,4 @@
-<?php
-        require_once 'include/config.php';
-        require_once 'include/dbconn/user.php';
-        require_once 'include/UIFacade.php';
-
-        require 'include/pre.php';
-?>
+<?php   require 'include/pre.php'; ?>
 <h2>Calendario</h2>
 <div>
         <form>
@@ -58,4 +52,4 @@
 <form id="form" action="agregar_equipo.php" method="post">
         <input type="submit" value="Agregar juego"/>
 </form>
-<?php   require('include/post.html'); ?>
+<?php   require 'include/post.html'; ?>

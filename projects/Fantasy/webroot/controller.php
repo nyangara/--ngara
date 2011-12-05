@@ -1,32 +1,61 @@
 <?php
-        require_once 'include/dbconn/admin.php';
-        require_once 'include/UIFacade.php';
+        require_once 'include/session.php';
 
         $actions = array(
-                'contenido_insert' => function () {
-                        date_default_timezone_set('America/Caracas');
-                        UIFacade::insert('Contenido', set_fields('Contenido', array(
-                                'fecha' => date('Y-m-d H:i:sP')
-                        )));
-                },
+                'liga_insert' => array(
+                        'authorization' => 'user',
+                        'action' => function () {
+                                $data = array();
+                                if (userclass() != 'admin') $data['es pública'] = 'f';
+                                insert_fields('Liga', $data);
+                        }
+                ),
 
-                'juego_insert' => function () {
-                        UIFacade::insert('Juego', set_fields('Juego', array(
-                                'inicio' => sprintf('%s-%s-%s %s:%s %s',
-                                        $_POST['year'  ],
-                                        $_POST['month' ],
-                                        $_POST['day'   ],
-                                        $_POST['hour'  ],
-                                        $_POST['minute'],
-                                        $_POST['ampm'  ]
-                                )
-                        )));
-                },
+                'contenido_insert' => array(
+                        'authorization' => 'admin',
+                        'action' => function () {
+                                if ($user_class)
+                                insert_fields('Contenido', set_fields('Contenido', array(
+                                        'fecha' => date('Y-m-d H:i:sP')
+                                )));
+                        }
+                ),
 
-                'contenido_remove' => function () { remove_by_pk('Contenido'); },
-                'juego_remove'     => function () { remove_by_pk('Juego'    ); },
-                'liga_remove'      => function () { remove_by_pk('Liga'     ); }
+                'juego_insert' => array(
+                        'authorization' => 'admin',
+                        'action' => function () {
+                                insert_fields('Juego', array(
+                                        'inicio' => sprintf(
+                                                '%s-%s-%s %s:%s %s',
+                                                $_POST['year'  ],
+                                                $_POST['month' ],
+                                                $_POST['day'   ],
+                                                $_POST['hour'  ],
+                                                $_POST['minute'],
+                                                $_POST['ampm'  ]
+                                        )
+                                ));
+                        }
+                ),
+
+                'contenido_remove' => array('authorization' => 'admin', 'action' => function () { remove_by_pk('Contenido'); }),
+                'juego_remove'     => array('authorization' => 'admin', 'action' => function () { remove_by_pk('Juego'    ); }),
+
+                'liga_remove' => array(
+                        'authorization' => 'user',
+                        'action' => function () {
+                                if (userclass() == 'admin') remove_by_pk('Liga');
+                                else {
+                                        $l = UIFacade::select('Liga', set_pk('Liga'));
+                                        if ($l->get('creador') == userdata()->get('id')) $l->remove();
+                                }
+                        }
+                )
         );
+
+        function insert_fields($entity_class, $data = array()) {
+                UIFacade::insert($entity_class, set_fields($entity_class, $data));
+        }
 
         function remove_by_pk($entity_class) {
                 UIFacade::remove($entity_class, set_pk($entity_class));
@@ -44,8 +73,19 @@
         function set_fields($entity_class, $data = array()) { return set_data($entity_class, $data, 'fields'); }
         function set_pk    ($entity_class, $data = array()) { return set_data($entity_class, $data, 'pk'    ); }
 
-        if (array_key_exists('action', $_POST) and array_key_exists($_POST['action'], $actions)) {
-                call_user_func($actions[$_POST['action']]);
+        if (array_key_exists('action', $_POST)) {
+                $an = $_POST['action'];
+                if (array_key_exists($an, $actions)) {
+                        $a = $actions[$an];
+                        $auth = $a['authorization'];
+                        $c = userclass();
+                        if (
+                                ($c == $auth) or
+                                ($c == 'user'  and in_array($auth, array('guest'))) or      // un user es también un guest
+                                ($c == 'admin' and in_array($auth, array('guest', 'user'))) // un admin es también un guest y un user
+                        ) call_user_func($a['action']);
+                        else error_log('Fantasy: intento de llamar función del controlador ' . $an . ' por usuario no autorizado de clase ' . $c);
+                }
         }
 
         if (array_key_exists('goto', $_POST)) {

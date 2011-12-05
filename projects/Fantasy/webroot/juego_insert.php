@@ -1,7 +1,5 @@
 <?php
-        require_once 'include/config.php';
-        require_once 'include/dbconn/user.php';
-        require_once 'include/UIFacade.php';
+        require 'include/pre.php';
 
         function select_opts($name, $range, $now, $format) {
                 $r = '<select name="' . $name . '">';
@@ -18,8 +16,6 @@
 
         $equipos  = UIFacade::retrieveAll('Equipo');
         $estadios = UIFacade::retrieveAll('Estadio');
-
-        require 'include/pre.php';
 ?>
 <div id="contenido_interno" style="height: auto">
         <div style="height:500px; overflow-y: scroll;">

@@ -27,15 +27,18 @@
         </tr>
 <?php
         foreach (UIFacade::calendario() as $c) {
-                $date = strtotime($c['juego']->get('inicio'));
-                $img_local     = $c['equipo local'    ]->get('URL del logo') or $img_local     = 'generico.jpg';
-                $img_visitante = $c['equipo visitante']->get('URL del logo') or $img_visitante = 'generico.jpg';
+                $date          = strtotime($c['juego']->get('inicio'));
+                $id            = $c['juego'           ]->get('id'          );
+                $img_local     = $c['equipo local'    ]->get('URL del logo');
+                $img_visitante = $c['equipo visitante']->get('URL del logo');
+                if ($img_local     and !filter_var($img_local    , FILTER_VALIDATE_URL)) $img_local     = 'static/images/equipo/' . $img_local    ;
+                if ($img_visitante and !filter_var($img_visitante, FILTER_VALIDATE_URL)) $img_visitante = 'static/images/equipo/' . $img_visitante;
 ?>
         <tr>
                 <td><?php echo date('d/m/Y', $date); ?><br/><?php echo date('h:i A', $date); ?></td>
-                <td class="img"><img src="static/images/equipo/<?php echo $img_local; ?>"/>
+                <td class="img"><img src="<?php echo $img_local; ?>"/>
                 <td><?php echo $c['equipo local'    ]->get('nombre corto'); ?></td>
-                <td class="img"><img src="static/images/equipo/<?php echo $img_visitante; ?>"/>
+                <td class="img"><img src="<?php echo $img_visitante; ?>"/>
                 <td><?php echo $c['equipo visitante']->get('nombre corto'); ?></td>
                 <td><?php echo $c['estadio'         ]->get('nombre'      ); ?></td>
                 <td>
@@ -45,6 +48,7 @@
                 </form>
                 <form method="post" action="controller">
                         <input type="hidden" name="id" value="<?php echo $id; ?>"/>
+                        <input type="hidden" name="goto" value="calendario"/>
                         <button type="submit" name="action" value="juego_remove"/>Eliminar</button>
                 </form>
                 </td>

@@ -11,17 +11,17 @@ INSERT INTO "Fantasy"."Estadio" (
         "URL de la foto",
         "descripción"
 ) VALUES
-        ('Alfonso "Chico" Carrasquel'      , 'Puerto La Cruz', 'Anzoátegui'      , 18000, 1991, 'grama artificial', NULL, NULL, NULL, 'Alfonso_Chico_Carrasquel.gif', NULL),
+        ('Alfonso "Chico" Carrasquel'      , 'Puerto La Cruz', 'Anzoátegui'      , 18000, 1991, 'grama artificial', NULL, NULL, NULL, 'Alfonso_Chico_Carrasquel.gif' , NULL),
         ('Antonio Herrera Gutiérrez'       , 'Barquisimeto'  , 'Lara'            , 22000, 1969, 'grama'           , NULL, NULL, NULL, 'Antonio_Herrera_Gutierrez.gif', NULL),
-        ('Bachiller Julio Hernández Molina', 'Araure'        , 'Portuguesa'      , 12000, 1967, 'grama'           ,  333,  383,  333, NULL, NULL),
-        ('Enzo Hernández'                  , 'El Tigre'      , 'Anzoátegui'      ,  5762, 2006, 'grama artificial',  330,  405,  330, NULL, NULL),
-        ('José Bernardo Pérez'             , 'Valencia'      , 'Carabobo'        , 15000, 1955, 'grama'           , NULL, NULL, NULL, 'Jose_Bernardo_Perez.gif', NULL),
-        ('José Pérez Colmenares'           , 'Maracay'       , 'Aragua'          , 12647, 1965, 'grama'           ,  348,  384,  348, 'Jose_Perez_Colmenares.gif', NULL),
-        ('La Ceiba'                        , 'Ciudad Guayana', 'Bolívar'         , 30000, 1998, 'grama'           , NULL, NULL, NULL, NULL, NULL),
-        ('Luis Aparicio "El Grande"'       , 'Maracaibo'     , 'Zulia'           , 23900, 1963, 'grama'           , NULL, NULL, NULL, 'Luis_Aparicio_El_Grande.gif', NULL),
-        ('Metropolitano de San Cristóbal'  , 'San Cristóbal' , 'Táchira'         , 22000, 2005, 'grama'           , NULL, NULL, NULL, NULL, NULL),
-        ('Nueva Esparta'                   , 'Porlamar'      , 'Nueva Esparta'   , 16100, 1990, 'grama'           , NULL, NULL, NULL, 'Nueva_Esparta.gif', NULL),
-        ('Universitario'                   , 'Caracas'       , 'Distrito Capital', 23700, 1951, 'grama'           ,  347,  385,  347, 'Universitario_de_Caracas.gif', NULL);
+        ('Bachiller Julio Hernández Molina', 'Araure'        , 'Portuguesa'      , 12000, 1967, 'grama'           ,  333,  383,  333, NULL                           , NULL),
+        ('Enzo Hernández'                  , 'El Tigre'      , 'Anzoátegui'      ,  5762, 2006, 'grama artificial',  330,  405,  330, NULL                           , NULL),
+        ('José Bernardo Pérez'             , 'Valencia'      , 'Carabobo'        , 15000, 1955, 'grama'           , NULL, NULL, NULL, 'Jose_Bernardo_Perez.gif'      , NULL),
+        ('José Pérez Colmenares'           , 'Maracay'       , 'Aragua'          , 12647, 1965, 'grama'           ,  348,  384,  348, 'Jose_Perez_Colmenares.gif'    , NULL),
+        ('La Ceiba'                        , 'Ciudad Guayana', 'Bolívar'         , 30000, 1998, 'grama'           , NULL, NULL, NULL, NULL                           , NULL),
+        ('Luis Aparicio "El Grande"'       , 'Maracaibo'     , 'Zulia'           , 23900, 1963, 'grama'           , NULL, NULL, NULL, 'Luis_Aparicio_El_Grande.gif'  , NULL),
+        ('Metropolitano de San Cristóbal'  , 'San Cristóbal' , 'Táchira'         , 22000, 2005, 'grama'           , NULL, NULL, NULL, NULL                           , NULL),
+        ('Nueva Esparta'                   , 'Porlamar'      , 'Nueva Esparta'   , 16100, 1990, 'grama'           , NULL, NULL, NULL, 'Nueva_Esparta.gif'            , NULL),
+        ('Universitario'                   , 'Caracas'       , 'Distrito Capital', 23700, 1951, 'grama'           ,  347,  385,  347, 'Universitario_de_Caracas.gif' , NULL);
 
 INSERT INTO "Fantasy"."Equipo" (
         "nombre completo",

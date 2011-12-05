@@ -9,7 +9,6 @@
                                 'fecha' => date('Y-m-d H:i:sP')
                         )));
                 },
-                'contenido_remove' => function () { UIFacade::remove('Contenido', set_pk('Contenido')); },
 
                 'juego_insert' => function () {
                         UIFacade::insert('Juego', set_fields('Juego', array(
@@ -22,8 +21,16 @@
                                         $_POST['ampm'  ]
                                 )
                         )));
-                }
+                },
+
+                'contenido_remove' => function () { remove_by_pk('Contenido'); },
+                'juego_remove'     => function () { remove_by_pk('Juego'    ); },
+                'liga_remove'      => function () { remove_by_pk('Liga'     ); }
         );
+
+        function remove_by_pk($entity_class) {
+                UIFacade::remove($entity_class, set_pk($entity_class));
+        }
 
         function set_data($entity_class, $data = array(), $kind_of_data = 'fields') {
                 if (in_array($kind_of_data, array('fields', 'pk'))) {

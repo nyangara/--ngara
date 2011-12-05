@@ -4,6 +4,8 @@
         class Entity {
                 protected $data;
 
+                public static function enum_values($type_name) { return DataFacade::enum_values($type_name); }
+
                 public function get($field) {
                         if (array_key_exists($field, $this->data)) {
                                 return $this->data[$field];

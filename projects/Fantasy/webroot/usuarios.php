@@ -2,13 +2,15 @@
         require_once 'include/config.php';
         require_once 'include/dbconn/user.php';
         require_once 'include/UIFacade.php';
-        require      'include/pre.php';
+
+        require 'include/pre.php';
 ?>
-<div id="contenido_interno">
+<div>
         <h2>Usuarios</h2>
 <?php
         foreach (UIFacade::retrieveAll('Usuario') as $u) {
                 $img = $u->get('URL del avatar') or $img = 'generico.jpg';
+                if ($img and !filter_var($img, FILTER_VALIDATE_URL)) $img = 'static/images/usuario/' . $img;
 ?>
         <div class="alcanceUsuario">
                 <form class="Fila" action="Datos_Usr.php" method="post">
@@ -23,4 +25,4 @@
         </div>
 <?php   } ?>
 </div>
-<?php   require('include/post.html'); ?>
+<?php   require 'include/post.html'; ?>

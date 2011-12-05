@@ -79,28 +79,16 @@ input[type="submit"] {
   margin: 0 auto;
 }
 
-#header,
-#updates,
-#footer {
-  clear: both;
-}
-
 #header {
-  height: 180px;
-
-  padding-top: 30px;
-  
-  background-color: #3D3D3D;
+  height: 171px;
   
   color: #E6E4DD;
 }
 
 #logo {
-  float: left;
-  
   height: 50px;
   
-  margin: 0 0 20px 30px;
+  margin: 25px 25px 15px;
 }
 
 #logo img {
@@ -121,27 +109,24 @@ input[type="submit"] {
 }
 
 #login {
+  display: inline-block;
   float: right;
   
-  height: 30px;
-  
-  margin: 10px 0 30px;
+  margin-top: -57px;
+  margin-right: 26px;
 }
 
 #updates {
-  display: table;
+  display: block;
   
-  height: 40px;
+  width: 825px;
+  height: 20px;
   
-  margin: 0 auto 30px;
+  margin: 0 25px 25px;
   padding: 10px;
   
   background-color: #919E42;
   color: #000000;
-}
-
-#updates span {
-  display: table-row;
 }
 
 #updates strong,
@@ -154,12 +139,11 @@ input[type="submit"] {
 }
 
 #navigation {
+  height: 41px;
 }
 
 #navigation ul {
   display: block;
-  
-  border-bottom: 8px solid #728603;
   
   font-size: medium;
   text-align: center;
@@ -174,7 +158,7 @@ input[type="submit"] {
 #navigation li a {
   display: block;
   
-  padding: 8px 12px 5px;
+  padding: 8px 12px 4px;
   
   text-align: center;
   text-decoration: none;
@@ -200,11 +184,6 @@ input[type="submit"] {
   margin: 0 auto;
 }
 
-#main {
-  overflow-y: auto;
-  height: 500px;
-}
-
 #main,
 #sidebar {
   padding: 1em 0.5em;
@@ -216,8 +195,9 @@ input[type="submit"] {
 
 #main {
   float: left;
-  width: 650px;
-  min-height: 500px;
+  width: 665px;
+  height: 500px;
+  overflow-y: auto;
 }
 
 #main > * {
@@ -244,6 +224,8 @@ input[type="submit"] {
   
   font-size: medium;
   color: #E6E4DD;
+  
+  clear: both;
 }
 
 p.copyright {

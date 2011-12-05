@@ -15,7 +15,7 @@
         </form>
 </div>
 <?php   } ?>
-<form id="form" action="agregar_equipo.php" method="post">
+<form id="form" action="equipo_insert.php" method="post">
         <input type="submit" value="Agregar equipo"/>
 </form>
 <?php   require('include/post.html'); ?>

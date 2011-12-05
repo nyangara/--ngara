@@ -9,21 +9,31 @@
                 <link rel="Shortcut Icon" href="static/images/favicon.ico" />
         </head>
         <body id="<?php echo basename($_SERVER['SCRIPT_NAME'], '.php') ?>">
-                <div id="marquee">
-                    <div><span>Novedades:</span> <marquee behavior="scroll" direction="left" scrollamount="3">Esto es un marquee de prueba.</marquee></div>
-                </div>
                 <div id="wrapper">
                         <div id="header">
                                 <div id="logo">
                                         <img src="static/images/LogoGrande.png" alt="logo" width="48" height="48"/>
                                         <h1><a href="index.php">Liga Fantástica</a></h1>
                                 </div>
+                                <div id="login">         
+                                    <form id="loginform" action="loginAction.php" method="POST">
+                                        <input name="username" type="text" value="Nombre de usuario" onclick="if ( value == \'Nombre de usuario\' ) { value = \'\'; }" />
+                                        <input name="password" type="password" value="Contraseña" onclick="if ( value == \'Contraseña\' ) { value = \'\'; }"/> 
+                                        <input name="TIPO" type="hidden" value="Usuario" />
+                                        <input name="Login" type="submit" value="Acceder" tabindex="3" />
+                                    </form>
+                                    <form action="l./Registro_Usr.php">
+                                        <input name="Login" type="submit" value="Regístrate" tabindex="3" />
+                                    </form>
+                                </div>
+                                <div id="updates">
+                                    <span><strong>Novedades:</strong> <marquee behavior="scroll" direction="left" scrollamount="3">Esto es un marquee de prueba.</marquee></span>
+                                </div>
                         <div id="navigation">
                                 <ul>
 <?php
         $vs = array(
-                'Inicio'      => 'index',
-                'Noticias'    => 'noticias',
+                'Noticias'    => 'index',
                 'Jugadores'   => 'jugadores',
                 'Equipos'     => 'equipos',
                 'Estadios'    => 'estadios',

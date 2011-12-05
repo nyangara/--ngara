@@ -5,6 +5,8 @@
 
         require 'include/pre.php';
 ?>
+<h2>Noticias</h2>
+
 <!-- Starting slider... -->
 <script type="text/javascript" src="static/js/jquery.js"></script>
 <script type="text/javascript" src="static/js/s3SliderPacked.js"></script>
@@ -21,15 +23,15 @@
 <div id="slider">
     <ul id="sliderContent">
         <li class="sliderImage">
-            <a href=""><img src="slider_images/imagen1.jpg" alt="1" width="600" height="300" /></a>
+            <a href=""><img src="static/images/slider/01.jpg" alt="1" width="600" height="300" /></a>
             <span class="left"><strong>Vive...</strong><br />La emoción de el béisbol...</span>
         </li>
         <li class="sliderImage">
-            <a href=""><img src="slider_images/imagen2.jpg" alt="2" width="600" height="300" /></a>
+            <a href=""><img src="static/images/slider/02.jpg" alt="2" width="600" height="300" /></a>
             <span class="right"><strong>Diseña...</strong><br />El equipo de tus sueños...</span>
         </li>
         <li class="sliderImage">
-            <img src="slider_images/imagen3.jpg" alt="3" width="600" height="300" />
+            <img src="static/images/slider/03.jpg" alt="3" width="600" height="300" />
             <span class="right"><strong>Juega...</strong><br />El Fantasy de la LPBV</span>
         </li>
         <div class="clear sliderImage"></div>
@@ -37,22 +39,38 @@
 </div>
 <!-- Slider ended. -->
 
-<div id="login">
+<div id="search">
+  <form>
+    <input name="" type="text" /> <input name="" type="submit" value="Buscar" />
+  </form>
+</div>
+
+<div id="else">
+<?
+        foreach (UIFacade::retrieveAll('Contenido') as $c) {
+                if ($c->get('tipo') == 'noticia') {
+                        $img  = $c->get('URL de imagen');
+                        $tags = $c->get('tags'         );
+                        $id   = $c->get('id'           );
+?>
 <div>
-<h2>Acceder</h2>
-<form action="#">
-        <p>Nombre de usuario: </p>
-        <p><input type="text"     name="username" value=""/></p>
-        <p>Contraseña:        </p>
-        <p><input type="password" name="password" value=""/></p>
-        <p><input name="Login" type="submit" value="Acceder"/></p>
+<div class="admin-options">
+<form method="post" action="controller_contenido_remove">
+        <input type="hidden" name="id" value="<?php echo $id; ?>"/>
+        <input type="submit" name="contenido_remove" value="Eliminar" />
+</form>
+<form method="post" action="contenido_update">
+        <input type="hidden" name="id" value="<?php echo $id; ?>"/>
+        <input type="submit" name="contenido_update" value="Modificar"/>
 </form>
 </div>
-<div>
-<h2>¿Eres nuevo?</h2>
-<form action="registro.php">
-    <input name="Register" type="submit" value="Crear cuenta"/>
-</form>
+<h3><?php echo $c->get('título'); ?></h3>
+<h4><?php echo $c->get('fecha'); ?></h4>
+<br />
+<?php if ($img) { ?><img src="static/images/noticia/<?php echo $img; ?>"/><?php } ?>
+<p><?php echo $c->get('texto'); ?></p>
+<?php if ($tags) { ?><p><strong>Etiquetas:</strong> <?php echo $tags; ?></p><?php } ?>
 </div>
+<?php  }  }  ?>
 </div>
-<?php   require('include/post.html'); ?>
+<?php  require 'include/post.html';  ?>

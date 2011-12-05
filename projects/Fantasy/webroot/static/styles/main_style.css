@@ -53,8 +53,9 @@ form {
 
 input[type="text"],
 input[type="password"],
+button,
+input[type="file"],
 select {
-  width: 10em;
   padding: 0.25em;
   
   background-color: #EEEEEE;
@@ -114,6 +115,10 @@ input[type="submit"] {
   
   margin-top: -57px;
   margin-right: 26px;
+}
+
+#login input {
+  max-width: 150px;
 }
 
 #updates {
@@ -327,6 +332,16 @@ div.admin-options {
 #resultados #main table td.img {
   background-color: #FFFFFF;
   width: 50px;
+}
+
+
+#equipo_insert #main img {
+  float: right;
+  
+  width: auto;
+  height: 180px;
+  
+  margin-left:125px;
 }
 
 /* Slider *********************************************************************/

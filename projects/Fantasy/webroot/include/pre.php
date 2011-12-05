@@ -35,13 +35,13 @@
           <ul>
 <?php
         $vs = array(
-                'Noticias'    => 'noticias',
+                'Noticias'    => 'index',
                 'Jugadores'   => 'jugadores',
                 'Equipos'     => 'equipos',
                 'Estadios'    => 'estadios',
                 'Calendario'  => 'calendario',
                 'Resultados'  => 'resultados',
-                'Ligas'       => 'ligas'
+                'Ligas'       => 'ligas',
         );
 
         foreach ($vs as $v => $f) {

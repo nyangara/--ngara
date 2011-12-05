@@ -20,7 +20,7 @@
 <?php   if (userdata()) { ?>
           <form action="logout" method="post" id="loginform">
             <p>
-              <?php echo userdata()->get('username') . (userdata()->get('es administrador') ? ' (administrador)' : ''); ?>
+              <?php echo userdata()->get('username') . (userdata()->get('es administrador') == 't' ? ' (administrador)' : ''); ?>
               <button type="submit" name="action" class="submit" value="logout">Logout</button>
             </p>
           </form>

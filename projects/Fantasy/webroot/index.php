@@ -18,7 +18,7 @@
       <span class="left">
         <strong>Vive...</strong>
         <br/>
-        La emoción de el béisbol...
+        La emoción del béisbol...
       </span>
     </li>
     <li class="sliderImage">
@@ -43,12 +43,6 @@
 <!-- Slider ended. -->
 
 <h2>Noticias</h2>
-<div id="search">
-  <form>
-    <input type="text" name="text"/>
-    <button type="submit" name="noticia_search" value="1">Buscar</button>
-  </form>
-</div>
 <div id="else">
 <?
         foreach (UIFacade::retrieveAll('Contenido') as $c) {
@@ -59,6 +53,7 @@
                         if ($img and !filter_var($img, FILTER_VALIDATE_URL)) $img = 'static/images/contenido/' . $img;
 ?>
   <div>
+<?php                   if (has_auth('admin')) { ?>
     <div class="admin-options">
       <form method="post" action="controller">
         <input type="hidden" name="id" value="<?php echo $id; ?>"/>
@@ -69,6 +64,7 @@
         <button type="submit" name="contenido_update" value="1">Modificar</button>
       </form>
     </div>
+<?php                   } ?>
     <h3><?php echo $c->get('título'); ?></h3>
     <h4><?php echo $c->get('fecha'); ?></h4>
     <br/>
@@ -84,5 +80,11 @@
                 }
         }
 ?>
+</div>
+<div id="search">
+  <form>
+    <input type="text" name="text"/>
+    <button type="submit" name="noticia_search" value="1">Buscar</button>
+  </form>
 </div>
 <?php   require 'include/post.html'; ?>

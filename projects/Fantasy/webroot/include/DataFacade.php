@@ -5,6 +5,27 @@
                 protected static function conds($i, $j) { return self::quote($i) . ' = ' . self::dolar($j); }
                 protected static function sets ($i, $j) { return 'SET ' . self::conds($i, $j); }
 
+                public static function auth($username, $password) {
+                        global $dbconn;
+                        global $pqs;
+                        $pq = 'AUTH';
+
+                        if (!isset($pqs)) $pqs = array();
+                        if (!in_array($pq, $pqs)) {
+                                $query = 'SELECT "Fantasy"."autenticar"($1, $2)';
+                                $result = pg_prepare($dbconn, $pq, $query) or die('pg_prepare: ' . pg_last_error());
+                                $pqs[] = $pq;
+                        }
+
+                        $result = pg_execute($dbconn, $pq, array($username, $password)) or die('pg_execute: ' . pg_last_error());
+
+                        if (pg_num_rows($result) === 0) return null;
+                        $row = pg_fetch_row($result) or die('pg_fetch_row: ' . pg_last_error());
+                        pg_free_result($result);
+
+                        return $row[0];
+                }
+
                 public static function enum_values($type_name) {
                         global $dbconn;
                         global $pqs;
@@ -134,7 +155,7 @@ EOF;
 
                         $e = new $ec;
                         $n = pg_num_fields($result);
-                        for ($i = 1; $i < $n; ++$i) {
+                        for ($i = 0; $i < $n; ++$i) {
                                 $e->set(pg_field_name($result, $i), $row[$i]);
                         }
                         pg_free_result($result);

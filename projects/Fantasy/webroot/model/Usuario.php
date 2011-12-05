@@ -17,5 +17,14 @@
                         'id'
                 );
                 protected $data;
+
+                public static function auth($username, $password) {
+                        $id = DataFacade::auth($username, $password);
+                        if ($id) {
+                                $u = new self();
+                                return $u->set('id', $id)->select();
+                        }
+                        return null;
+                }
         }
 ?>

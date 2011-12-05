@@ -14,3 +14,5 @@ GRANT EXECUTE ON FUNCTION
                 IN      "parámetro: password"                   text
         )
 TO "Fantasy (autenticación)";
+
+GRANT SELECT ON "Fantasy"."Usuario" TO "Fantasy (autenticación)";

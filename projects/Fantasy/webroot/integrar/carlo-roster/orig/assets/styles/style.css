@@ -1,0 +1,347 @@
+body {
+	margin: 0;
+	font-family:Verdana, Geneva, sans-serif;
+	background-color: #e6e3dc;
+	background-image: url(../images/background.png);
+	background-repeat: repeat-x;
+
+}
+
+a {
+	color: #CCC;
+	text-decoration: none;
+}
+
+a:hover {
+	color: #060;
+	text-decoration: underline;
+}
+
+#wrapper {
+  width: 900px;
+  margin: 0 auto;
+}
+
+#logo {
+	width: 240px;
+	height: 50px;
+	margin-top: 17px;
+	margin-left: 10px;
+	background-repeat: no-repeat;
+}
+
+#updates {
+  color: #e6e3dc;
+  font-family: "Tahoma", Arial, Helvetica, sans-serif;
+  padding-top: 5px;
+}
+
+#updates span {
+  font-size: 13px;
+}
+
+#login {
+	width: 400px;
+	height: 73px;
+	position: relative;
+	top: -71px;
+	left: 420px;
+	color: #e6e3dc;
+	font-family: "Tahoma", Arial, Helvetica, sans-serif;
+	font-size: 13px;
+	float:right;
+	margin-right: 400px;
+	margin-top: 20px;
+}
+
+#loginwelcome {
+  padding-left: 20px;
+  padding-top: 15px;
+}
+
+#login form {
+	width: 320px;
+}
+
+#login .username {
+  border: none;
+  background: url(../images/formfield.png) transparent no-repeat;
+  width: 131px;
+  height: 21px;
+  color: #859c0a;
+  font-family: "Tahoma", Arial, Helvetica, sans-serif;
+  text-indent: 4px;
+  font-size: 13px;
+}
+
+#login .password {
+  border: none;
+  background: url(../images/formfield.png) transparent no-repeat;
+  width: 131px;
+  height: 21px;
+  color: #859c0a;
+  font-family: "Tahoma", Arial, Helvetica, sans-serif;
+  text-indent: 4px;
+  font-size: 13px;
+}
+
+#login .submit {
+	border: none;
+	background: none;
+	width: 50px;
+	font-family: "Myriad Pro", Arial, Helvetica, sans-serif;
+	color: #e6e3dc;
+	font-size: 14px;
+}
+
+ul {
+	list-style: none;
+	margin: 0px;
+	padding: 0px;
+}
+
+#navigation {
+	float:right;
+	font-size:12px;
+	margin-top: -60px;
+	font-family: "Tahoma", Arial, Helvetica, sans-serif;
+	float:right;
+}
+
+
+#navigation li {
+  float:left;
+  margin-right: 3px;
+  margin-bottom: -12px;
+}
+
+#navigation li a{
+	display: block;
+	text-decoration: none;
+	color: #e6e3dc;
+	width: 70px;
+	height: 20px;
+	text-align: center;
+	padding-top: 5px;
+	margin-right: 5px;
+	margin-bottom: 5px;
+}
+
+#navigation li a:hover {
+	background-repeat: no-repeat;
+	-webkit-border-top-left-radius: 10px;
+	-webkit-border-top-right-radius: 10px;
+	-moz-border-radius-topleft: 10px;
+	-moz-border-radius-topright: 10px;
+	background-color: #6D8103;
+}
+
+#navigation .on {
+	background-repeat: no-repeat;
+	-webkit-border-top-left-radius: 10px;
+	-webkit-border-top-right-radius: 10px;
+	-moz-border-radius-topleft: 10px;
+	-moz-border-radius-topright: 10px;
+	background-color: #6D8103;
+}
+
+#content {
+	height: 530px;
+	width: 100%;
+	float:left;
+	background-image: url(../images/FondoEscrito.jpg);
+	background-repeat: no-repeat;
+	padding: 10px;
+	margin-top: -30px;
+}
+
+#content h2 {
+  font-family: Tahoma, Arial, Helvetica, sans-serif;
+  font-size: 23px;
+  color: #9bb50b;
+  margin-top: 10px;
+}
+
+#content p {
+  font-family: "Tahoma", Arial, Helvetica, sans-serif;
+  font-size: 13px;
+  padding-left: 15px;
+  margin: 0;
+  width: 90%;
+}
+
+#footer{
+	height: 65px;
+	font-family: "Tahoma", Arial, Helvetica, sans-serif;
+	font-size:14px;
+	color: #FFFFFF;
+	background-repeat: no-repeat;
+	width: 100%;
+	float: none;
+	background-color: #434343;
+	padding: 10px;
+	background-image: url(../images/footback2.png);
+	-moz-border-radius-bottomleft: 10px;
+	-moz-border-radius-bottomright: 10px;
+	-webkit-border-bottom-left-radius: 10px;
+	-webkit-border-bottom-right-radius: 10px;
+	float:left;
+}
+
+#nombresistema{
+	font-family: Verdana, Geneva, sans-serif;
+	font-size: 18px;
+	color: #CCC;
+	display: block;
+	float: right;
+	margin-top: 10px;
+}
+
+#sideBar #twitter{
+	padding-right: 30px;
+	padding-left: 30px;
+}
+
+.logoCluster{
+	background-image: url(../images/logoClusterSS.png);
+	height: 71px;
+	width: 137px;
+	float: left;
+	background-repeat: no-repeat;
+	background-position: left top;
+	padding: 10px;
+	margin-left: 20px;
+}
+
+.logoNiangara{
+	background-image: url(../images/niangaralogo.png);
+	height: 71px;
+	width: 137px;
+	float: right;
+	background-repeat: no-repeat;
+	background-position: left top;
+	padding: 10px;
+	margin-top: -90px;
+	margin-left: 70%;
+	margin-right: -40px;
+}
+
+#contacto{
+	text-align: center;
+	width: 760px;
+}
+
+#sideBar{
+	float: right;
+	height: 500px;
+	padding-right: 0px;
+}
+
+  #buscador{
+	padding-top: 10px;
+	padding-right: 15px;
+	padding-bottom: 15px;
+	padding-left: 20px;
+}
+
+#contenido_titulo{
+	float: left;
+	width: 300px;
+}
+
+#content #contenido_interno{
+	width: 600px;
+	height: 500px;
+	float: left;
+	background-color: #333;
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+}
+
+#content #contenido_interno p{
+	color: grey;
+}
+
+.Boton {
+	background-color: #708403;
+	display: block;
+	height: 20px;
+	width: 70px;
+	float: right;
+	font-family: Verdana, Geneva, sans-serif;
+	color: #FFF;
+	font-size: 12px;
+	text-align: center;
+	padding-top: 5px;
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	margin-top: -36px;
+	margin-right: 8px;
+
+}
+
+.Boton:hover {
+	background-color: #690;
+	display: block;
+	height: 20px;
+	width: 70px;
+	float: right;
+	font-family: Verdana, Geneva, sans-serif;
+	color: #FFF;
+	font-size: 12px;
+	text-align: center;
+	padding-top: 5px;
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	margin-top: -36px;
+	margin-right: 8px;
+}
+
+#wrapper #header .Boton a {
+	text-decoration: none;
+}
+
+
+#wrapper #content #contenido h2{
+    text-align: center;
+}
+
+#wrapper #content #contenido #formulario {
+	float: left;
+	width: 550px;
+	height: 300px;
+	margin: 0px;
+}
+
+#wrapper #content #contenido #formulario p {
+	color: #FFF;
+}
+
+#wrapper #content #contenido {
+	background-color: #333;
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+}
+
+#wrapper #content #contenido .user {
+	background-image: url(../images/user.png);
+	background-repeat: no-repeat;
+	background-position: left top;
+	float: right;
+	margin-left: 40px;
+	height: 94px;
+	width: 92px;
+	border-top-style: solid;
+	border-right-style: solid;
+	border-bottom-style: solid;
+	border-left-style: solid;
+	border-top-color: #000;
+	border-right-color: #000;
+	border-bottom-color: #000;
+	border-left-color: #000;
+	margin-right: 40px;
+}
+
+#video{
+	margin-left: 20px;
+}

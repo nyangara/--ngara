@@ -78,13 +78,8 @@
                 if (array_key_exists($an, $actions)) {
                         $a = $actions[$an];
                         $auth = $a['authorization'];
-                        $c = userclass();
-                        if (
-                                ($c == $auth) or
-                                ($c == 'user'  and in_array($auth, array('guest'))) or      // un user es también un guest
-                                ($c == 'admin' and in_array($auth, array('guest', 'user'))) // un admin es también un guest y un user
-                        ) call_user_func($a['action']);
-                        else error_log('Fantasy: intento de llamar función del controlador ' . $an . ' por usuario no autorizado de clase ' . $c);
+                        if (has_auth($auth)) call_user_func($a['action']);
+                        else error_log('Fantasy: intento de llamar función del controlador ' . $an . ' por usuario no autorizado de clase ' . userclass());
                 }
         }
 

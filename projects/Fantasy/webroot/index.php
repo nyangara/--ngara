@@ -1,6 +1,4 @@
 <?php   require 'include/pre.php'; ?>
-<h2>Noticias</h2>
-
 <!-- Starting slider... -->
 <script type="text/javascript" src="static/js/jquery.js"></script>
 <script type="text/javascript" src="static/js/s3SliderPacked.js"></script>
@@ -44,13 +42,13 @@
 </div>
 <!-- Slider ended. -->
 
+<h2>Noticias</h2>
 <div id="search">
   <form>
-    <input name="" type="text"/>
-    <input name="" type="submit" value="Buscar"/>
+    <input type="text" name="text"/>
+    <button type="submit" name="noticia_search" value="1">Buscar</button>
   </form>
 </div>
-
 <div id="else">
 <?
         foreach (UIFacade::retrieveAll('Contenido') as $c) {
@@ -68,7 +66,7 @@
       </form>
       <form method="post" action="contenido_update">
         <input type="hidden" name="id" value="<?php echo $id; ?>"/>
-        <input type="submit" name="contenido_update" value="Modificar"/>
+        <button type="submit" name="contenido_update" value="1">Modificar</button>
       </form>
     </div>
     <h3><?php echo $c->get('título'); ?></h3>

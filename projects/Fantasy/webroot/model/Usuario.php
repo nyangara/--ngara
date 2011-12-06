@@ -26,5 +26,14 @@
                         }
                         return null;
                 }
+
+                public static function register($username, $name, $email, $admin, $password) {
+                        $id = DataFacade::register($username, $name, $email, $admin, $password);
+                        if ($id) {
+                                $u = new self();
+                                return $u->set('id', $id)->select();
+                        }
+                        return null;
+                }
         }
 ?>

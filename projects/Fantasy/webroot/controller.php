@@ -5,8 +5,8 @@
                 'liga_insert' => array(
                         'authorization' => 'user',
                         'action' => function () {
-                                $data = array();
-                                if (userclass() != 'admin') $data['es pública'] = 'f';
+                                $data = array('creador' => userdata()->get('id'));
+                                if (!has_auth('admin')) $data['es pública'] = 'f';
                                 insert_fields('Liga', $data);
                         }
                 ),
@@ -14,10 +14,23 @@
                 'contenido_insert' => array(
                         'authorization' => 'admin',
                         'action' => function () {
-                                if ($user_class)
-                                insert_fields('Contenido', set_fields('Contenido', array(
+                                insert_fields('Contenido', array(
                                         'fecha' => date('Y-m-d H:i:sP')
-                                )));
+                                ));
+                        }
+                ),
+
+                'equipo_insert' => array(
+                        'authorization' => 'admin',
+                        'action' => function () {
+                                $nombre = '';
+                                if($_FILES['image']['error'] == 0) {
+                                    $nombre = $_FILES['imagen']['name'];
+
+                                    $d = move_uploaded_file($_FILES['imagen']['tmp_name'], 'static/images/equipo/' . $nombre);
+                                } else $nombre = 'generico.jpg';
+
+                                insert_fields('Equipo', array('URL del logo' => $nombre));
                         }
                 ),
 

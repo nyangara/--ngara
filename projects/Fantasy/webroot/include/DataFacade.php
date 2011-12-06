@@ -26,6 +26,27 @@
                         return $row[0];
                 }
 
+                public static function register($username, $name, $email, $admin, $password) {
+                        global $dbconn;
+                        global $pqs;
+                        $pq = 'AUTH';
+
+                        if (!isset($pqs)) $pqs = array();
+                        if (!in_array($pq, $pqs)) {
+                                $query = 'SELECT "Fantasy"."registrar"($1, $2, $3, $4, $5)';
+                                $result = pg_prepare($dbconn, $pq, $query) or die('pg_prepare: ' . pg_last_error());
+                                $pqs[] = $pq;
+                        }
+
+                        $result = pg_execute($dbconn, $pq, array($username, $name, $email, $admin, $password)) or die('pg_execute: ' . pg_last_error());
+
+                        if (pg_num_rows($result) === 0) return null;
+                        $row = pg_fetch_row($result) or die('pg_fetch_row: ' . pg_last_error());
+                        pg_free_result($result);
+
+                        return $row[0];
+                }
+
                 public static function enum_values($type_name) {
                         global $dbconn;
                         global $pqs;
@@ -192,8 +213,8 @@ EOF;
                         if (!isset($pqs)) $pqs = array();
                         if (!in_array($pq, $pqs)) {
                                 $query =
-                                        'UPDATE "Fantasy"."' . $en . '" SET '                         .
-                                        join(', '    , array_map('self::conds', $fs, $fr)) . ' WHERE ' .
+                                        'UPDATE "Fantasy"."' . $en . '" SET '                          .
+                                        join(', '    , array_map('self::conds', $fn, $fr)) . ' WHERE ' .
                                         join(' AND ', array_map('self::conds', $pk, $kr));
                                 $result = pg_prepare($dbconn, $pq, $query) or die('pg_prepare: ' . pg_last_error());
                                 $pqs[] = $pq;

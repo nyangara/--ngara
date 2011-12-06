@@ -22,12 +22,12 @@ $BODY$;
 
 -- TODO: manejar errores (parámetros nulos, usuario ya existente, etc)
 CREATE OR REPLACE FUNCTION "Fantasy"."registrar"(
-        IN      "parámetro: username"                   text,
-        IN      "parámetro: nombre completo"            text,
-        IN      "parámetro: dirección de e-mail"        text,
-        IN      "parámetro: es administrador"           boolean,
-        IN      "parámetro: password"                   text
-) RETURNS void
+        IN "parámetro: username"            text,
+        IN "parámetro: nombre completo"     text,
+        IN "parámetro: dirección de e-mail" text,
+        IN "parámetro: es administrador"    boolean,
+        IN "parámetro: password"            text
+) RETURNS integer
         VOLATILE
         STRICT
         SECURITY DEFINER
@@ -54,5 +54,7 @@ AS $BODY$
                         "Fantasy"."Usuario"
                 WHERE
                         "Fantasy"."Usuario"."username" = "parámetro: username";
+
+                RETURN (SELECT "id" FROM "Fantasy"."Usuario" WHERE "username" = "parámetro: username");
         END;
 $BODY$;

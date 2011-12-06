@@ -15,4 +15,4 @@ GRANT EXECUTE ON FUNCTION
         )
 TO "Fantasy (autenticación)";
 
-GRANT SELECT ON "Fantasy"."Usuario" TO "Fantasy (autenticación)";
+GRANT SELECT, UPDATE ON "Fantasy"."Usuario" TO "Fantasy (autenticación)";

@@ -71,6 +71,24 @@ CREATE TABLE "Fantasy"."Participa" (
                 ON DELETE CASCADE
 );
 
+CREATE TABLE "Fantasy"."Invitación" (
+        "usuario"                       integer                         NOT NULL,
+        "liga"                          integer                         NOT NULL,
+
+        CONSTRAINT "Invitación PRIMARY KEY"
+                PRIMARY KEY ("usuario", "liga"),
+
+        CONSTRAINT "Invitación FOREIGN KEY usuario REFERENCES Usuario"
+                FOREIGN KEY ("usuario")
+                REFERENCES "Fantasy"."Usuario" ("id")
+                ON DELETE CASCADE,
+
+        CONSTRAINT "Invitación FOREIGN KEY liga REFERENCES Liga"
+                FOREIGN KEY ("liga")
+                REFERENCES "Fantasy"."Liga" ("id")
+                ON DELETE CASCADE
+);
+
 CREATE TABLE "Fantasy"."Estadio" (
         "id"                            serial                          NOT NULL,
         "nombre"                        text                            NOT NULL,

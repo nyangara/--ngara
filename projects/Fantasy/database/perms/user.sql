@@ -23,6 +23,7 @@ GRANT
 ON
         "Fantasy"."Liga",
         "Fantasy"."Participa",
+        "Fantasy"."Invitación",
         "Fantasy"."Usuario tiene jugador",
         "Fantasy"."Usuario tiene lanzadores"
 TO "Fantasy (usuario normal)";

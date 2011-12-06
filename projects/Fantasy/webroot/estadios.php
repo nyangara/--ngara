@@ -1,6 +1,12 @@
 <?php   require 'include/pre.php'; ?>
 <h2>Estadios</h2>
+<?php   if (has_auth('admin')) { ?>
+<form action="estadio_insert" method="post">
+  <input type="submit" value="Agregar Estadio"/>
+</form>
 <?php
+        }
+
         $show = array(
                 'ciudad',
                 'estado',
@@ -16,20 +22,18 @@
 
         foreach (UIFacade::retrieveAll('Estadio') as $s) {
                 $img = $s->get('URL de la foto') or $img = 'generico.jpg';
+                if ($img and !filter_var($img, FILTER_VALIDATE_URL)) $img = 'static/images/estadio/' . $img;
 ?>
 <div>
-        <form action="Datos_Es.php" method="post">
-                <input type="hidden" name="id" value="<?php echo $s->get('id'); ?>"/>
-                <h3><?php echo $s->get('nombre'); ?></h3>
-                <br/>
-                <img src="static/images/estadio/<?php echo $img; ?>"/>
+  <h3><?php echo $s->get('nombre'); ?></h3>
+  <br/>
+  <img src="<?php echo $img; ?>"/>
 <?php           foreach ($show as $f) if ($s->get($f)) { ?>
-                        <p><strong><?php echo mb_ucfirst($f, 'utf-8'); ?>:</strong> <?php echo $s->get($f); ?></p>
+  <p><strong><?php echo mb_ucfirst($f, 'utf-8'); ?>:</strong> <?php echo $s->get($f); ?></p>
 <?php           } ?>
-        </form>
 </div>
-<?php   } ?>
-<form id="form" action="Agregar_Es.php" method="post">
-        <input type="submit" value="Agregar Estadio">
-</form>
-<?php   require('include/post.html'); ?>
+<?php
+        }
+
+        require 'include/post.html';
+?>

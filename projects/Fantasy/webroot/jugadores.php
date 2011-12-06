@@ -1,6 +1,12 @@
 <?php   require 'include/pre.php'; ?>
 <h2>Jugadores</h2>
+<?php   if (has_auth('admin')) { ?>
+<form id="form" action="jugador_insert" method="post">
+        <input type="submit" value="Agregar jugador"/>
+</form>
 <?php
+        }
+
         foreach (UIFacade::jugadores() as $j) {
                 $img = $j['jugador']->get('URL de la foto');
                 if ($img and !filter_var($img, FILTER_VALIDATE_URL)) $img = 'static/images/jugador/' . $img;
@@ -18,7 +24,4 @@
         </form>
         </div>
 <?php   } ?>
-<form id="form" action="jugador_insert" method="post">
-        <input type="submit" value="Agregar jugador"/>
-</form>
 <?php   require 'include/post.html'; ?>

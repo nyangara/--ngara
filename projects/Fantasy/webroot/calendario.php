@@ -8,7 +8,7 @@
       <option>Equipo </option>
       <option>Estadio</option>
     </select>
-    <input type="submit" name="" value="Buscar"/>
+    <button type="submit" name="action" value="search">Buscar</button>
   </form>
 </div>
 <table width="100%" border="0" cellspacing="5" cellpadding="5">
@@ -17,7 +17,9 @@
     <th colspan="2">Equipo local    </th>
     <th colspan="2">Equipo visitante</th>
     <th            >Estadio         </th>
+<?php   if (has_auth('admin')) { ?>
     <th            >                </th>
+<?php   } ?>
   </tr>
 <?php
         foreach (UIFacade::calendario() as $c) {
@@ -30,31 +32,31 @@
 ?>
   <tr>
     <td><?php echo date('d/m/Y', $date); ?><br/><?php echo date('h:i A', $date); ?></td>
-    <td class="img"><img src="<?php echo $img_local; ?>"/>
-      <td><?php echo $c['equipo local'    ]->get('nombre corto'); ?></td>
-      <td class="img"><img src="<?php echo $img_visitante; ?>"/>
-        <td><?php echo $c['equipo visitante']->get('nombre corto'); ?></td>
-        <td><?php echo $c['estadio'         ]->get('nombre'      ); ?></td>
+    <td class="img"><img src="<?php echo $img_local; ?>"/></td>
+    <td><?php echo $c['equipo local'    ]->get('nombre corto'); ?></td>
+    <td class="img"><img src="<?php echo $img_visitante; ?>"/></td>
+    <td><?php echo $c['equipo visitante']->get('nombre corto'); ?></td>
+    <td><?php echo $c['estadio'         ]->get('nombre'      ); ?></td>
 <?php           if (has_auth('admin')) { ?>
-        <td>
-          <form method="post" action="juego_update">
-            <input type="hidden" name="id" value="<?php echo $id; ?>"/>
-            <input type="submit" name="juego_update" value="Modificar"/>
-          </form>
-          <form method="post" action="controller">
-            <input type="hidden" name="id" value="<?php echo $id; ?>"/>
-            <input type="hidden" name="goto" value="calendario"/>
-            <button type="submit" name="action" value="juego_remove"/>Eliminar</button>
-          </form>
-        </td>
+    <td>
+      <form method="post" action="juego_update">
+        <input type="hidden" name="id" value="<?php echo $id; ?>"/>
+        <input type="submit" name="juego_update" value="Modificar"/>
+      </form>
+      <form method="post" action="controller">
+        <input type="hidden" name="id" value="<?php echo $id; ?>"/>
+        <input type="hidden" name="goto" value="calendario"/>
+        <button type="submit" name="action" value="juego_remove"/>Eliminar</button>
+      </form>
+    </td>
 <?php           } ?>
-      </tr>
+  </tr>
 <?php   } ?>
-    </table>
+</table>
 <?php   if (has_auth('admin')) { ?>
-    <form id="form" action="agregar_equipo.php" method="post">
-      <input type="submit" value="Agregar juego"/>
-    </form>
+<form id="form" action="agregar_equipo.php" method="post">
+  <input type="submit" value="Agregar juego"/>
+</form>
 <?php
         }
 

@@ -32,14 +32,14 @@
   <h3><?php echo $l['liga']->get('nombre'); ?></h3>
   <img class="imagen" src="<?php echo $img; ?>"/>
   <p><strong>Creador:</strong> <a href="#"><?php echo $l['creador']->get('username'); ?></a></p>
-  <form action="liga_detail" method="post">
+  <form action="liga_detail" method="get">
     <input type="hidden" name="id" value="<?php echo $id; ?>"/>
-    <button type="submit" name="action" value="liga_detail">Ver</button>
+    <button type="submit">Ver</button>
   </form>
 <?php                   if ($admin || ($l['liga']->get('creador') == $uid)) { ?>
-  <form action="liga_update" method="post">
+  <form action="liga_update" method="get">
     <input type="hidden" name="id" value="<?php echo $id; ?>"/>
-    <button type="submit" name="action" value="liga_update">Modificar</button>
+    <button type="submit">Modificar</button>
   </form>
   <form action="controller" method="post">
     <input type="hidden" name="id" value="<?php echo $id; ?>"/>

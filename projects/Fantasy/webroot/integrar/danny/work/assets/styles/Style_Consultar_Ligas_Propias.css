@@ -1,0 +1,46 @@
+.top-options {
+  float: right;
+}
+
+.alcanceLiga {
+  width: 100%;
+  height: auto;
+}
+
+.alcanceLiga .datos {
+  width: 250px;
+  margin: 20px;
+
+  font-family: Verdana, Geneva, sans-serif;
+  font-size: 14px;
+  color: #CCC;
+  text-align: justify;
+}
+
+.alcanceLiga .options {
+  margin: 0px 20px;
+}
+
+form {
+  display: inline;
+}
+
+input.link {
+  background: none;
+  border: none;
+  
+  font-size: inherit;
+  color: inherit;
+  
+  text-decoration: underline;
+  
+  cursor: pointer;
+}
+
+input.link:hover {
+  text-decoration: none;
+}
+
+h4, h3 {
+  margin: 0.5em;
+}

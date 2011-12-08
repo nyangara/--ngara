@@ -23,7 +23,7 @@
 ?>
 <h2>Calendario</h2>
 <?php   if (has_auth('admin')) { ?>
-<form id="form" action="juego_insert" method="post">
+<form id="form" action="juego_insert" method="get">
   <button type="submit">Agregar juego</button>
 </form>
 <?php   } ?>
@@ -69,11 +69,11 @@
     <td><?php echo $c['estadio'         ]->get('nombre'      ); ?></td>
 <?php           if (has_auth('admin')) { ?>
     <td>
-      <form method="post" action="juego_update">
+      <form action="juego_update" method="get">
         <input type="hidden" name="id" value="<?php echo $id; ?>"/>
         <button type="submit" name="action" value="juego_update" style="width: 5em"/>Modificar</button>
       </form>
-      <form method="post" action="controller">
+      <form action="controller" method="post">
         <input type="hidden" name="id" value="<?php echo $id; ?>"/>
         <input type="hidden" name="goto" value="calendario"/>
         <button type="submit" name="action" value="juego_remove" style="width: 5em"/>Eliminar</button>

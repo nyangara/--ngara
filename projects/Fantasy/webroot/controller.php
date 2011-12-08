@@ -47,6 +47,20 @@
                         }
                 ),
 
+                'equipo_update' => array(
+                        'authorization' => 'admin',
+                        'action' => function () {
+                                $nombre = '';
+                                if ($_FILES['imagen']['error'] == 0) {
+                                    $nombre = $_FILES['imagen']['name'];
+
+                                    $d = move_uploaded_file($_FILES['imagen']['tmp_name'], 'static/images/equipo/' . $nombre);
+                                } else $nombre = 'generico.jpg';
+
+                                update_fields('Equipo', array('URL del logo' => $nombre));
+                        }
+                ),
+
                 'juego_insert' => array(
                         'authorization' => 'admin',
                         'action' => function () {
@@ -80,6 +94,7 @@
 
                 'contenido_remove' => array('authorization' => 'admin', 'action' => function () { remove_by_pk('Contenido'); }),
                 'juego_remove'     => array('authorization' => 'admin', 'action' => function () { remove_by_pk('Juego'    ); }),
+                'equipo_remove'    => array('authorization' => 'admin', 'action' => function () { remove_by_pk('Equipo'   ); }),
 
                 'participa_insert' => array(
                         'authorization' => 'user',

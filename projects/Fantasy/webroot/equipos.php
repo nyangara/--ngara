@@ -27,9 +27,10 @@
     <input type="hidden" name="id" value="<?php echo $e->get('id'); ?>"/>
     <button type="submit" style="width: 5em">Modificar</button>
   </form>
-  <form action="equipo_remove" method="get">
+  <form action="controller" method="post">
     <input type="hidden" name="id" value="<?php echo $e->get('id'); ?>"/>
-    <button type="submit" style="width: 5em">Eliminar</button>
+    <input type="hidden" name="goto" value="equipos"/>
+    <button type="submit" name="action" value="equipo_remove" style="width: 5em">Eliminar</button>
   </form>
 <?php           } ?>
 </div>

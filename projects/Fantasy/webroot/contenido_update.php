@@ -1,8 +1,8 @@
 <?php
         require 'include/pre.php';
 
-        if (has_auth('admin') && array_key_exists('id', $_POST)) {
-                $c = UIFacade::select('Contenido', array('id' => $_POST['id']));
+        if (has_auth('admin') && array_key_exists('id', $_GET)) {
+                $c = UIFacade::select('Contenido', array('id' => $_GET['id']));
 ?>
 <h2>Actualizar contenido</h2>
 <div>

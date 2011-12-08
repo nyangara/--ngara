@@ -15,8 +15,8 @@
                 return $r . "</select>";
         }
 
-        if (has_auth('admin') && array_key_exists('id', $_POST)) {
-                $j = UIFacade::select('Juego', array('id' => $_POST['id']));
+        if (has_auth('admin') && array_key_exists('id', $_GET)) {
+                $j = UIFacade::select('Juego', array('id' => $_GET['id']));
                 $equipos  = UIFacade::retrieveAll('Equipo' );
                 $estadios = UIFacade::retrieveAll('Estadio');
 ?>

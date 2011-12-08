@@ -1,8 +1,8 @@
 <?php   require 'include/pre.php'; ?>
 <h2>Estadios</h2>
 <?php   if (has_auth('admin')) { ?>
-<form action="estadio_insert" method="post">
-  <input type="submit" value="Agregar Estadio"/>
+<form action="estadio_insert" method="get">
+  <button type="submit">Agregar Estadio</button>
 </form>
 <?php
         }

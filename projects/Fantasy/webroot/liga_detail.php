@@ -1,8 +1,8 @@
 <?php
         require 'include/pre.php';
 
-        if (has_auth('user') and array_key_exists('id', $_POST)) {
-                $d = UIFacade::liga_detail($_POST['id']);
+        if (has_auth('user') and array_key_exists('id', $_GET)) {
+                $d = UIFacade::liga_detail($_GET['id']);
                 $uid = userdata()->get('id');
 
                 $see = $d['liga']->get('es pública') || has_auth('admin');
@@ -20,11 +20,11 @@
 ?>
 <h2>Liga <?php echo ($d['liga']->get('es pública') == 't' ? 'pública ' : 'privada ') . $d['liga']->get('nombre'); ?></h2>
 <div style="border: 1em">
-  <form action="usuario_detail" method="post">
+  <img src="<?php echo $c_img; ?>" style="float: left; clear: both"/>
+  <p>Creador: <?php echo $d['creador']->get('nombre completo'); ?> (<?php echo $d['creador']->get('username'); ?>)</p>
+  <form action="usuario_detail" method="get">
     <input type="hidden" name="id" value="<?php echo $d['creador']->get('id'); ?>"/>
-    <img src="<?php echo $c_img; ?>" style="float: left; clear: both"/>
-    <p>Creador: <?php echo $d['creador']->get('nombre completo'); ?> (<?php echo $d['creador']->get('username'); ?>)</p>
-    <p><input type="submit" value="Detalles"/></p>
+    <p><button type="submit">Detalles</button></p>
   </form>
 </div>
 <hr style="clear: both"/>
@@ -38,16 +38,16 @@
   <img src="<?php echo $img; ?>" style="float: left; clear: both"/>
   <p>Usuario: <?php echo $u->get('username'       ); ?></p>
   <p>Nombre:  <?php echo $u->get('nombre completo'); ?></p>
-  <form action="user_detail" method="post">
+  <form action="usuario_detail" method="get">
     <input type="hidden" name="id" value="<?php echo $u->get('id'); ?>"/>
-    <p><input type="submit" value="Detalles"/></p>
+    <p><button type="submit" style="width: 5em">Detalles</button></p>
   </form>
 <?php                           if ($own) { ?>
   <form action="controller" method="post">
     <input type="hidden" name="usuario" value="<?php echo $u->get('id'); ?>"/>
     <input type="hidden" name="liga"    value="<?php echo $d['liga']->get('id'); ?>"/>
     <input type="hidden" name="goto"    value="ligas"/>
-    <p><button type="submit" name="action" value="participa_remove">Expulsar</button></p>
+    <p><button type="submit" name="action" value="participa_remove" style="width: 5em">Expulsar</button></p>
   </form>
 <?php                           } ?>
 </div>

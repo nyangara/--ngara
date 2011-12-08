@@ -1,8 +1,8 @@
 <?php
         require 'include/pre.php';
 
-        if (has_auth('user') and array_key_exists('id', $_POST)) {
-                $l = UIFacade::select('Liga', array('id' => $_POST['id']));
+        if (has_auth('user') and array_key_exists('id', $_GET)) {
+                $l = UIFacade::select('Liga', array('id' => $_GET['id']));
                 if (has_auth('admin') || $l->get('creador') == userdata()->get('id')) {
                         $s = ' selected="selected"';
                         $p = ($l->get('es pública') == 't');

@@ -55,13 +55,13 @@
   <div>
 <?php                   if (has_auth('admin')) { ?>
     <div class="admin-options">
-      <form method="post" action="controller">
+      <form action="controller" method="post">
         <input type="hidden" name="id" value="<?php echo $id; ?>"/>
-        <button type="submit" name="action" value="contenido_remove">Eliminar</button>
+        <button type="submit" name="action" value="contenido_remove" style="width: 5em">Eliminar</button>
       </form>
-      <form method="post" action="contenido_update">
+      <form action="contenido_update" method="get">
         <input type="hidden" name="id" value="<?php echo $id; ?>"/>
-        <button type="submit" name="contenido_update" value="1">Modificar</button>
+        <button type="submit" method="get">Modificar</button>
       </form>
     </div>
 <?php                   } ?>

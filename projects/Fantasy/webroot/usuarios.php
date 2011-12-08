@@ -6,7 +6,7 @@
                 if ($img and !filter_var($img, FILTER_VALIDATE_URL)) $img = 'static/images/usuario/' . $img;
 ?>
 <div style="border: 1em">
-  <form action="usuario_detail" method="post">
+  <form action="usuario_detail" method="get">
     <input type="hidden" name="id" value="<?php echo $u->get('id'); ?>"/>
     <img src="<?php echo $img; ?>" style="float: left; clear: both"/>
     <p>Usuario: <?php echo $u->get('username'       ); ?></p>

@@ -25,7 +25,6 @@
 <h2>Agregar equipo</h2>
 <div>
   <form action="controller" enctype="multipart/form-data" method="post">
-    <img src="static/images/equipo/generico.jpg"/>
     <p>Nombre completo:</p>
     <p><input name="nombre completo" type="text"/></p>
     <p>Nombre corto:</p>

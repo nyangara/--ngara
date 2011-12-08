@@ -1,5 +1,10 @@
 <?php   require 'include/pre.php'; ?>
 <h2>Resultados</h2>
+<?php   if (has_auth('admin')) { ?>
+<form id="form" action="equipo_insert" method="get">
+  <button type="submit">Agregar juego</button>
+</form>
+<?php   } ?>
 <div>
   <form>
     <input type="text" name=""/>
@@ -39,26 +44,18 @@
     <td><?php echo $c['estadio'         ]->get('nombre'      ); ?></td>
 <?php           if (has_auth('admin')) { ?>
     <td>
-      <form method="post" action="juego_update">
+      <form action="juego_update" method="get">
         <input type="hidden" name="id" value="<?php echo $id; ?>"/>
-        <input type="submit" name="juego_update" value="Modificar"/>
+        <button type="submit" style="width: 5em">Modificar</button>
       </form>
       <form method="post" action="controller">
         <input type="hidden" name="id" value="<?php echo $id; ?>"/>
         <input type="hidden" name="goto" value="calendario"/>
-        <button type="submit" name="action" value="juego_remove"/>Eliminar</button>
+        <button type="submit" name="action" value="juego_remove" style="width: 5em">Eliminar</button>
       </form>
     </td>
 <?php           } ?>
   </tr>
 <?php   } ?>
 </table>
-<?php   if (has_auth('admin')) { ?>
-<form id="form" action="agregar_equipo.php" method="post">
-  <input type="submit" value="Agregar juego"/>
-</form>
-<?php
-        }
-
-        require 'include/post.html';
-?>
+<?php   require 'include/post.html'; ?>

@@ -20,7 +20,8 @@
 <?php   if (userdata()) { ?>
           <form action="logout" method="post" id="loginform">
             <p>
-              <?php echo userdata()->get('username') . (userdata()->get('es administrador') == 't' ? ' (administrador)' : ''); ?>
+              <strong><?php echo userdata()->get('username'); ?></strong>
+              <?php if (userdata()->get('es administrador') == 't') echo ' (administrador)'; ?>
               <button type="submit" name="action" class="submit" value="logout">Logout</button>
             </p>
           </form>
@@ -53,6 +54,7 @@
                 'Estadios'   => array('authorization' => 'guest', 'views' => array('estadios'  )),
                 'Calendario' => array('authorization' => 'guest', 'views' => array('calendario')),
                 'Resultados' => array('authorization' => 'guest', 'views' => array('resultados')),
+                'Roster'     => array('authorization' => 'user' , 'views' => array('roster'    )),
                 'Ligas'      => array('authorization' => 'user' , 'views' => array('ligas'     , 'ligas_privadas', 'ligas_publicas')),
                 'Usuarios'   => array('authorization' => 'user' , 'views' => array('usuarios'  ))
         );

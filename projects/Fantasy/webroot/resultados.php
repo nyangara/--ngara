@@ -1,19 +1,44 @@
-<?php   require 'include/pre.php'; ?>
+<?php
+        require 'include/pre.php';
+
+        $search = null;
+        $q = null;
+        if (
+                array_key_exists('search', $_GET) &&
+                array_key_exists('q'     , $_GET)
+        ) {
+                $search = $_GET['search'];
+                $q      = $_GET['q'     ];
+        }
+
+        $search_fields = array(
+                'todos'     => 'Todos los campos',
+                'fecha'     => 'Fecha',
+                'equipo'    => 'Equipo',
+                'local'     => 'Equipo local',
+                'visitante' => 'Equipo visitante',
+                'estadio'   => 'Estadio',
+        );
+        $default = 'todos';
+?>
 <h2>Resultados</h2>
 <?php   if (has_auth('admin')) { ?>
-<form id="form" action="equipo_insert" method="get">
+<form id="form" action="juego_insert" method="get">
   <button type="submit">Agregar juego</button>
 </form>
 <?php   } ?>
 <div>
-  <form>
-    <input type="text" name=""/>
-    <select name="">
-      <option>Fecha  </option>
-      <option>Equipo </option>
-      <option>Estadio</option>
+  <form method="get" action="calendario">
+    <select name="search">
+<?php   foreach ($search_fields as $k => $v) { ?>
+      <option value="<?php echo $k; ?>"<?php if (($search == null && $k == $default) || ($search == $k)) echo ' selected="selected"'; ?>><?php echo $v; ?></option>
+<?php   }; ?>
     </select>
-    <input type="submit" name="" value="Buscar"/>
+    <input type="text" name="q" value="<?php echo $q; ?>"/>
+    <button type="submit">Buscar</button>
+  </form>
+  <form method="get" action="calendario">
+    <button type="submit">Ver todos</button>
   </form>
 </div>
 <table width="100%" border="0" cellspacing="5" cellpadding="5">
@@ -27,7 +52,8 @@
 <?php   } ?>
   </tr>
 <?php
-        foreach (UIFacade::calendario() as $c) {
+        foreach (UIFacade::calendario($search, $q) as $c) {
+                if ($c['juego']->get('estado') == 'pautado') continue;
                 $date          = strtotime($c['juego']->get('inicio'));
                 $id            = $c['juego'           ]->get('id'          );
                 $img_local     = $c['equipo local'    ]->get('URL del logo');
@@ -46,12 +72,12 @@
     <td>
       <form action="juego_update" method="get">
         <input type="hidden" name="id" value="<?php echo $id; ?>"/>
-        <button type="submit" style="width: 5em">Modificar</button>
+        <button type="submit" name="action" value="juego_update" style="width: 5em"/>Modificar</button>
       </form>
-      <form method="post" action="controller">
+      <form action="controller" method="post">
         <input type="hidden" name="id" value="<?php echo $id; ?>"/>
         <input type="hidden" name="goto" value="calendario"/>
-        <button type="submit" name="action" value="juego_remove" style="width: 5em">Eliminar</button>
+        <button type="submit" name="action" value="juego_remove" style="width: 5em"/>Eliminar</button>
       </form>
     </td>
 <?php           } ?>

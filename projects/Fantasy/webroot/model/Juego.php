@@ -14,7 +14,8 @@
                         'hits del equipo local',
                         'hits del equipo visitante',
                         'errores del equipo local',
-                        'errores del equipo visitante'
+                        'errores del equipo visitante',
+                        'estado'
                 );
                 protected static $pk = array(
                         'id'

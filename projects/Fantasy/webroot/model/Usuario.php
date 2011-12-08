@@ -11,7 +11,9 @@
                         'fecha de nacimiento',
                         'es administrador',
                         'dirección de e-mail',
-                        'URL del avatar'
+                        'URL del avatar',
+                        'puntaje',
+                        'créditos'
                 );
                 protected static $pk = array(
                         'id'

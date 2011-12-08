@@ -13,6 +13,7 @@ ON
         "Fantasy"."Juego",
         "Fantasy"."Estadística de bateo",
         "Fantasy"."Estadística de pitcheo",
+        "Fantasy"."Historial_Bateo",
         "Fantasy"."Contenido",
         "Fantasy"."Usuario"
 TO "Fantasy (visitante)";

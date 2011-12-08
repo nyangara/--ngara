@@ -12,7 +12,7 @@
                         'equipo',
                         'número',
                         'posición',
-                        'precio',
+                        'precio'
                 );
                 protected static $pk = array(
                         'id'

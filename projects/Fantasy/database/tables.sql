@@ -7,7 +7,8 @@ CREATE TABLE "Fantasy"."Usuario" (
         "es administrador"              boolean                         NOT NULL,
         "dirección de e-mail"           text                            NOT NULL,
         "URL del avatar"                text                                NULL,
-        "puntaje"                       integer                             NULL,
+        "puntaje"                       integer                         NOT NULL,
+        "créditos"                      integer                         NOT NULL,
 
         CONSTRAINT "Usuario PRIMARY KEY"
                 PRIMARY KEY ("id"),
@@ -71,24 +72,6 @@ CREATE TABLE "Fantasy"."Participa" (
                 ON DELETE CASCADE
 );
 
-CREATE TABLE "Fantasy"."Invitación" (
-        "usuario"                       integer                         NOT NULL,
-        "liga"                          integer                         NOT NULL,
-
-        CONSTRAINT "Invitación PRIMARY KEY"
-                PRIMARY KEY ("usuario", "liga"),
-
-        CONSTRAINT "Invitación FOREIGN KEY usuario REFERENCES Usuario"
-                FOREIGN KEY ("usuario")
-                REFERENCES "Fantasy"."Usuario" ("id")
-                ON DELETE CASCADE,
-
-        CONSTRAINT "Invitación FOREIGN KEY liga REFERENCES Liga"
-                FOREIGN KEY ("liga")
-                REFERENCES "Fantasy"."Liga" ("id")
-                ON DELETE CASCADE
-);
-
 CREATE TABLE "Fantasy"."Estadio" (
         "id"                            serial                          NOT NULL,
         "nombre"                        text                            NOT NULL,
@@ -118,6 +101,7 @@ CREATE TABLE "Fantasy"."Equipo" (
         "estado"                        text                                NULL,
         "estadio principal"             integer                         NOT NULL,
         "URL del logo"                  text                                NULL,
+        "precio"                        integer                         NOT NULL,
 
         CONSTRAINT "Equipo PRIMARY KEY"
                 PRIMARY KEY ("id"),
@@ -163,6 +147,11 @@ CREATE TABLE "Fantasy"."Jugador" (
 CREATE TABLE "Fantasy"."Usuario tiene jugador" (
         "usuario"                       integer                         NOT NULL,
         "jugador"                       integer                         NOT NULL,
+        "fecha de compra"               timestamp with time zone        NOT NULL,
+        "fecha de venta"                timestamp with time zone            NULL,
+        "precio de compra"              integer                         NOT NULL,
+        "activo"                        boolean                         NOT NULL,
+        "posición"                      "posición"                      NOT NULL,
 
         CONSTRAINT "Usuario tiene jugador PRIMARY KEY"
                 PRIMARY KEY ("usuario", "jugador"),
@@ -181,6 +170,10 @@ CREATE TABLE "Fantasy"."Usuario tiene jugador" (
 CREATE TABLE "Fantasy"."Usuario tiene lanzadores" (
         "usuario"                       integer                         NOT NULL,
         "equipo"                        integer                         NOT NULL,
+        "fecha de compra"               timestamp with time zone        NOT NULL,
+        "fecha de venta"                timestamp with time zone            NULL,
+        "precio de compra"              integer                         NOT NULL,
+        "activo"                        boolean                         NOT NULL,
 
         CONSTRAINT "Usuario tiene lanzadores PRIMARY KEY"
                 PRIMARY KEY ("usuario", "equipo"),
@@ -208,6 +201,7 @@ CREATE TABLE "Fantasy"."Juego" (
         "hits del equipo visitante"     integer                             NULL,
         "errores del equipo local"      integer                             NULL,
         "errores del equipo visitante"  integer                             NULL,
+        "estado"                        "estado de juego"               NOT NULL,
 
         CONSTRAINT "Juego PRIMARY KEY"
                 PRIMARY KEY ("id"),
@@ -230,7 +224,7 @@ CREATE TABLE "Fantasy"."Juego" (
                 REFERENCES "Fantasy"."Estadio" ("id")
                 ON DELETE CASCADE
 );
-
+/*
 CREATE TABLE "Fantasy"."Estadística de bateo" (
         "jugador"                       integer                         NOT NULL,
         "juego"                         integer                         NOT NULL,
@@ -275,6 +269,78 @@ CREATE TABLE "Fantasy"."Estadística de pitcheo" (
                 ON DELETE CASCADE,
 
         CONSTRAINT "Estadística de pitcheo FOREIGN KEY jugador REFERENCES Jugador"
+                FOREIGN KEY ("jugador")
+                REFERENCES "Fantasy"."Jugador" ("id")
+                ON DELETE CASCADE
+);
+*/
+
+CREATE TABLE "Fantasy"."Estadística de bateo" (
+        "id"        serial                                      NOT NULL,
+        "jugador"   integer                                     NOT NULL,
+        "fecha"     date                                        NOT NULL,
+        "ci"        integer                                     NOT NULL,
+        "ca"        integer                                     NOT NULL,
+        "tb"        integer                                     NOT NULL,
+        "br"        integer                                     NOT NULL,
+        "bb"        integer                                     NOT NULL,
+        "h"         integer                                         NULL,
+        "h2"        integer                                         NULL,
+        "h3"        integer                                         NULL,
+        "hr"        integer                                         NULL,
+        "vb"        integer                                         NULL,
+        "k"         integer                                     NOT NULL,
+
+        CONSTRAINT "Estadística de bateo PRIMARY KEY"
+                PRIMARY KEY ("id"),
+
+        CONSTRAINT "Estadística de bateo UNIQUE (jugador, fecha)"
+                UNIQUE ("jugador", "fecha"),
+
+        CONSTRAINT "Estadística de bateo FOREIGN KEY jugador REFERENCES Jugador"
+                FOREIGN KEY ("jugador")
+                REFERENCES "Fantasy"."Jugador" ("id")
+                ON DELETE CASCADE
+);
+
+CREATE TABLE "Fantasy"."Estadística de pitcheo" (
+        "id"        serial                                      NOT NULL,
+        "jugador"   integer                                     NOT NULL,
+        "fecha"     date                                        NOT NULL,
+        "el"        integer                                     NOT NULL,
+        "cl"        integer                                     NOT NULL,
+        "i"         integer                                     NOT NULL,
+        "bb"        integer                                     NOT NULL,
+        "k"         integer                                     NOT NULL,
+        "jg"        integer                                     NOT NULL,
+        "errores"   integer                                     NOT NULL DEFAULT 0,
+
+        CONSTRAINT "Estadística de pitcheo PRIMARY KEY"
+                PRIMARY KEY ("id"),
+
+        CONSTRAINT "Estadística de pitcheo UNIQUE (jugador, fecha)"
+                UNIQUE ("jugador", "fecha"),
+
+        CONSTRAINT "Estadística de pitcheo FOREIGN KEY jugador REFERENCES Jugador"
+                FOREIGN KEY ("jugador")
+                REFERENCES "Fantasy"."Jugador" ("id")
+                ON DELETE CASCADE
+);
+
+CREATE TABLE "Fantasy"."Historial_Bateo" (
+        "id"        serial                                      NOT NULL,
+        "jugador"   integer                                     NOT NULL,
+        "anio"      integer                                     NOT NULL,
+        "vb"        integer                                     NOT NULL,
+        "h"         integer                                     NOT NULL,
+
+        CONSTRAINT "Historial_Bateo PRIMARY KEY"
+                PRIMARY KEY ("id"),
+
+        CONSTRAINT "Historial_Bateo UNIQUE (jugador, anio)"
+                UNIQUE ("jugador", "anio"),
+
+        CONSTRAINT "Historial_Bateo FOREIGN KEY jugador REFERENCES Jugador"
                 FOREIGN KEY ("jugador")
                 REFERENCES "Fantasy"."Jugador" ("id")
                 ON DELETE CASCADE

@@ -4,19 +4,19 @@
         class EstadisticaPitcheo extends Entity {
                 protected static $table = 'Estadística de pitcheo';
                 protected static $fields = array(
+                        'id',
                         'jugador',
                         'fecha',
-                        'entradas lanzadas',
-                        'carreras limpias',
-                        'imparables',
-                        'bases por bola',
-                        'punchouts',
-                        'juegos ganados',
+                        'el',
+                        'cl',
+                        'i',
+                        'bb',
+                        'k',
+                        'jg',
                         'errores'
                 );
                 protected static $pk = array(
-                        'jugador',
-                        'fecha'
+                        'id'
                 );
                 protected $data;
         }

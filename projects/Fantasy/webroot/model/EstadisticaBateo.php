@@ -4,19 +4,23 @@
         class EstadisticaBateo extends Entity {
                 protected static $table = 'Estadística de bateo';
                 protected static $fields = array(
+                        'id',
                         'jugador',
                         'fecha',
-                        'carreras impulsadas',
-                        'carreras anotadas',
-                        'total de bases',
-                        'bases robadas',
-                        'bases por bola',
-                        'ponches',
-                        'errores'
+                        'ci',
+                        'ca',
+                        'tb',
+                        'br',
+                        'bb',
+                        'h',
+                        'h2',
+                        'h3',
+                        'hr',
+                        'vb',
+                        'k'
                 );
                 protected static $pk = array(
-                        'jugador',
-                        'fecha'
+                        'id'
                 );
                 protected $data;
         }

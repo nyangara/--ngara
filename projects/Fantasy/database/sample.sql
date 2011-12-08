@@ -89,10 +89,10 @@ INSERT INTO "Fantasy"."Jugador" (
 FROM
         "Fantasy"."Equipo",
         (VALUES
-                ('Fabiana Reggio'  , '1990/01/02', 'San Antonio, Venezuela', 'Tigres de Aragua'         , 01, 'pitcher'            ,  100, 'fabiana.jpg' ),
-                ('Krisvely Varela' , '1990/03/04', 'Caracas, Venezuela'    , 'Navegantes del Magallanes', 12, 'jardinero izquierdo',  200, 'krisvely.jpg'),
-                ('Miguel Ambrosio' , '1988/05/06', 'Caracas, Venezuela'    , 'Leones del Caracas'       , 23, 'tercera base'       ,  300, 'miguel.jpg'  ),
-                ('Ricardo Monascal', '1846/08/12', 'San Antonio, Venezuela', 'Navegantes del Magallanes', 42, 'catcher'            ,  400, 'ricardo.jpg' )
+                ('Fabiana Reggio'  , '1990/01/02', 'San Antonio, Venezuela', 'Tigres de Aragua'         , 01, 'P' ,  100, 'fabiana.jpg' ),
+                ('Krisvely Varela' , '1990/03/04', 'Caracas, Venezuela'    , 'Navegantes del Magallanes', 12, 'LF',  200, 'krisvely.jpg'),
+                ('Miguel Ambrosio' , '1988/05/06', 'Caracas, Venezuela'    , 'Leones del Caracas'       , 23, '3B',  300, 'miguel.jpg'  ),
+                ('Ricardo Monascal', '1846/08/12', 'San Antonio, Venezuela', 'Navegantes del Magallanes', 42, 'C' ,  400, 'ricardo.jpg' )
         ) AS "Datos" ("nombre completo", "fecha de nacimiento", "lugar de procedencia", "equipo", "número", "posición", "precio", "URL de la foto")
 WHERE "Datos"."equipo" = "Fantasy"."Equipo"."nombre completo";
 
@@ -102,22 +102,24 @@ INSERT INTO "Fantasy"."Juego" (
         "inicio",
         "equipo local",
         "equipo visitante",
-        "estadio"
+        "estadio",
+        "estado"
 ) SELECT
         to_timestamp("Datos"."inicio", 'YYYY/MM/DD HH12:MI AM'),
         "Equipo local"."id",
         "Equipo visitante"."id",
-        "Estadio"."id"
+        "Estadio"."id",
+        "Datos"."estado"::"estado de juego"
 FROM
         "Fantasy"."Equipo" AS "Equipo local",
         "Fantasy"."Equipo" AS "Equipo visitante",
         "Fantasy"."Estadio",
         (VALUES
-                ('Tigres de Aragua'         , 'Leones del Caracas', 'José Pérez Colmenares', '2010/11/03 06:30 PM'),
-                ('Navegantes del Magallanes', 'Tigres de Aragua'  , 'José Bernardo Pérez'  , '2010/11/04 07:45 PM'),
-                ('Leones del Caracas'       , 'Tigres de Aragua'  , 'Universitario'        , '2010/11/06 06:00 PM'),
-                ('Navegantes del Magallanes', 'Leones del Caracas', 'José Bernardo Pérez'  , '2010/11/09 07:00 PM')
-        ) AS "Datos" ("equipo local", "equipo visitante", "estadio", "inicio")
+                ('Tigres de Aragua'         , 'Leones del Caracas', 'José Pérez Colmenares', '2010/11/03 06:30 PM', 'pautado'),
+                ('Navegantes del Magallanes', 'Tigres de Aragua'  , 'José Bernardo Pérez'  , '2010/11/04 07:45 PM', 'pautado'),
+                ('Leones del Caracas'       , 'Tigres de Aragua'  , 'Universitario'        , '2010/11/06 06:00 PM', 'pautado'),
+                ('Navegantes del Magallanes', 'Leones del Caracas', 'José Bernardo Pérez'  , '2010/11/09 07:00 PM', 'pautado')
+        ) AS "Datos" ("equipo local", "equipo visitante", "estadio", "inicio", "estado")
 WHERE
         "Datos"."equipo local"     = "Equipo local"."nombre completo"     AND
         "Datos"."equipo visitante" = "Equipo visitante"."nombre completo" AND

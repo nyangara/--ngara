@@ -1,0 +1,37 @@
+div.panel,p.flip
+{
+margin:0px;
+padding:5px;
+text-align:center;
+background:#e5eecc;
+border:solid 1px #c3c3c3;
+}
+div.panel
+{
+height:120px;
+display:none;
+}
+
+div.aLF, div.aCF, div.aRF, div.aSS, div.a2B, div.a3B, div.a1B, div.aP, div.aC, div.aDEF{
+ position:fixed;
+ top : 25%;
+ left : 30%;
+ height : 250px;
+ width : 250px;
+ background: #444;
+ -webkit-border-radius: 12px;
+  -moz-border-radius: 12px;
+}
+
+.aLF table p, .aCF table p, .aRF table p, .aSS table p, .a2B table p, .a3B table p, .a1B table p, .aP table p, .aC table p, .aDEF table p{
+	color:#FFF;
+	font:Verdana, Geneva, sans-serif;
+	text-shadow:#000;
+	margin: 1px;
+}
+
+#imgjugador{
+	margin-top: 20px;
+	margin-left: 80px;
+	margin-bottom: 10px;
+}

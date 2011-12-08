@@ -38,12 +38,16 @@ AS $BODY$
                         "username",
                         "nombre completo",
                         "dirección de e-mail",
-                        "es administrador"
+                        "es administrador",
+                        "puntaje",
+                        "créditos"
                 ) VALUES (
                         "parámetro: username",
                         "parámetro: nombre completo",
                         "parámetro: dirección de e-mail",
-                        "parámetro: es administrador"
+                        "parámetro: es administrador",
+                        0,
+                        50000
                 );
 
                 INSERT INTO "Fantasy"."passwd"

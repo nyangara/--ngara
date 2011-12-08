@@ -12,7 +12,8 @@
                         'ciudad',
                         'estado',
                         'estadio principal',
-                        'URL del logo'
+                        'URL del logo',
+                        'precio'
                 );
                 protected static $pk = array(
                         'id'

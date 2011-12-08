@@ -3,9 +3,9 @@
 class fachadaBD {
     private static $instancia;
     private static $hostname = "localhost";
-    private static $username = "adminf";
-    private static $password = "adminf";
-    private static $database = "FantasyCluster";    
+    private static $username = "cluster";
+    private static $password = "failwhale";
+    private static $database = "FantasyRoster";    
     
     private function __construct(){}
     

@@ -31,7 +31,8 @@ INSERT INTO "Fantasy"."Equipo" (
         "ciudad",
         "estado",
         "estadio principal",
-        "URL del logo"
+        "URL del logo",
+        "precio"
 ) SELECT
         "Datos"."nombre completo",
         "Datos"."nombre corto",
@@ -40,17 +41,18 @@ INSERT INTO "Fantasy"."Equipo" (
         "Datos"."ciudad",
         "Datos"."estado",
         "Estadio"."id",
-        "Datos"."URL del logo"
+        "Datos"."URL del logo",
+        "Datos"."precio"
 FROM
         "Fantasy"."Estadio",
         (VALUES
-                ('Águilas del Zulia'        , 'Águilas'   , 'ZUL', 1968, 'Maracaibo'     , 'Zulia'           , 'Luis Aparicio "El Grande"' , 'aguilas.jpg'),
-                ('Bravos de Margarita'      , 'Bravos'    , 'MAR', 2007, 'Porlamar'      , 'Nueva Esparta'   , 'Nueva Esparta'             , 'bravos.jpg'),
-                ('Cardenales de Lara'       , 'Cardenales', 'LAR', 1942, 'Barquisimeto'  , 'Lara'            , 'Antonio Herrera Gutiérrez' , 'cardenales.jpg'),
-                ('Caribes de Anzoátegui'    , 'Caribes'   , 'CAR', 1987, 'Puerto La Cruz', 'Anzoátegui'      , 'Alfonso "Chico" Carrasquel', 'caribes.jpg'),
-                ('Leones del Caracas'       , 'Leones'    , 'LEO', 1952, 'Caracas'       , 'Distrito Capital', 'Universitario'             , 'leones.jpg'),
-                ('Navegantes del Magallanes', 'Navegantes', 'NAV', 1917, 'Valencia'      , 'Carabobo'        , 'José Bernardo Pérez'       , 'navegantes.jpg'),
-                ('Tiburones de La Guaira'   , 'Tiburones' , 'TIB', 1962, 'La Guaira'     , 'Vargas'          , 'Universitario'             , 'tiburones.jpg'),
-                ('Tigres de Aragua'         , 'Tigres'    , 'TIG', 1965, 'Maracay'       , 'Aragua'          , 'José Pérez Colmenares'     , 'tigres.jpg')
-        ) as "Datos" ("nombre completo", "nombre corto", "siglas", "año de fundación", "ciudad", "estado", "nombre del estadio principal", "URL del logo")
+                ('Águilas del Zulia'        , 'Águilas'   , 'ZUL', 1968, 'Maracaibo'     , 'Zulia'           , 'Luis Aparicio "El Grande"' , 'aguilas.jpg'   , 1000),
+                ('Bravos de Margarita'      , 'Bravos'    , 'MAR', 2007, 'Porlamar'      , 'Nueva Esparta'   , 'Nueva Esparta'             , 'bravos.jpg'    , 1000),
+                ('Cardenales de Lara'       , 'Cardenales', 'LAR', 1942, 'Barquisimeto'  , 'Lara'            , 'Antonio Herrera Gutiérrez' , 'cardenales.jpg', 1000),
+                ('Caribes de Anzoátegui'    , 'Caribes'   , 'CAR', 1987, 'Puerto La Cruz', 'Anzoátegui'      , 'Alfonso "Chico" Carrasquel', 'caribes.jpg'   , 1000),
+                ('Leones del Caracas'       , 'Leones'    , 'LEO', 1952, 'Caracas'       , 'Distrito Capital', 'Universitario'             , 'leones.jpg'    , 1000),
+                ('Navegantes del Magallanes', 'Navegantes', 'NAV', 1917, 'Valencia'      , 'Carabobo'        , 'José Bernardo Pérez'       , 'navegantes.jpg', 1000),
+                ('Tiburones de La Guaira'   , 'Tiburones' , 'TIB', 1962, 'La Guaira'     , 'Vargas'          , 'Universitario'             , 'tiburones.jpg' , 1000),
+                ('Tigres de Aragua'         , 'Tigres'    , 'TIG', 1965, 'Maracay'       , 'Aragua'          , 'José Pérez Colmenares'     , 'tigres.jpg'    , 1000)
+        ) as "Datos" ("nombre completo", "nombre corto", "siglas", "año de fundación", "ciudad", "estado", "nombre del estadio principal", "URL del logo", "precio")
 WHERE "Datos"."nombre del estadio principal" = "Estadio"."nombre";

@@ -2,64 +2,6 @@
 include 'Static/head.php';
 include 'Static/header.php';
 
-require_once("Clases/fachadaInterface.php");
-$instancia = fachadaInterface::singleton();
-
-if(isset($_SESSION['Manager'])){
-        unset($_POST);
-        $_POST['TIPO']='Manager';
-        $_POST['id'] = $_SESSION['Manager'];
-        $Manager = $instancia->obtener();
-        unset($_POST);
-        $_POST['manager'] = $_SESSION['Manager'];
-}  elseif ($_SESSION['Administrador']) {
-        $ID_ROSTER = $_POST['id'];
-} else {
-        header('Location: index.php');
-}
-
-$_POST['TIPO']='Roster';
-$Roster = $instancia->obtener();
-unset($_POST);
-
-if($Roster->id == -1)
-        header('Location: Agregar_R.php');
-
-$_POST['TIPO']='Roster_Equipo';
-$_POST['roster']=$Roster->id;
-$_POST['equipo_activo']= true;
-$Equipo_Roster = $instancia->obtener();
-unset($_POST);
-
-if($Equipo_Roster->equipo != -1 ){
-        $_POST['TIPO']='Equipo';
-        $_POST['id']= $Equipo_Roster->equipo;
-        $EquipoR = $instancia->obtener();
-} else
-        $EquipoR = null;
-unset($_POST);
-
-$_POST['TIPO']='Roster_Jugador';
-$_POST['roster']=$Roster->id;
-$_POST['jugador_activo']= true;
-$Jugadores_Roster = $instancia->obtenerTodos();
-unset($_POST);
-
-$i=0;
-$_POST['TIPO']='Jugador';
-$JugadoresR = array();
-foreach($Jugadores_Roster as $J_R){
-        $_POST['id']=$J_R->jugador;
-        $JugadoresR[$i]= $instancia->obtener();
-        $i++;
-}
-unset($_POST);
-
-$_POST['TIPO']='Jugador';
-$Jugadores = $instancia->obtenerTodos();
-$_POST['TIPO']='Equipo';
-$Equipos = $instancia->obtenerTodos();
-
 $Usados = array();
 $i=0;
 $_POST['TIPO']='Jugador';
@@ -71,7 +13,7 @@ foreach($Jugadores_Roster as $J_R){
         $i++;
 }
 
-$Aux['DEF'] = '<a class="irADEF"><img src="assets/images/Fotos_Roster/JugadorDefault.jpg"  width="50" height="50" /></a>' ;
+$Aux['DEF'] = '<a class="irADEF"><img src="assets/images/Fotos_Roster/JugadorDefault.jpg" width="50" height="50"/></a>' ;
 
 //Seleccion de Posicion Disponible;
 $Todos = array('C','1B','2B','3B','SS','LF','CF','RF');
@@ -104,6 +46,8 @@ foreach($Equipos as $Equipo){
                 $i++;
         }
 }
+
+
 
 $B = ''; // Bateadores
 $i=0;
@@ -217,15 +161,15 @@ if($EquipoR != null){
                 <input type="hidden" name="id_Equipo" value="'.$EquipoR->id.'">
                 <input type="submit" name="Vender" value="Vender Equipo de Lanzadores">
                 </form>
-                </div>';
+                </div> ';
 }
 
 ?>
 
-<link href="SpryAssets/SpryAccordion.css" rel="stylesheet" type="text/css" />
-<link rel="stylesheet" href="assets/styles/style_roster.css"  type="text/css" />
-<link rel="stylesheet" href="assets/styles/style_showinfo.css"  type="text/css" />
-<script src="SpryAssets/SpryAccordion.js" type="text/javascript"></script>
+<link rel="stylesheet" href="SpryAssets/SpryAccordion.css"     type="text/css"/>
+<link rel="stylesheet" href="assets/styles/style_roster.css"   type="text/css"/>
+<link rel="stylesheet" href="assets/styles/style_showinfo.css" type="text/css"/>
+<script type="text/javascript" src="SpryAssets/SpryAccordion.js"></script>
 <script type="text/javascript" src="assets/js/jquery.js"></script>
 <script type="text/javascript" src="assets/js/showinfo.js"></script>
 
@@ -291,45 +235,24 @@ if($EquipoR != null){
         <div class="AccordionPanel">
           <div class="AccordionPanelTab"><h1>Bateadores</h1></div>
           <div class="AccordionPanelContent">
-
             <table width="350" border="0">
               <tr class="impar">
-                <td>Nombre:</td>
+                <td>Nombre</td>
                 <td>Posicion</td>
                 <td>AVG</td>
                 <td>Precio</td>
               </tr>
               <?php echo $B; ?>
-            </table>
-
+                </table>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-
-
-  <div id="sideBar">
-
-  </div>
-</div>
-
-
-<div id="footer">
-  <span class="logoCluster"></span>
-  <div id="contacto">
-    <p> Powered by Cluster System Solutions & &Ntildeangara <br />
-    Septiembre-Diciembre 2011. </p>
-  </div>
-  <span class="logoNiangara"></span>
-</div>
-
-</div>
-<script type="text/javascript">
-var Accordion1 = new Spry.Widget.Accordion("Accordion1");
-</script>
-
-<?php echo $D; ?>
-
-</body>
+    <script type="text/javascript">
+        var Accordion1 = new Spry.Widget.Accordion("Accordion1");
+    </script>
+<?php   echo $D; ?>
+  </body>
 </html>

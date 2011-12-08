@@ -2,6 +2,180 @@
         require_once 'include/session.php';
 
         $actions = array(
+                'vender_equipo' => array(
+                        'authorization' => 'user',
+                        'action' => function () {
+                                if (array_key_exists('equipo', $_POST)) {
+                                        $e = UIFacade::select('Equipo', array('id' => $_POST['equipo']));
+                                        if ($e) {
+                                                $t = UIFacade::select(
+                                                        'TieneEquipo',
+                                                        array(
+                                                                'equipo'  => $e->get('id'),
+                                                                'usuario' => userdata()->get('id')
+                                                        )
+                                                );
+                                                if ($t->get('activo') == 't') {
+                                                        $t
+                                                                ->set('fecha de venta', date('Y-m-d H:i:sP'))
+                                                                ->set('activo'        , 'f'                 )
+                                                                ->update();
+
+                                                        userdata()
+                                                                ->set('créditos', userdata()->get('créditos') + $t->get('precio de compra'))
+                                                                ->update();
+                                                }
+                                        }
+                                }
+                        }
+                ),
+
+                'vender_jugador' => array(
+                        'authorization' => 'user',
+                        'action' => function () {
+                                if (array_key_exists('jugador', $_POST)) {
+                                        $j = UIFacade::select('Jugador', array('id' => $_POST['jugador']));
+                                        if ($j) {
+                                                $t = UIFacade::select(
+                                                        'TieneEquipo',
+                                                        array(
+                                                                'jugador' => $j->get('id'),
+                                                                'usuario' => userdata()->get('id')
+                                                        )
+                                                );
+                                                if ($t->get('activo') == 't') {
+                                                        $t
+                                                                ->set('fecha de venta', date('Y-m-d H:i:sP'))
+                                                                ->set('activo'        , 'f'                 )
+                                                                ->update();
+
+                                                        userdata()
+                                                                ->set('créditos', userdata()->get('créditos') + $t->get('precio de compra'))
+                                                                ->update();
+                                                }
+                                        }
+                                }
+                        }
+                ),
+
+                'comprar_equipo' => array(
+                        'authorization' => 'user',
+                        'action' => function () {
+                                if (array_key_exists('equipo', $_POST)) {
+                                        $e = UIFacade::select('Equipo', array('id' => $_POST['equipo']));
+                                        if ($e && intval($e->get('precio')) <= intval(userdata()->get('créditos'))) {
+                                                UIFacade::insert(
+                                                        'TieneEquipo',
+                                                        array(
+                                                                'equipo'           => $e->get('id'),
+                                                                'usuario'          => userdata()->get('id'),
+                                                                'fecha de compra'  => date('Y-m-d H:i:sP'),
+                                                                'precio de compra' => $e->get('precio'),
+                                                                'activo'           => 't'
+                                                        )
+                                                );
+                                                userdata()
+                                                        ->set('créditos', userdata()->get('créditos') - $e->get('precio'))
+                                                        ->update();
+                                        }
+                                }
+                        }
+                ),
+
+                'comprar_jugador' => array(
+                        'authorization' => 'user',
+                        'action' => function () {
+                                if (array_key_exists('jugador', $_POST) && array_key_exists('posición', $_POST)) {
+                                        $j = UIFacade::select('Jugador', array('id' => $_POST['jugador']));
+                                        if ($j && intval($j->get('precio')) <= intval(userdata()->get('créditos'))) {
+                                                UIFacade::insert(
+                                                        'TieneJugador',
+                                                        array(
+                                                                'jugador'          => $j->get('id'),
+                                                                'usuario'          => userdata()->get('id'),
+                                                                'fecha de compra'  => date('Y-m-d H:i:sP'),
+                                                                'precio de compra' => $j->get('precio'),
+                                                                'activo'           => 't',
+                                                                'posición'         => $_POST['posición']
+                                                        )
+                                                );
+
+                                                userdata()
+                                                        ->set('créditos', userdata()->get('créditos') - $j->get('precio'))
+                                                        ->update();
+                                        }
+                                }
+                        }
+                ),
+
+                'renegociar_equipo' => array(
+                        'authorization' => 'user',
+                        'action' => function () {
+                                if (array_key_exists('equipo', $_POST)) {
+                                        $e = UIFacade::select('Equipo', array('id' => $_POST['equipo']));
+                                        if ($e) {
+                                                $t = UIFacade::select(
+                                                        'TieneEquipo',
+                                                        array(
+                                                                'equipo'  => $e->get('id'),
+                                                                'usuario' => userdata()->get('id')
+                                                        )
+                                                );
+
+                                                if ($t && intval($e->get('precio')) < intval($t->get('precio de compra'))) {
+                                                        userdata()
+                                                                ->set(
+                                                                        'créditos',
+                                                                        userdata()->get('créditos')         -
+                                                                        intval($e->get('precio'          )) +
+                                                                        intval($t->get('precio de compra'))
+                                                                )
+                                                                ->update();
+
+                                                        $t
+                                                                ->set('fecha de compra' , date('Y-m-d H:i:sP'))
+                                                                ->set('precio de compra', $e->get('precio')   )
+                                                                ->update();
+                                                }
+                                        }
+                                }
+                        }
+                ),
+
+                'renegociar_jugador' => array(
+                        'authorization' => 'user',
+                        'action' => function () {
+                                if (array_key_exists('juego', $_POST)) {
+                                        $j = UIFacade::select('Juego', array('id' => $_POST['juego']));
+                                        if ($j) {
+                                                $t = UIFacade::select(
+                                                        'TieneJugador',
+                                                        array(
+                                                                'jugador' => $j->get('id'),
+                                                                'usuario' => userdata()->get('id')
+                                                        )
+                                                );
+
+                                                if ($t && intval($j->get('precio')) < intval($t->get('precio de compra'))) {
+                                                        userdata()
+                                                                ->set(
+                                                                        'créditos',
+                                                                        userdata()->get('créditos')         -
+                                                                        intval($e->get('precio'          )) +
+                                                                        intval($t->get('precio de compra'))
+                                                                )
+                                                                ->update();
+
+                                                        $t
+                                                                ->set('fecha de compra' , date('Y-m-d H:i:sP'))
+                                                                ->set('precio de compra', $j->get('precio')   )
+                                                                ->update();
+                                                }
+                                        }
+                                }
+                        }
+                ),
+
                 'liga_insert' => array(
                         'authorization' => 'user',
                         'action' => function () {

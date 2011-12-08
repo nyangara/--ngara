@@ -10,7 +10,7 @@
 </form>
 <?php   } ?>
 <div id="search">
-  <form method="get" action="index">
+  <form method="get" action="reglas">
     <input type="text" name="q" value="<?php echo $q; ?>"/>
     <button type="submit">Buscar</button>
   </form>

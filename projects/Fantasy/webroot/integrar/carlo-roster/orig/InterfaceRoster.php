@@ -7,6 +7,11 @@ require_once("Clases/fachadaInterface.php");
 $instancia = fachadaInterface::singleton();
 
 if(isset($_SESSION['Manager'])){
+    unset($_POST);
+    $_POST['TIPO']='Manager';
+    $_POST['id'] = $_SESSION['Manager'];
+    $Manager = $instancia->obtener();
+    unset($_POST);
     $_POST['manager'] = $_SESSION['Manager'];
 }  elseif ($_SESSION['Administrador']) {
     $ID_ROSTER = $_POST['id'];
@@ -37,9 +42,6 @@ unset($_POST);
 
 $_POST['TIPO']='Roster_Jugador';
 $_POST['roster']=$Roster->id;
-
-$ALGO=$Roster->nombre;
-
 $_POST['jugador_activo']= true;
 $Jugadores_Roster = $instancia->obtenerTodos();
 unset($_POST);
@@ -69,7 +71,7 @@ $_POST['TIPO']='Jugador';
 foreach($Jugadores_Roster as $J_R){
     $_POST['id']=$J_R->jugador;
     $Tmp = $instancia->obtener();
-    $Aux[$J_R->posicion_jugador] = '<img src="assets/images/Fotos_Roster/Eliminar.png" width="18" height="18" /><a class="irA'.$J_R->posicion_jugador.'"><img src="'.$Tmp->foto.'" width="50" height="50" /></a>' ;
+    $Aux[$J_R->posicion_jugador] = '<a class="irA'.$J_R->posicion_jugador.'"><img src="'.$Tmp->foto.'"  width="50" height="50" /></a>' ;
     $Usados[$i]=$J_R->posicion_jugador;
     $i++;
 }
@@ -99,31 +101,35 @@ $s .= '</select>';
 $i=0;
 $P = ''; //Equipos de Pitchers
 foreach($Equipos as $Equipo){
-    if( $i % 2 ) // Impares
-        $P .= '<tr class="impar"><form action="Manejo_Roster.php" method="post"><input type="hidden" name="id" value="'.$Roster->id.'" /><input type="hidden" name="id_Equipo" value="'.$Equipo->id.'" /><td><input class="imagen" type="image" src="assets/images/Fotos_Roster/Agregar.png" width="15" />'.$Equipo->nombre.'</td><td>00</td><td>'.$Equipo->precio.'</td></form></tr>';
-    else //Pares
-        $P .= '<tr class="par">  <form action="Manejo_Roster.php" method="post"><input type="hidden" name="id" value="'.$Roster->id.'" /><input type="hidden" name="id_Equipo" value="'.$Equipo->id.'" /><td><input class="imagen" type="image" src="assets/images/Fotos_Roster/Agregar.png" width="15" />'.$Equipo->nombre.'</td><td>00</td><td>'.$Equipo->precio.'</td></form></tr>';
-    $i++;
+    if($EquipoR == null || $Equipo->id != $EquipoR->id){
+        if( $i % 2 ) // Impares
+            $P .= '<tr class="impar"><form action="Manejo_Roster.php" method="post"><input type="hidden" name="id" value="'.$Roster->id.'" /><input type="hidden" name="id_Equipo" value="'.$Equipo->id.'" /><td><input class="imagen" type="image" src="assets/images/Fotos_Roster/Agregar.png" width="15" />'.$Equipo->nombre.'</td><td>00</td><td>'.$Equipo->precio.'</td></form></tr>';
+        else //Pares
+            $P .= '<tr class="par">  <form action="Manejo_Roster.php" method="post"><input type="hidden" name="id" value="'.$Roster->id.'" /><input type="hidden" name="id_Equipo" value="'.$Equipo->id.'" /><td><input class="imagen" type="image" src="assets/images/Fotos_Roster/Agregar.png" width="15" />'.$Equipo->nombre.'</td><td>00</td><td>'.$Equipo->precio.'</td></form></tr>';
+        $i++;
+    }
 }
+
 
 
 $B = ''; // Bateadores
 $i=0;
 foreach($Jugadores as $Jugador){
-    if($Jugador->posicion != 'P'){
+    if($Jugador->posicion != 'P' && !in_array($Jugador,$JugadoresR)){
         if( $i % 2 ) // Impares
             $B .= '<tr class="impar"><form action="Manejo_Roster.php" method="post"><input type="hidden" name="id" value="'.$Roster->id.'" /><input type="hidden" name="id_Jugador" value="'.$Jugador->id.'" /><td>'.$s.'<input class="imagen" type="image" src="assets/images/Fotos_Roster/Agregar.png" width="15"/>'.$Jugador->nombres.'</td><td>'.$Jugador->posicion.'</td><td>AVG</td><td>'.$Jugador->precio.'</td></form></tr>';
         else //Pares
             $B .= '<tr class="par">  <form action="Manejo_Roster.php" method="post"><input type="hidden" name="id" value="'.$Roster->id.'" /><input type="hidden" name="id_Jugador" value="'.$Jugador->id.'" /><td>'.$s.'<input class="imagen" type="image" src="assets/images/Fotos_Roster/Agregar.png" width="15"/>'.$Jugador->nombres.'</td><td>'.$Jugador->posicion.'</td><td>AVG</td><td>'.$Jugador->precio.'</td></form></tr>';
         $i++;
     }
+    
 }
 
         
 if($EquipoR != null)
-    $Aux['P'] = '<a class="P"><img src="'.$EquipoR->logo.'"  width="50" height="50" /></a>' ;
+    $Aux['P'] = '<a class="irAP"><img src="'.$EquipoR->logo.'"  width="50" height="50" /></a>' ;
 else
-    $Aux['P'] = '<a class="P"><img src="assets/images/Fotos_Roster/EquipoDefault.jpg"  width="50" height="50" /></a>' ;
+    $Aux['P'] = '<a class="irAP"><img src="assets/images/Fotos_Roster/EquipoDefault.jpg"  width="50" height="50" /></a>' ;
 
 $i=0;
 $D = '';
@@ -142,7 +148,7 @@ foreach($Jugadores_Roster as $J_R){
                         </tr>
                         <tr class="par">
                                 <td><p>Posicion:</p></td>
-                                <td><p>'.$Tmp->posicion.'</p></td>
+                                <td><p>'.$J_R->posicion_jugador.'</p></td>
                         </tr>
                         <tr class="impar">
                                 <td><p>Valor:</p></td>
@@ -153,6 +159,15 @@ foreach($Jugadores_Roster as $J_R){
                                 <td><p>.000</p></td>
                         </tr>
                 </table>
+
+		<form action="Manejo_Roster.php" method="post">
+			<input type="hidden" name="id_Jugador" value="'.$Tmp->id.'">
+			<input type="submit" name="Vender" value="Vender Jugador">
+		</form>
+		<form action="Manejo_Roster.php" method="post">
+			<input type="hidden" name="id_Jugador" value="'.$Tmp->id.'">
+			<input type="submit" name="Renegociar" value="Renegociar Jugador">
+		</form>                
         </div> ';
 }
 
@@ -180,6 +195,37 @@ foreach($Jugadores_Roster as $J_R){
                         </tr>
                 </table>
         </div> ';
+        
+if($EquipoR != null){
+    $D .= '
+        <div class="aP">
+                <div id="imgjugador">
+                <img src="'.$EquipoR->logo.'" height="100" width="70" />
+                </div>
+                <table width="240" align="left">
+                        <tr class="impar">
+                                <td><p>Nombre:</p></td>
+                                <td><p>'.$EquipoR->nombre.'</p></td>
+                        </tr>
+                        <tr class="par">
+                                <td><p>Posicion:</p></td>
+                                <td><p>P</p></td>
+                        </tr>
+                        <tr class="impar">
+                                <td><p>Valor:</p></td>
+                                <td><p>'.$EquipoR->precio.'</p></td>
+                        </tr>
+                        <tr class="par">
+                                <td><p>Efectividad:</p></td>
+                                <td><p>-------</p></td>
+                        </tr>
+                </table>
+		<form action="Manejo_Roster.php" method="post">
+                    <input type="hidden" name="id_Equipo" value="'.$EquipoR->id.'">
+                    <input type="submit" name="Vender" value="Vender Equipo de Lanzadores">
+                </form>                
+        </div> ';        
+}
 
 ?>
 
@@ -191,45 +237,19 @@ foreach($Jugadores_Roster as $J_R){
 <script type="text/javascript" src="assets/js/showinfo.js"></script>
 
 
- <?php
-
-if(isset($_SESSION['Manager'])){?>
-	<ul id="navigation">
-    	<li><a href="index.php">Inicio</a></li>
-        <li><a href="gestion_jugadores.php">Jugadores</a></li>
-        <li><a href="gestion_equipos.php">Equipos</a></li>
-        <li><a href="gestion_estadios.php">Estadios</a></li>
-        <li><a href="gestion_miperfil.php">Mi Perfil</a></li>
-        <li  class="on"><a href="gestion_rosters.php">Roster</a></li>
-        <li><a href="#">Ligas</a></li>
-        <li><a href="#">Calendario</a></li>
-        <li><a href="#">Resultados</a></li>
-        <li><a href="#">Reglas</a></li>
-        <li><a href="#">Cont&aacutectenos</a></li>
-    </ul>
-<?php } elseif(isset($_SESSION['Administrador'])){?>
-	<ul id="navigation">
-    	<li><a class="on" href="index.php">Inicio</a></li>
-        <li><a href="gestion_jugadores.php">Jugadores</a></li>
-        <li><a href="gestion_equipos.php">Equipos</a></li>
-        <li><a href="gestion_estadios.php">Estadios</a></li>
-        <li  class="on"><a href="gestion_rosters.php">Roster</a></li>
-        <li><a href="#">Ligas</a></li>
-        <li><a href="#">Calendario</a></li>
-        <li><a href="#">Resultados</a></li>
-        <li><a href="#">Reglas</a></li>
-        <li><a href="#">Cont&aacutectenos</a></li>
-		<li><a class="on" href="gestion_usuarios.php">Usuarios</a></li>
-	</ul>
-<?php } else { 
-		echo '<ul id="navigation">
-		<li><a href="index.php">Inicio</a></li>
-        <li><a href="gestion_jugadores.php">Jugadores</a></li>
-        <li><a href="gestion_equipos.php">Equipos</a></li>
-        <li><a href="gestion_estadios.php">Estadios</a></li>
-        </ul>';
-	}
-	?>
+        <ul id="navigation">
+          <li><a href="pruebaRoster.html">Inicio</a></li>
+          <li><a href="gestion_jugadores.php">Jugadores</a></li>
+          <li><a href="#">Equipos</a></li>
+          <li><a href="#">Estadios</a></li>
+          <li><a href="#">Mi Perfil</a></li>
+          <li><a class="on" href="pruebaRoster.html">Roster</a></li>
+          <li><a href="#">Ligas</a></li>
+          <li><a href="#">Calendario</a></li>
+          <li><a href="#">Resultados</a></li>
+          <li><a href="#">Reglas</a></li>
+          <li><a href="#">Cont&aacutectenos </a></li>
+        </ul>
 </div>
 
 	   
@@ -239,11 +259,11 @@ if(isset($_SESSION['Manager'])){?>
                 <div class="toFade">
 
                     <div id="campo_juego">
-                        <h3><?php echo $ALGO ?></h3> 
+                        <h3>Tu Roster</h3> 
                     
-                        <div id="score_usuario">Score:</div>
+                        <div id="score_usuario"><?php echo $Manager->puntaje; ?></div>
                     
-                        <div id="creditos_usuario">Creditos:</div>
+                        <div id="creditos_usuario"><?php echo $Manager-> creditos; ?></div>
                           
                         <div id="LF"><?php $ira = (isset($Aux['LF'])) ? $Aux['LF'] : $Aux['DEF']; echo $ira; ?></div>
                         <div id="CF"><?php $ira = (isset($Aux['CF'])) ? $Aux['CF'] : $Aux['DEF']; echo $ira; ?></div>

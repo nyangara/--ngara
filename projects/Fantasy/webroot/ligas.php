@@ -6,14 +6,16 @@
                 $uid = userdata()->get('id');
 ?>
 <h2>Ligas</h2>
+<p>Ver todas | <a href="ligas_publicas">públicas</a> | <a href="ligas_privadas">privadas</a></p>
 <form action="liga_insert">
-  <input type="submit" value="Crear liga"/>
+  <button type="submit">Crear liga</button>
 </form>
 <?php
                 foreach (UIFacade::ligas() as $l) {
                         if (
                                 !$admin &&
                                 $l['liga']->get('es pública') == 'f' &&
+                                $uid != $l['creador']->get('id') &&
                                 !in_array(
                                         $uid,
                                         array_map(
@@ -47,8 +49,6 @@
 <?php                   } ?>
 </div>
 <?php           } ?>
-<h2><a href="ligas_publicas">Ver solo ligas públicas</a></h2>
-<h2><a href="ligas_privadas">Ver solo ligas privadas</a></h2>
 <?php
         }
 

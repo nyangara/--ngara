@@ -11,6 +11,19 @@
                         }
                 ),
 
+                'liga_update' => array(
+                        'authorization' => 'user',
+                        'action' => function () {
+                                $l = UIFacade::select('Liga', array('id' => $_POST['id']));
+                                $data = array(
+                                        'id'      => $l->get('id'),
+                                        'creador' => $l->get('creador')
+                                );
+                                if (!has_auth('admin')) $data['es pública'] = $l->get('es pública');
+                                update_fields('Liga', $data);
+                        }
+                ),
+
                 'contenido_insert' => array(
                         'authorization' => 'admin',
                         'action' => function () {
@@ -24,7 +37,7 @@
                         'authorization' => 'admin',
                         'action' => function () {
                                 $nombre = '';
-                                if($_FILES['image']['error'] == 0) {
+                                if ($_FILES['imagen']['error'] == 0) {
                                     $nombre = $_FILES['imagen']['name'];
 
                                     $d = move_uploaded_file($_FILES['imagen']['tmp_name'], 'static/images/equipo/' . $nombre);
@@ -51,8 +64,56 @@
                         }
                 ),
 
+                'juego_update' => array(
+                        'authorization' => 'admin',
+                        'action' => function () {
+                                update_fields('Juego');
+                        }
+                ),
+
+                'contenido_update' => array(
+                        'authorization' => 'admin',
+                        'action' => function () {
+                                update_fields('Contenido');
+                        }
+                ),
+
                 'contenido_remove' => array('authorization' => 'admin', 'action' => function () { remove_by_pk('Contenido'); }),
                 'juego_remove'     => array('authorization' => 'admin', 'action' => function () { remove_by_pk('Juego'    ); }),
+
+                'participa_insert' => array(
+                        'authorization' => 'user',
+                        'action' => function () {
+                                if (
+                                        array_key_exists('liga'   , $_POST) &&
+                                        array_key_exists('usuario', $_POST)
+                                ) {
+                                        if (!has_auth('admin')) {
+                                                $liga = UIFacade::select('Liga', array('id' => $_POST['liga']));
+                                                if (!$liga) return;
+                                                if ($liga->get('creador') != userdata()->get('id')) return;
+                                        }
+                                        insert_fields('Participa');
+                                }
+                        }
+                ),
+
+                'participa_remove' => array(
+                        'authorization' => 'user',
+                        'action' => function () {
+                                if (
+                                        array_key_exists('liga'   , $_POST) &&
+                                        array_key_exists('usuario', $_POST)
+                                ) {
+                                        if (!has_auth('admin')) {
+                                                $liga = UIFacade::select('Liga', array('id' => $_POST['liga']));
+                                                if (!$liga) return;
+                                                if ($liga->get('creador') != userdata()->get('id')) return;
+                                        }
+                                        remove_by_pk('Participa');
+                                }
+                        }
+                ),
 
                 'liga_remove' => array(
                         'authorization' => 'user',
@@ -65,6 +126,10 @@
                         }
                 )
         );
+
+        function update_fields($entity_class, $data = array()) {
+                UIFacade::update($entity_class, set_fields($entity_class, $data));
+        }
 
         function insert_fields($entity_class, $data = array()) {
                 UIFacade::insert($entity_class, set_fields($entity_class, $data));
@@ -93,7 +158,7 @@
                         $auth = $a['authorization'];
                         if (has_auth($auth)) call_user_func($a['action']);
                         else error_log('Fantasy: intento de llamar función del controlador ' . $an . ' por usuario no autorizado de clase ' . userclass());
-                }
+                } else error_log('Fantasy: intento de llamar la función inexistente del controlador "' . $an . '" por usuario de clase ' . userclass());
         }
 
         if (array_key_exists('goto', $_POST)) {

@@ -1,27 +1,28 @@
 <?php
         require 'include/pre.php';
 
-        function select_opts($name, $range, $now, $format) {
+        function select_opts($name, $range, $now, $format, $print_empty) {
                 $r = '<select name="' . $name . '">';
+                if ($print_empty) $r .= '<option value=""></option>';
                 foreach ($range as $i) {
                         $r .= sprintf(
                                 '<option value="' . $format . '"%s>' . $format . '</option>',
                                 $i,
-                                ($i == $now ? ' selected="selected"' : ''),
+                                ($i === $now ? ' selected="selected"' : ''),
                                 $i
                         );
                 }
                 return $r . "</select>";
         }
 
-        $equipos  = UIFacade::retrieveAll('Equipo');
+        $equipos  = UIFacade::retrieveAll('Equipo' );
         $estadios = UIFacade::retrieveAll('Estadio');
 ?>
 <div id="contenido_interno" style="height: auto">
-        <div style="height:500px; overflow-y: scroll;">
+        <div>
                 <form action="controller" method="post">
                         <input type="hidden" name="goto" value="calendario"/>
-                        <table width="100%" border="0" cellspacing="5" cellpadding="5" align="left" style="color: #cccccc">
+                        <table width="100%" border="0" cellspacing="5" cellpadding="5" align="left">
                                 <tr>
                                         <th style="border: 2px solid #cccccc">
                                                 Agregar juego
@@ -30,26 +31,27 @@
                                 <tr>
                                         <td style="border: 1px solid #cccccc">
                                                 Introduzca la fecha:
-                                                <?php echo select_opts('day', range(1, 31), date('d'), '%02d'); ?>
+                                                <?php echo select_opts('day', range(1, 31), '', '%02d', true); ?>
                                                 /
-                                                <?php echo select_opts('month', range(1, 12), date('n'), '%02d'); ?>
+                                                <?php echo select_opts('month', range(1, 12), '', '%02d', true); ?>
                                                 /
-                                                <?php $y = date('Y'); echo select_opts('year' , range($y, $y + 3), $y, '%d'); ?>
+                                                <?php $y = date('Y'); echo select_opts('year' , range($y - 10, $y + 10), '', '%d', true); ?>
                                         </td>
                                 </tr>
                                 <tr>
                                         <td style="border: 1px solid #cccccc">
                                                 Introduzca la hora:
-                                                <?php echo select_opts('hour', range(1, 12), date('h'), '%02d'); ?>
+                                                <?php echo select_opts('hour', range(1, 12), '', '%02d', true); ?>
                                                 :
-                                                <?php echo select_opts('minute', range(0, 59), date('i'), '%02d'); ?>
-                                                <?php echo select_opts('ampm', array('AM', 'PM'), date('A'), '%s'); ?>
+                                                <?php echo select_opts('minute', range(0, 59), '', '%02d', true); ?>
+                                                <?php echo select_opts('ampm', array('AM', 'PM'), '', '%s', true); ?>
                                         </td>
                                 </tr>
                                 <tr>
                                         <td style="border: 1px solid #cccccc">
                                                 Seleccione el equipo local:
                                                 <select name="equipo local" id="equipo_local">
+                                                        <option value=""></option>
 <?php   foreach ($equipos as $e) { ?>
                                                         <option value="<?php echo $e->get('id'); ?>"><?php echo $e->get('nombre completo'); ?></option>
 <?php   } ?>
@@ -60,6 +62,7 @@
                                         <td style="border: 1px solid #cccccc">
                                                 Seleccione el equipo visitante:
                                                 <select name="equipo visitante">
+                                                        <option value=""></option>
 <?php   foreach ($equipos as $e) { ?>
                                                         <option value="<?php echo $e->get('id'); ?>"><?php echo $e->get('nombre completo'); ?></option>
 <?php   } ?>
@@ -70,6 +73,7 @@
                                         <td style="border: 1px solid #cccccc">
                                                 Seleccione el estadio:
                                                 <select name="estadio">
+                                                        <option value=""></option>
 <?php   foreach ($estadios as $s) { ?>
                                                         <option value="<?php echo $s->get('id'); ?>"><?php echo $s->get('nombre'); ?></option>
 <?php   } ?>

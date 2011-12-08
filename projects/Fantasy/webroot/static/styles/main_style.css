@@ -112,12 +112,12 @@ input[type="submit"] {
 #login {
   display: inline-block;
   float: right;
-  
+
   margin-top: -57px;
   margin-right: 26px;
 }
 
-#login input {
+#login input button {
   max-width: 150px;
 }
 

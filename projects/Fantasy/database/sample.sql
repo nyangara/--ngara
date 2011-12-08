@@ -92,8 +92,7 @@ FROM
                 ('Fabiana Reggio'  , '1990/01/02', 'San Antonio, Venezuela', 'Tigres de Aragua'         , 01, 'pitcher'            ,  100, 'fabiana.jpg' ),
                 ('Krisvely Varela' , '1990/03/04', 'Caracas, Venezuela'    , 'Navegantes del Magallanes', 12, 'jardinero izquierdo',  200, 'krisvely.jpg'),
                 ('Miguel Ambrosio' , '1988/05/06', 'Caracas, Venezuela'    , 'Leones del Caracas'       , 23, 'tercera base'       ,  300, 'miguel.jpg'  ),
-                ('Ricardo Monascal', '1846/08/12', 'San Antonio, Venezuela', 'Navegantes del Magallanes', 42, 'catcher'            ,  400, 'ricardo.jpg' ),
-                ('Chuck Norris'    , '1337/01/01', 'Here There Be Monsters', 'Navegantes del Magallanes', 00, 'campo corto'        , 9999, NULL          )
+                ('Ricardo Monascal', '1846/08/12', 'San Antonio, Venezuela', 'Navegantes del Magallanes', 42, 'catcher'            ,  400, 'ricardo.jpg' )
         ) AS "Datos" ("nombre completo", "fecha de nacimiento", "lugar de procedencia", "equipo", "número", "posición", "precio", "URL de la foto")
 WHERE "Datos"."equipo" = "Fantasy"."Equipo"."nombre completo";
 

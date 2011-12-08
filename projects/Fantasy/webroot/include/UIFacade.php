@@ -48,6 +48,23 @@
                         );
                 }
 
+                public static function usuario_ligas_invitables($id) {
+                        $uid = userdata()->get('id');
+                        return array_filter(
+                                UIFacade::ligas(),
+                                function ($l) use ($uid, $id) {
+                                        return
+                                                (has_auth('admin') || $l['creador'] == $uid) &&
+                                                !in_array($id,
+                                                        array_map(
+                                                                function ($p) { return $p->get('id'); },
+                                                                $l['participantes']
+                                                        )
+                                                );
+                                }
+                        );
+                }
+
                 public static function ligas() {
                         $ps = array();
                         $uids = array();
@@ -91,20 +108,62 @@
                         );
                 }
 
-                public static function calendario() {
-                        return array_map(
-                                function ($j) {
-                                        $l = new Equipo (); $l->set('id', $j->get('equipo local'    )); $l = $l->select();
-                                        $v = new Equipo (); $v->set('id', $j->get('equipo visitante')); $v = $v->select();
-                                        $s = new Estadio(); $s->set('id', $j->get('estadio'         )); $s = $s->select();
-                                        return array(
+                public static function calendario($search_opt, $search_query) {
+                        $search_opts = array(
+                                'fecha'     => array(
+                                        'juego'            => array('inicio')
+                                ),
+
+                                'estadio'   => array(
+                                        'estadio'          => array('nombre')
+                                ),
+
+                                'equipo'    => array(
+                                        'equipo local'     => array('nombre completo', 'siglas', 'ciudad', 'estado'),
+                                        'equipo visitante' => array('nombre completo', 'siglas', 'ciudad', 'estado')
+                                ),
+
+                                'local'     => array(
+                                        'equipo local'     => array('nombre completo', 'siglas', 'ciudad', 'estado')
+                                ),
+
+                                'visitante' => array(
+                                        'equipo visitante' => array('nombre completo', 'siglas', 'ciudad', 'estado')
+                                ),
+
+                                'todos'     => array(
+                                        'juego'            => array('inicio'),
+                                        'estadio'          => array('nombre'),
+                                        'equipo local'     => array('nombre completo', 'siglas', 'ciudad', 'estado'),
+                                        'equipo visitante' => array('nombre completo', 'siglas', 'ciudad', 'estado')
+                                )
+                        );
+
+                        return array_reduce(
+                                self::retrieveAll('Juego'),
+                                function ($acc, $j) use ($search_opts, $search_opt, $search_query) {
+                                        $new = array(
                                                 'juego'            => $j,
-                                                'equipo local'     => $l,
-                                                'equipo visitante' => $v,
-                                                'estadio'          => $s
+                                                'equipo local'     => UIFacade::select('Equipo' , array('id' => $j->get('equipo local'    ))),
+                                                'equipo visitante' => UIFacade::select('Equipo' , array('id' => $j->get('equipo visitante'))),
+                                                'estadio'          => UIFacade::select('Estadio', array('id' => $j->get('estadio'         )))
                                         );
+
+                                        if (!array_key_exists($search_opt, $search_opts)) $acc[] = $new;
+                                        else {
+                                                foreach ($search_opts[$search_opt] as $obj => $fs) {
+                                                        foreach ($fs as $f) {
+                                                                if (stristr($new[$obj]->get($f), $search_query)) {
+                                                                        $acc[] = $new;
+                                                                        break 2;
+                                                                }
+                                                        }
+                                                }
+                                        }
+
+                                        return $acc;
                                 },
-                                self::retrieveAll('Juego')
+                                array()
                         );
                 }
         }

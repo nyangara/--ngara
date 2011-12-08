@@ -112,7 +112,7 @@ CREATE TABLE "Fantasy"."Equipo" (
         "id"                            serial                          NOT NULL,
         "nombre completo"               text                            NOT NULL,
         "nombre corto"                  text                            NOT NULL,
-        "siglas"                        char(3)                         NOT NULL,
+        "siglas"                        text                            NOT NULL,
         "año de fundación"              integer                             NULL,
         "ciudad"                        text                                NULL,
         "estado"                        text                                NULL,

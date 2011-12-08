@@ -1,4 +1,9 @@
-Agregar ligas y más cosas a database/sample.sql
+estadio_detail
+estadio_update
+jugador_detail
+jugador_update
+usuario_update
+perfil_update
 Borrar de webroot todo lo que no se esté usando
 Terminar de integrar
 Poner cosas en el TODO

@@ -27,7 +27,7 @@
     <p><input type="submit" value="Detalles"/></p>
   </form>
 </div>
-<hr style="clear:both"/>
+<hr style="clear: both"/>
 <h3>Miembros:</h3>
 <?php
                         foreach ($d['participantes'] as $u) {
@@ -35,13 +35,21 @@
                                 if ($img and !filter_var($img, FILTER_VALIDATE_URL)) $img = 'static/images/usuario/' . $img;
 ?>
 <div style="border: 1em">
-  <form action="usuario_detail" method="post">
+  <img src="<?php echo $img; ?>" style="float: left; clear: both"/>
+  <p>Usuario: <?php echo $u->get('username'       ); ?></p>
+  <p>Nombre:  <?php echo $u->get('nombre completo'); ?></p>
+  <form action="user_detail" method="post">
     <input type="hidden" name="id" value="<?php echo $u->get('id'); ?>"/>
-    <img src="<?php echo $img; ?>" style="float: left; clear: both"/>
-    <p>Usuario: <?php echo $u->get('username'       ); ?></p>
-    <p>Nombre:  <?php echo $u->get('nombre completo'); ?></p>
     <p><input type="submit" value="Detalles"/></p>
   </form>
+<?php                           if ($own) { ?>
+  <form action="controller" method="post">
+    <input type="hidden" name="usuario" value="<?php echo $u->get('id'); ?>"/>
+    <input type="hidden" name="liga"    value="<?php echo $d['liga']->get('id'); ?>"/>
+    <input type="hidden" name="goto"    value="ligas"/>
+    <p><button type="submit" name="action" value="participa_remove">Expulsar</button></p>
+  </form>
+<?php                           } ?>
 </div>
 <?php
                         }

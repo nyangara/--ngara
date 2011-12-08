@@ -5,15 +5,17 @@
                 $admin = has_auth('admin');
                 $uid = userdata()->get('id');
 ?>
-<h2>Ligas públicas</h2>
+<h2>Ligas</h2>
+<p>Ver <a href="ligas">todas</a> | públicas | <a href="ligas_privadas">privadas</a></p>
 <form action="liga_insert">
-  <input type="submit" value="Crear liga"/>
+  <button type="submit">Crear liga</button>
 </form>
 <?php
                 foreach (UIFacade::ligas() as $l) if ($l['liga']->get('es pública') == 't') {
                         if (
                                 !$admin &&
                                 $l['liga']->get('es pública') == 'f' &&
+                                $uid != $l['creador']->get('id') &&
                                 !in_array(
                                         $uid,
                                         array_map(
@@ -27,7 +29,7 @@
                         if ($img and !filter_var($img, FILTER_VALIDATE_URL)) $img = 'static/images/usuario/' . $img;
 ?>
 <div>
-  <h3><a href="#"><?php echo $l['liga']->get('nombre'); ?></a></h3>
+  <h3><?php echo $l['liga']->get('nombre'); ?></h3>
   <img class="imagen" src="<?php echo $img; ?>"/>
   <p><strong>Creador:</strong> <a href="#"><?php echo $l['creador']->get('username'); ?></a></p>
   <form action="liga_detail" method="post">
@@ -41,13 +43,12 @@
   </form>
   <form action="controller" method="post">
     <input type="hidden" name="id" value="<?php echo $id; ?>"/>
-    <input type="hidden" name="goto" value="ligas"/>
+    <input type="hidden" name="goto" value="ligas_publicas"/>
     <button type="submit" name="action" value="liga_remove">Eliminar</button>
   </form>
 <?php                   } ?>
 </div>
 <?php           } ?>
-<h2><a href="ligas_privadas">Ver solo ligas privadas</a></h2>
 <?php
         }
 

@@ -1,4 +1,8 @@
-<?php   require 'include/pre.php'; ?>
+<?php
+        require 'include/pre.php';
+
+        $q = array_key_exists('q', $_GET) ? $_GET['q'] : null;
+?>
 <!-- Starting slider... -->
 <script type="text/javascript" src="static/js/jquery.js"></script>
 <script type="text/javascript" src="static/js/s3SliderPacked.js"></script>
@@ -43,17 +47,28 @@
 <!-- Slider ended. -->
 
 <h2>Noticias</h2>
+<?php   if (has_auth('admin')) { ?>
+<form method="get" action="contenido_insert">
+  <button type="submit">Agregar contenido</button>
+</form>
+<?php   } ?>
+<div id="search">
+  <form method="get" action="index">
+    <input type="text" name="q" value="<?php echo $q; ?>"/>
+    <button type="submit">Buscar</button>
+  </form>
+</div>
 <div id="else">
 <?
-        foreach (UIFacade::retrieveAll('Contenido') as $c) {
-                if ($c->get('tipo') == 'noticia') {
-                        $id   = $c->get('id'           );
-                        $tags = $c->get('tags'         );
-                        $img  = $c->get('URL de imagen');
-                        if ($img and !filter_var($img, FILTER_VALIDATE_URL)) $img = 'static/images/contenido/' . $img;
+        foreach (UIFacade::contenidos('noticia', $q) as $c) {
+                $id   = $c->get('id'           );
+                $tags = $c->get('tags'         );
+                $img  = $c->get('URL de imagen');
+                if ($img and !filter_var($img, FILTER_VALIDATE_URL)) $img = 'static/images/contenido/' . $img;
 ?>
   <div>
-<?php                   if (has_auth('admin')) { ?>
+
+<?php           if (has_auth('admin')) { ?>
     <div class="admin-options">
       <form action="controller" method="post">
         <input type="hidden" name="id" value="<?php echo $id; ?>"/>
@@ -64,27 +79,23 @@
         <button type="submit" method="get">Modificar</button>
       </form>
     </div>
-<?php                   } ?>
+<?php           } ?>
+
     <h3><?php echo $c->get('título'); ?></h3>
     <h4><?php echo $c->get('fecha'); ?></h4>
     <br/>
-<?php                   if ($img) { ?>
+
+<?php           if ($img) { ?>
     <img src="<?php echo $img; ?>"/>
-<?php                   } ?>
+<?php           } ?>
+
     <?php echo $c->get('texto'); ?>
-<?php                   if ($tags) { ?>
+
+<?php           if ($tags) { ?>
     <p><strong>Etiquetas:</strong> <?php echo $tags; ?></p>
-<?php                   } ?>
+<?php           } ?>
+
   </div>
-<?php
-                }
-        }
-?>
-</div>
-<div id="search">
-  <form>
-    <input type="text" name="text"/>
-    <button type="submit" name="noticia_search" value="1">Buscar</button>
-  </form>
+<?php   } ?>
 </div>
 <?php   require 'include/post.html'; ?>

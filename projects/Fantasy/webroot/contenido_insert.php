@@ -1,8 +1,8 @@
 <?php   require 'include/pre.php'; ?>
 <h2>Agregar contenido</h2>
 <div>
-        <form action="controller" method="post" id="Alcance">
-                <input type="hidden" name="goto" value="noticias"/>
+        <form action="controller" enctype="multipart/form-data" method="post" id="Alcance">
+                <input type="hidden" name="goto" value="index"/>
                         <table width="400" border="0">
                                 <tr>
                                         <td>Título:</td>
@@ -17,9 +17,9 @@
                                         </td>
                                 </tr>
                                 <tr>
-                                        <td>URL de la imagen:</td>
+                                        <td>Imagen:</td>
                                         <td>
-                                                <input type="text" name="URL de imagen" value="" size="25"/>
+                                                <input type="file" name="imagen" size="25"/>
                                         </td>
                                 </tr>
                                 <tr>

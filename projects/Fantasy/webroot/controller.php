@@ -27,8 +27,16 @@
                 'contenido_insert' => array(
                         'authorization' => 'admin',
                         'action' => function () {
+                                $nombre = '';
+                                if (array_key_exists('imagen', $_FILES) && $_FILES['imagen']['error'] == 0) {
+                                    $nombre = $_FILES['imagen']['name'];
+
+                                    $d = move_uploaded_file($_FILES['imagen']['tmp_name'], 'static/images/contenido/' . $nombre);
+                                } else $nombre = 'generico.jpg';
+
                                 insert_fields('Contenido', array(
-                                        'fecha' => date('Y-m-d H:i:sP')
+                                        'URL de imagen' => $nombre,
+                                        'fecha'         => date('Y-m-d H:i:sP')
                                 ));
                         }
                 ),

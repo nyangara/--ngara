@@ -1,5 +1,10 @@
 <?php   require 'include/pre.php'; ?>
 <h2>Preguntas Frecuentes</h2>
+<?php   if (has_auth('admin')) { ?>
+<form method="get" action="contenido_insert">
+  <button type="submit">Agregar contenido</button>
+</form>
+<?php   } ?>
 <form>
   <input name="" type="text"/>
   <input name="" type="submit" value="Buscar"/>

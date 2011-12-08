@@ -32,7 +32,7 @@
         <td>
           <select name="tipo">
 <?php           foreach (UIFacade::enum_values('tipo de contenido') as $v) { ?>
-            <option value="<?php echo $v; ?>"<?php if ($c->get('tipo') == $v) echo $c->get('tipo'); ?>><?php echo mb_ucfirst($v, 'utf-8'); ?></option>
+            <option value="<?php echo $v; ?>"<?php if ($c->get('tipo') == $v) echo ' selected="selected"'; ?>><?php echo mb_ucfirst($v, 'utf-8'); ?></option>
 <?php           } ?>
           </select>
         </td>

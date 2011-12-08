@@ -108,6 +108,26 @@
                         );
                 }
 
+                public static function contenidos($type, $search_query) {
+                        return array_reduce(
+                                self::retrieveAll('Contenido'),
+                                function ($acc, $c) use ($type, $search_query) {
+                                        if ($type != $c->get('tipo')) return $acc;
+
+                                        if (!$search_query) $acc[] = $c;
+                                        else foreach (array('título', 'texto', 'tags') as $f) {
+                                                if (stristr($c->get($f), $search_query)) {
+                                                        $acc[] = $c;
+                                                        break;
+                                                }
+                                        }
+
+                                        return $acc;
+                                },
+                                array()
+                        );
+                }
+
                 public static function calendario($search_opt, $search_query) {
                         $search_opts = array(
                                 'fecha'     => array(

@@ -136,7 +136,7 @@ include("Static/header.php");
                                     </tr>
                                     <tr>
                                         <td>Posición:</td>
-                                        <td colspan="2"><? echo $Pos; ?></td>
+                                        <td colspan="2"><?php echo $Pos; ?></td>
                                     </tr>
                                     <tr>
                                         <td>Precio:</td>

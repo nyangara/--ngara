@@ -26,7 +26,6 @@ echo '<div id="content">
 				$estadio = $eFac->getAllEstadio();
 				$n = count($estadio);
 	
-
 				
 				echo "<td>";
 				echo "<select name=\"Nombre_Estadio\">";

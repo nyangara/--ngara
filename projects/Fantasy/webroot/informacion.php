@@ -15,7 +15,7 @@
     <button type="submit">Buscar</button>
   </form>
 </div>
-<?
+<?php
         foreach (UIFacade::contenidos('información', $q) as $c) {
                 $id   = $c->get('id'           );
                 $tags = $c->get('tags'         );

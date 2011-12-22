@@ -1,9 +1,25 @@
-<?php   require 'include/session.php'; ?>
+<?php
+        require 'include/session.php';
+
+        require_once 'include/conneg.phi';
+        $conneg = new contentNegotiation();
+        $uastring = $_SERVER['HTTP_USER_AGENT'];
+        header('Vary: Accept, User-Agent');
+        if (
+                $conneg->compareQ('application/xhtml+xml,text/html') == 'application/xhtml+xml' &&
+                !strpos($uastring,'MSIE')
+        ) {
+                header('Content-Type:application/xhtml+xml');
+        } else {
+                header('Content-Type:text/html;charset=utf-8');
+        }
+?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <title>Liga de Fantasía</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8"/>
     <meta name="keywords"    content="fantasy, beisbol venezolano, liga venezolana de beisbol profesional, lvbp"/>
     <meta name="description" content="Fantasy de la liga venezolana de beisbol profesional."/>
     <link rel="stylesheet" href="static/styles/main_style.css" type="text/css"/>

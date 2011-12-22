@@ -31,7 +31,7 @@
 <div>
   <h3><?php echo $l['liga']->get('nombre'); ?></h3>
   <img class="imagen" src="<?php echo $img; ?>"/>
-  <p><strong>Creador:</strong> <a href="#"><?php echo $l['creador']->get('username'); ?></a></p>
+  <p><strong>Creador:</strong> <a href="usuario_detail?id=<?php echo $l['creador']->get('id'); ?>"><?php echo $l['creador']->get('username'); ?></a></p>
   <form action="liga_detail" method="get">
     <input type="hidden" name="id" value="<?php echo $id; ?>"/>
     <button type="submit">Ver</button>

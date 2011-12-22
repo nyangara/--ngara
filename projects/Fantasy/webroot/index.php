@@ -59,7 +59,7 @@
   </form>
 </div>
 <div id="else">
-<?
+<?php
         foreach (UIFacade::contenidos('noticia', $q) as $c) {
                 $id   = $c->get('id'           );
                 $tags = $c->get('tags'         );

@@ -62,21 +62,21 @@
 ?>
   <tr>
     <td><?php echo date('d/m/Y', $date); ?><br/><?php echo date('h:i A', $date); ?></td>
-    <td class="img"><img src="<?php echo $img_local; ?>"/></td>
+    <td class="img"><img src="<?php echo $img_local; ?>" alt="<?php echo $c['equipo local']->get('siglas'); ?>"/></td>
     <td><?php echo $c['equipo local'    ]->get('nombre corto'); ?></td>
-    <td class="img"><img src="<?php echo $img_visitante; ?>"/></td>
+    <td class="img"><img src="<?php echo $img_visitante; ?>" alt="<?php echo $c['equipo visitante']->get('siglas'); ?>"/></td>
     <td><?php echo $c['equipo visitante']->get('nombre corto'); ?></td>
     <td><?php echo $c['estadio'         ]->get('nombre'      ); ?></td>
 <?php           if (has_auth('admin')) { ?>
     <td>
       <form action="juego_update" method="get">
         <input type="hidden" name="id" value="<?php echo $id; ?>"/>
-        <button type="submit" name="action" value="juego_update" style="width: 5em"/>Modificar</button>
+        <button type="submit" name="action" value="juego_update" style="width: 5em">Modificar</button>
       </form>
       <form action="controller" method="post">
         <input type="hidden" name="id" value="<?php echo $id; ?>"/>
         <input type="hidden" name="goto" value="calendario"/>
-        <button type="submit" name="action" value="juego_remove" style="width: 5em"/>Eliminar</button>
+        <button type="submit" name="action" value="juego_remove" style="width: 5em">Eliminar</button>
       </form>
     </td>
 <?php           } ?>

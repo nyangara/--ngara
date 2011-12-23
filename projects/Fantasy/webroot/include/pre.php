@@ -1,6 +1,7 @@
 <?php
         require 'include/session.php';
 
+        $xhtml = true;
         require_once 'include/conneg.phi';
         $conneg = new contentNegotiation();
         $uastring = $_SERVER['HTTP_USER_AGENT'];
@@ -12,14 +13,21 @@
                 header('Content-Type:application/xhtml+xml');
         } else {
                 header('Content-Type:text/html;charset=utf-8');
+                $xhtml = false;
         }
+
+        if ($xhtml) {
 ?>
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es">
+<?php   } else { ?>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd">
+<html>
+<?php   } ?>
   <head>
     <title>Liga de Fantasía</title>
-    <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8"/>
+    <meta http-equiv="Content-Type" content="<?php echo $xhtml ? 'application/xhtml+xml' : 'text/html'; ?>; charset=utf-8"/>
     <meta name="keywords"    content="fantasy, beisbol venezolano, liga venezolana de beisbol profesional, lvbp"/>
     <meta name="description" content="Fantasy de la liga venezolana de beisbol profesional."/>
     <link rel="stylesheet" href="static/styles/main_style.css" type="text/css"/>
@@ -53,12 +61,6 @@
             <a href="registro">Regístrate</a>
           </span>
 <?php   } ?>
-        </div>
-        <div id="updates">
-          <span>
-            <strong>Novedades:</strong>
-            <marquee behavior="scroll" direction="left" scrollamount="3">Funcional e integrado en un 99.99999999999999999999999999999999999999999999999999999999999%</marquee>
-          </span>
         </div>
         <div id="navigation">
           <ul>

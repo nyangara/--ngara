@@ -3,22 +3,23 @@
 
         $q = array_key_exists('q', $_GET) ? $_GET['q'] : null;
 ?>
-<!-- Starting slider... -->
-<script type="text/javascript" src="static/js/jquery.js"></script>
-<script type="text/javascript" src="static/js/s3SliderPacked.js"></script>
-<script type="text/javascript" src="static/js/s3Slider.js"></script>
+<script type="text/javascript" src="static/js/jquery.js"        />
+<script type="text/javascript" src="static/js/s3SliderPacked.js"/>
+<script type="text/javascript" src="static/js/s3Slider.js"      />
 <script type="text/javascript">
+//<![CDATA[
         $(document).ready(function() {
                 $('#slider').s3Slider({
                         timeOut: 4000
                 });
         });
+//]]>
 </script>
 
 <div id="slider">
   <ul id="sliderContent">
     <li class="sliderImage">
-      <a href=""><img src="static/images/slider/01.jpg" alt="1" width="600" height="300"/></a>
+      <img src="static/images/slider/01.jpg" alt="Jugador de béisbol" width="600" height="300"/>
       <span class="left">
         <strong>Vive...</strong>
         <br/>
@@ -26,7 +27,7 @@
       </span>
     </li>
     <li class="sliderImage">
-      <a href=""><img src="static/images/slider/02.jpg" alt="2" width="600" height="300"/></a>
+      <img src="static/images/slider/02.jpg" alt="Jugador de béisbol" width="600" height="300"/>
       <span class="right">
         <strong>Diseña...</strong>
         <br/>
@@ -34,28 +35,29 @@
       </span>
     </li>
     <li class="sliderImage">
-      <img src="static/images/slider/03.jpg" alt="3" width="600" height="300"/>
+      <img src="static/images/slider/03.jpg" alt="Jugador de béisbol" width="600" height="300"/>
       <span class="right">
         <strong>Juega...</strong>
         <br/>
         El Fantasy de la LPBV
       </span>
     </li>
-    <div class="clear sliderImage"></div>
+    <li><div class="clear sliderImage"></div></li>
   </ul>
 </div>
-<!-- Slider ended. -->
 
 <h2>Noticias</h2>
 <?php   if (has_auth('admin')) { ?>
 <form method="get" action="contenido_insert">
-  <button type="submit">Agregar contenido</button>
+  <p><button type="submit">Agregar contenido</button></p>
 </form>
 <?php   } ?>
 <div id="search">
   <form method="get" action="index">
-    <input type="text" name="q" value="<?php echo $q; ?>"/>
-    <button type="submit">Buscar</button>
+    <p>
+      <input type="text" name="q" value="<?php echo $q; ?>"/>
+      <button type="submit">Buscar</button>
+    </p>
   </form>
 </div>
 <div id="else">
@@ -71,12 +73,12 @@
 <?php           if (has_auth('admin')) { ?>
     <div class="admin-options">
       <form action="controller" method="post">
-        <input type="hidden" name="id" value="<?php echo $id; ?>"/>
-        <button type="submit" name="action" value="contenido_remove" style="width: 5em">Eliminar</button>
+        <p><input type="hidden" name="id" value="<?php echo $id; ?>"/></p>
+        <p><button type="submit" name="action" value="contenido_remove" style="width: 5em">Eliminar</button></p>
       </form>
       <form action="contenido_update" method="get">
-        <input type="hidden" name="id" value="<?php echo $id; ?>"/>
-        <button type="submit" method="get">Modificar</button>
+        <p><input type="hidden" name="id" value="<?php echo $id; ?>"/></p>
+        <p><button type="submit" method="get">Modificar</button></p>
       </form>
     </div>
 <?php           } ?>
@@ -86,7 +88,7 @@
     <br/>
 
 <?php           if ($img) { ?>
-    <img src="<?php echo $img; ?>"/>
+    <img src="<?php echo $img; ?>" alt="Imagen"/>
 <?php           } ?>
 
     <?php echo $c->get('texto'); ?>

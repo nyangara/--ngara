@@ -1,4 +1,6 @@
 SHELL := /usr/bin/env bash
+SQL=PGOPTIONS='--client-min-messages=warning' psql
+SQLOPTS=--quiet --variable=ON_ERROR_STOP=1 --pset pager=off
 
 .PHONY: all check-locale packages apache postgresql
 
@@ -16,3 +18,5 @@ apache:
 postgresql:
 	sudo -u postgres createuser -EPs "$$USER"
 	createdb -E UTF-8
+	printf "REVOKE ALL PRIVILEGES ON DATABASE %s FROM PUBLIC;" template0 template1 postgres "$$USER" | $(SQL) $(SQLOPTS) -f -
+	$(SQL) $(SQLOPTS) -c "REVOKE ALL PRIVILEGES ON SCHEMA public FROM PUBLIC;"

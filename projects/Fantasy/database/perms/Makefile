@@ -1,4 +1,4 @@
-SQL=psql
+SQL=PGOPTIONS='--client-min-messages=warning' psql
 SQLOPTS=--quiet
 DATABASE=Fantasy
 
@@ -7,13 +7,13 @@ DATABASE=Fantasy
 all: guest user admin auth
 
 guest:
-	"$(SQL)" $(SQLOPTS) -d "$(DATABASE)" -f guest.sql
+	$(SQL) $(SQLOPTS) -d '$(DATABASE)' -f guest.sql
 
 user:
-	"$(SQL)" $(SQLOPTS) -d "$(DATABASE)" -f user.sql
+	$(SQL) $(SQLOPTS) -d '$(DATABASE)' -f user.sql
 
 admin:
-	"$(SQL)" $(SQLOPTS) -d "$(DATABASE)" -f admin.sql
+	$(SQL) $(SQLOPTS) -d '$(DATABASE)' -f admin.sql
 
 auth:
-	"$(SQL)" $(SQLOPTS) -d "$(DATABASE)" -f auth.sql
+	$(SQL) $(SQLOPTS) -d '$(DATABASE)' -f auth.sql

@@ -1,11 +1,11 @@
-CREATE TYPE "tipo de terreno" AS ENUM (
+CREATE TYPE "Fantasy"."tipo de terreno" AS ENUM (
         'tierra',
         'grama',
         'grama artificial'
 );
 
 /*
-CREATE TYPE "posición" AS ENUM (
+CREATE TYPE "Fantasy"."posición" AS ENUM (
         'pitcher',
         'catcher',
         'primera base',
@@ -17,7 +17,7 @@ CREATE TYPE "posición" AS ENUM (
         'jardinero derecho'
 );
 */
-CREATE TYPE "posición" AS ENUM (
+CREATE TYPE "Fantasy"."posición" AS ENUM (
         'P',
         'C',
         '1B',
@@ -29,18 +29,18 @@ CREATE TYPE "posición" AS ENUM (
         'RF'
 );
 
-CREATE TYPE "género" AS ENUM (
+CREATE TYPE "Fantasy"."género" AS ENUM (
         'masculino',
         'femenino',
         'otro'
 );
 
-CREATE TYPE "estado de juego" AS ENUM (
+CREATE TYPE "Fantasy"."estado de juego" AS ENUM (
         'pautado',
         'ocurrido'
 );
 
-CREATE TYPE "tipo de contenido" AS ENUM (
+CREATE TYPE "Fantasy"."tipo de contenido" AS ENUM (
         'noticia',
         'regla',
         'pregunta frecuente',

@@ -2,7 +2,7 @@ CREATE TABLE "Fantasy"."Usuario" (
         "id"                            serial                          NOT NULL,
         "username"                      text                            NOT NULL,
         "nombre completo"               text                            NOT NULL,
-        "género"                        "género"                            NULL,
+        "género"                        "Fantasy"."género"                  NULL,
         "fecha de nacimiento"           date                                NULL,
         "es administrador"              boolean                         NOT NULL,
         "dirección de e-mail"           text                            NOT NULL,
@@ -79,7 +79,7 @@ CREATE TABLE "Fantasy"."Estadio" (
         "estado"                        text                                NULL,
         "capacidad"                     integer                             NULL,
         "año de fundación"              integer                             NULL,
-        "tipo de terreno"               "tipo de terreno"                   NULL,
+        "tipo de terreno"               "Fantasy"."tipo de terreno"         NULL,
         "propietario"                   text                                NULL,
         "medida del left field"         integer                             NULL,
         "medida del center field"       integer                             NULL,
@@ -129,7 +129,7 @@ CREATE TABLE "Fantasy"."Jugador" (
         "URL de la foto"                text                                NULL,
         "equipo"                        integer                         NOT NULL,
         "número"                        integer                         NOT NULL,
-        "posición"                      "posición"                      NOT NULL,
+        "posición"                      "Fantasy"."posición"            NOT NULL,
         "precio"                        integer                         NOT NULL,
 
         CONSTRAINT "Jugador PRIMARY KEY"
@@ -151,7 +151,7 @@ CREATE TABLE "Fantasy"."Usuario tiene jugador" (
         "fecha de venta"                timestamp with time zone            NULL,
         "precio de compra"              integer                         NOT NULL,
         "activo"                        boolean                         NOT NULL,
-        "posición"                      "posición"                      NOT NULL,
+        "posición"                      "Fantasy"."posición"            NOT NULL,
 
         CONSTRAINT "Usuario tiene jugador PRIMARY KEY"
                 PRIMARY KEY ("usuario", "jugador"),
@@ -201,7 +201,7 @@ CREATE TABLE "Fantasy"."Juego" (
         "hits del equipo visitante"     integer                             NULL,
         "errores del equipo local"      integer                             NULL,
         "errores del equipo visitante"  integer                             NULL,
-        "estado"                        "estado de juego"               NOT NULL,
+        "estado"                        "Fantasy"."estado de juego"     NOT NULL,
 
         CONSTRAINT "Juego PRIMARY KEY"
                 PRIMARY KEY ("id"),
@@ -353,7 +353,7 @@ CREATE TABLE "Fantasy"."Contenido" (
         "fecha"                         timestamp with time zone        NOT NULL,
         "URL de imagen"                 text                                NULL,
         "tags"                          text                                NULL,
-        "tipo"                          "tipo de contenido"             NOT NULL,
+        "tipo"                          "Fantasy"."tipo de contenido"   NOT NULL,
 
         CONSTRAINT "Contenido PRIMARY KEY"
                 PRIMARY KEY ("id"),

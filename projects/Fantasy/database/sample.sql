@@ -83,7 +83,7 @@ INSERT INTO "Fantasy"."Jugador" (
         "Datos"."lugar de procedencia",
         "Fantasy"."Equipo"."id",
         "Datos"."número",
-        "Datos"."posición"::"posición",
+        "Datos"."posición"::"Fantasy"."posición",
         "Datos"."precio",
         "Datos"."URL de la foto"
 FROM
@@ -109,7 +109,7 @@ INSERT INTO "Fantasy"."Juego" (
         "Equipo local"."id",
         "Equipo visitante"."id",
         "Estadio"."id",
-        "Datos"."estado"::"estado de juego"
+        "Datos"."estado"::"Fantasy"."estado de juego"
 FROM
         "Fantasy"."Equipo" AS "Equipo local",
         "Fantasy"."Equipo" AS "Equipo visitante",
